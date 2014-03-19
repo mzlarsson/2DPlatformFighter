@@ -1,4 +1,4 @@
-﻿Meeting Agenda 18-03-14
+﻿Meeting Agenda 2014-03-18
 
 
 Meeting begins at:
@@ -33,7 +33,7 @@ Meeting ends at:
 ________________
 
 
-Meeting begins at: 15:40 18-03-14
+Meeting begins at: 15:40 2014-03-18
 Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
 
 1. Reports from previous meeting:
@@ -57,7 +57,7 @@ Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
         	Things we HOPE to implement (time dependant):
                 	Nice textures and models
 	                Status effects
-	                Nice “limb-following�? hitboxes
+	                Nice “limb-following"? hitboxes
         	        Smooth non-static animations for characters
                 	Rebindable keys
 	                Keypad support
@@ -107,6 +107,6 @@ Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
 		- General roles of group members
 			Possible roles: Project manager, Graphical designer, Content designer, Code overseer, Test/debugger
 
-Meeting ends at: 17:20 18-03-14
+Meeting ends at: 17:20 2014-03-18
 
 
