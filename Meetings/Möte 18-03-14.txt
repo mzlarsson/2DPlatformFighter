@@ -1,0 +1,112 @@
+﻿Meeting Agenda 18-03-14
+
+
+Meeting begins at:
+Participants:
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+	2.1 Decide the scope and content of the project
+	2.2 Decide which standards shall be used for the code.
+	2.3 Decide on general Use Cases
+	2.4 Decide the general roles of the group members
+	2.5 Send Email
+
+3. Discussion items:
+        3.1 How do we do:
+         ---
+        3.2 What to do:
+         --- 
+        3.3 Why is:
+         --- 
+
+4. Outcomes and assignments:
+
+5. Wrap up:
+        5.1 Unsolved issues 
+        5.2 Next meeting
+
+Meeting ends at:
+
+________________
+
+
+Meeting begins at: 15:40 18-03-14
+Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+	With no previous meetings there is nothing to report.
+
+2. Objectives:
+	2.1 Decide the scope and content of the project:
+                 Thing we aim to implement:
+			Characters in plural - hopefully
+        		Attacks: Melee, Range and Skill
+        		Hit Reaction: Melee, Range and Skill
+        		Character and object health
+        		Gravitation
+        		Sound: Effects and Music
+        		Keyboard and mouse controller
+        		HUD
+        		Movement: Characters, Projectiles
+        		Basic animations
+        		Scroll/Zoom Camera
+        
+        	Things we HOPE to implement (time dependant):
+                	Nice textures and models
+	                Status effects
+	                Nice “limb-following�? hitboxes
+        	        Smooth non-static animations for characters
+                	Rebindable keys
+	                Keypad support
+
+		Things expected to NOT be in the final version (time dependant):
+		        Multiplayer over INTERNET
+        		Account and account progress
+	        	Story
+        		AI
+		        Shadows
+        
+2.2 Decide which standards shall be used for the code:
+        Complete graphics libraries: LWJGL and Slick 2D
+        General design principle: MVC
+        
+2.3 Decide on general Use Cases:
+        Moved to next meeting.
+
+
+2.4 Decide the general roles of the group members:
+        Moved to next meeting.
+
+
+2.5 Send Email:
+        Email sent to course examiners with groupname, how to access our git-project,
+	a short summary of what we aim to do and preferred thursday meeting time.
+
+3. Discussion items
+	3.1 How do we do: 
+		---
+	3.2What to do:
+		---
+	3.3 Why is:
+        	---
+
+4. Outcomes and assignments:
+        All should get git up and running, prepare for the next meeting and think of a name for the game.
+
+5. Wrap up 
+        5.1 Unsolved: 
+        	- Use Cases
+        	- General roles of group members
+        5.2 Next meeting:
+        	- 10:00 19-03-14
+		- Use Cases
+		- Do the requirement elicitation process
+		- General roles of group members
+			Possible roles: Project manager, Graphical designer, Content designer, Code overseer, Test/debugger
+
+Meeting ends at: 17:20 18-03-14
+
+
