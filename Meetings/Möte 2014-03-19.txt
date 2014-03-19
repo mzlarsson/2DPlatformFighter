@@ -1,0 +1,78 @@
+﻿Meeting Agenda 2014-03-19
+Meeting begins at:
+Participants:
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+        2.1 Do the requirement elicitation process
+	2.2 Decide on general Use Cases
+	2.3 Decide the general roles of the group members
+		Possible roles: Project manager, Graphical designer, Content designer, Code overseer, Test/debug
+
+3. Discussion items:
+        3.1 How do we do:
+        	Maven project in eclipse
+        3.2 What to do:
+        	--- 
+        3.3 Why is:
+        	--- 
+
+4. Outcomes and assignments:
+
+5. Wrap up:
+        5.1 Unsolved issues 
+        5.2 Next meeting
+
+Meeting ends at:
+
+
+________________
+
+
+
+Meeting begins at: 11:12 2014-03-19
+Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+        All got git up and running. Game name is put on hold indefinitely.
+
+
+2. Objectives:
+         2.1 Do the requirement elicitation process
+                The RAD point 1 is done with some use cases for point 2 done.
+	2.2 Decide on general Use Cases
+        	Coincides with 2.1.
+	2.3 Decide the general roles of the group members
+		Possible roles: Project manager, Graphical designer, Content designer, Code overseer, Test/debug
+		        Pushed to next meeting.
+
+3. Discussion items:
+        3.1 How do we do:
+        	Maven project in eclipse
+                	Maven was no problem but getting the Slick2D graphical library to get
+			included in the git commit proved to require quite a bit of workaround.
+
+        3.2 What to do:
+        	--- 
+        3.3 Why is:
+        	--- 
+
+4. Outcomes and assignments:
+	Get a sense for how Slick2D and LWJGL works, how it affects our code design and
+	what we can do with it.
+
+5. Wrap up:
+        5.1 Unsolved issues 
+         	Decide the general roles of the group members, we have to do some more
+         	planning before we know what roles we will need.
+        5.2 Next meeting
+        	08:00  2014-03-20 (Scheduled teacher meeting)
+        	09:00  2014-03-20 (Private group meeting)
+        	- Decide the general roles of the group members.
+        	- Continue with the RAD and get revision 1 done.
+        	- Start designing the code structure for our game.
+
+
+Meeting ends at: 12:20 2014-03-19
