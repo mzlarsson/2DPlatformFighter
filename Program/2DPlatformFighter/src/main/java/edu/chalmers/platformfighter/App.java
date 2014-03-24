@@ -1,5 +1,4 @@
 package edu.chalmers.platformfighter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,43 +6,107 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
 
-public class App extends BasicGame
+public class App extends BasicGame implements KeyListener
 {
-	double origPosY = 200;
-	double posY = 200;
-	double yGrav = 0.0005;
-	double speed = 0;
-	Date timer = new Date();	
-	long airtime = timer.getTime();
+	int groundPosY = 460;
+	double origPosX = 300;
+	double origPosY = groundPosY;
+	double posX = origPosX;
+	double posY = groundPosY;
+	double yGrav = 0.0000001;
+	double verticalspeed = 0;
+	double walkingspeed = 0.005;
+	double jumpspeed = -0.011;
+	int maxjumps = 2;
+	int jumpsLeft = maxjumps;
+	long airtime = System.nanoTime();
+	long walktime = System.nanoTime();
+	boolean airborne = true;
+	boolean movingLeft = false;
+	boolean movingRight = false;
+	boolean jumpHeld = false;
+	
 	public App(String gamename)
 	{
 		super(gamename);
 	}
 
 	@Override
-	public void init(GameContainer gc) throws SlickException {}
-
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException {}
-
-	public void render(GameContainer gc, Graphics g) throws SlickException {
-//		System.out.println((timer.getTime()-airtime));
-//		System.out.println(timer.getTime());
-//		posY = origPosY + (speed+yGrav*(timer.getTime()-airtime))*(timer.getTime()-airtime);
-		speed += yGrav;
-		posY += speed;
-		if (posY>=480) {
-			System.out.println("Boing!");
-			posY = 480;
-			origPosY = 480;
-			airtime = timer.getTime();
-			speed = -0.5;
-		}
-		g.drawString("Howdy!", 300, (int)posY);
+	public void init(GameContainer gc) throws SlickException {
+//		gc.setVSync(true);
 	}
 
+	@Override
+	public void update(GameContainer gc, int i) throws SlickException {
+		// X-Movement
+		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+			if (!movingLeft) {
+				movingLeft = true;
+				movingRight = false;
+				walktime = System.nanoTime();
+				origPosX = posX;
+			}
+			long timeDiff = (System.nanoTime()-walktime)/10000;
+			posX = origPosX + -1*walkingspeed*timeDiff;
+		} else if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			if (!movingRight) {
+				movingLeft = false;
+				movingRight = true;
+				walktime = System.nanoTime();
+				origPosX = posX;
+			}
+			long timeDiff = (System.nanoTime()-walktime)/10000;
+			posX = origPosX + walkingspeed*timeDiff;
+		} else if (movingLeft || movingRight) {
+			origPosX = posX;
+			movingLeft = false;
+			movingRight = false;
+		}
+		// Y-Movement
+		
+//		if (gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+//			System.out.println("Space held");
+//			if (!jumpHeld && canJump()) {
+//				System.out.println("Jumping");
+//				airtime = System.nanoTime();
+//				verticalspeed = jumpspeed;
+//				airborne = true;
+//			}
+//		}
+		if (airborne) {
+			long timeDiff = (System.nanoTime()-airtime)/10000;
+			double speedDiff = verticalspeed + yGrav*timeDiff;
+			if (!(gc.getInput().isKeyDown(Input.KEY_SPACE)) && (speedDiff<-0.1)) {
+				verticalspeed = -0.1;
+				airtime = System.nanoTime();
+			}
+			posY = origPosY + (verticalspeed + yGrav*timeDiff)*timeDiff;
+			if (posY>=groundPosY) {
+				posY = groundPosY;
+				origPosY = posY;
+				airborne = false;
+			}
+		} else {
+			if (gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+				airtime = System.nanoTime();
+				verticalspeed = jumpspeed;
+				airborne = true;
+			}
+		}
+	}
+
+	public boolean canJump() {
+		return jumpsLeft>0;
+	}
+	
+	public void render(GameContainer gc, Graphics g) throws SlickException {
+		g.drawOval((int)posX-15, (int)posY-15, 30, 30);
+	}
+	
 	public static void main(String[] args)
 	{
 		try
