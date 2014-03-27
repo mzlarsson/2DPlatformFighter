@@ -1,0 +1,82 @@
+﻿Meeting Agenda 2014-03-27
+Meeting begins at: 9:00
+Participants:David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+        2.1 Discuss library
+	2.2 Work on the analysis
+	2.3 Roles in project
+
+3. Discussion items:
+        3.1 How do we do:
+         ---
+        3.2 What to do:
+         --- 
+        3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+5.2 Next meeting
+
+Meeting ends at: 11:00
+
+________________
+
+
+Meeting Agenda 2014-03-26
+Meeting begins at: 9:00
+Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+	The unsolved issues from previous meeting has been added to the agenda of this
+	meeting.
+2. Objectives:
+         2.1 Discuss library
+		Is slick2D the best choice? We look at libGDX and find quite a lot of information about the libGDX and good videos. libGDX is possible to switch to other platforms, that’s a positive. 
+		However there seems to be problems when libGDX is used with Maven, therefore we will continue with Slick2D.
+
+
+	2.2 Work on the analysis
+        	The analysis has been improved and fixed. It now contains elements with more
+        	specific names and useful working areas. Some unnecessary items have been
+        	removed.
+        	The first version has been added to the RAD. 
+
+
+	2.3 Roles in project
+                Game designer:		Patrik Haar
+        	Graphical designer:	Lisa Lipkin
+        	Lead programmer:	Matz Larsson
+        	Lead tester:		David Gustafsson
+
+3. Discussion items:
+        3.1 How do we do:
+         ---
+        3.2 What to do:
+         --- 
+        3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+	We continue with Slick2D.
+	Project roles are set and will be used as a guideline for responsibility.
+        Preliminary analysis is finished.
+        Lisa will draw a preliminary GUI sketch for the application.
+	The group members will look into Slick2D TileMapEditor.
+	The first version of the RAD will be pushed to GIT. 
+
+5. Wrap up:
+        5.1 Unsolved issues
+        	No unsolved issues
+        
+	5.2 Next meeting
+		15:00  2014-03-31 (Private group meeting)
+		- Sequence map
+
+Meeting ends at: 11:00

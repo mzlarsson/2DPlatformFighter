@@ -1,0 +1,74 @@
+﻿Meeting Agenda 2014-03-24
+Meeting begins at:
+Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+         2.1 Work on the analysis model.
+        2.2 Work on the RAD document.
+
+3. Discussion items:
+        3.1 How do we do:
+         ---
+        3.2 What to do:
+         --- 
+        3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+ 
+5.2 Next meeting
+
+Meeting ends at:
+
+
+
+________________
+
+
+Meeting Agenda 2014-03-24
+Meeting begins at: 10:00
+Participants: David Gustafsson, Patrik Haar, Lisa Lipkin and Matz Larsson
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+	2.1 Work on the analysis model.
+        	We worked on the analysis model and used our use cases to draw up potential
+        	classes on the whiteboard and discussed which we should use and what
+		connections they should have. We made a decision concerning static/dynamic
+		areas which will demand further discussions in the next meeting.
+
+
+	2.2 Work on the RAD document.
+		We worked on the RAD and got everything done except for part of the appendix.
+
+3. Discussion items:
+        3.1 How do we do:
+         ---
+        3.2 What to do:
+         --- 
+        3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues 
+         	Decide the general roles of the group members, we have to do some more
+         	planning before we know what roles we will need.
+        5.2 Next meeting
+        	08:00  2014-03-27 (Scheduled teacher meeting)
+        	09:00  2014-03-27 (Private group meeting)
+        	- Decide the general roles of the group members.
+        	- Continue with the RAD and get revision 1 done.
+        	- Finish with the analysis model.
+
+
+Meeting ends at: 12:00
