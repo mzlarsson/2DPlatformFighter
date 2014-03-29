@@ -1,6 +1,8 @@
 package edu.chalmers.platformfighter;
 
-public class Velocity {
+import org.newdawn.slick.geom.Vector2f;
+
+public class Velocity extends Vector2f {
 
 	public Velocity(float x, float y) {
 		// TODO Auto-generated constructor stub

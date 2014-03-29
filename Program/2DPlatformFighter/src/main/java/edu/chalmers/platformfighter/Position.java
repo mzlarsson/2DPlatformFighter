@@ -1,6 +1,8 @@
 package edu.chalmers.platformfighter;
 
-public class Position {
+import org.newdawn.slick.geom.Vector2f;
+
+public class Position extends Vector2f{
 
 	public Position(float x, float y) {
 		// TODO Auto-generated constructor stub
