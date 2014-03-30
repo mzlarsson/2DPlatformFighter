@@ -18,6 +18,11 @@ public class Velocity extends Vector2f {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Velocity add(float i, float j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public float getX() {
 		// TODO Auto-generated method stub
@@ -28,5 +33,6 @@ public class Velocity extends Vector2f {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

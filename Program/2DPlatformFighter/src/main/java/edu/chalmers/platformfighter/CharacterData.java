@@ -8,10 +8,12 @@ public class CharacterData {
 	public final Shape shape;
 	public final float baseMovementSpeed;
 	public final float baseJumpingPower;
+	public final int maxJumps;
 	
 	public CharacterData() {
 		this.shape = new Circle(0,0,30);
-		this.baseMovementSpeed = 100;
-		this.baseJumpingPower = 300;
+		this.baseMovementSpeed = 300;
+		this.baseJumpingPower = 100;
+		this.maxJumps = 1;
 	}
 }

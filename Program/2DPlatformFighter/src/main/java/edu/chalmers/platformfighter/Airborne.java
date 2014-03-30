@@ -37,6 +37,6 @@ public class Airborne implements MovementState {
 	 * @param delta The time passed since last update in milliseconds.
 	 */
 	private void applyOuterForce(int delta) {
-		gameO.getVariableVelocity().add(outerForce.scale(delta/MODIFIER));
+		gameO.setVariableVelocity((Velocity)(gameO.getVariableVelocity().add(outerForce.scale(delta/MODIFIER))));
 	}
 }
