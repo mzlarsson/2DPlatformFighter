@@ -24,6 +24,7 @@ public class Position extends Vector2f{
 	}
 	/**
 	 * Returns a copy of this position
+	 * @return a copy of this position
 	 */
 	public Position copy() {
 		return new Position(x, y); 
@@ -32,7 +33,7 @@ public class Position extends Vector2f{
 	 * Add a vector to this position and return the resulting position
 	 */
 	public Position add(Vector2f f){
-		return new Position(this.add(f));
+		return (Position)(super.add(f));
 	}
 
 }
