@@ -136,6 +136,15 @@ public class Character extends GameObject {
 		this.movState = ms;
 	}
 	
+	/**
+	 * Returns a copy of this character.
+	 */
+	@Override
+	public GameObject copy(){
+		//FIXME temporary solution. implement correctly!
+		return new Character(new CharacterData());
+	}
+	
 	// TODO Temporary draw method to use a shape as the image for the upcoming demo.
 	public void draw(Graphics g) {
 		g.draw(this.getShape());

@@ -192,6 +192,7 @@ public abstract class GameObject {
 	 * Transforms the GameObject's shape using the given Transform object.
 	 * @param trans The Transform object to transform the shape of the GameObject with.
 	 */
+	//FIXME This method does nothing at all. Shape.transform() does not change the Shape.
 	public void transform(Transform trans) {
 		this.shape.transform(trans);
 	}
@@ -304,4 +305,6 @@ public abstract class GameObject {
 	public void setShape(Shape shape) {
 		this.shape = shape;
 	}
+	
+	public abstract GameObject copy();
 }
