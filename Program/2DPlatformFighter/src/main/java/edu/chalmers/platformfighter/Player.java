@@ -9,9 +9,11 @@ package edu.chalmers.platformfighter;
 public class Player {
 	
 	private String name;
+	private Character ch;
 	
-	public Player(String name) {
+	public Player(String name, Character ch) {
 		this.name = name;
+		this.ch = ch;
 	}
 	
 	/**
@@ -20,5 +22,22 @@ public class Player {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * Returns the character connected with the player.
+	 * @return The character connected with the player.
+	 */
+	public Character getCharacter() {
+		return this.ch;
+	}
+	
+	/**
+	 * Updates the velocity and position of the Player´s Character and returns the old position.
+	 * @param delta The time passed since last update in milliseconds.
+	 * @return The position before movement.
+	 */
+	public Position update(int delta) {
+		return this.ch.update(delta);
 	}
 }

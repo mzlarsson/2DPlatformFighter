@@ -9,8 +9,6 @@ import org.newdawn.slick.Graphics;
  * @version 0.2
  */
 public class Character extends GameObject {
-
-	private String name;
 	
 	private float baseSpeed;
 	private float baseJump;
@@ -29,9 +27,8 @@ public class Character extends GameObject {
 	 * @param cd The data from which the character gets its attributes from.
 	 * @param player The Player controlling the character.
 	 */
-	public Character(CharacterData cd, Player player) {
+	public Character(CharacterData cd) {
 		super(cd.shape);
-		this.name = player.getName();
 		this.baseSpeed = cd.baseMovementSpeed;
 		this.baseJump = cd.baseJumpingPower;
 		this.gravity = new Velocity(0,10);
@@ -48,43 +45,36 @@ public class Character extends GameObject {
 	}
 	
 	/**
-	 * Makes the character move to the left.
+	 * Makes the character move to the left/right/up/down depending on the Direction.
 	 */
-	public void moveLeft() {
-		if (!movingLeft) {
-			if (movingRight) {
-				this.increaseBaseVelocity(-2*this.baseSpeed,0);
-			} else {
-				this.increaseBaseVelocity(-this.baseSpeed,0);
+	public void move(Direction dir) {
+		switch (dir) {
+		case LEFT:
+			if (!movingLeft) {
+				if (movingRight) {
+					this.increaseBaseVelocity(-2*this.baseSpeed,0);
+				} else {
+					this.increaseBaseVelocity(-this.baseSpeed,0);
+				}
 			}
-		}
-	}
-	
-	/**
-	 * Makes the character move to the right.
-	 */
-	public void moveRight() {
-		if (!movingRight) {
-			if (movingLeft) {
-				this.increaseBaseVelocity(2*this.baseSpeed,0);
-			} else {
-				this.increaseBaseVelocity(this.baseSpeed,0);
+			break;
+			
+		case RIGHT:
+			if (!movingRight) {
+				if (movingLeft) {
+					this.increaseBaseVelocity(2*this.baseSpeed,0);
+				} else {
+					this.increaseBaseVelocity(this.baseSpeed,0);
+				}
 			}
+			break;
+			
+		case UP:
+			// TODO Auto-generated method stub
+			
+		case DOWN:
+			// TODO Auto-generated method stub
 		}
-	}
-	
-	/**
-	 * Makes the character move upwards.
-	 */
-	public void moveUp() {
-		// TODO Auto-generated method stub
-	}
-	
-	/**
-	 * Makes the character move downwards.
-	 */
-	public void moveDown() {
-		// TODO Auto-generated method stub
 	}
 	
 	/**
