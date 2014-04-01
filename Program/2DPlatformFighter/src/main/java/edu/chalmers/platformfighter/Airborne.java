@@ -26,9 +26,9 @@ public class Airborne implements MovementState {
 	public Position update(int delta) {
 		Position oldPos = gameO.getCenterPosition().copy();
 		this.applyOuterForce(delta);
-		Velocity tot = gameO.getTotalVelocity().add(outerForce);
-		gameO.setCenterX( gameO.getCenterX() + (tot.getX()*(delta/MODIFIER)) );
-		gameO.setCenterY( gameO.getCenterY() + (tot.getY()*(delta/MODIFIER)) );
+		Velocity tot = gameO.getTotalVelocity();
+		gameO.setCenterX( gameO.getCenterX() + (tot.getX()*((float)(delta))/MODIFIER) );
+		gameO.setCenterY( gameO.getCenterY() + (tot.getY()*((float)(delta))/MODIFIER) );
 		return oldPos;
 	}
 
@@ -37,6 +37,6 @@ public class Airborne implements MovementState {
 	 * @param delta The time passed since last update in milliseconds.
 	 */
 	private void applyOuterForce(int delta) {
-		gameO.setVariableVelocity((Velocity)(gameO.getVariableVelocity().add(outerForce.scale(delta/MODIFIER))));
+		gameO.setVariableVelocity((gameO.getVariableVelocity().add(outerForce.scale(((float)(delta))/MODIFIER))));
 	}
 }

@@ -32,8 +32,9 @@ public class Character extends GameObject {
 		super(cd.shape);
 		this.baseSpeed = cd.baseMovementSpeed;
 		this.baseJump = cd.baseJumpingPower;
-		this.gravity = new Velocity(0,10);
-		this.movState = new Airborne(this, this.gravity);
+		this.maxJumps = cd.maxJumps;
+		this.gravity = new Velocity(0,1000);
+		this.setMovementState(new Airborne(this, this.gravity));
 	}
 	
 	/**
@@ -57,7 +58,10 @@ public class Character extends GameObject {
 				} else {
 					this.increaseBaseVelocity(-this.baseSpeed,0);
 				}
+				movingLeft = true;
+				movingRight = false;
 			}
+			System.out.println("Springer vänster, chilla.");
 			break;
 			
 		case RIGHT:
@@ -67,7 +71,10 @@ public class Character extends GameObject {
 				} else {
 					this.increaseBaseVelocity(this.baseSpeed,0);
 				}
+				movingLeft = false;
+				movingRight = true;
 			}
+			System.out.println("Springer höger, chilla.");
 			break;
 			
 		case UP:
@@ -75,6 +82,11 @@ public class Character extends GameObject {
 			
 		case DOWN:
 			// TODO Auto-generated method stub
+			
+		case NONE:
+			movingLeft = false;
+			movingRight = false;
+			this.setBaseVelocity(0, this.getBaseVelocity().getY());
 		}
 	}
 	
@@ -83,9 +95,15 @@ public class Character extends GameObject {
 	 */
 	public void makeJump() {
 		if (this.canJump()) {
+			System.out.println("Hoppa? Jaja...");
 			this.jumpsLeft--;
-			this.increaseBaseVelocity(0, -this.baseJump);
-			this.setMovementState(new Airborne(this, this.gravity));
+			if (this.getBaseVelocity().getY()==0) {
+				this.increaseBaseVelocity(0, -this.baseJump);
+			}
+			this.setVariableVelocity(this.getVariableVelocity().getX(), 0);
+			if(jumpsLeft==maxJumps) {
+				this.setMovementState(new Airborne(this, this.gravity));
+			}
 		}
 	}
 	
@@ -112,6 +130,7 @@ public class Character extends GameObject {
 	 * @return true if the character can jump.
 	 */
 	private boolean canJump() {
+		System.out.println(jumpsLeft);
 		return jumpsLeft>0;
 	}
 	
@@ -131,8 +150,12 @@ public class Character extends GameObject {
 		if (ms.getClass().equals(Walking.class)) {
 			this.setBaseVelocity(this.getBaseVelocity().getX(), 0);
 			jumpsLeft = maxJumps;
-		} else if (ms.getClass().equals(Airborne.class) && maxJumps==jumpsLeft) {
-			jumpsLeft--;
+		} else if (ms.getClass().equals(Airborne.class)) {
+			if (maxJumps==jumpsLeft) {
+				jumpsLeft--;
+			} else {
+				jumpsLeft = maxJumps;
+			}
 		}
 		this.movState = ms;
 	}

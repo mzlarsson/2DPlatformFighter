@@ -26,8 +26,8 @@ public class Walking implements MovementState {
 	public Position update(int delta) {
 		Position oldPos = gameO.getCenterPosition().copy();
 		Velocity tot = gameO.getTotalVelocity().add(outerForce);
-		gameO.setCenterX( gameO.getCenterX() + (tot.getX()*(delta/MODIFIER)) );
-		gameO.setCenterY( gameO.getCenterY() + (tot.getY()*(delta/MODIFIER)) );
+		gameO.setCenterX( gameO.getCenterX() + (tot.getX()*((float)(delta))/MODIFIER) );
+		gameO.setCenterY( gameO.getCenterY() + (tot.getY()*((float)(delta))/MODIFIER) );
 		return oldPos;
 	}
 

@@ -59,14 +59,20 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int arg1) throws SlickException {
 		Player[] players = game.getPlayers();
-		if (gc.getInput().isKeyPressed(Input.KEY_RIGHT)) {
+		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			System.out.println("Spring höger!!!");
 			game.move(players[0], Direction.RIGHT);
-		}
-		if (gc.getInput().isKeyPressed(Input.KEY_LEFT)) {
+		} else if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+			System.out.println("Spring vänster!!!");
 			game.move(players[0], Direction.LEFT);
+
+		} else {
+			game.move(players[0], Direction.NONE);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
+			System.out.println("Hoppa!!!");
 			game.jump(players[0]);
+
 		}
 		game.update(arg1);
 	}

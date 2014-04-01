@@ -4,7 +4,6 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * A class that describes velocity object to our game
  * @author David Gustafsson
- *
  */
 public class Velocity extends Vector2f {
 	/**
@@ -30,31 +29,49 @@ public class Velocity extends Vector2f {
 		return new Velocity(x, y);
 	}
 	/**
-	 * Add a vector to this velocity and returns the resulting velocity
+	 * Increase the x and y value of this velocity with given velocity.
 	 * @param variableSpeed the velocity to add to this velocity
 	 * @return the resulting velocity
 	 */
-	public Velocity add(Velocity variableSpeed) {
-		Velocity v = (Velocity)(super.add(variableSpeed));
-		return v;
+	public void increase(Velocity variableSpeed) {
+		super.add(variableSpeed);
 	}
 
 	/**
-	 * Add a x and y value to this velocity and returns the resulting velocity
+	 * Increase the x and y value of this velocity with given x and y values.
+	 * @param x the x value to add to this velocity
+	 * @param y the y value to add to this velocity
+	 * @return The resulting velocity
+	 */
+	public void increase(float x, float y) {
+		super.add(new Vector2f(x,y));
+	}
+	
+	/**
+	 * Adds these x and y value of this velocity with given x and y values.
 	 * @param x the x value to add to this velocity
 	 * @param y the y value to add to this velocity
 	 * @return The resulting velocity
 	 */
 	public Velocity add(float x, float y) {
-		return (Velocity)(super.add(new Vector2f(x,y)));
-	}
-	/**
-	 * Increase our velocity with a given float value 
-	 * @param f The value to scale this velocity by.
-	 */
-	public void increase(float f){
-		this.set(f * x, f * y);
+		return new Velocity(this.getX()+x, this.getY()+y);
 	}
 	
-
+	/**
+	 * Adds these x and y value of this velocity with given x and y values.
+	 * @param x the x value to add to this velocity
+	 * @param y the y value to add to this velocity
+	 * @return The resulting velocity
+	 */
+	public Velocity add(Velocity v) {
+		return this.add(v.getX(), v.getY());
+	}
+	
+	/**
+	 * Multiplies the given Velocity with a float number.
+	 * @return The resulting Velocity vector.
+	 */
+	public Velocity scale(float f) {
+		return new Velocity(this.getX()*f, this.getY()*f);
+	}
 }

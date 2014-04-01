@@ -33,7 +33,7 @@ public class Position extends Vector2f{
 	 * Add a vector to this position and return the resulting position
 	 */
 	public Position add(Vector2f f){
-		return (Position)(super.add(f));
+		return (Position)(f.copy().add(this)); //FIXME Vector2f CHANGES the given vector.
 	}
 
 }

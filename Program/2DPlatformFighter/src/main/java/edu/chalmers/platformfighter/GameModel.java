@@ -48,9 +48,9 @@ public class GameModel {
 		for (Player p : players) {
 			Position old = p.update(delta);
 			Character ch = p.getCharacter();
-			if (!world.isValid(ch)) {
-				ch.setCenterPosition(world.getValidPosition(ch, old));
-			}
+//			if (!world.isValid(ch)) {
+//				ch.setCenterPosition(world.getValidPosition(ch, old));
+//			}
 		}
 	}
 	

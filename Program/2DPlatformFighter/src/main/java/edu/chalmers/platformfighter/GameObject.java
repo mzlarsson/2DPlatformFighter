@@ -169,7 +169,7 @@ public abstract class GameObject {
 	 * @return float, the y-coordinate of the center of the shape.
 	 */
 	public float getCenterY() {
-		return this.shape.getCenterX();
+		return this.shape.getCenterY();
 	}
 	
 	/**
