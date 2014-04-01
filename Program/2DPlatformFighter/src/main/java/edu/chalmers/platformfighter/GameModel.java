@@ -14,20 +14,30 @@ public class GameModel {
 		players = p;
 		world = w;
 	}
+	
+	/**
+	 * Returns the players playing the game.
+	 * @return The Players.
+	 */
 	public Player[] getPlayers(){
 		return players;
 	}
+	
 	/**
 	 * Moves the character connected to the player in the given direction.
 	 * @param player The Player connected to the event.
 	 * @param dir The Direction to move the character.
 	 */
 	public void move(Player player, Direction dir) {
-		Character ch = player.getCharacter();
-		Position old = ch.move(dir);
-		if (!world.isValid(ch)) {
-			ch.setCenterPosition(world.getValidPosition(ch, old));
-		}
+		player.getCharacter().move(dir);
+	}
+	
+	/**
+	 * Make the character connected to the player jump.
+	 * @param player The Player connected to the event.
+	 */
+	public void jump(Player player) {
+		player.getCharacter().makeJump();
 	}
 	
 	/**
@@ -36,11 +46,19 @@ public class GameModel {
 	 */
 	public void update(int delta) {
 		for (Player p : players) {
-			p.update(delta);
+			Position old = p.update(delta);
+			Character ch = p.getCharacter();
+			if (!world.isValid(ch)) {
+				ch.setCenterPosition(world.getValidPosition(ch, old));
+			}
 		}
-//		List list = world.getGameObjects();
-//		for (GameObject go : list) {
-//			go.update(delta);
-//		}
-	}	
+	}
+	
+	/**
+	 * Returns the world used by the game.
+	 * @return The world used by the game.
+	 */
+	public World getWorld() {
+		return world;
+	}
 }

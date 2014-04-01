@@ -11,7 +11,7 @@ public class CharacterData {
 	public final int maxJumps;
 	
 	public CharacterData() {
-		this.shape = new Circle(0,0,30);
+		this.shape = new Circle(200, 200, 30);
 		this.baseMovementSpeed = 300;
 		this.baseJumpingPower = 100;
 		this.maxJumps = 1;

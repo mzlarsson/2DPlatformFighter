@@ -58,10 +58,10 @@ public class TestGame extends BasicGame {
 	public void update(GameContainer gc, int arg1) throws SlickException {
 		Player[] players = game.getPlayers();
 		if (gc.getInput().isKeyPressed(Input.KEY_RIGHT)) {
-			game.move(players[0], RIGHT);
+			game.move(players[0], Direction.RIGHT);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_LEFT)) {
-			game.move(players[0], LEFT);
+			game.move(players[0], Direction.LEFT);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
 			game.jump(players[0]);
@@ -75,7 +75,7 @@ public class TestGame extends BasicGame {
 			AppGameContainer appgc;
 			Player[] players = { new Player("Player1", new Character(
 					new CharacterData())) };
-			// Fixa world
+			// FIXME world
 			appgc = new AppGameContainer(new TestGame(new GameModel(players,
 					new World(players, null))));
 
