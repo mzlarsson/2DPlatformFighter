@@ -10,6 +10,13 @@ public class GameModel {
 	private World world;
 	private Player[] players;
 	
+	public GameModel(Player[] p, World w){
+		players = p;
+		world = w;
+	}
+	public Player[] getPlayers(){
+		return players;
+	}
 	/**
 	 * Moves the character connected to the player in the given direction.
 	 * @param player The Player connected to the event.
