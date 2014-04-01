@@ -28,29 +28,31 @@ public class TestGame extends BasicGame {
 	 * @param game
 	 *            the game model for this test game
 	 */
-	public TestGame(GameModel game) {
+	public TestGame() {
 		super("Demo");
-		this.game = game;
+	}
+	public void startGame(Player[] players){
+		game = new GameModel(players, new World(players, new GameMap()));
 	}
 
 	/**
 	 * Renders the test game
 	 */
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		List<GameObject> list = game.getWorld().getAll();
-		for (int i; i < list.size(); i++) {
-			if (list.get(i) instanceof Character) {
-				Character tmp = (Character) list.get(i);
-				tmp.draw(g);
-			}
+		game.getWorld().getMap().render(0,0);
+
+		for(Player p:game.getPlayers()){
+			p.getCharacter().draw();
 		}
-		TiledMap map = game.getWorld().getMap();
-		map.render(0, 0);
+		
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		// TODO Auto-generated method stub
+		Player[] players = { new Player("Player1", new Character(
+				new CharacterData())) };
+		this.startGame(players);
+		
 
 	}
 
@@ -71,15 +73,12 @@ public class TestGame extends BasicGame {
 
 	public static void main(String[] args) {
 		try {
-
+			TestGame game = new TestGame();
 			AppGameContainer appgc;
-			Player[] players = { new Player("Player1", new Character(
-					new CharacterData())) };
-			// FIXME world
-			appgc = new AppGameContainer(new TestGame(new GameModel(players,
-					new World(players, null))));
+			// Fixa world
+			appgc = new AppGameContainer(game);
 
-			appgc.setDisplayMode(640, 480, false);
+			appgc.setDisplayMode(1024, 768, false);
 			appgc.start();
 		} catch (SlickException ex) {
 			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);

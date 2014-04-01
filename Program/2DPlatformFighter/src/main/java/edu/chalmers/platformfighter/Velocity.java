@@ -35,7 +35,7 @@ public class Velocity extends Vector2f {
 	 * @return the resulting velocity
 	 */
 	public Velocity add(Velocity variableSpeed) {
-		Velocity v = new Velocity (this.add(variableSpeed));
+		Velocity v = (Velocity)(super.add(variableSpeed));
 		return v;
 	}
 

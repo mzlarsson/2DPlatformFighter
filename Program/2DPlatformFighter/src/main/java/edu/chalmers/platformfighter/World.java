@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * Class for holding all the data of the current game world.
@@ -19,6 +20,7 @@ public class World {
 
 	private Player[] players;
 	private List<GameObject> objects;
+	private TiledMap map;
 	
 	/**
 	 * Creates a new game world for a given player set with a given game map as model.
@@ -28,7 +30,7 @@ public class World {
 	public World(Player[] players, GameMap map){
 		this.players = players;
 		this.objects = new ArrayList<GameObject>();
-		setup(map);
+		this.map = map.getMap();
 	}
 	
 	/**
@@ -60,6 +62,7 @@ public class World {
 	//FIXME temporary solution. This will not always work.
 	public Position getValidPosition(GameObject obj, Position old){
 		GameObject collider = getCollisionObject(obj);
+		if(collider==null)return old.copy();
 		Position tmp = new Position(obj.getX(), obj.getY());
 		GameObject gCopy = obj.copy();
 		
@@ -100,5 +103,9 @@ public class World {
 		Shape s0 = go0.getShape(), s1 = go1.getShape();
 		return (s0.intersects(s1) || s0.contains(s1));
 	}
+	public TiledMap getMap(){
+		return map;
+	}
+	
 
 }

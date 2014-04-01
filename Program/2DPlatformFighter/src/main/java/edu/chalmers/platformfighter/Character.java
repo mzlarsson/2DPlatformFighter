@@ -1,5 +1,6 @@
 package edu.chalmers.platformfighter;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 /**
@@ -146,7 +147,9 @@ public class Character extends GameObject {
 	}
 	
 	// TODO Temporary draw method to use a shape as the image for the upcoming demo.
-	public void draw(Graphics g) {
-		g.draw(this.getShape());
+	public void draw() {
+		Graphics g = new Graphics();
+		g.setColor(Color.black);
+		g.fill(this.getShape());
 	}
 }
