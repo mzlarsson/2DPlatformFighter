@@ -219,18 +219,18 @@ public class World {
 			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
 		}
 		if (collider == null){
-			return obj.getPosition();
+			return obj.getCenterPosition();
 		}
 		
-		Position tmp = obj.getCenterPosition();
+		Position tmp = obj.getCenterPosition().copy();
 		GameObject gCopy = obj.copy();
 
 		gCopy.setCenterPosition(tmp.getX(), old.getY());
-		if (!(collider.intersects(gCopy.getShape()) || collider.contains(gCopy.getShape()))) {
+		if (!collides(collider, gCopy.getShape())){
 			return new Position(tmp.getX(), old.getY());
 		} else {
 			gCopy.setCenterPosition(old.getX(), tmp.getY());
-			if (!(collider.intersects(gCopy.getShape()) || collider.contains(gCopy.getShape()))) {
+			if (!collides(collider, gCopy.getShape())){
 				return new Position(old.getX(), tmp.getY());
 			} else {
 				return old.copy();
