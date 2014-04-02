@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -20,6 +21,7 @@ public class World {
 
 	private Player[] players;
 	private List<GameObject> objects;
+	private Shape[][] mapObjects;
 	private TiledMap map;
 	
 	/**
@@ -31,16 +33,21 @@ public class World {
 		this.players = players;
 		this.objects = new ArrayList<GameObject>();
 		this.map = map.getMap();
+		setup();
 	}
 	
 	/**
-	 * Sets up the world by copying all data from the map.
-	 * @param map The GameMap to fetch data from
+	 * Sets up the world by copying all Shapes from the different layers on the map.
 	 */
-	private void setup(GameMap map){
-		List<GameObject> obj = map.getAllObjects();
-		for(int i = 0; i<obj.size(); i++){
-			this.objects.add(obj.get(i).copy());
+	private void setup(){
+		mapObjects = new Shape[map.getObjectGroupCount()][];
+		for (int i=0; i<mapObjects.length ; i++) {
+			for (int j=0; j<map.getObjectCount(i); j++) {
+				mapObjects[i][j] = new Rectangle(map.getObjectX(i, j)
+												,map.getObjectY(i, j)
+												,map.getObjectWidth(i, j)
+												,map.getObjectHeight(i, j));
+			}
 		}
 	}
 	

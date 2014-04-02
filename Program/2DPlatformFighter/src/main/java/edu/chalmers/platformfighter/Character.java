@@ -61,7 +61,6 @@ public class Character extends GameObject {
 				movingLeft = true;
 				movingRight = false;
 			}
-			System.out.println("Springer vänster, chilla.");
 			break;
 			
 		case RIGHT:
@@ -74,7 +73,6 @@ public class Character extends GameObject {
 				movingLeft = false;
 				movingRight = true;
 			}
-			System.out.println("Springer höger, chilla.");
 			break;
 			
 		case UP:
@@ -84,9 +82,11 @@ public class Character extends GameObject {
 			// TODO Auto-generated method stub
 			
 		case NONE:
-			movingLeft = false;
-			movingRight = false;
-			this.setBaseVelocity(0, this.getBaseVelocity().getY());
+			if (movingLeft || movingRight) {
+				this.setBaseVelocity(0, this.getBaseVelocity().getY());
+				movingLeft = false;
+				movingRight = false;
+			}
 		}
 	}
 	
@@ -130,7 +130,6 @@ public class Character extends GameObject {
 	 * @return true if the character can jump.
 	 */
 	private boolean canJump() {
-		System.out.println(jumpsLeft);
 		return jumpsLeft>0;
 	}
 	
