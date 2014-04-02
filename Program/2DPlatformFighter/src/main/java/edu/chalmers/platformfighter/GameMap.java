@@ -8,6 +8,8 @@ import org.newdawn.slick.tiled.TiledMap;
 public class GameMap {
 
 	private TiledMap map; 
+	
+	
 	public GameMap() {
 		try {
 			map = new TiledMap("res/flatTestMap.tmx");
@@ -15,11 +17,15 @@ public class GameMap {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		
+
 	}
 	
 	public TiledMap getMap(){
 		return map;
 	}
+	
 	
 	public List<GameObject> getAllObjects(){
 		//FIXME implement this.
