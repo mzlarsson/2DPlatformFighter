@@ -155,6 +155,7 @@ public abstract class GameObject {
 	public Position getPosition() {
 		return new Position(this.getX(),this.getY());
 	}
+
 	
 	/**
 	 * Returns the x-coordinate of the center of the shape.
