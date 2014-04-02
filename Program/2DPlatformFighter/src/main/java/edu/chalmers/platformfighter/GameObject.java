@@ -307,5 +307,6 @@ public abstract class GameObject {
 		this.shape = shape;
 	}
 	
+	public abstract void setMovementState(MovementState ms);
 	public abstract GameObject copy();
 }

@@ -59,6 +59,8 @@ public class GameModel {
 			Character ch = p.getCharacter();
 			if (!world.isTileValid(ch.getCenterPosition())) {
 				ch.setCenterPosition(world.getValidTilePosition(ch, old));
+			} else {
+				ch.setMovementState(new Airborne(ch, new Velocity(0,1000)));
 			}
 		}
 	}

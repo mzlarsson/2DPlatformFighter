@@ -121,6 +121,9 @@ public class World {
 	public Position getValidTilePosition(GameObject obj, Position old) {
 		Position tmp = new Position(obj.getCenterX(), obj.getCenterY());
 
+		if ((!isTileValid(new Position(old.getX(), tmp.getY())) && (old.getY()<tmp.getY()))) {
+			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
+		}
 		if (!isTileValid(tmp)) {
 			Position tmp2 = new Position(tmp.getX(), old.getY());
 			if (isTileValid(tmp2)) {
@@ -150,6 +153,9 @@ public class World {
 	 *         that is, empty.
 	 */
 	public boolean isTileValid(Position p) {
+		if (getPositionTileID(p) == 0) {
+			
+		}
 		return getPositionTileID(p) == 0;
 	}
 

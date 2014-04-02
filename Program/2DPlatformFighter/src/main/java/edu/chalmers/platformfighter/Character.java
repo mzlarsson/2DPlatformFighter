@@ -95,15 +95,14 @@ public class Character extends GameObject {
 	 */
 	public void makeJump() {
 		if (this.canJump()) {
-			System.out.println("Hoppa? Jaja...");
 			this.jumpsLeft--;
+			if(jumpsLeft==maxJumps-1) {
+				this.setMovementState(new Airborne(this, this.gravity));
+			}
 			if (this.getBaseVelocity().getY()==0) {
 				this.increaseBaseVelocity(0, -this.baseJump);
 			}
 			this.setVariableVelocity(this.getVariableVelocity().getX(), 0);
-			if(jumpsLeft==maxJumps) {
-				this.setMovementState(new Airborne(this, this.gravity));
-			}
 		}
 	}
 	
@@ -148,12 +147,11 @@ public class Character extends GameObject {
 	public void setMovementState(MovementState ms) {
 		if (ms.getClass().equals(Walking.class)) {
 			this.setBaseVelocity(this.getBaseVelocity().getX(), 0);
+			this.setVariableVelocity(this.getVariableVelocity().getX(), 0);
 			jumpsLeft = maxJumps;
 		} else if (ms.getClass().equals(Airborne.class)) {
-			if (maxJumps==jumpsLeft) {
-				jumpsLeft--;
-			} else {
-				jumpsLeft = maxJumps;
+			if (jumpsLeft == maxJumps) {
+				jumpsLeft = maxJumps -1;
 			}
 		}
 		this.movState = ms;
