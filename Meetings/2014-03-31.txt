@@ -1,0 +1,81 @@
+﻿Meeting Agenda 2014-03-31
+Meeting begins at:
+Participants: 
+
+1. Reports from previous meeting:
+        
+2. Objectives:
+         
+2.1 Sequence map
+2.2 Discuss possibility of creating a proper design model uml
+2.3 Divide work responsibilities.
+ 
+3. Discussion items:
+        3.1 How do we do:
+         Javadoc
+        Check up with work even though meeting time is sparse.
+
+        3.2 What to do:
+         --- 
+         3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+5.2 Next meeting
+
+Meeting ends at:
+
+________________
+
+
+Meeting Agenda 2014-03-31
+Meeting begins at: 15:20
+Participants: Matz Larsson, Patrik Haar, Lisa Lipkin, David Gustafsson
+
+1. Reports from previous meeting:
+Members have not looked into tiled map editor.         
+2. Objectives:
+         2.1 Divide work responsibilities.
+2.2 Sequence map
+        made a sequence map of the UC move.
+2.3 Discuss possibility of creating a proper design model uml
+Started with some of the most important classes in our program, though we won’t be able to finish something complete till thursday
+
+3. Discussion items:
+        3.1 How do we do:
+         Javadoc
+It is much easier for the group members to understand if there is javadoc, therefore we will write javadoc on all methods.
+                Check up with work even though meeting time is sparse.
+                        We will try to find meeting times that fits everyone. If this is not possible,
+                        Skype may be an alternative solution. Also, a Google Calender will be
+                        used to plan meetings in a more flexible way.
+3.2 What to do:
+         --- 
+         3.3 Why is:
+         ---
+
+4. Outcomes and assignments:
+All code will be documented with javadoc even though this is not compulsory
+A Google Calendar will be created and used for easier scheduling.
+        Lisa will create the above mentioned calendar.
+
+
+Code for the demo will be produced by all members with responsibilities as follows:
+        David - Basic logic for an easy TestGame for the demo (controller + view)
+        Matz - World and collision detection
+        Lisa - Map together with TiledMap and some of the World-parts.
+        Patrik - Movement for the character
+
+5. Wrap up:
+        5.1 Unsolved issues
+        The design model has not yet been fully completed
+5.2 Next meeting
+08:00  2014-04-03 (Scheduled teacher meeting)
+14:00  2014-04-04 (Private group meeting)
+- Continue with design model
+- Split up work for the next week concerning the coding part
+
+Meeting ends at: 18:00
