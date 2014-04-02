@@ -51,7 +51,8 @@ public class World {
 	private void setup(){
 		mapObjects = new Shape[map.getObjectGroupCount()][];
 		for (int i=0; i<mapObjects.length ; i++) {
-			for (int j=0; j<map.getObjectCount(i); j++) {
+			mapObjects[i] = new Shape[map.getObjectCount(i)];
+			for (int j=0; j<mapObjects[i].length; j++) {
 				mapObjects[i][j] = new Rectangle(map.getObjectX(i, j)
 												,map.getObjectY(i, j)
 												,map.getObjectWidth(i, j)
