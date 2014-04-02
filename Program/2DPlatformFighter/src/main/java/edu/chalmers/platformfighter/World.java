@@ -213,6 +213,11 @@ public class World {
 	public Position getValidPosition(GameObject obj, Position old, int groupID){
 		Shape collider = (groupID>=0 && groupID<mapObjects.length?
 							getCollisionShape(obj, groupID):getCollisionShape(obj));
+		GameObject walkCol = obj.copy();
+		walkCol.setCenterPosition(old.getX(), obj.getCenterY());
+		if ((!isValid(walkCol) && (old.getY()<obj.getCenterY()))) {
+			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
+		}
 		if (collider == null){
 			return obj.getPosition();
 		}
