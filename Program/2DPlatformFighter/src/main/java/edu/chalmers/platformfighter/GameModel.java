@@ -62,6 +62,10 @@ public class GameModel {
 			} else {
 				ch.setMovementState(new Airborne(ch, new Velocity(0,1000)));
 			}
+			
+			if(!world.isValid(ch)){
+				ch.setCenterPosition(world.getValidPosition(ch, old));
+			}
 		}
 	}
 
