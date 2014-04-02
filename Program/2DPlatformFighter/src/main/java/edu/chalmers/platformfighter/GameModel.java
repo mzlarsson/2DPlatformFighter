@@ -60,6 +60,10 @@ public class GameModel {
 			if (!world.isTileValid(ch.getCenterPosition())) {
 				ch.setCenterPosition(world.getValidTilePosition(ch, old));
 			}
+			
+			if(!world.isValid(ch)){
+				ch.setCenterPosition(world.getValidPosition(ch, old));
+			}
 		}
 	}
 
