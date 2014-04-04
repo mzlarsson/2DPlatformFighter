@@ -1,0 +1,57 @@
+﻿	Meeting Agenda 2014-04-04
+	Meeting begins at:
+	Participants: 
+
+	1. Reports from previous meeting:
+	
+	2. Objectives:
+	2.1 Decide on the schedule and what to focus on next week
+
+	3. Discussion items:
+ 		3.1 How do we do:
+ 		---
+ 		3.2 What to do:
+ 		--- 
+  		3.3 Why is:
+ 		---
+
+	4. Outcomes and assignments:
+	
+	5. Wrap up:
+ 		5.1 Unsolved issues
+		5.2 Next meeting
+
+	Meeting ends at:
+
+	Meeting Agenda 2014-04-04
+	Meeting begins at: 10:50
+	Participants: Lisa Lipkin, Patrik Haar, Matz Larsson, David Gustafsson
+
+	1. Reports from previous meeting:
+		A google calendar was created for meetings.
+		Code for the demo was written and executable, with great success.
+		The meeting with the counselor went well and we are in line timewise.
+
+	2. Objectives:
+		2.1 Decide on the schedule and what to focus on next week
+			Focus will be on the Design model and general structure of the code.
+			We will try to meet pretty much whenever there are no classes.
+
+	3. Discussion items:
+ 		3.1 How do we do:
+ 		---
+ 		3.2 What to do:
+ 		--- 
+  		3.3 Why is:
+ 		---
+
+	4. Outcomes and assignments:
+		To next meeting we should look over the code and think of suggestions on how to
+		improve the structure.
+	
+	5. Wrap up:
+ 		5.1 Unsolved issues
+		5.2 Next meeting
+			2014-04-08 13:00	Design model and code structure.
+
+	Meeting ends at: 11:22.
