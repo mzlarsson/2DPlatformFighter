@@ -1,4 +1,4 @@
-package edu.chalmers.platformfighter;
+package edu.chalmers.brawlbuddies;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

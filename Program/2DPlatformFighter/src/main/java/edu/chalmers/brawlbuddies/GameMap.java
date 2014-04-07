@@ -1,4 +1,4 @@
-package edu.chalmers.platformfighter;
+package edu.chalmers.brawlbuddies;
 
 import java.util.List;
 

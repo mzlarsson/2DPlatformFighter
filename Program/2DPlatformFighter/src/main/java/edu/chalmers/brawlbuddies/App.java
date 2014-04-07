@@ -1,4 +1,4 @@
-package edu.chalmers.platformfighter;
+package edu.chalmers.brawlbuddies;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,7 +8,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class App extends BasicGame implements KeyListener
 {
@@ -30,6 +32,8 @@ public class App extends BasicGame implements KeyListener
 	boolean movingRight = false;
 	boolean jumpHeld = false;
 	
+	Sound sound = null;
+	
 	public App(String gamename)
 	{
 		super(gamename);
@@ -37,13 +41,18 @@ public class App extends BasicGame implements KeyListener
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-//		gc.setVSync(true);
+		gc.setVSync(true);
+		sound = new Sound("res/steps.wav");
+		
+		Music music = new Music("res/song.ogg");
+		music.loop(1.0f, 0.5f);
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
 		// X-Movement
 		if (gc.getInput().isKeyDown(Input.KEY_LEFT)) {
+			if(!sound.playing())sound.loop(3.0f, 1.0f);
 			if (!movingLeft) {
 				movingLeft = true;
 				movingRight = false;
@@ -53,6 +62,7 @@ public class App extends BasicGame implements KeyListener
 			long timeDiff = (System.nanoTime()-walktime)/10000;
 			posX = origPosX + -1*walkingspeed*timeDiff;
 		} else if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			if(!sound.playing())sound.loop(3.0f, 1.0f);
 			if (!movingRight) {
 				movingLeft = false;
 				movingRight = true;
@@ -65,18 +75,21 @@ public class App extends BasicGame implements KeyListener
 			origPosX = posX;
 			movingLeft = false;
 			movingRight = false;
+			sound.stop();
 		}
-		// Y-Movement
 		
-//		if (gc.getInput().isKeyDown(Input.KEY_SPACE)) {
-//			System.out.println("Space held");
-//			if (!jumpHeld && canJump()) {
-//				System.out.println("Jumping");
-//				airtime = System.nanoTime();
-//				verticalspeed = jumpspeed;
-//				airborne = true;
-//			}
-//		}
+		
+		// Y-Movement
+		if (gc.getInput().isKeyDown(Input.KEY_SPACE)) {
+			System.out.println("Space held");
+			if (!jumpHeld && canJump()) {
+				System.out.println("Jumping");
+				airtime = System.nanoTime();
+				verticalspeed = jumpspeed;
+				jumpHeld = true;
+				airborne = true;
+			}
+		}
 		if (airborne) {
 			long timeDiff = (System.nanoTime()-airtime)/10000;
 			double speedDiff = verticalspeed + yGrav*timeDiff;
@@ -113,7 +126,7 @@ public class App extends BasicGame implements KeyListener
 		{
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new App("Simple Slick Game"));
-			appgc.setDisplayMode(640, 480, false);
+			appgc.setDisplayMode(1920, 1080, true);
 			appgc.start();
 		}
 		catch (SlickException ex)

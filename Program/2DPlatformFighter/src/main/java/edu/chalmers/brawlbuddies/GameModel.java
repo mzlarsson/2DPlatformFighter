@@ -1,4 +1,4 @@
-package edu.chalmers.platformfighter;
+package edu.chalmers.brawlbuddies;
 
 /**
  * Holds the logic for the game.

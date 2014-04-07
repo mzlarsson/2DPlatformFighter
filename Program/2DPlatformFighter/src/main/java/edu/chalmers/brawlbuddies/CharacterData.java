@@ -1,4 +1,4 @@
-package edu.chalmers.platformfighter;
+package edu.chalmers.brawlbuddies;
 
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
