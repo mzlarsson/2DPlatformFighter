@@ -4,9 +4,9 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * A class describing a position object for our game
  * @author David Gustafsson
- *
+ * @version 0.2
  */
-public class Position extends Vector2f{
+public class Position extends Vector{
 	/**
 	 * Creates a new position with a x and y value
 	 * @param x the x-value of the position
@@ -32,8 +32,8 @@ public class Position extends Vector2f{
 	/**
 	 * Add a vector to this position and return the resulting position
 	 */
-	public Position add(Vector2f f){
-		return (Position)(f.copy().add(this)); //FIXME Vector2f CHANGES the given vector.
+	public Position add(Vector v){
+		return (Position)super.add(v);
 	}
 
 }

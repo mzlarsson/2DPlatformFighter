@@ -4,8 +4,9 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * A class that describes velocity object to our game
  * @author David Gustafsson
+ * @version 0.2 
  */
-public class Velocity extends Vector2f {
+public class Velocity extends Vector {
 	/**
 	 * Creates a new Velocity from a x and y value
 	 * @param x the x value of the new Velocity
@@ -28,24 +29,7 @@ public class Velocity extends Vector2f {
 	public Velocity copy() {
 		return new Velocity(x, y);
 	}
-	/**
-	 * Increase the x and y value of this velocity with given velocity.
-	 * @param variableSpeed the velocity to add to this velocity
-	 * @return the resulting velocity
-	 */
-	public void increase(Velocity variableSpeed) {
-		super.add(variableSpeed);
-	}
 
-	/**
-	 * Increase the x and y value of this velocity with given x and y values.
-	 * @param x the x value to add to this velocity
-	 * @param y the y value to add to this velocity
-	 * @return The resulting velocity
-	 */
-	public void increase(float x, float y) {
-		super.add(new Vector2f(x,y));
-	}
 	
 	/**
 	 * Adds these x and y value of this velocity with given x and y values.
@@ -54,7 +38,7 @@ public class Velocity extends Vector2f {
 	 * @return The resulting velocity
 	 */
 	public Velocity add(float x, float y) {
-		return new Velocity(this.getX()+x, this.getY()+y);
+		return (Velocity)super.add(x,y);
 	}
 	
 	/**
@@ -64,7 +48,7 @@ public class Velocity extends Vector2f {
 	 * @return The resulting velocity
 	 */
 	public Velocity add(Velocity v) {
-		return this.add(v.getX(), v.getY());
+		return (Velocity)super.add(v);
 	}
 	
 	/**
