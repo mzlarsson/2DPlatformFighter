@@ -1,5 +1,6 @@
 package edu.chalmers.brawlbuddies;
 
+import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +12,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * A test game for the basic function of the model
@@ -49,11 +52,9 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		Player[] players = { new Player("Player1", new Character(
-				new CharacterData())) };
+		Player[] players = { new Player("Player1", generateBob()) };
 		this.startGame(players);
 		
-
 	}
 
 	@Override
@@ -74,6 +75,13 @@ public class TestGame extends BasicGame {
 		game.update(delta);
 	}
 
+	private Character generateBob() {
+		XStream xStream = new XStream();
+		xStream.processAnnotations(Character.class);
+		Object readObject = xStream.fromXML(new File("res/characters/bob.xml"));
+		return (Character)readObject;
+	}
+	
 	public static void main(String[] args) {
 		try {
 			TestGame game = new TestGame();
