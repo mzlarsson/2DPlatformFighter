@@ -1,4 +1,9 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
+
+import edu.chalmers.brawlbuddies.controller.Player;
+import edu.chalmers.brawlbuddies.model.world.Airborne;
+import edu.chalmers.brawlbuddies.model.world.Character;
+import edu.chalmers.brawlbuddies.model.world.World;
 
 /**
  * Holds the logic for the game.
@@ -6,12 +11,12 @@ package edu.chalmers.brawlbuddies;
  * @author Patrik Haar
  * @version 0.1
  */
-public class GameModel {
+public class BrawlBuddies {
 
 	private World world;
 	private Player[] players;
 
-	public GameModel(Player[] p, World w) {
+	public BrawlBuddies(Player[] p, World w) {
 		players = p;
 		world = w;
 	}

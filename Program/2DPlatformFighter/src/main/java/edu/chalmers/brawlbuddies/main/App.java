@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.main;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

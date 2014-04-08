@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.List;
 

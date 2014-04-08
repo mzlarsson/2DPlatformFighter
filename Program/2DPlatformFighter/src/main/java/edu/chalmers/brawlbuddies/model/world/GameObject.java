@@ -1,8 +1,11 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
 
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
+
+import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * A class to describe an object with a position, velocity and shape in the game.

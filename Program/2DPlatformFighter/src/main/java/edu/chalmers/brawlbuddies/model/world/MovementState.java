@@ -1,4 +1,6 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
+
+import edu.chalmers.brawlbuddies.model.Position;
 
 /**
  * An interface to handle the movement for game objects with different states.

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import edu.chalmers.brawlbuddies.Vector;
+import edu.chalmers.brawlbuddies.model.Vector;
 
 /**
  * A test class for Vector

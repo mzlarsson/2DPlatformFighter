@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.chalmers.brawlbuddies.model.Vector;
+import edu.chalmers.brawlbuddies.model.Velocity;
+
 /**
  * A test class for Velocity
  * 

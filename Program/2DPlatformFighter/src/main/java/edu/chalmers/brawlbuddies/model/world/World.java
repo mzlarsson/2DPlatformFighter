@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,10 @@ import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
+
+import edu.chalmers.brawlbuddies.controller.Player;
+import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * Class for holding all the data of the current game world. It is also

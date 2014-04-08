@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
 
 /**
  * Enum for holding simple movement directions.

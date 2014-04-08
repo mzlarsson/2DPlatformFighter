@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
 /**
  * A class describing a Players aim 
  * @author David Gustafsson

@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
 
 import org.newdawn.slick.geom.Vector2f;
 /**

@@ -1,4 +1,7 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
+
+import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * A MovementState for stationary GameObjects.

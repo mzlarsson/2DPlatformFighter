@@ -3,6 +3,8 @@ package edu.chalmers.brawlbuddies;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import edu.chalmers.brawlbuddies.model.Aim;
 /**
  * A test for the Aim class
  * @author David Gustafsson

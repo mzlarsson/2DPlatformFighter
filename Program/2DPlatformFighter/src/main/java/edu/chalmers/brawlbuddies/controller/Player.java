@@ -1,4 +1,7 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.controller;
+
+import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.world.Character;
 
 /**
  * A class to describe a player playing the game.

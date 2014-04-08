@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.main;
 
 import java.io.File;
 import java.util.List;
@@ -15,6 +15,13 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import com.thoughtworks.xstream.XStream;
 
+import edu.chalmers.brawlbuddies.controller.Player;
+import edu.chalmers.brawlbuddies.model.BrawlBuddies;
+import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.world.Character;
+import edu.chalmers.brawlbuddies.model.world.GameMap;
+import edu.chalmers.brawlbuddies.model.world.World;
+
 /**
  * A test game for the basic function of the model
  * 
@@ -23,7 +30,7 @@ import com.thoughtworks.xstream.XStream;
  */
 
 public class TestGame extends BasicGame {
-	private GameModel game;
+	private BrawlBuddies game;
 
 	/**
 	 * Creates a new instance of test game
@@ -35,7 +42,7 @@ public class TestGame extends BasicGame {
 		super("Demo");
 	}
 	public void startGame(Player[] players){
-		game = new GameModel(players, new World(players, new GameMap()));
+		game = new BrawlBuddies(players, new World(players, new GameMap()));
 	}
 
 	/**

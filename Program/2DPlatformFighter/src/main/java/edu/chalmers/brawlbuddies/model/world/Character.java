@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model.world;
 
 import java.io.ObjectStreamException;
 
@@ -7,6 +7,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * A class to represent a player-controlled character.
@@ -42,11 +46,8 @@ public class Character extends GameObject {
 	 * @param cd The data from which the character gets its attributes from.
 	 * @param player The Player controlling the character.
 	 */
-	public Character(CharacterData cd) {
-		super(cd.shape);
-		this.baseSpeed = cd.baseMovementSpeed;
-		this.baseJump = cd.baseJumpingPower;
-		this.maxJumps = cd.maxJumps;
+	public Character() {
+		super();
 		this.gravity = new Velocity(0,1000);
 		this.setMovementState(new Airborne(this, this.gravity));
 	}
@@ -179,7 +180,7 @@ public class Character extends GameObject {
 	@Override
 	public GameObject copy(){
 		//FIXME temporary solution. implement correctly!
-		return new Character(new CharacterData());
+		return new Character();
 	}
 	
 	// TODO Temporary draw method to use a shape as the image for the upcoming demo.
