@@ -4,7 +4,7 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * A class describing a position object for our game
  * @author David Gustafsson
- * @version 0.2
+ * @version 0.3
  */
 public class Position extends Vector{
 	/**
@@ -19,7 +19,7 @@ public class Position extends Vector{
  * Creates a new position from a vector
  * @param f a vector
  */
-	public Position(Vector2f f){
+	public Position(Vector f){
 		this(f.getX(), f.getY());
 	}
 	/**
@@ -34,6 +34,9 @@ public class Position extends Vector{
 	 */
 	public Position add(Vector v){
 		return (Position)super.add(v);
+	}
+	public Position add(float x , float y){
+		return (Position)super.add(x, y);
 	}
 
 }

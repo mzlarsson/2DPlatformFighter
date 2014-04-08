@@ -4,7 +4,7 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * A class that describes velocity object to our game
  * @author David Gustafsson
- * @version 0.2 
+ * @version 0.3
  */
 public class Velocity extends Vector {
 	/**
@@ -19,7 +19,7 @@ public class Velocity extends Vector {
 	 * Creates a new Velocity from a vector
 	 * @param v the vector to create a new velocity
 	 */
-	public Velocity(Vector2f v){
+	public Velocity(Vector v){
 		this(v.getX(), v.getY());
 	}
 	/**

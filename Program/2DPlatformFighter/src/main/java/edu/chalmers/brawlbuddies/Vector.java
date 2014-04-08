@@ -4,6 +4,7 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * An adapter class to vector2f to change implementation of some methods.
  * @author David Gustafsson
+ * @version 0.2
  * 
  */
 public class Vector extends Vector2f {
@@ -11,24 +12,23 @@ public class Vector extends Vector2f {
 		super(x , y);
 	}
 	
-	public Vector add(Vector2f v){
+	public Vector add(Vector v){
 		return add(v.getX(), v.getY());
 	}
+	
 	public Vector add(float x , float y){
-		// TODO check if satisfactory solution
-		if(this instanceof Position){
-			return new Position(this.getX() + x, this.getY() + y);
-		}
-		if(this instanceof Velocity){
-			return new Velocity(this.getX() + x, this.getY() + y);
-		}
-		return new Vector(this.getX() + x, this.getY() + y);	
+	Vector v = 	this.copy();
+	v.set(this.getX() + x ,this.getY() + y);
+	return v;
 	}
 	/**
 	 * Add x and y value to a Vector
 	 * @param x
 	 * @param y
 	 */
+	public Vector copy(){
+		return new Vector(this.getX(), this.getY());
+	}
 	public void Increase(Float x , Float y){
 		this.set(this.getX() + x, this.getY() + y);
 	}
@@ -36,7 +36,7 @@ public class Vector extends Vector2f {
 	 * Add a vector2f to a Vector
 	 * @param v
 	 */
-	public void Increase(Vector2f v){
+	public void Increase(Vector v){
 		this.Increase(v.getX() , v.getY());
 	}
 }
