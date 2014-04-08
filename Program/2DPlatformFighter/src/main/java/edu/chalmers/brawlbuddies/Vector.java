@@ -39,4 +39,8 @@ public class Vector extends Vector2f {
 	public void Increase(Vector v){
 		this.Increase(v.getX() , v.getY());
 	}
+	public Vector getNormalised(){
+		Vector2f v = this.getNormal();
+		return new Vector(v.getX() , v.getY());		
+	}
 }

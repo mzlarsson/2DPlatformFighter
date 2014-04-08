@@ -85,4 +85,12 @@ public class VectorTest {
 		assertTrue(v2.x == 3f);
 		assertTrue(v2.y == 6f);
 	}
+	@Test
+	public void testgetNormalised(){
+		Vector v1 = new Vector(1f , 3f);
+		Vector v2 = v1.getNormalised();
+		assertTrue(v1.x == 1f);
+		assertTrue(v1.y == 3f);
+		assertTrue(v2.x * v2.x + v2.y * v2.y > 1 - 0.0000001);
+	}
 }
