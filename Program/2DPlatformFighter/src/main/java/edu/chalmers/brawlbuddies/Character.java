@@ -1,7 +1,12 @@
 package edu.chalmers.brawlbuddies;
 
+import java.io.ObjectStreamException;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
  * A class to represent a player-controlled character.
@@ -9,10 +14,19 @@ import org.newdawn.slick.Graphics;
  * @author Patrik Haar
  * @version 0.2
  */
+@XStreamAlias("character")
 public class Character extends GameObject {
 	
+	@XStreamAlias("name")
+	private String name;
+	@XStreamAlias("bio")
+	private String bio;
+	
+	@XStreamAlias("movespeed")
 	private float baseSpeed;
+	@XStreamAlias("jumpingpower")
 	private float baseJump;
+	@XStreamAlias("maxjumps")
 	private int maxJumps;
 	private int jumpsLeft;
 	
@@ -94,6 +108,7 @@ public class Character extends GameObject {
 	 * Makes the character jump if able.
 	 */
 	public void makeJump() {
+		System.out.println("Försöker hoppa med antal hopp kvar: " + jumpsLeft);
 		if (this.canJump()) {
 			this.jumpsLeft--;
 			if(jumpsLeft==maxJumps-1) {
@@ -146,6 +161,7 @@ public class Character extends GameObject {
 	 */
 	public void setMovementState(MovementState ms) {
 		if (ms.getClass().equals(Walking.class)) {
+			System.out.println("Sätter Walking");
 			this.setBaseVelocity(this.getBaseVelocity().getX(), 0);
 			this.setVariableVelocity(this.getVariableVelocity().getX(), 0);
 			jumpsLeft = maxJumps;
@@ -171,5 +187,15 @@ public class Character extends GameObject {
 		Graphics g = new Graphics();
 		g.setColor(Color.black);
 		g.fill(this.getShape());
+	}
+	
+	private Object readResolve() throws ObjectStreamException {
+		this.setShape(new Rectangle(0,0,50,80));
+		this.setBaseVelocity(0, 0);
+		this.setVariableVelocity(0, 0);
+		this.jumpsLeft = this.maxJumps;
+		this.gravity = new Velocity(0,1000);
+		this.setMovementState(new Airborne(this, this.gravity));
+		return this;
 	}
 }
