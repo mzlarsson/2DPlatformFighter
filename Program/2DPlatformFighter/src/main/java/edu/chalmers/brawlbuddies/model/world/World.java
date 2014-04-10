@@ -180,7 +180,7 @@ public class World {
 	 *         <code>false</code> otherwise.
 	 */
 	public boolean isValid(GameObject obj) {
-		return getCollisionShape(obj) == null;
+		return getCollisionShapes(obj).isEmpty();
 	}
 
 	/**
@@ -191,8 +191,8 @@ public class World {
 	 * @return <code>true</code> if object is allowed at its current position,
 	 *         <code>false</code> otherwise.
 	 */
-	public boolean isValid(GameObject obj, int groupID) {
-		return getCollisionShape(obj, groupID) == null;
+	public boolean isValid(GameObject obj, int groupID){
+		return getCollisionShapes(obj, groupID).isEmpty();
 	}
 
 	/**
@@ -215,28 +215,38 @@ public class World {
 	 * @return The best position for the GO depending on surroundings.
 	 */
 	public Position getValidPosition(GameObject obj, Position old, int groupID){
-		Shape collider = (groupID>=0 && groupID<mapObjects.length?
-							getCollisionShape(obj, groupID):getCollisionShape(obj));
-		GameObject walkCol = obj.copy();
+		List<Shape> colliders = (groupID>=0 && groupID<mapObjects.length?
+							getCollisionShapes(obj, groupID):getCollisionShapes(obj));
+		
+		//TODO remove with movementstate
+		/*GameObject walkCol = obj.copy();
 		walkCol.setCenterPosition(old.getX(), obj.getCenterY());
 		if ((!isValid(walkCol) && (old.getY()<obj.getCenterY()))) {
 			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
-		}
-		if (collider == null){
+		}*/
+		
+		//No colliders?
+		if (colliders.isEmpty()){
 			return obj.getCenterPosition();
 		}
 		
+		//Copy gameobject position and gameobject
 		Position tmp = obj.getCenterPosition().copy();
 		GameObject gCopy = obj.copy();
 
+		//Check movement only along x-axis
 		gCopy.setCenterPosition(tmp.getX(), old.getY());
-		if (!collides(collider, gCopy.getShape())){
+		if (!collides(gCopy.getShape(), colliders)){
+			//TODO remove with movementstate
+			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
+
 			return new Position(tmp.getX(), old.getY());
 		} else {
+			//Check movement only along y-axis
 			gCopy.setCenterPosition(old.getX(), tmp.getY());
-			if (!collides(collider, gCopy.getShape())){
+			if (!collides(gCopy.getShape(), colliders)){
 				return new Position(old.getX(), tmp.getY());
-			} else {
+			} else{
 				return old.copy();
 			}
 		}
@@ -248,8 +258,8 @@ public class World {
 	 * @param obj The GameObject to check.
 	 * @return <code>null</code> if no collision detected, otherwise the object it collides with.
 	 */
-	private Shape getCollisionShape(GameObject obj){
-		return getCollisionShape(obj.getShape());
+	private List<Shape> getCollisionShapes(GameObject obj){
+		return getCollisionShapes(obj.getShape());
 	}
 
 	/**
@@ -259,8 +269,8 @@ public class World {
 	 * @param groupID The groupID to check collisions in
 	 * @return <code>null</code> if no collision detected, otherwise the object it collides with.
 	 */
-	private Shape getCollisionShape(GameObject obj, int groupID){
-		return getCollisionShape(obj.getShape(), groupID);
+	private List<Shape> getCollisionShapes(GameObject obj, int groupID){
+		return getCollisionShapes(obj.getShape(), groupID);
 	}
 
 	/**
@@ -269,16 +279,13 @@ public class World {
 	 * @param shape The Shape to check.
 	 * @return <code>null</code> if no collision detected, otherwise the object it collides with.
 	 */
-	private Shape getCollisionShape(Shape shape){
-		Shape tmp = null;
+	private List<Shape> getCollisionShapes(Shape shape){
+		List<Shape> collisions = new ArrayList<Shape>();
 		for(int i = 0; i<mapObjects.length; i++){
-			tmp = getCollisionShape(shape, i);
-			if(tmp != null){
-				return tmp;
-			}
+			collisions.addAll(getCollisionShapes(shape, i));
 		}
 		
-		return null;
+		return collisions;
 	}
 	
 	/**
@@ -288,15 +295,33 @@ public class World {
 	 * @param groupID The groupID to check collisions in
 	 * @return <code>null</code> if no collision detected, otherwise the object it collides with.
 	 */
-	private Shape getCollisionShape(Shape shape, int groupID) {
+	private List<Shape> getCollisionShapes(Shape shape, int groupID) {
+		List<Shape> collisions = new ArrayList<Shape>();
 		if(groupID>=0 && groupID<mapObjects.length){
 			for (int i = 0; i < mapObjects[groupID].length; i++) {
-				if (collides(shape, mapObjects[groupID][i])) {
-					return mapObjects[groupID][i];
+				if (collides(shape, mapObjects[groupID][i])){
+					collisions.add(mapObjects[groupID][i]);
 				}
 			}
 		}
-		return null;
+		
+		return collisions;
+	}
+
+	/**
+	 * Checks whether two Shapes collides in any matter.
+	 * @param go0 The first Shape
+	 * @param go1 The second Shape
+	 * @return <code>true</code> if they collides in any matter,
+	 *         <code>false</code> otherwise.
+	 */
+	private boolean collides(Shape s1, List<Shape> shapes) {
+		for(int i = 0; i<shapes.size(); i++){
+			if(collides(s1, shapes.get(i))){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
