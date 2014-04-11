@@ -1,9 +1,11 @@
 package edu.chalmers.brawlbuddies.main;
 
 import java.io.File;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -11,7 +13,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -19,6 +27,7 @@ import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.world.Character;
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.World;
 
@@ -83,10 +92,7 @@ public class TestGame extends BasicGame {
 	}
 
 	private Character generateBob() {
-		XStream xStream = new XStream();
-		xStream.processAnnotations(Character.class);
-		Object readObject = xStream.fromXML(new File("res/characters/bob.xml"));
-		return (Character)readObject;
+		return CharacterFactory.createCharacter("bob");
 	}
 	
 	public static void main(String[] args) {

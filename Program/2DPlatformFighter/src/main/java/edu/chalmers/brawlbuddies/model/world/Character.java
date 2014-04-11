@@ -5,6 +5,7 @@ import java.io.ObjectStreamException;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -46,12 +47,34 @@ public class Character extends GameObject {
 	 * @param cd The data from which the character gets its attributes from.
 	 * @param player The Player controlling the character.
 	 */
-	public Character() {
-		super();
+	public Character(Shape shape) {
+		super(shape);
+		this.jumpsLeft = this.maxJumps;
 		this.gravity = new Velocity(0,1000);
 		this.setMovementState(new Airborne(this, this.gravity));
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public void setBaseSpeed(float baseSpeed) {
+		this.baseSpeed = baseSpeed;
+	}
+
+	public void setBaseJump(float baseJump) {
+		this.baseJump = baseJump;
+	}
+
+	public void setMaxJumps(int maxJumps) {
+		this.maxJumps = maxJumps;
+		this.jumpsLeft = maxJumps;
+	}
+
 	/**
 	 * Updates the velocity and position of the Character and returns the old position.
 	 * @param delta The time passed since last update in milliseconds.
@@ -180,7 +203,7 @@ public class Character extends GameObject {
 	@Override
 	public GameObject copy(){
 		//FIXME temporary solution. implement correctly!
-		return new Character();
+		return new Character(new Rectangle(0,0,50,80));
 	}
 	
 	// TODO Temporary draw method to use a shape as the image for the upcoming demo.
