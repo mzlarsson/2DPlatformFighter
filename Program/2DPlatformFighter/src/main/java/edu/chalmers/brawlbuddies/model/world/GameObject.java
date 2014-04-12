@@ -12,6 +12,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
  * 
  * @author Patrik Haar
  * @version 1.0
+ * 
  */
 public abstract class GameObject {
 	
@@ -196,9 +197,9 @@ public abstract class GameObject {
 	 * Transforms the GameObject's shape using the given Transform object.
 	 * @param trans The Transform object to transform the shape of the GameObject with.
 	 */
-	//FIXME This method does nothing at all. Shape.transform() does not change the Shape.
+	//TODO check if this fix works
 	public void transform(Transform trans) {
-		this.shape.transform(trans);
+		this.shape = shape.transform(trans);
 	}
 	
 	/**

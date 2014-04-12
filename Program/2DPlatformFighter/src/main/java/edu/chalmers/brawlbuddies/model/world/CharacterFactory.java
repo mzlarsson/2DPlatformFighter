@@ -6,6 +6,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.newdawn.slick.geom.Rectangle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -30,6 +31,9 @@ public class CharacterFactory {
 				.getChildNodes().item(0).getNodeValue());
 		character.setBio(xmlDoc.getElementsByTagName("bio").item(0).getChildNodes()
 				.item(0).getNodeValue());
+		//TODO check if this works
+		character.setHealthforCharacter(Float.parseFloat(xmlDoc.getElementsByTagName("healthvalue").item(0).getChildNodes()
+				.item(0).getNodeValue()));;
 		character.setBaseSpeed(Float.parseFloat(xmlDoc
 				.getElementsByTagName("movespeed").item(0).getChildNodes()
 				.item(0).getNodeValue()));

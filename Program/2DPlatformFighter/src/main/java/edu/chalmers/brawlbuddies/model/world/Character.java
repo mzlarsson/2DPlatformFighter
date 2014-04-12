@@ -17,7 +17,8 @@ import edu.chalmers.brawlbuddies.model.Velocity;
  * A class to represent a player-controlled character.
  * 
  * @author Patrik Haar
- * @version 0.2
+ * @version 0.3
+ * @revised David Gustafsson
  */
 @XStreamAlias("character")
 public class Character extends GameObject {
@@ -26,7 +27,8 @@ public class Character extends GameObject {
 	private String name;
 	@XStreamAlias("bio")
 	private String bio;
-	
+	@XStreamAlias("health")
+	private Health health;
 	@XStreamAlias("movespeed")
 	private float baseSpeed;
 	@XStreamAlias("jumpingpower")
@@ -61,7 +63,9 @@ public class Character extends GameObject {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-
+	public void setMaxHealth(float a){
+		
+	}
 	public void setBaseSpeed(float baseSpeed) {
 		this.baseSpeed = baseSpeed;
 	}
@@ -196,6 +200,22 @@ public class Character extends GameObject {
 		}
 		this.movState = ms;
 	}
+	public void takeDamage(float a){
+		health.takeDamage(a);
+	}
+	public void heal(float a){
+		health.heal(a);
+	}
+	public float getHealth(){
+		return health.getHp();
+	}
+	public void restoreHealth(){
+		health.restoreHp();
+	}
+	public void setHealthforCharacter(float a){
+		health.setMaxHealth(a);
+		health.setHealth(a);
+	}
 	
 	/**
 	 * Returns a copy of this character.
@@ -222,4 +242,5 @@ public class Character extends GameObject {
 		this.setMovementState(new Airborne(this, this.gravity));
 		return this;
 	}
+
 }
