@@ -23,6 +23,16 @@ public class Velocity extends Vector {
 		this(v.getX(), v.getY());
 	}
 	/**
+	 * Creates a new Velocity vector with the direction of the Aim and the length of the scale. 
+	 * @param aim The direction of the new vector.
+	 * @param scale The length of the new vector.
+	 */
+	public Velocity(Aim aim, float scale) {
+		this(aim);
+		this.set(this.getNormalized().getX(), this.getNormalized().getY());
+		this.scale(scale);
+	}
+	/**
 	 * Returns a copy of this velocity.
 	 * @return the copy of this velocity
 	 */

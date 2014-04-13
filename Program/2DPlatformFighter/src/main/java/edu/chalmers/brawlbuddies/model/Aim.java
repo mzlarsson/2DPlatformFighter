@@ -2,6 +2,7 @@ package edu.chalmers.brawlbuddies.model;
 /**
  * A class describing a Players aim 
  * @author David Gustafsson
+ * @revised Patrik Haar
  *
  */
 //TODO Write more comments
@@ -22,5 +23,11 @@ public class Aim extends Vector {
 	}
 	public Aim add(float x , float y){
 		return (Aim)super.add(x, y);
+	}
+	public Aim getNormalized() {
+		return (Aim)super.getNormalized();
+	}
+	public Aim scale(float f) {
+		return (Aim)super.scale(f);
 	}
 }

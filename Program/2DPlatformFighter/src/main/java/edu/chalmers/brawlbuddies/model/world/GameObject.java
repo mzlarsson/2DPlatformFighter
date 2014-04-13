@@ -6,6 +6,7 @@ import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
+import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
  * A class to describe an object with a position, velocity and shape in the game.
@@ -30,7 +31,7 @@ public abstract class GameObject {
 	public GameObject(Velocity baseSpeed, Velocity variableSpeed, Shape shape) {
 		this.baseSpeed = baseSpeed.copy();
 		this.variableSpeed = variableSpeed.copy();
-		this.shape = shape;
+		this.shape = SlickUtil.copy(shape);
 	}
 	
 	/**
@@ -312,5 +313,6 @@ public abstract class GameObject {
 	}
 	
 	public abstract void setMovementState(MovementState ms);
+	public abstract Position update(int delta);
 	public abstract GameObject copy();
 }
