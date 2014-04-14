@@ -10,7 +10,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * A class describing health for a character
  * 
  * @author David Gustafsson
- * 
+ * @revised Patrik Haar
  */
 @XStreamAlias("health")
 public class Health {
@@ -18,6 +18,24 @@ public class Health {
 	private float maxHp;
 	private float currentHp;
 
+	/**
+	 * Creates a Health object with a max and current health value.
+	 * @param max The maximum health value.
+	 * @param curr The current health value.
+	 */
+	public Health(float max, float curr) {
+		this.maxHp = max;
+		this.currentHp = curr;
+	}
+	
+	/**
+	 * Creates a Health object with a max value.
+	 * @param max The maximum health value.
+	 */
+	public Health(float max) {
+		this(max, max);
+	}
+	
 	/**
 	 * Decrease currentHp with float a if sum is lesser than zero currentHp is
 	 * set to zero

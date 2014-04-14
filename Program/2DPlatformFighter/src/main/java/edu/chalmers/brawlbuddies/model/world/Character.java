@@ -212,9 +212,8 @@ public class Character extends GameObject {
 	public void restoreHealth(){
 		health.restoreHp();
 	}
-	public void setHealthforCharacter(float a){
-		health.setMaxHealth(a);
-		health.setHealth(a);
+	public void setHealth(float a){
+		this.health = new Health(a);
 	}
 	
 	/**

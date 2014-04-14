@@ -32,8 +32,8 @@ public class CharacterFactory {
 		character.setBio(xmlDoc.getElementsByTagName("bio").item(0).getChildNodes()
 				.item(0).getNodeValue());
 		//TODO check if this works
-		character.setHealthforCharacter(Float.parseFloat(xmlDoc.getElementsByTagName("healthvalue").item(0).getChildNodes()
-				.item(0).getNodeValue()));;
+		character.setHealth(Float.parseFloat(xmlDoc.getElementsByTagName("health").item(0).getChildNodes()
+				.item(0).getNodeValue()));
 		character.setBaseSpeed(Float.parseFloat(xmlDoc
 				.getElementsByTagName("movespeed").item(0).getChildNodes()
 				.item(0).getNodeValue()));
