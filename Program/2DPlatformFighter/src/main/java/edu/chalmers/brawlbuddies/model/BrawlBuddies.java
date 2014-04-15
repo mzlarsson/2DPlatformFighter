@@ -1,7 +1,6 @@
 package edu.chalmers.brawlbuddies.model;
 
 import edu.chalmers.brawlbuddies.controller.Player;
-import edu.chalmers.brawlbuddies.model.world.Airborne;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.World;
 
@@ -64,8 +63,6 @@ public class BrawlBuddies {
 			Character ch = p.getCharacter();
 			if (!world.isTileValid(ch.getCenterPosition())) {
 				ch.setCenterPosition(world.getValidTilePosition(ch, old));
-			} else {
-				ch.setMovementState(new Airborne(ch, new Velocity(0,1000)));
 			}
 			
 			if(!world.isValid(ch)){

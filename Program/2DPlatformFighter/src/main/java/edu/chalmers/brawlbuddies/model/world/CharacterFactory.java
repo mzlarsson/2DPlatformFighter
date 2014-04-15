@@ -6,8 +6,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.newdawn.slick.geom.Rectangle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * A factory for creating characters.
@@ -34,15 +35,16 @@ public class CharacterFactory {
 		//TODO check if this works
 		character.setHealth(Float.parseFloat(xmlDoc.getElementsByTagName("health").item(0).getChildNodes()
 				.item(0).getNodeValue()));
-		character.setBaseSpeed(Float.parseFloat(xmlDoc
+		float moveSpeed = Float.parseFloat(xmlDoc
 				.getElementsByTagName("movespeed").item(0).getChildNodes()
-				.item(0).getNodeValue()));
-		character.setBaseJump(Float.parseFloat(xmlDoc
+				.item(0).getNodeValue());
+		float jumpSpeed = Float.parseFloat(xmlDoc
 				.getElementsByTagName("jumpingpower").item(0).getChildNodes()
-				.item(0).getNodeValue()));
-		character.setMaxJumps(Integer.parseInt(xmlDoc
+				.item(0).getNodeValue());
+		int maxJumps = Integer.parseInt(xmlDoc
 				.getElementsByTagName("maxjumps").item(0).getChildNodes()
-				.item(0).getNodeValue()));
+				.item(0).getNodeValue());
+		character.setMovement(new JumpMovement(new Velocity(moveSpeed, 0), jumpSpeed, maxJumps));
 		return character;
 	}
 

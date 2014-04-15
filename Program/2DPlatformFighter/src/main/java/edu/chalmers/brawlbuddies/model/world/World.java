@@ -1,17 +1,14 @@
 package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * Class for holding all the data of the current game world. It is also
@@ -80,9 +77,6 @@ public class World {
 	public Position getValidTilePosition(GameObject obj, Position old) {
 		Position tmp = new Position(obj.getCenterX(), obj.getCenterY());
 
-		if ((!isTileValid(new Position(old.getX(), tmp.getY())) && (old.getY()<tmp.getY()))) {
-			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
-		}
 		if (!isTileValid(tmp)) {
 			Position tmp2 = new Position(tmp.getX(), old.getY());
 			if (isTileValid(tmp2)) {
@@ -218,13 +212,6 @@ public class World {
 		List<Shape> colliders = (groupID>=0 && groupID<mapObjects.length?
 							getCollisionShapes(obj, groupID):getCollisionShapes(obj));
 		
-		//TODO remove with movementstate
-		/*GameObject walkCol = obj.copy();
-		walkCol.setCenterPosition(old.getX(), obj.getCenterY());
-		if ((!isValid(walkCol) && (old.getY()<obj.getCenterY()))) {
-			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
-		}*/
-		
 		//No colliders?
 		if (colliders.isEmpty()){
 			return obj.getCenterPosition();
@@ -237,16 +224,16 @@ public class World {
 		//Check movement only along x-axis
 		gCopy.setCenterPosition(tmp.getX(), old.getY());
 		if (!collides(gCopy.getShape(), colliders)){
-			//TODO remove with movementstate
-			obj.setMovementState(new Walking(obj, new Velocity(0,1000)));
-
+			obj.onCollision(null, Movement.Alignment.VERTICAL);
 			return new Position(tmp.getX(), old.getY());
 		} else {
 			//Check movement only along y-axis
 			gCopy.setCenterPosition(old.getX(), tmp.getY());
 			if (!collides(gCopy.getShape(), colliders)){
+				obj.onCollision(null, Movement.Alignment.HORIZONTAL);
 				return new Position(old.getX(), tmp.getY());
 			} else{
+				obj.onCollision(null, Movement.Alignment.BOTH);
 				return old.copy();
 			}
 		}
