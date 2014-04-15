@@ -25,6 +25,14 @@ public class Projectile extends GameObject {
 		this.lifetime = lifetime;
 	}
 	
+	/**
+	 * Check if the Projectile is still active.
+	 * @return true if the Projectile is active.
+	 */
+	public boolean isActive() {
+		return lifetime>0;
+	}
+	
 	@Override
 	public void setMovementState(MovementState ms) {
 		// TODO Auto-generated method stub
@@ -35,10 +43,11 @@ public class Projectile extends GameObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	//TODO Currently unaffected by gravity.
 	@Override
 	public Position update(int delta) {
+		lifetime -= delta;
 		Position oldPos = getCenterPosition().copy();
 		Velocity tot = getTotalVelocity();
 		setCenterX( getCenterX() + (tot.getX()*((float)(delta))/1000) );	//FIXME Change the 1000 value to a constant modifier in the later Constants class.

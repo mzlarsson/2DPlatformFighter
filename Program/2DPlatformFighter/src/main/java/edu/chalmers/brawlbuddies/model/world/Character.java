@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Shape;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
@@ -40,9 +41,9 @@ public class Character extends GameObject {
 	private MovementState movState;
 	private Velocity gravity;
 	
-	// TODO We probably don't want it like this in the final version
-	private boolean movingLeft;
-	private boolean movingRight;
+	private Aim aim;
+	private Direction currDir;
+	private Direction lastAimed = Direction.RIGHT;
 	
 	/**
 	 * Creates a Character.
@@ -53,6 +54,7 @@ public class Character extends GameObject {
 		super(shape);
 		this.jumpsLeft = this.maxJumps;
 		this.gravity = new Velocity(0,1000);
+		this.aim = new Aim(1,0);
 		this.setMovementState(new Airborne(this, this.gravity));
 	}
 	
@@ -92,42 +94,50 @@ public class Character extends GameObject {
 	 * Makes the character move to the left/right/up/down depending on the Direction.
 	 */
 	public void move(Direction dir) {
-		switch (dir) {
-		case LEFT:
-			if (!movingLeft) {
-				if (movingRight) {
-					this.increaseBaseVelocity(-2*this.baseSpeed,0);
-				} else {
-					this.increaseBaseVelocity(-this.baseSpeed,0);
-				}
-				movingLeft = true;
-				movingRight = false;
-			}
-			break;
-			
-		case RIGHT:
-			if (!movingRight) {
-				if (movingLeft) {
-					this.increaseBaseVelocity(2*this.baseSpeed,0);
-				} else {
-					this.increaseBaseVelocity(this.baseSpeed,0);
-				}
-				movingLeft = false;
-				movingRight = true;
-			}
-			break;
-			
-		case UP:
-			// TODO Auto-generated method stub
-			
-		case DOWN:
-			// TODO Auto-generated method stub
-			
-		case NONE:
-			if (movingLeft || movingRight) {
+		if (dir != currDir) {
+			switch (dir) {
+			case LEFT:
+				this.setBaseVelocity(-this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.LEFT;
+				this.aim = dir.getAim();
+				break;
+			case RIGHT:
+				this.setBaseVelocity(this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.RIGHT;
+				this.aim = dir.getAim();
+				break;
+			case UP:
 				this.setBaseVelocity(0, this.getBaseVelocity().getY());
-				movingLeft = false;
-				movingRight = false;
+				this.aim = dir.getAim();
+				break;
+			case DOWN:
+				this.setBaseVelocity(0, this.getBaseVelocity().getY());
+				this.aim = dir.getAim();
+				break;
+			case NORTHEAST:
+				this.setBaseVelocity(this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.RIGHT;
+				this.aim = dir.getAim();
+				break;
+			case NORTHWEST:
+				this.setBaseVelocity(-this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.LEFT;
+				this.aim = dir.getAim();
+				break;
+			case SOUTHEAST:
+				this.setBaseVelocity(this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.RIGHT;
+				this.aim = dir.getAim();
+				break;
+			case SOUTHWEST:
+				this.setBaseVelocity(-this.baseSpeed,this.getBaseVelocity().getY());
+				lastAimed = Direction.LEFT;
+				this.aim = dir.getAim();
+				break;
+			case NONE:
+				this.setBaseVelocity(0, this.getBaseVelocity().getY());
+				this.aim = lastAimed.getAim();
+				break;
 			}
 		}
 	}
@@ -156,6 +166,10 @@ public class Character extends GameObject {
 		if (this.getBaseVelocity().getY()<0 && this.getTotalVelocity().getY()<10) {
 			this.setVariableVelocity(this.getVariableVelocity().getX(), -this.getBaseVelocity().getX()-10);
 		}
+	}
+	
+	public Aim getAim() {
+		return this.aim;
 	}
 	
 	/**
@@ -189,7 +203,6 @@ public class Character extends GameObject {
 	 */
 	public void setMovementState(MovementState ms) {
 		if (ms.getClass().equals(Walking.class)) {
-			System.out.println("Sätter Walking");
 			this.setBaseVelocity(this.getBaseVelocity().getX(), 0);
 			this.setVariableVelocity(this.getVariableVelocity().getX(), 0);
 			jumpsLeft = maxJumps;

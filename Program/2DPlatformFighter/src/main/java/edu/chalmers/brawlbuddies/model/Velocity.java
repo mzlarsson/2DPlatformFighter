@@ -30,7 +30,7 @@ public class Velocity extends Vector {
 	public Velocity(Aim aim, float scale) {
 		this(aim);
 		this.set(this.getNormalized().getX(), this.getNormalized().getY());
-		this.scale(scale);
+		this.set(this.scale(scale));
 	}
 	/**
 	 * Returns a copy of this velocity.
