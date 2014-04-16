@@ -30,13 +30,6 @@ public class Character extends GameObject {
 	private String bio;
 	@XStreamAlias("health")
 	private Health health;
-	@XStreamAlias("movespeed")
-	private float baseSpeed;
-	@XStreamAlias("jumpingpower")
-	private float baseJump;
-	@XStreamAlias("maxjumps")
-	private int maxJumps;
-	private int jumpsLeft;
 	
 	/**
 	 * Creates a Character.

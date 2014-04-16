@@ -20,11 +20,11 @@ public class SlickUtil {
 	public static Shape copy(Shape shape) {
 		Shape copy;
 		if(shape.getClass()==Rectangle.class){
-			copy = new Rectangle(shape.getX(),shape.getY(),shape.getWidth(),shape.getHeight());
+			copy = new Rectangle(shape.getCenterX(),shape.getCenterY(),shape.getWidth(),shape.getHeight());
 		} else if (shape.getClass()==Circle.class){
-			copy = new Circle(shape.getX(),shape.getY(),((Circle)shape).getRadius());
+			copy = new Circle(shape.getCenterX(),shape.getCenterY(),((Circle)shape).getRadius());
 		} else if (shape.getClass()==Ellipse.class){
-			copy = new Ellipse(shape.getX(),shape.getY(),((Ellipse)shape).getRadius1(),((Ellipse)shape).getRadius2());
+			copy = new Ellipse(shape.getCenterX(),shape.getCenterY(),((Ellipse)shape).getRadius1(),((Ellipse)shape).getRadius2());
 		} else {
 			throw new IllegalArgumentException("The Shape: " + shape.getClass() + " is not supported for copying.");
 		}

@@ -1,14 +1,150 @@
 package edu.chalmers.brawlbuddies.model;
 
 /**
- * Enum for holding simple movement directions.
+ * Enum for holding and calculating simple movement directions.
  * 
  * @author Matz Larsson
- * @version 0.1
- *
+ * @version 0.2
+ * @revised Patrik Haar
  */
 
 public enum Direction {
 	//All values are self explaining.
-	LEFT, RIGHT, UP, DOWN, NONE
+	LEFT(-1,0) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.UP) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	RIGHT(1,0) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.UP) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	UP(0,-1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.LEFT) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	DOWN(0,1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.RIGHT) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.UP) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NORTHWEST(-1,-1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.RIGHT) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.SOUTHEAST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NORTHEAST(1,-1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.LEFT) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.SOUTHWEST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	SOUTHWEST(-1,1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.UP) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.NORTHEAST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	SOUTHEAST(1,1) {
+		@Override
+		public Direction add(Direction dir) {
+			if(dir == Direction.UP) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.NORTHWEST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NONE(0,0) {
+		@Override
+		public Direction add(Direction dir) {
+			return dir;
+		}
+	};
+	
+	private int x;
+	private int y;
+	private Direction(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Creates a Aim object of the direction.
+	 * @return A Aim vector with this direction.
+	 */
+	public Aim getAim() {
+		return new Aim(x, y);
+	}
+	
+	// This method is overridden by the enum constants.
+	/**
+	 * Used to add two directions to create a direction that is the same, none, or turned 45 degrees
+	 * depending on the given direction. With the exception of Direction.NONE which will be replaced
+	 * by the given Direction.
+	 * @param dir The direction to add.
+	 * @return A new Direction that is the same, none, or turned 45 degrees depending on the given direction.
+	 */
+	public Direction add(Direction dir) {
+		return this;
+	}
 }
