@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Shape;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
@@ -30,6 +31,10 @@ public class Character extends GameObject {
 	private String bio;
 	@XStreamAlias("health")
 	private Health health;
+	
+	private Aim aim = new Aim(1,0);
+	private Direction lastDir = Direction.NONE;
+	private boolean lastAimLeft;
 	
 	/**
 	 * Creates a Character.
@@ -92,7 +97,29 @@ public class Character extends GameObject {
 	 * Makes the character move to the left/right/up/down depending on the Direction.
 	 */
 	public void move(Direction dir) {
+		if(dir != lastDir) {
+			updateAim(dir);
+			lastDir = dir;
+		}
+	}
+	
+	/**
+	 * Updates the current Aim of the character.
+	 * @param dir The Direction to aim in.
+	 */
+	private void updateAim(Direction dir) {
+		// Logic for the aiming.
 		this.getMovement().move(dir);
+		if (dir != Direction.NONE) {
+			// Sets the aim to current movement.
+			this.aim = new Aim(dir);
+		} else {
+			// If no movement is done, aim is set to the last horizontal-facing direction.
+			this.aim = this.lastAimLeft?new Aim(Direction.LEFT):new Aim(Direction.RIGHT);
+		}
+		if (dir.getX() != 0) {
+			lastAimLeft = dir.getX()<0?true:false;
+		}
 	}
 	
 	/**
@@ -109,6 +136,10 @@ public class Character extends GameObject {
 		this.getMovement().cancelJump();
 	}
 
+	public Aim getAim() {
+		return this.aim;
+	}
+	
 	public void takeDamage(float a){
 		health.takeDamage(a);
 	}

@@ -3,7 +3,6 @@ package edu.chalmers.brawlbuddies.model.world;
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
  * A class for representing a Projectile in-game.
@@ -20,8 +19,8 @@ public class Projectile extends GameObject {
 	 * @param vel The base Velocity of the projectile.
 	 * @param lifetime How long the projectile shall exist in milliseconds.
 	 */
-	public Projectile(Shape shape, Velocity vel, float lifetime) {
-		super(vel, shape);
+	public Projectile(Shape shape, Movement mov, float lifetime) {
+		super(mov, shape);
 		this.lifetime = lifetime;
 	}
 	
@@ -34,11 +33,6 @@ public class Projectile extends GameObject {
 	}
 	
 	@Override
-	public void setMovementState(MovementState ms) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public GameObject copy() {
 		// TODO Auto-generated method stub
 		return null;
@@ -48,10 +42,9 @@ public class Projectile extends GameObject {
 	@Override
 	public Position update(int delta) {
 		lifetime -= delta;
-		Position oldPos = getCenterPosition().copy();
-		Velocity tot = getTotalVelocity();
-		setCenterX( getCenterX() + (tot.getX()*((float)(delta))/1000) );	//FIXME Change the 1000 value to a constant modifier in the later Constants class.
-		setCenterY( getCenterY() + (tot.getY()*((float)(delta))/1000) );	//FIXME Change the 1000 value to a constant modifier in the later Constants class.
+		Position oldPos = this.getCenterPosition().copy();
+		Position newPos = this.getMovement().nextPosition(this.getCenterPosition(), delta);
+		this.setCenterPosition(newPos);
 		return oldPos;
 	}
 

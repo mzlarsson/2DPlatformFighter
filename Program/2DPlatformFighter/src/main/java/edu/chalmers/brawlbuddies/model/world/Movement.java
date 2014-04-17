@@ -41,14 +41,33 @@ public class Movement {
 	}
 
 	/**
+	 * Initiates this Movement with a base speed and fires it immediately.
+	 * @param baseSpeed The base speed for this Movement object
+	 * @param immidiate true if the movement should start immediately.
+	 */
+	public Movement(Velocity baseSpeed, boolean immediate){
+		this(baseSpeed, new Velocity(0, 1000), immediate);
+	}
+	
+	/**
 	 * Initiates this Movement with a base speed and a gravity
 	 * @param baseSpeed The base speed to use for controlled movements
 	 * @param gravity The gravity
 	 */
 	public Movement(Velocity baseSpeed, Velocity gravity){
-		this.baseSpeed = baseSpeed;
-		this.gravity = gravity;
-		this.innerSpeed = new Velocity(0, 0);
+		this(baseSpeed, gravity, false);
+	}
+	
+	/**
+	 * Initiates this Movement with a base speed and a gravity and fires it immediately.
+	 * @param baseSpeed The base speed to use for controlled movements
+	 * @param gravity The gravity
+	 * @param immidiate true if the movement should start immediately.
+	 */
+	public Movement(Velocity baseSpeed, Velocity gravity, boolean immediate){
+		this.baseSpeed = baseSpeed.copy();
+		this.gravity = gravity.copy();
+		this.innerSpeed = immediate?baseSpeed.copy():new Velocity(0, 0);
 		this.outerSpeed = new Velocity(0, 0);
 	}
 	
@@ -107,17 +126,21 @@ public class Movement {
 		switch(dir){
 			case RIGHT:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
 			case LEFT:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case UP:	setInnerSpeed(this.innerSpeed.getX(), -this.baseSpeed.getY());break;
-			case DOWN:	setInnerSpeed(this.innerSpeed.getX(), this.baseSpeed.getY());break;
+			case UP:	setInnerSpeed(0, this.innerSpeed.getY());break;
+			case DOWN:	setInnerSpeed(0, this.innerSpeed.getY());break;
+			case NORTHWEST:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
+			case NORTHEAST:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
+			case SOUTHWEST:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
+			case SOUTHEAST:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
 			case NONE:	setInnerSpeed(0, this.innerSpeed.getY()); break;
 		}
-	}	
+	}
 
 	/**
 	 * Adds another outer speed to the Movement
 	 * @param outerSpeed The outer speed to add
 	 */
-	public void addOuterSpeed(Velocity outerSpeed){
+	public void increaseOuterSpeed(Velocity outerSpeed){
 		this.outerSpeed.increase(outerSpeed);
 	}
 	/**

@@ -133,7 +133,7 @@ public class JumpMovement extends Movement{
 	 */
 	public boolean jump(){
 		if(canJump()){
-			this.setInnerSpeed(0, -this.baseJumpSpeed);
+			this.setInnerSpeed(this.getInnerSpeed().getX(), -this.baseJumpSpeed);
 			this.jumpsLeft--;
 			return true;
 		}else{

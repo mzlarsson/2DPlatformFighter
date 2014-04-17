@@ -12,6 +12,9 @@ public class Aim extends Vector {
 	public Aim(Position start, Position end) {
 		this(end.getX() - start.getX(), end.getY() - start.getY());
 	}
+	public Aim(Direction dir) {
+		this(dir.getX(), dir.getY());
+	}
 	public Aim(float x , float y){
 		super(x , y);
 	}

@@ -29,7 +29,7 @@ public class VectorTest {
 	public void testIncreaseVector(){
 		Vector v1 = new Vector( 1f, 2f);
 		Vector v2 = new Vector( 3f, 4f);
-		v1.Increase(v2);
+		v1.increase(v2);
 		assertTrue(v1.x == 4f);
 		assertTrue(v1.y == 6f);
 		assertTrue(v2.x == 3f);
@@ -41,7 +41,7 @@ public class VectorTest {
 	@Test
 	public void testIncreaseFloats(){
 		Vector v1 = new Vector( 1f, 2f);
-		v1.Increase(3f,4f);
+		v1.increase(3f,4f);
 		assertTrue(v1.x == 4f);
 		assertTrue(v1.y == 6f);
 	}

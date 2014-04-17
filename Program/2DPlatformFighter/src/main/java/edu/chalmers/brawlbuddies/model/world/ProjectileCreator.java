@@ -40,7 +40,7 @@ public class ProjectileCreator {
 		Shape tmp = SlickUtil.copy(shape);
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());
-		return new Projectile(tmp, new Movement(new Velocity(aim, speed)), lifetime);
+		return new Projectile(tmp, new Movement(new Velocity(aim, speed), true), lifetime);
 	}
 
 }

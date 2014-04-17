@@ -129,11 +129,19 @@ public enum Direction {
 	}
 	
 	/**
-	 * Creates a Aim object of the direction.
-	 * @return A Aim vector with this direction.
+	 * Returns the Directions x-value.
+	 * @return The x
 	 */
-	public Aim getAim() {
-		return new Aim(x, y);
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * Returns the Directions y-value.
+	 * @return The y
+	 */
+	public int getY() {
+		return y;
 	}
 	
 	// This method is overridden by the enum constants.
