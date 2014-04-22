@@ -133,6 +133,9 @@ public class JumpMovement extends Movement{
 	 */
 	public boolean jump(){
 		if(canJump()){
+			//Remove current falling speed to simulate good non-ground jumps
+			resetGravity(Movement.Alignment.VERTICAL);
+			//Setup the jump speed.
 			this.setInnerSpeed(this.getInnerSpeed().getX(), -this.baseJumpSpeed);
 			this.jumpsLeft--;
 			return true;

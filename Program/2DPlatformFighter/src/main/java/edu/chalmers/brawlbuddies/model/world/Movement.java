@@ -22,6 +22,7 @@ public class Movement {
 	
 	/* Inner variables used by this class */
 	private Velocity innerSpeed;
+	private Velocity gravitySpeed;
 	private Velocity outerSpeed;
 	
 	/**
@@ -68,6 +69,7 @@ public class Movement {
 		this.baseSpeed = baseSpeed.copy();
 		this.gravity = gravity.copy();
 		this.innerSpeed = immediate?baseSpeed.copy():new Velocity(0, 0);
+		this.gravitySpeed = new Velocity(0, 0);
 		this.outerSpeed = new Velocity(0, 0);
 	}
 	
@@ -76,6 +78,8 @@ public class Movement {
 	 * @param align Alignment to reset in.
 	 */
 	public void resetSpeed(Alignment align){
+		resetGravity(align);
+		
 		switch(align){
 			case VERTICAL:		setInnerSpeed(this.innerSpeed.getX(), 0);
 								setOuterSpeed(this.outerSpeed.getX(), 0);break;
@@ -83,6 +87,19 @@ public class Movement {
 								setOuterSpeed(0, this.outerSpeed.getY());break;
 			case BOTH:			setInnerSpeed(0, 0);
 								setOuterSpeed(0, 0);break;
+			case NONE:			/* Do nothing */ break;
+		}
+	}
+	
+	/**
+	 * Removes the speed that has been given of gravity
+	 */
+	public void resetGravity(Alignment align){
+		switch(align){
+			case VERTICAL:		this.gravitySpeed.set(this.gravitySpeed.getX(), 0);break;
+			case HORIZONTAL:	this.gravitySpeed.set(0, this.gravitySpeed.getY());break;
+			case BOTH:			this.gravitySpeed.set(this.gravitySpeed.getX(), 0);
+								this.gravitySpeed.set(0, this.gravitySpeed.getY());break;
 			case NONE:			/* Do nothing */ break;
 		}
 	}
@@ -123,17 +140,7 @@ public class Movement {
 	 * @param dir The direction to use.
 	 */
 	public void move(Direction dir){
-		switch(dir){
-			case RIGHT:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case LEFT:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case UP:	setInnerSpeed(0, this.innerSpeed.getY());break;
-			case DOWN:	setInnerSpeed(0, this.innerSpeed.getY());break;
-			case NORTHWEST:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case NORTHEAST:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case SOUTHWEST:	setInnerSpeed(-this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case SOUTHEAST:	setInnerSpeed(this.baseSpeed.getX(), this.innerSpeed.getY());break;
-			case NONE:	setInnerSpeed(0, this.innerSpeed.getY()); break;
-		}
+		setInnerSpeed(this.getBaseSpeed().getX()*dir.getX(),this.innerSpeed.getY());
 	}
 
 	/**
@@ -204,7 +211,16 @@ public class Movement {
 	 * @return The current Velocity of the Movement
 	 */
 	public Velocity getTotalVelocity(){
-		return this.innerSpeed.add(this.outerSpeed);
+		return this.innerSpeed.add(this.outerSpeed).add(this.gravitySpeed);
+	}
+	
+	/**
+	 * Increases the gravity
+	 * @param delta The time since last update
+	 */
+	private void increaseGravitySpeed(int delta){
+		Velocity tmpGrav = this.gravity.scale(((float)(delta))/Constants.MODIFIER);
+		this.gravitySpeed.increase(tmpGrav);
 	}
 	
 	/**
@@ -214,9 +230,7 @@ public class Movement {
 	 * @return			The new calculated position
 	 */
 	public Position nextPosition(Position previous, int delta){
-		//Add gravity to the inner speed (to operate more closely with the movement)
-		Velocity tmpGrav = this.gravity.scale(((float)(delta))/Constants.MODIFIER);
-		this.increaseInnerSpeed(tmpGrav);
+		increaseGravitySpeed(delta);
 		
 		//Calculate next position
 		Velocity totalSpeed = this.getTotalVelocity();
