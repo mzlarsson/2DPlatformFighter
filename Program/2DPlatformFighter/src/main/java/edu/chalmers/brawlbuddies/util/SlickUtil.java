@@ -20,7 +20,7 @@ public class SlickUtil {
 	public static Shape copy(Shape shape) {
 		Shape copy;
 		if(shape.getClass()==Rectangle.class){
-			copy = new Rectangle(shape.getCenterX(),shape.getCenterY(),shape.getWidth(),shape.getHeight());
+			copy = new Rectangle(shape.getX(),shape.getY(),shape.getWidth(),shape.getHeight());
 		} else if (shape.getClass()==Circle.class){
 			copy = new Circle(shape.getCenterX(),shape.getCenterY(),((Circle)shape).getRadius());
 		} else if (shape.getClass()==Ellipse.class){

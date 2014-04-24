@@ -8,7 +8,9 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
 import edu.chalmers.brawlbuddies.controller.Player;
+import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
  * Class for holding all the data of the current game world. It is also
@@ -16,8 +18,8 @@ import edu.chalmers.brawlbuddies.model.Position;
  * 
  * @author Matz Larsson
  * @version 0.2
- * @revision by Lisa Lipkin
- * 
+ * @revisied Lisa Lipkin
+ * @revisied Patrik Haar
  */
 
 public class World {
@@ -62,56 +64,172 @@ public class World {
 			}
 		}
 	}
-
+	
 	/**
 	 * Calculates the best position to place the moving object when colliding
 	 * with environmental tiles.
 	 * 
 	 * @param obj
-	 *            the moving GameObject
-	 * @param old
-	 *            the old position of obj
-	 * @return the best calculated position that is valid
+	 *            The moving GameObject
+	 * @param newPos
+	 *            The new position of obj
+	 * @return The best calculated position that is valid
 	 */
-
-	public Position getValidTilePosition(GameObject obj, Position old) {
-		Position tmp = new Position(obj.getCenterX(), obj.getCenterY());
-
-		if (!isTileValid(tmp)) {
-			Position tmp2 = new Position(tmp.getX(), old.getY());
-			if (isTileValid(tmp2)) {
-				return tmp2;
-			} else {
-				Position tmp3 = new Position(old.getX(), tmp.getY());
-				if (isTileValid(tmp3)) {
-					return tmp3;
-				} else {
-					return old;
+	public Position getValidTilePosition(GameObject obj, Position newPos) {
+		Position newGoodPos = newPos.copy();
+		// Determines which way the object is moving to decide which corners to use.
+		boolean movingLeft = obj.getCenterX()>newPos.getX();
+		boolean movingUp = obj.getCenterY()>newPos.getY();
+		int oldXTile = getTilePositionX( movingLeft ? obj.getShape().getMinX() : obj.getShape().getMaxX() );
+		int newXTile = getTilePositionX( newPos.getX()+ (movingLeft ? -obj.getShape().getWidth()/2 - 1: obj.getShape().getWidth()/2 + 1) );
+		int oldYTile = getTilePositionY( movingUp ? obj.getShape().getMinY() : obj.getShape().getMaxY() );
+		int newYTile = getTilePositionY( newPos.getY()+ (movingUp ? -obj.getShape().getHeight()/2 - 1 :obj.getShape().getHeight()/2 + 1) );
+		int xdiff = newXTile<0 ? 1 : Math.abs(newXTile-oldXTile);
+		int ydiff = newYTile<0 ? 1 : Math.abs(newYTile-oldYTile);
+		
+		// Checks if object has entered a new tile.
+		if (xdiff!=0 || ydiff!=0) {
+			Direction movedir = Direction.getDirection(newXTile-oldXTile, newYTile-oldYTile);
+			Shape shape = SlickUtil.copy(obj.getShape());
+			boolean xFound = xdiff==0;
+			boolean yFound = ydiff==0;
+			for (int i=0; i<Math.max(xdiff, ydiff); i++) {
+				if (!isNextTileValid(shape, movedir)) {
+					if (!xFound && !isNextTileValid(shape, movedir.getXDirection())) {
+						xFound = true;
+						// If obj collides after just one tile it uses it's old x-value to prevent shimmering edges.
+						if (i==0) {
+							newGoodPos.set(obj.getCenterX(), newGoodPos.getY());
+						// Keeps the Y-pos and sets the X-pos to just before the collision.
+						} else {
+							newGoodPos.set(movedir.getX()<0? shape.getCenterX()+shape.getWidth()/2 - shape.getCenterX()%map.getTileWidth()
+									: shape.getCenterX()-shape.getWidth()/2 + (map.getTileWidth()-shape.getCenterX()%map.getTileWidth() - 1)
+									, newGoodPos.getY());
+						}
+						movedir = movedir.getYDirection();
+						obj.onCollision(null, Movement.Alignment.HORIZONTAL);
+					}
+					if (!yFound && !isNextTileValid(shape, movedir.getYDirection())) {
+						yFound = true;
+						// If obj collides after just one tile it uses it's old x-value to prevent shimmering edges.
+						if (i==0) {
+							newGoodPos.set(newGoodPos.getX(), obj.getCenterY());
+						// Keeps the X-pos and sets the Y-pos to just before the collision.
+						} else {
+							newGoodPos.set(newGoodPos.getX()
+									, movedir.getY()<0? shape.getCenterY()+shape.getHeight()/2 - shape.getCenterY()%map.getTileHeight() - map.getTileHeight()
+									: shape.getCenterY()-shape.getHeight()/2 + (map.getTileHeight()-shape.getCenterY()%map.getTileHeight()) + map.getTileHeight() - 1);
+						}
+						movedir = movedir.getXDirection();
+						obj.onCollision(null, Movement.Alignment.VERTICAL);
+					}
+				}
+				// If no collision occurred the testing shape will move one tile on the x-axis.
+				if (!xFound) {
+					shape.setCenterX(shape.getCenterX() + map.getTileWidth()*movedir.getX());
+					xFound = i==xdiff;
+				}
+				// If no collision occurred the testing shape will move one tile on the y-axis.
+				if (!yFound) {
+					shape.setCenterY(shape.getCenterY() + map.getTileHeight()*movedir.getY());
+					yFound = i==ydiff;
+				}
+				// On collision on both x- and y- axis the loop is aborted and the calculated values are used.
+				if (xFound && yFound) {
+					break;
 				}
 			}
-
-		} else {
-			return tmp;
 		}
-
+		return newGoodPos;
 	}
-
+	
+	/**
+	 * Checks if the Shape is occupying valid tiles.
+	 * @param shape The Shape to test.
+	 * @return true if position is valid.
+	 */
+	private boolean isTileValid(Shape shape) {
+		int minX = getTilePositionX(shape.getMinX());
+		int maxX = getTilePositionX(shape.getMaxX());
+		int minY = getTilePositionY(shape.getMinY());
+		int maxY = getTilePositionY(shape.getMaxY());
+		for (int i=minX; i<=maxX; i++ ) {
+			for (int j=minY; j<=maxY; j++ ) {
+				if (!isTileValid(i,j)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks if the tiles adjacent to the shape in the given direction is valid.
+	 * @param shape The moving Shape.
+	 * @param dir The Direction the Shape is moving.
+	 * @return true if all the tiles adjacent to the Shape is valid in the given direction.
+	 */
+	private boolean isNextTileValid(Shape shape, Direction dir) {
+		boolean xmov = dir.getX()!=0;
+		boolean ymov = dir.getY()!=0;
+		// Checks if the next x-tiles are valid.
+		if (xmov) {
+			int height = getTilePositionY(shape.getMaxY()) - getTilePositionY(shape.getMinY()) + 1;
+			int x = getTilePositionX(dir.getX()<0?shape.getMinX():shape.getMaxX()) + dir.getX();
+			int y = getTilePositionY(shape.getMinY());
+			for (int i=0; i<height; i++) {
+				if (!isTileValid(x, y+i)) {
+					return false;
+				}
+			}
+		}
+		// Checks if the next y-tiles are valid.
+		if (ymov) {
+			int width = getTilePositionX(shape.getMaxX()) - getTilePositionX(shape.getMinX()) + 1;
+			int x = getTilePositionX(shape.getMinX());
+			int y = getTilePositionY(dir.getY()<0?shape.getMinY():shape.getMaxY()) + dir.getY();
+			for (int i=0; i<width; i++) {
+				if (!isTileValid(x+i, y)) {
+					return false;
+				}
+			}
+		}
+		// Checks the missed tile on diagonal movement.
+		if (xmov&&ymov) {
+			int x = getTilePositionX(dir.getX()<0?shape.getMinX():shape.getMaxX()) + dir.getX();
+			int y = getTilePositionY(dir.getY()<0?shape.getMinY():shape.getMaxY()) + dir.getY();
+			if (!isTileValid(x, y)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Checks if the tile of the position on the environmentlayer is a valid
 	 * tile to position the object.
 	 * 
 	 * @param p
-	 *            position of a GameObject to be checed
+	 *            position of a GameObject to be checked
 	 * @return true if the tile of the position on the environmentlayer is 0,
 	 *         that is, empty.
 	 */
 	public boolean isTileValid(Position p) {
-		if (getPositionTileID(p) == 0) {
-			
-		}
 		return getPositionTileID(p) == 0;
 	}
 
+	/**
+	 * Checks if the tile of the coordinate on the environmentlayer is a valid
+	 * tile for objects.
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 * @return true if the tile of the position on the environmentlayer is 0,
+	 *         that is, empty.
+	 */
+	public boolean isTileValid(int x, int y) {
+		return getTileID(x,y) == 0;
+	}
+	
 	/**
 	 * Calculates the TileId of the position
 	 * 
@@ -122,13 +240,23 @@ public class World {
 	private int getPositionTileID(Position p) {
 		int x = getTilePositionX(p.getX());
 		int y = getTilePositionY(p.getY());
-		if (x < 0 || y < 0) {
+		return getTileID(x,y);
+	}
+
+	/**
+	 * Returns the Tile ID of the Tile on the given coordinate.
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 * @return The Tile ID if valid, -1 if out of bounds.
+	 */
+	private int getTileID(int x, int y) {
+		if (x < 0 || y < 0 || x > numberXTiles-1 || y > numberYTiles-1) {
 			return -1;
 		} else {
 			return map.getTileId(x, y, map.getLayerIndex("environment"));
 		}
 	}
-
+	
 	/**
 	 * calculates the position, that is, the tile number from left to right.
 	 * 
@@ -143,7 +271,6 @@ public class World {
 		} else {
 			return tilePosition;
 		}
-
 	}
 
 	/**
@@ -161,11 +288,6 @@ public class World {
 			return tilePosition;
 		}
 	}
-	
-	
-	
-	
-	
 	
 	/**
 	 * Checks whether the given GameObject is in a valid position.

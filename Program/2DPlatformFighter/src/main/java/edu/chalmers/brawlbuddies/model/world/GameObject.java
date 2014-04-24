@@ -113,7 +113,7 @@ public abstract class GameObject {
 	 * @return float, the y-coordinate of the top left corner of the shape.
 	 */
 	public float getY() {
-		return this.shape.getX();
+		return this.shape.getY();
 	}
 
 	/**

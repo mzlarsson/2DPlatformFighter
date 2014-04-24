@@ -93,4 +93,14 @@ public class Vector extends Vector2f {
 		Vector2f v = this.getNormal();
 		return new Vector(v.getX() , v.getY());		
 	}
+	
+	/**
+	 * Translate the vector into one of the 9 directions.
+	 * @return A Direction based on this vector.
+	 */
+	public Direction getDirection() {
+		Direction dir = ( this.getX()<0 ? Direction.LEFT : (this.getX()>0 ? Direction.RIGHT : Direction.NONE) );
+		dir = dir.add( ( this.getY()<0 ? Direction.UP : (this.getY()>0 ? Direction.DOWN : Direction.NONE) ) );
+		return dir;
+	}
 }

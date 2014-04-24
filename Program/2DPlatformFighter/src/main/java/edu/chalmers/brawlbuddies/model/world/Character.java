@@ -87,6 +87,7 @@ public class Character extends GameObject {
 	 * @return The position before movement.
 	 */
 	public Position update(int delta) {
+		// TODO Change this to return the new position instead.
 		Position oldPos = this.getCenterPosition().copy();
 		Position newPos = this.getMovement().nextPosition(this.getCenterPosition(), delta);
 		this.setCenterPosition(newPos);
@@ -97,10 +98,9 @@ public class Character extends GameObject {
 	 * Makes the character move to the left/right/up/down depending on the Direction.
 	 */
 	public void move(Direction dir) {
-		if(dir != lastDir) {
-			updateAim(dir);
-			lastDir = dir;
-		}
+		this.getMovement().move(dir);
+		updateAim(dir);
+		lastDir = dir;
 	}
 	
 	/**
@@ -109,7 +109,6 @@ public class Character extends GameObject {
 	 */
 	private void updateAim(Direction dir) {
 		// Logic for the aiming.
-		this.getMovement().move(dir);
 		if (dir != Direction.NONE) {
 			// Sets the aim to current movement.
 			this.aim = new Aim(dir);
