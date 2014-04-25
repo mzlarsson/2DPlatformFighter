@@ -3,12 +3,17 @@ package edu.chalmers.brawlbuddies.model.world;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import edu.chalmers.brawlbuddies.model.Velocity;
+import edu.chalmers.brawlbuddies.model.Skills.DamageEffect;
+import edu.chalmers.brawlbuddies.model.Skills.ProjectileSkill;
+import edu.chalmers.brawlbuddies.model.Skills.SelfCastSkill;
+import edu.chalmers.brawlbuddies.model.Skills.Skill;
 
 /**
  * A factory for creating characters.
@@ -45,6 +50,12 @@ public class CharacterFactory {
 				.getElementsByTagName("maxjumps").item(0).getChildNodes()
 				.item(0).getNodeValue());
 		character.setMovement(new JumpMovement(new Velocity(moveSpeed, 0), jumpSpeed, maxJumps));
+		
+		//TODO temporary Solution to set a Character Skills
+		Skill firstSkill  = new ProjectileSkill(new Circle(0,0,10), 1000, 5000 , 0);
+		Skill secondSkill = new SelfCastSkill(0 , new DamageEffect(1001));
+		Skill[] skills = { firstSkill , secondSkill};
+		character.setSkills(skills);
 		return character;
 	}
 

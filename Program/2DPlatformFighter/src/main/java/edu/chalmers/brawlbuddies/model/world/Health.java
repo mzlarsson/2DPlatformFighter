@@ -195,4 +195,8 @@ public class Health {
 		this.currentHp = maxHp;
 		return this;
 	}
+
+	public float getMaxHealth() {
+		return maxHp;
+	}
 }
