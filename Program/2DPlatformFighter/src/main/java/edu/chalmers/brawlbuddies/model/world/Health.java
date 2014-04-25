@@ -163,6 +163,9 @@ public class Health {
 	public void restoreHp() {
 		currentHp = maxHp;
 	}
+	public boolean isDead(){
+		return currentHp == 0;
+	}
 
 	/**
 	 * Set max health

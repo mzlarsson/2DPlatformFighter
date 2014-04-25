@@ -456,4 +456,9 @@ public class World {
 		return map;
 	}
 
+
+	public List<Projectile> getProjectiles() {
+		return projectiles;
+	}
+
 }

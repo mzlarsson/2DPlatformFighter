@@ -1,8 +1,14 @@
 package edu.chalmers.brawlbuddies.model;
 
+import java.util.List;
+
 import edu.chalmers.brawlbuddies.controller.Player;
+import edu.chalmers.brawlbuddies.model.Skills.Effect;
 import edu.chalmers.brawlbuddies.model.world.Character;
+import edu.chalmers.brawlbuddies.model.world.GameObject;
+import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.World;
+import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 
 /**
  * Holds the logic for the game.
@@ -10,13 +16,17 @@ import edu.chalmers.brawlbuddies.model.world.World;
  * @author Patrik Haar
  * @version 0.1
  */
-public class BrawlBuddies {
+public class BrawlBuddies implements CharacterActionListener {
 
 	private World world;
 	private Player[] players;
 
 	public BrawlBuddies(Player[] p, World w) {
 		players = p;
+		for(int i = 0 ; i < players.length ; i++){
+			players[i].getCharacter().addCharacterActionListener(this);
+			System.out.println("added a CharacterListener to player " + i);
+		}
 		world = w;
 	}
 
@@ -28,7 +38,9 @@ public class BrawlBuddies {
 	public Player[] getPlayers() {
 		return players;
 	}
-
+	public List<Projectile> getProjectiles(){
+		return world.getProjectiles();
+	}
 	/**
 	 * Moves the character connected to the player in the given direction.
 	 * 
@@ -69,6 +81,14 @@ public class BrawlBuddies {
 				ch.setCenterPosition(world.getValidPosition(ch, old));
 			}
 		}
+		List <Projectile> projectiles = world.getProjectiles();
+		for(int i=0; i< projectiles.size(); i++) {
+			if(projectiles.get(i).isActive()) {
+				projectiles.get(i).update(delta);
+			} else {
+				projectiles.remove(i);
+			}
+		}
 	}
 
 	/**
@@ -78,5 +98,25 @@ public class BrawlBuddies {
 	 */
 	public World getWorld() {
 		return world;
+	}
+
+	public void characterActionPerformed(Projectile p) {
+		world.getProjectiles().add(p);
+		
+	}
+
+	public void characterActionPerformed(GameObject o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void characterActionPerformed(Character c, Effect e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void characterActionPerformed(Effect e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

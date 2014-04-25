@@ -246,7 +246,9 @@ public class Character extends GameObject implements CharacterInterface {
 		// Sends a projectile to the projectilelist in the CharacterAction listener
 		sup.sendEvent(p);
 	}
-
+	public boolean isDead(){
+		return health.isDead();
+	}
 	private Object readResolve() throws ObjectStreamException {
 		this.setShape(new Rectangle(0, 0, 50, 80));
 		/*

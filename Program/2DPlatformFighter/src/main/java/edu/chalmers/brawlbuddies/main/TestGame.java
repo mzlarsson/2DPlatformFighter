@@ -49,10 +49,9 @@ import edu.chalmers.brawlbuddies.util.CharacterActionListener;
  * 
  */
 
-public class TestGame extends BasicGame implements CharacterActionListener {
+public class TestGame extends BasicGame {
 	private BrawlBuddies game;
 	private ProjectileCreator pc;
-	private List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	/**
 	 * Creates a new instance of test game
@@ -76,7 +75,7 @@ public class TestGame extends BasicGame implements CharacterActionListener {
 		for(Player p:game.getPlayers()){
 			p.getCharacter().draw();
 			// Following Code is used to check if bob takes damage or if hes dead
-			if( p.getCharacter().getHealth() == 0){
+			if( p.getCharacter().isDead()){
 				g.setColor(Color.gray);
 				g.drawString("Bob is dead. RIP BOB", 25, 25);
 			}
@@ -90,6 +89,7 @@ public class TestGame extends BasicGame implements CharacterActionListener {
 			}
 
 		}
+		List <Projectile> projectiles = game.getProjectiles();
 		for(int i=0; i< projectiles.size(); i++) {
 			g.setColor(Color.black);
 			g.fill(projectiles.get(i).getShape());
@@ -101,7 +101,6 @@ public class TestGame extends BasicGame implements CharacterActionListener {
 		this.pc = new ProjectileCreator(new Circle(0,0,10), 1000, 5000);
 		Player[] players = { new Player("Player1", generateBob()) };
 		// Make this testgame a listener for events from character
-		players[0].getCharacter().addCharacterActionListener(this);
 		this.startGame(players);
 	}
 
@@ -134,13 +133,6 @@ public class TestGame extends BasicGame implements CharacterActionListener {
 			players[0].getCharacter().activateSkill(1);
 		}
 		game.update(delta);
-		for(int i=0; i< projectiles.size(); i++) {
-			if(projectiles.get(i).isActive()) {
-				projectiles.get(i).update(delta);
-			} else {
-				projectiles.remove(i);
-			}
-		}
 	}
 
 	private Character generateBob() {
@@ -160,21 +152,5 @@ public class TestGame extends BasicGame implements CharacterActionListener {
 		} catch (SlickException ex) {
 			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}
-	public void characterActionPerformed(Projectile p) {
-		projectiles.add(p);
-		
-	}
-	public void characterActionPerformed(GameObject o) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void characterActionPerformed(Character c, Effect e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void characterActionPerformed(Effect e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
