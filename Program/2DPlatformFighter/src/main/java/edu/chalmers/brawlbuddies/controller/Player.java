@@ -8,15 +8,34 @@ import edu.chalmers.brawlbuddies.model.world.Character;
  * 
  * @author Patrik Haar
  * @version 0.1
+ * @author Matz Larsson
  */
 public class Player {
 	
 	private String name;
 	private Character ch;
-	
+	private InputHandler handler;
+
+
+	/**
+	 * Creates a new player.
+	 * @param name The name of the player
+	 * @param ch The character to use
+	 */
 	public Player(String name, Character ch) {
+		this(name, ch, new InputHandler());
+	}
+	
+	/**
+	 * Creates a new player with predefined control settings.
+	 * @param name Name of the player
+	 * @param ch Character to use
+	 * @param handler Handler for handling controls.
+	 */
+	public Player(String name, Character ch, InputHandler handler) {
 		this.name = name;
 		this.ch = ch;
+		this.handler = handler;
 	}
 	
 	/**
@@ -33,6 +52,14 @@ public class Player {
 	 */
 	public Character getCharacter() {
 		return this.ch;
+	}
+	
+	/**
+	 * Returns the input handler of this player (contains control settings etc.)
+	 * @return The input handler of this player.
+	 */
+	public InputHandler getInputHandler(){
+		return this.handler;
 	}
 	
 	/**
