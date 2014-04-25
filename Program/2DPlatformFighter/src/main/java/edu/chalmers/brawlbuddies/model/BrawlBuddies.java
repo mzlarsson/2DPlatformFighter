@@ -61,9 +61,9 @@ public class BrawlBuddies {
 		for (Player p : players) {
 			Position old = p.update(delta);
 			Character ch = p.getCharacter();
-			if (!world.isTileValid(ch.getCenterPosition())) {
-				ch.setCenterPosition(world.getValidTilePosition(ch, old));
-			}
+			Position newPos = ch.getCenterPosition().copy();
+			ch.setCenterPosition(old);
+			ch.setCenterPosition(world.getValidTilePosition(ch, newPos));
 			
 			if(!world.isValid(ch)){
 				ch.setCenterPosition(world.getValidPosition(ch, old));

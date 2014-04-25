@@ -123,6 +123,7 @@ public enum Direction {
 	
 	private int x;
 	private int y;
+	
 	private Direction(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -154,5 +155,32 @@ public enum Direction {
 	 */
 	public Direction add(Direction dir) {
 		return this;
+	}
+	
+	/**
+	 * Get this Directions projection on the x-axis.
+	 * @return The resulting LEFT, RIGHT or NONE Direction.
+	 */
+	public Direction getXDirection() {
+		return getX()<0 ? Direction.LEFT : (getX()>0 ? Direction.RIGHT : Direction.NONE);
+	}
+	
+	/**
+	 * Get this Directions projection on the y-axis.
+	 * @return The resulting UP, DOWN or NONE Direction.
+	 */
+	public Direction getYDirection() {
+		return getY()<0 ? Direction.UP : (getY()>0 ? Direction.DOWN : Direction.NONE);
+	}
+	
+	/**
+	 * Returns a direction based on the given coordinates where 0,0 will return the Direction NONE.
+	 * @param x A value -infinity < x < infinity.
+	 * @param y A value -infinity < x < infinity.
+	 * @return The Direction created.
+	 */
+	public static Direction getDirection(float x, float y) {
+		return Direction.NONE.add(x<0?Direction.LEFT:x>0?Direction.RIGHT:Direction.NONE)
+				.add(y<0?Direction.UP:y>0?Direction.DOWN:Direction.NONE);
 	}
 }
