@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.model.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
@@ -10,6 +11,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
@@ -17,9 +19,9 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * responsible for the calculation of collisions between objects in this world.
  * 
  * @author Matz Larsson
- * @version 0.2
- * @revisied Lisa Lipkin
- * @revisied Patrik Haar
+ * @version 0.3
+ * @revised Lisa Lipkin
+ * @revised Patrik Haar
  */
 
 public class World {
@@ -28,6 +30,7 @@ public class World {
 	
 	private Player[] players;
 	private List<GameObject> objects;
+	private List<GameObject> impassableObjects = new ArrayList<GameObject>();
 	private Shape[][] mapObjects;
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private TiledMap map;
@@ -57,6 +60,7 @@ public class World {
 		setup();
 	}
 
+	// TODO Check if we want to keep this.
 	/**
 	 * Sets up the world by copying all Shapes from the different layers on the map.
 	 */
@@ -65,10 +69,12 @@ public class World {
 		for (int i=0; i<mapObjects.length ; i++) {
 			mapObjects[i] = new Shape[map.getObjectCount(i)];
 			for (int j=0; j<mapObjects[i].length; j++) {
-				mapObjects[i][j] = new Rectangle(map.getObjectX(i, j)
-												,map.getObjectY(i, j)
-												,map.getObjectWidth(i, j)
-												,map.getObjectHeight(i, j));
+				Rectangle tmp = new Rectangle(map.getObjectX(i, j)
+											 ,map.getObjectY(i, j)
+											 ,map.getObjectWidth(i, j)
+											 ,map.getObjectHeight(i, j));
+				mapObjects[i][j] = tmp;
+				impassableObjects.add(new MapObject(tmp));
 			}
 		}
 	}
@@ -320,9 +326,167 @@ public class World {
 	}
 
 	/**
+	 * Calculates a Polygon covering the GameObject current Shape´s Position and
+	 * new Position. OBS Will handle the GameObjects Shape as a Rectangle.
+	 * @param obj The moving GameObject.
+	 * @param newPos The new Position for the GameObject.
+	 * @return A Polygon covering both the old and new Position.
+	 */
+	public Polygon getConnectedShape(GameObject obj, Position newPos) {	//TODO Only public due to testing purposes, change later.
+		// Determines which way the object is moving to decide which corners to use.
+		boolean movingLeft = obj.getCenterX()>newPos.getX();
+		boolean movingUp = obj.getCenterY()>newPos.getY();
+		
+		float width = obj.getShape().getWidth();	// For convenience
+		float height = obj.getShape().getHeight();	// For convenience
+		
+		// The x-/y values for the corners on the old (A) and new (B) positions.
+		float xA = movingLeft ? obj.getShape().getMaxX() : obj.getShape().getMinX();
+		float yA = movingUp ? obj.getShape().getMaxY() : obj.getShape().getMinY();
+		float xB = movingLeft ? newPos.getX()-width/2 : newPos.getX()+width/2;
+		float yB = movingUp ? newPos.getY()-height/2 : newPos.getY()+height/2;
+		
+		float[] polypoints = new float[12];
+		
+		polypoints[0] = xA;
+		polypoints[1] = yA;
+		polypoints[2] = xA;
+		polypoints[3] = movingUp ? yA-height : yA+height;
+		polypoints[4] = movingLeft ? xB+width : xB-width;
+		polypoints[5] = yB;
+		polypoints[6] = xB;
+		polypoints[7] = yB;
+		polypoints[8] = xB;
+		polypoints[9] = movingUp ? yB+height : yB-height;
+		polypoints[10] = movingLeft ? xA-width : xA+width;
+		polypoints[11] = yA;
+		
+		return new Polygon(polypoints);
+	}
+	
+	/**
+	 * Calculates the best position to place a GameObject on depending on
+	 * collisions with the provided list.
+	 * @param obj The GameObject to fix positioning with.
+	 * @param newPos The new position to be tested.
+	 * @param list The list of GameObjects to check collisions with.
+	 * @return The best position for the GO depending on surroundings.
+	 */
+	public Position getValidPosition(GameObject obj, Position newPos, List<GameObject> list) {
+		Position newGoodPos = newPos.copy();
+		Polygon poly = getConnectedShape(obj, newPos);
+		List<GameObject> collisions = getCollisions(poly, list);
+
+		if (collisions.size()!=0) {
+			boolean movingLeft = obj.getCenterX()>newPos.getX();
+			boolean movingUp = obj.getCenterY()>newPos.getY();
+			Alignment align = getCollisionAlignment(obj.getShape(), newPos, collisions.get(0).getShape());
+			GameObject vertColl = align==Alignment.BOTH ? collisions.get(0)
+					: align==Alignment.VERTICAL ? collisions.get(0) : null;
+			GameObject horiColl = align==Alignment.BOTH ? collisions.get(0)
+					: align==Alignment.HORIZONTAL ? collisions.get(0) : null;
+			
+			if (collisions.size()>1) {				
+				// Determines which way the object is moving to decide which object it hit first.
+				for (int i=1; i<collisions.size(); i++) {
+					Shape tmp = collisions.get(i).getShape();
+					Alignment tmpAlign = getCollisionAlignment(obj.getShape(), newPos, tmp);
+					
+					if (vertColl == null && (tmpAlign == Alignment.BOTH || tmpAlign == Alignment.VERTICAL)) {
+						vertColl = collisions.get(i);
+						if (horiColl != null) {
+							align = Alignment.BOTH;
+						} else {
+							align = Alignment.VERTICAL;
+						}
+					}
+					if (horiColl == null && (tmpAlign == Alignment.BOTH || tmpAlign == Alignment.HORIZONTAL)) {
+						horiColl = collisions.get(i);
+						if (vertColl != null) {
+							align = Alignment.BOTH;
+						} else {
+							align = Alignment.HORIZONTAL;
+						}
+					}
+					if (tmpAlign == Alignment.BOTH || tmpAlign == Alignment.VERTICAL) {
+						// If this shape is closer to the original position it replaces the old.
+						if ( (movingUp ? vertColl.getShape().getMaxY() - tmp.getMaxY() : tmp.getMinY() - vertColl.getShape().getMinY()) < 0 ) {
+							vertColl = collisions.get(i);
+						}
+					}
+					if (tmpAlign == Alignment.BOTH || tmpAlign == Alignment.HORIZONTAL) {
+						// If this shape is closer to the original position it replaces the old.
+						if ( (movingLeft ? vertColl.getShape().getMaxX() - tmp.getMaxX() : tmp.getMinX() - vertColl.getShape().getMinX()) < 0 ) {
+							horiColl = collisions.get(i);
+						}
+					}
+				}
+			}
+			if (align == Alignment.BOTH || align == Alignment.HORIZONTAL) {
+				newGoodPos.set(obj.getCenterX(), newGoodPos.getY());
+				obj.onCollision(vertColl, align); //TODO It doesn't feel good to send collision events 
+												  //     when you're just checking for a new position.
+			}
+			if (align == Alignment.BOTH || align == Alignment.VERTICAL) {
+				newGoodPos.set(newGoodPos.getX(), obj.getCenterY());
+				if (vertColl != horiColl) {
+					obj.onCollision(vertColl, align); //TODO It doesn't feel good to send collision events 
+													  //     when you're just checking for a new position.
+				}
+			}
+		}
+		return newGoodPos;
+	}
+	
+	/**
+	 * Finds and returns all collisions with the GameObjects in the provided list.
+	 * @param shape The Shape to be tested for collisions.
+	 * @param list The list of GameObjects to test for collisions.
+	 * @return A list with all colliding GameObjects.
+	 */
+	private List<GameObject> getCollisions(Shape shape, List<GameObject> list) {
+		List<GameObject> collisions = new ArrayList<GameObject>();
+		for (GameObject go : list) {
+			if (collides(shape, go.getShape())) {
+				collisions.add(go);
+			}
+		}
+		return collisions;
+	}
+	
+	/**
+	 * Get the Alignment of a collision between two Shapes.
+	 * @param collider The moving Shape.
+	 * @param newPos The new Position of the moving shape.
+	 * @param collidee The stationary Shape.
+	 * @return The Alignment the two shapes collide in.
+	 */
+	private Alignment getCollisionAlignment(Shape collider, Position newPos, Shape collidee) {
+		boolean movingLeft = collider.getCenterX()>newPos.getX();
+		boolean movingUp = collider.getCenterY()>newPos.getY();
+		
+		float x = movingLeft ? collider.getMinX() : collider.getMaxX();
+		float y = movingUp ? collider.getMinY() : collider.getMaxY();
+		
+		boolean xColl = movingLeft ? (collidee.getMaxX()-x)<0 : (x-collidee.getMinX())<0;
+		boolean yColl = movingUp ? (collidee.getMaxY()-y)<0 : (y-collidee.getMinY())<0;
+		
+		if (xColl && yColl) {
+			return Alignment.BOTH;
+		} else if (xColl) {
+			return Alignment.HORIZONTAL;
+		} else if (yColl) {
+			return Alignment.VERTICAL;
+		} else {
+			return Alignment.NONE;
+		}
+	}
+	
+	// TODO Old outdated methods.
+	/**
 	 * Calculates the best position to place a GameObject on depending on
 	 * surroundings. Uses all layers.
-	 * @param go The GameObject to fix positioning with
+	 * @param obj The GameObject to fix positioning with
 	 * @param old The last previous known position
 	 * @return The best position for the GO depending on surroundings.
 	 */
@@ -456,7 +620,12 @@ public class World {
 		return map;
 	}
 
-
+	//TODO This is for our current temporary collision handling in Brawl Buddies
+	//	   and will not bee needed when it is moved to world.
+	public List<GameObject> getImpassableObjects() {
+		return this.impassableObjects;
+	}
+	
 	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}

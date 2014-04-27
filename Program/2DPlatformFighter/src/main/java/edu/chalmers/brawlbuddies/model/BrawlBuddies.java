@@ -71,14 +71,13 @@ public class BrawlBuddies implements CharacterActionListener {
 	 */
 	public void update(int delta) {
 		for (Player p : players) {
-			Position old = p.update(delta);
 			Character ch = p.getCharacter();
-			Position newPos = ch.getCenterPosition().copy();
-			ch.setCenterPosition(old);
-			ch.setCenterPosition(world.getValidTilePosition(ch, newPos));
-			
-			if(!world.isValid(ch)){
-				ch.setCenterPosition(world.getValidPosition(ch, old));
+			Position newPos = ch.update(delta);
+			Position newShapePos = world.getValidPosition(ch, newPos, world.getImpassableObjects());
+			if (!newPos.equals(newShapePos)) {
+				ch.setCenterPosition(newShapePos);
+			} else {
+				ch.setCenterPosition(world.getValidTilePosition(ch, newPos));
 			}
 		}
 		List <Projectile> projectiles = world.getProjectiles();
@@ -86,7 +85,7 @@ public class BrawlBuddies implements CharacterActionListener {
 			if(projectiles.get(i).isActive()) {
 				projectiles.get(i).update(delta);
 			} else {
-				projectiles.remove(i);
+				projectiles.remove(i--);
 			}
 		}
 	}

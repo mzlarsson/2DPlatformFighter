@@ -17,6 +17,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
 import org.w3c.dom.Document;
@@ -94,6 +95,7 @@ public class TestGame extends BasicGame {
 			g.setColor(Color.black);
 			g.fill(projectiles.get(i).getShape());
 		}
+		g.draw(game.getWorld().getConnectedShape(game.getPlayers()[0].getCharacter(), new Position(gc.getInput().getMouseX(),gc.getInput().getMouseY()))); // Test for the polygon collision area.
 	}
 
 	@Override

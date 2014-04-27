@@ -111,20 +111,14 @@ public class Character extends GameObject implements CharacterInterface {
 	}
 
 	/**
-	 * Updates the velocity and position of the Character and returns the old
+	 * Updates the velocity and position of the Character and returns the new
 	 * position.
 	 * 
-	 * @param delta
-	 *            The time passed since last update in milliseconds.
-	 * @return The position before movement.
+	 * @param delta The time passed since last update in milliseconds.
+	 * @return The position after the movement.
 	 */
 	public Position update(int delta) {
-		// TODO Change this to return the new position instead.
-		Position oldPos = this.getCenterPosition().copy();
-		Position newPos = this.getMovement().nextPosition(
-				this.getCenterPosition(), delta);
-		this.setCenterPosition(newPos);
-		return oldPos;
+		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
 	/**
