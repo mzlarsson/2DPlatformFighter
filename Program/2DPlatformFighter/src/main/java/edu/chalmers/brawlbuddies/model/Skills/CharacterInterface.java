@@ -10,9 +10,9 @@ import edu.chalmers.brawlbuddies.model.world.Projectile;
  *
  */
 public interface CharacterInterface extends HealAble, DamageAble {
-	public int getPlayerId();
 	public Position getCenterPosition();
 	public Aim getAim();
 	public void updateProjectile(Projectile p);
+	public void tryNewPosition(Position newPosition);
 
 }
