@@ -23,7 +23,7 @@ public class Player {
 	 * @param ch The character to use
 	 */
 	public Player(String name, Character ch) {
-		this(name, ch, new InputHandler());
+		this(name, ch, new KeyInputHandler());
 	}
 	
 	/**
