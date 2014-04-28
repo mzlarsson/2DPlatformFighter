@@ -1,6 +1,11 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
 import edu.chalmers.brawlbuddies.controller.Controller;
-import edu.chalmers.brawlbuddies.controller.Player;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
+import edu.chalmers.brawlbuddies.main.App;
 
 /**
  * This is the main class of the game Brawl Buddies, a 2D platform fighter game.
@@ -18,8 +23,15 @@ public class Main {
 	 */
 	public static void main(String[] args){
 		Controller controller = new Controller();
-		Player[] players = { new Player("BobTheSparklyMidget", CharacterFactory.createCharacter("bob")) };
-		controller.startGame(players);
+		try {
+			AppGameContainer appgc;
+			appgc = new AppGameContainer(controller);
+	
+			appgc.setDisplayMode(1024, 768, false);
+			appgc.start();
+		} catch (SlickException ex) {
+			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 }

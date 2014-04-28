@@ -1,5 +1,6 @@
 package edu.chalmers.brawlbuddies.controller;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -21,7 +22,8 @@ public class MenuState extends BasicGameState {
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
-
+		g.setColor(Color.yellow);
+		g.drawString("This is the menu", 100, 100);
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {

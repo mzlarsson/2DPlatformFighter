@@ -8,6 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 
 public class Controller extends StateBasedGame {
 
@@ -17,10 +18,14 @@ public class Controller extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
+		System.out.println("init states");
 		List<BasicGameState> states = StateFactory.getAllStates();
 		for(BasicGameState state : states){
 			this.addState(state);
 		}
+		
+		Player[] players = { new Player("BobTheSparklyMidget", CharacterFactory.createCharacter("bob")) };
+		this.startGame(players);
 	}
 	
 	public void gotoMenu(){
@@ -28,6 +33,7 @@ public class Controller extends StateBasedGame {
 	}
 	
 	public void startGame(Player[] players){
+		System.out.println("start");
 		this.enterState(Constants.GAMESTATE_PLAY);
 		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players);
 	}

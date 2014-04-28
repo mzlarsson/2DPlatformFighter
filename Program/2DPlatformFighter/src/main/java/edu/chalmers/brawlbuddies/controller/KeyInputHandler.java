@@ -18,9 +18,11 @@ import edu.chalmers.brawlbuddies.model.Direction;
 public class KeyInputHandler implements InputHandler{
 	
 	private Map<GameKey, Integer> keys;
+	private Input input;
 
-	public KeyInputHandler() {
+	public KeyInputHandler(Input input) {
 		this.keys = new TreeMap<GameKey, Integer>();
+		this.input = input;
 		resetDefault();
 	}
 	
@@ -29,6 +31,8 @@ public class KeyInputHandler implements InputHandler{
 		for(int i = 0; i<hKeys.length; i++){
 			this.setValue(hKeys[i], handler.getValue(hKeys[i]));
 		}
+		
+		this.input = handler.input;
 	}
 	
 	public void resetDefault(){
@@ -43,35 +47,48 @@ public class KeyInputHandler implements InputHandler{
 		this.setValue(GameKey.SKILL4, Input.KEY_4);
 	}
 	
+	public void setInput(Input input){
+		this.input = input;
+	}
+	
 	private GameKey[] getAllControlNames(){
 		Object[] keys = this.keys.keySet().toArray();
 		return Arrays.copyOf(keys, keys.length, GameKey[].class);
 	}
 	
 	public int getValue(GameKey key){
-		return (int)this.keys.get(key);
+		Integer keyValue = this.keys.get(key);
+		if(keyValue != null){
+			return (int)keyValue;
+		}else{
+			return -1;
+		}
 	}
 	
 	public void setValue(GameKey key, int ch){
 		this.keys.put(key, ch);
 	}
 	
-	public boolean isActive(Input input, GameKey key){
-		return input.isKeyDown(this.getValue(key));
+	public boolean isActivated(GameKey key){
+		return this.input.isKeyPressed(this.getValue(key));
 	}
 	
-	public Direction getDirection(Input input){
+	public boolean isActive(GameKey key){
+		return this.input.isKeyDown(this.getValue(key));
+	}
+	
+	public Direction getDirection(){
 		Direction dir = Direction.NONE;
-		if (input.isKeyDown(this.getValue(GameKey.UP))) {
+		if (this.input.isKeyDown(this.getValue(GameKey.UP))) {
 			dir = dir.add(Direction.UP);
 		}
-		if (input.isKeyDown(this.getValue(GameKey.DOWN))) {
+		if (this.input.isKeyDown(this.getValue(GameKey.DOWN))) {
 			dir = dir.add(Direction.DOWN);
 		}
-		if (input.isKeyDown(this.getValue(GameKey.RIGHT))) {
+		if (this.input.isKeyDown(this.getValue(GameKey.RIGHT))) {
 			dir = dir.add(Direction.RIGHT);
 		}
-		if (input.isKeyDown(this.getValue(GameKey.LEFT))) {
+		if (this.input.isKeyDown(this.getValue(GameKey.LEFT))) {
 			dir = dir.add(Direction.LEFT);
 		}
 		
