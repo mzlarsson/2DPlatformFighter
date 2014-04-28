@@ -80,7 +80,6 @@ public class Character extends GameObject implements CharacterInterface {
 	public void activateSkill(int positionNbr) {
 		if (skills != null && (positionNbr > -1) && (positionNbr < skills.length)
 				&& skills[positionNbr] != null) {
-			System.out.println("Activated skill");
 			skills[positionNbr].activate(this);
 		}
 	}
@@ -233,6 +232,12 @@ public class Character extends GameObject implements CharacterInterface {
 	public void draw() {
 		Graphics g = new Graphics();
 		g.setColor(Color.black);
+		if( health.getMissingHealth() > 0){
+		g.setColor(Color.yellow);
+		}
+		if( isDead()){
+		g.setColor(Color.red);
+		}
 		g.fill(this.getShape());
 	}
 	public void addCharacterActionListener(CharacterActionListener listener){

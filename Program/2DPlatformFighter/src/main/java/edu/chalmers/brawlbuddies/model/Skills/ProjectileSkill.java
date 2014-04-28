@@ -1,8 +1,10 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
-import org.newdawn.slick.geom.Shape;
-import edu.chalmers.brawlbuddies.model.world.Character;
+import java.util.List;
 
+import org.newdawn.slick.geom.Shape;
+
+import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 /**
@@ -19,7 +21,7 @@ public class ProjectileSkill implements Skill {
 		shooter.setCreatorId(a);
 	}
 
-	public ProjectileSkill(Shape shape, float speed , float lifetime, float cooldownTime, Effect[] effects) {
+	public ProjectileSkill(Shape shape, float speed , float lifetime, float cooldownTime, List<Effect> effects) {
 		shooter = new ProjectileCreator(shape , speed , lifetime, effects);
 		this.cooldownTime = cooldownTime;
 	}

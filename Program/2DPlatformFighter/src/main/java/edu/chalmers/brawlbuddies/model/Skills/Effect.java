@@ -9,5 +9,5 @@ import edu.chalmers.brawlbuddies.model.world.GameObject;
  */
 public interface Effect {
 
-	public void effect(GameObject o);
+	public boolean effect(GameObject o);
 }

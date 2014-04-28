@@ -13,10 +13,11 @@ public class HealEffect implements Effect {
 	this.healAmount = a;
 	}
 	
-	public void effect(GameObject o) {
+	public boolean effect(GameObject o) {
 		if(o instanceof HealAble){
 		((HealAble) o).heal(healAmount);
 		}
+		return true;
 	}
 
 }

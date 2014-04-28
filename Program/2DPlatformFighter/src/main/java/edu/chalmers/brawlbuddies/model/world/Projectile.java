@@ -1,10 +1,14 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Skills.CharacterInterface;
 import edu.chalmers.brawlbuddies.model.Skills.Effect;
+import edu.chalmers.brawlbuddies.util.ListCopy;
 
 /**
  * A class for representing a Projectile in-game.
@@ -15,7 +19,7 @@ import edu.chalmers.brawlbuddies.model.Skills.Effect;
 public class Projectile extends GameObject {
 
 	private float lifetime;
-	private Effect[] effects;
+	private List<Effect> effects;
 
 	/**
 	 * Creates a projectile with a Shape, Velocity and lifetime.
@@ -28,10 +32,10 @@ public class Projectile extends GameObject {
 	 *            How long the projectile shall exist in milliseconds.
 	 */
 	public Projectile(Shape shape, Movement mov, float lifetime,
-			Effect[] effects) {
+			List<Effect> effects) {
 		super(mov, shape);
 		this.lifetime = lifetime;
-		this.effects = effects;
+		this.effects = ListCopy.simpleCopy(effects);
 	}
 
 	/**
@@ -62,14 +66,21 @@ public class Projectile extends GameObject {
 
 	public void onCollision(GameObject o, Movement.Alignment alignment) {
 		if (o instanceof CharacterInterface) {
-			System.out.println("i hit a character");
-			for (int i = 0; i < effects.length; i++) {
-				effects[i].effect(o);
-				super.onCollision(o, alignment);
+			if(!effects.isEmpty()){
+				for(int i = 0 ; i < effects.size(); i++){
+					if(effects.get(i).effect(o)){
+						System.out.println("Effective");
+						effects.remove(i);
+						i--;
+					}
+				}
+			}
+			if( effects.isEmpty() ){
+				System.out.println("No more effects");
+				lifetime = -1;
 			}
 		} else {
-			System.out.println("i didnt hit a character");
-			super.onCollision(o, alignment);
+			lifetime = -1;
 		}
 	}
 }

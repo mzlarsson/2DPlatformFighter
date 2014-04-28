@@ -1,5 +1,8 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -54,9 +57,11 @@ public class CharacterFactory {
 		character.setMovement(new JumpMovement(new Velocity(moveSpeed, 0), jumpSpeed, maxJumps));
 		
 		//TODO temporary Solution to set a Character Skills
-		Effect[] effects1  = { new DamageEffect(150)};
+		List<Effect>effects1  = new ArrayList<Effect>();
+		effects1.add(new DamageEffect(150));
 		Skill firstSkill  = new ProjectileSkill(new Circle(0,0,10), 1000, 5000 , 0, effects1);
-		Effect[] effects2 = { new HealEffect(50)};
+		List<Effect> effects2 = new ArrayList<Effect>();
+		effects2.add( new HealEffect(50));
 		Skill secondSkill = new SelfCastSkill(0 , effects2);
 		Skill[] skills = { firstSkill , secondSkill};
 		character.setSkills(skills);

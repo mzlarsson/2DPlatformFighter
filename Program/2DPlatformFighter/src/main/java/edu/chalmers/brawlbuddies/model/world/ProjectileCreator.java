@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import java.util.List;
+
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Aim;
@@ -17,7 +19,7 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * @version 0.1
  */
 public class ProjectileCreator {
-	private Effect[] effects;
+	private List<Effect> effects;
 	private Shape shape;
 	private float speed;
 	private float lifetime;
@@ -35,7 +37,7 @@ public class ProjectileCreator {
 	 *            How long the projectile shall exist in milliseconds.
 	 */
 	public ProjectileCreator(Shape shape, float speed, float lifetime,
-			Effect[] effects) {
+			List<Effect> effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;
@@ -45,9 +47,9 @@ public class ProjectileCreator {
 	public void setCreatorId(int a) {
 		if (effects != null) {
 			System.out.println("effects is not null");
-			for (int i = 0; i < effects.length; i++) {
-				if (effects[i] instanceof DamageEffect) {
-					((DamageEffect) effects[i]).setCreatorId(a);
+			for (int i = 0; i < effects.size(); i++) {
+				if (effects.get(i) instanceof DamageEffect) {
+					((DamageEffect) effects.get(i)).setCreatorId(a);
 				}
 			}
 		}

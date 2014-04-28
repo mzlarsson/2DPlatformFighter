@@ -22,24 +22,22 @@ public class DamageEffect implements Effect {
 	 * @param damage
 	 */
 	public DamageEffect(float damage) {
-
 		this.damage = damage;
 	}
 	public void setCreatorId(int creatorId){
 		this.creatorId = creatorId;
-		System.out.println("creatorId set for effect the id is " +  creatorId);
 	}
 
-	public void effect(GameObject o) {
+	public boolean effect(GameObject o) {
 		if (o instanceof CharacterInterface) {
-			// The playerId is used so that a player can't damage
-			// himself/herself
 			if (!(((CharacterInterface) o).getId() == creatorId)) {
+				System.out.println("i hit someone");
 				((CharacterInterface) o).takeDamage(damage);
+				return true;
 			}
 		} else if (o instanceof DamageAble) {
 			((DamageAble) o).takeDamage(damage);
 		}
-
+		return false;
 	}
 }

@@ -62,7 +62,8 @@ public class TestGame extends BasicGame {
 	public TestGame() {
 		super("Demo");
 	}
-	public void startGame(Player[] players){
+
+	public void startGame(Player[] players) {
 		game = new BrawlBuddies(players, new World(players, new GameMap()));
 	}
 
@@ -70,36 +71,30 @@ public class TestGame extends BasicGame {
 	 * Renders the test game
 	 */
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		game.getWorld().getMap().render(0,0);
-
-		for(Player p:game.getPlayers()){
+		game.getWorld().getMap().render(0, 0);
+		List<GameObject> gameOB = game.getWorld().getImpassableObjects();
+		for (GameObject o : gameOB) {
+			g.setColor(Color.darkGray);
+			g.draw(o.getShape());
+		}
+		for (Player p : game.getPlayers()) {
+			
+			// Following Code is used to check if bob takes damage or if hes
+			// dead
 			p.getCharacter().draw();
-			// Following Code is used to check if bob takes damage or if hes dead
-			if( p.getCharacter().isDead()){
-				g.setColor(Color.gray);
-				g.drawString("Bob is dead. RIP BOB", 25, 25);
-			}
-			else if( p.getCharacter().getMaxHealth() != p.getCharacter().getHealth()){
-				g.setColor(Color.darkGray);
-				g.drawString("Bob is hurt", 25 , 25);
-			}
-			else{
-				g.setColor(Color.black);
-				g.drawString("Bob is ok", 25, 25);
-			}
 
 		}
-		List <Projectile> projectiles = game.getProjectiles();
-		for(int i=0; i< projectiles.size(); i++) {
+		List<Projectile> projectiles = game.getProjectiles();
+		for (int i = 0; i < projectiles.size(); i++) {
 			g.setColor(Color.black);
 			g.fill(projectiles.get(i).getShape());
 		}
-		g.draw(game.getWorld().getConnectedShape(game.getPlayers()[0].getCharacter(), new Position(gc.getInput().getMouseX(),gc.getInput().getMouseY()))); // Test for the polygon collision area.
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		Player[] players = { new Player("Player1", generateBob()) };
+		Player[] players = { new Player("Player1", generateBob()),
+				new Player("Player2", generateBob()) };
 		// Make this testgame a listener for events from character
 		this.startGame(players);
 	}
@@ -108,6 +103,19 @@ public class TestGame extends BasicGame {
 	public void update(GameContainer gc, int delta) throws SlickException {
 		Player[] players = game.getPlayers();
 		Direction dir = Direction.NONE;
+		Direction dir2 = Direction.NONE;
+		if (gc.getInput().isKeyDown(Input.KEY_LEFT)){
+			dir2 = dir2.add(Direction.LEFT);
+		}
+		if (gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			dir2 = dir2.add(Direction.RIGHT);
+		}
+		if (gc.getInput().isKeyDown(Input.KEY_DOWN)) {
+			dir2 = dir2.add(Direction.DOWN);
+		}
+		if (gc.getInput().isKeyDown(Input.KEY_UP)){
+			dir2 = dir2.add(Direction.UP);
+		}
 		if (gc.getInput().isKeyDown(Input.KEY_W)) {
 			dir = dir.add(Direction.UP);
 		}
@@ -121,15 +129,25 @@ public class TestGame extends BasicGame {
 			dir = dir.add(Direction.LEFT);
 		}
 		game.move(players[0], dir);
+		game.move(players[1], dir2);
 		
 		if (gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
 			game.jump(players[0]);
 		}
-		if (gc.getInput().isKeyPressed(Input.KEY_RSHIFT)) {
+		if (gc.getInput().isKeyDown(Input.KEY_LSHIFT)) {
 			players[0].getCharacter().activateSkill(0);
 		}
-		if (gc.getInput().isKeyPressed(Input.KEY_LSHIFT)){
+		if (gc.getInput().isKeyDown(Input.KEY_R)) {
 			players[0].getCharacter().activateSkill(1);
+		}
+		if (gc.getInput().isKeyPressed(Input.KEY_I)){
+			game.jump(players[1]);
+		}
+		if( gc.getInput().isKeyDown(Input.KEY_O)){
+			players[1].getCharacter().activateSkill(0);
+		}
+		if( gc.getInput().isKeyDown(Input.KEY_P)){
+			players[1].getCharacter().activateSkill(1);
 		}
 		game.update(delta);
 	}
@@ -137,9 +155,7 @@ public class TestGame extends BasicGame {
 	private Character generateBob() {
 		return CharacterFactory.createCharacter("bob");
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		try {
 			TestGame game = new TestGame();
