@@ -52,7 +52,6 @@ import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 
 public class TestGame extends BasicGame {
 	private BrawlBuddies game;
-	private ProjectileCreator pc;
 
 	/**
 	 * Creates a new instance of test game
@@ -86,7 +85,7 @@ public class TestGame extends BasicGame {
 			}
 			else{
 				g.setColor(Color.black);
-				g.drawString("Bob is ok used left shift to hurt him", 25, 25);
+				g.drawString("Bob is ok", 25, 25);
 			}
 
 		}
@@ -100,7 +99,6 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		this.pc = new ProjectileCreator(new Circle(0,0,10), 1000, 5000);
 		Player[] players = { new Player("Player1", generateBob()) };
 		// Make this testgame a listener for events from character
 		this.startGame(players);
@@ -129,7 +127,6 @@ public class TestGame extends BasicGame {
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_RSHIFT)) {
 			players[0].getCharacter().activateSkill(0);
-			//projectiles.add(pc.fire(players[0].getCharacter().getCenterPosition(), players[0].getCharacter().getAim()));
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_LSHIFT)){
 			players[0].getCharacter().activateSkill(1);

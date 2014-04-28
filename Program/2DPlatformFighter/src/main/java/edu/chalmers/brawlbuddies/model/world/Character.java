@@ -14,6 +14,7 @@ import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.Skills.CharacterInterface;
+import edu.chalmers.brawlbuddies.model.Skills.ProjectileSkill;
 import edu.chalmers.brawlbuddies.model.Skills.Skill;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
@@ -41,7 +42,7 @@ public class Character extends GameObject implements CharacterInterface {
 	private Direction lastDir = Direction.NONE;
 	private boolean lastAimLeft;
 
-	private int playerId;
+	private int id;
 	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
 	/**
@@ -172,19 +173,24 @@ public class Character extends GameObject implements CharacterInterface {
 	}
 
 	/**
-	 * Sets a int describing the playerId
+	 * Sets a int describing the players Id
 	 * 
 	 * @param playerId
 	 */
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
+	public void setId(int playerId) {
+		this.id = playerId;
+		for(int i = 0; i < skills.length; i++){
+			if(skills[i] instanceof ProjectileSkill){
+				((ProjectileSkill)skills[i]).setCreatorId(playerId);
+			}
+		}
 	}
 
 	/**
-	 * Returns a int describing the playerId
+	 * Returns a int describing the players Id
 	 */
-	public int getPlayerId() {
-		return this.playerId;
+	public int getId() {
+		return this.id;
 	}
 
 	public void setMaxHealth(float a) {
@@ -250,6 +256,11 @@ public class Character extends GameObject implements CharacterInterface {
 		 * this.jumpsLeft = this.maxJumps;
 		 */
 		return this;
+	}
+
+	public void tryNewPosition(Position newPosition) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

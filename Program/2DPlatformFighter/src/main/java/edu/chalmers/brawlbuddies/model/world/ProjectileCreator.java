@@ -5,42 +5,70 @@ import org.newdawn.slick.geom.Shape;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
+import edu.chalmers.brawlbuddies.model.Skills.DamageAble;
+import edu.chalmers.brawlbuddies.model.Skills.DamageEffect;
+import edu.chalmers.brawlbuddies.model.Skills.Effect;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
  * A class to hold and fire a specific Projectile-type.
+ * 
  * @author Patrik Haar
  * @version 0.1
  */
 public class ProjectileCreator {
-
+	private Effect[] effects;
 	private Shape shape;
 	private float speed;
 	private float lifetime;
-	
+	private int creatorId;
+
 	/**
-	 * Creates a new projectileCreator with a Shape, projectile speed and lifetime duration.
-	 * @param shape The Shape of the projectile.
-	 * @param speed How fast the projectile shall travel.
-	 * @param lifetime How long the projectile shall exist in milliseconds.
+	 * Creates a new projectileCreator with a Shape, projectile speed and
+	 * lifetime duration.
+	 * 
+	 * @param shape
+	 *            The Shape of the projectile.
+	 * @param speed
+	 *            How fast the projectile shall travel.
+	 * @param lifetime
+	 *            How long the projectile shall exist in milliseconds.
 	 */
-	public ProjectileCreator(Shape shape, float speed, float lifetime) {
+	public ProjectileCreator(Shape shape, float speed, float lifetime,
+			Effect[] effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;
+		this.effects = effects;
 	}
-	
+
+	public void setCreatorId(int a) {
+		if (effects != null) {
+			System.out.println("effects is not null");
+			for (int i = 0; i < effects.length; i++) {
+				if (effects[i] instanceof DamageEffect) {
+					((DamageEffect) effects[i]).setCreatorId(a);
+				}
+			}
+		}
+	}
+
 	/**
-	 * Creates and launches a projectile from the given position with the given aim.
-	 * @param pos The position where the projectile will be created at.
-	 * @param aim The direction the projectile will fly.
+	 * Creates and launches a projectile from the given position with the given
+	 * aim.
+	 * 
+	 * @param pos
+	 *            The position where the projectile will be created at.
+	 * @param aim
+	 *            The direction the projectile will fly.
 	 * @return The projectile created.
 	 */
 	public Projectile fire(Position pos, Aim aim) {
 		Shape tmp = SlickUtil.copy(shape);
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());
-		return new Projectile(tmp, new Movement(new Velocity(aim, speed), true), lifetime);
+		return new Projectile(tmp,
+				new Movement(new Velocity(aim, speed), true), lifetime, effects);
 	}
 
 }

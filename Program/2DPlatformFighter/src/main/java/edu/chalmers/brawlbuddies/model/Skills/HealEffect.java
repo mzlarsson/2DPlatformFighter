@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.GameObject;
  */
 public class HealEffect implements Effect {
 	private float healAmount;
-	protected HealEffect(float a) {
+	public HealEffect(float a) {
 	this.healAmount = a;
 	}
 	

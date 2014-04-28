@@ -10,7 +10,7 @@ import edu.chalmers.brawlbuddies.model.world.Character;
  * 
  */
 public class DamageEffect implements Effect {
-	private int playerId;
+	private int creatorId;
 	private float damage;
 
 	/**
@@ -18,22 +18,23 @@ public class DamageEffect implements Effect {
 	 * that belongs to the effect and damage describing the amount of damage a
 	 * object takes when exposed to the effect.
 	 * 
-	 * @param playerId
+	 * @param creatorId
 	 * @param damage
 	 */
 	public DamageEffect(float damage) {
 
 		this.damage = damage;
 	}
-	public void setplayerId(int playerId){
-		this.playerId = playerId;
+	public void setCreatorId(int creatorId){
+		this.creatorId = creatorId;
+		System.out.println("creatorId set for effect the id is " +  creatorId);
 	}
 
 	public void effect(GameObject o) {
 		if (o instanceof CharacterInterface) {
 			// The playerId is used so that a player can't damage
 			// himself/herself
-			if (!(((CharacterInterface) o).getPlayerId() == playerId)) {
+			if (!(((CharacterInterface) o).getId() == creatorId)) {
 				((CharacterInterface) o).takeDamage(damage);
 			}
 		} else if (o instanceof DamageAble) {

@@ -14,9 +14,13 @@ public class ProjectileSkill implements Skill {
 	private ProjectileCreator shooter;
 	private float cooldownCount = 0;
 	private float cooldownTime;
+	
+	public void setCreatorId(int a){
+		shooter.setCreatorId(a);
+	}
 
-	public ProjectileSkill(Shape shape, float speed , float lifetime, float cooldownTime) {
-		shooter = new ProjectileCreator(shape , speed , lifetime);
+	public ProjectileSkill(Shape shape, float speed , float lifetime, float cooldownTime, Effect[] effects) {
+		shooter = new ProjectileCreator(shape , speed , lifetime, effects);
 		this.cooldownTime = cooldownTime;
 	}
 	public void resetTime(){

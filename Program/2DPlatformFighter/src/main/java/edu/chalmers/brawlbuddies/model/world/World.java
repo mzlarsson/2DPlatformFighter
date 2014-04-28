@@ -51,7 +51,7 @@ public class World {
 		//TODO Temporary solution with player to set playerId to characters
 		for(int i = 0 ; i < players.length; i++){
 			nbrOfPlayers += 1;
-			players[i].getCharacter().setPlayerId(nbrOfPlayers);
+			players[i].getCharacter().setId(nbrOfPlayers);
 		}
 		this.objects = new ArrayList<GameObject>();
 		this.map = map.getMap();
