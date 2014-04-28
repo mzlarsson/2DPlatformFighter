@@ -1,58 +1,35 @@
 package edu.chalmers.brawlbuddies.controller;
 
-import org.newdawn.slick.BasicGame;
+import java.util.List;
+
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.controller.InputHandler.GameKey;
-import edu.chalmers.brawlbuddies.model.BrawlBuddies;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
-import edu.chalmers.brawlbuddies.model.world.GameMap;
-import edu.chalmers.brawlbuddies.model.world.World;
-import edu.chalmers.brawlbuddies.view.GameView;
+import edu.chalmers.brawlbuddies.Constants;
 
-public class Controller extends BasicGame{
-	
-	private GameView view;
-	private BrawlBuddies game;
+public class Controller extends StateBasedGame {
 
 	public Controller() {
-		super("Brawl Buddies v1.0");
+		super("BrawlBuddies v1.0");
+	}
+
+	@Override
+	public void initStatesList(GameContainer container) throws SlickException {
+		List<BasicGameState> states = StateFactory.getAllStates();
+		for(BasicGameState state : states){
+			this.addState(state);
+		}
 	}
 	
-	public void init(GameContainer gc){
-		//Empty for now.
+	public void gotoMenu(){
+		this.enterState(Constants.GAMESTATE_MENU);
 	}
 	
 	public void startGame(Player[] players){
-		game = new BrawlBuddies(players, new World(players, new GameMap()));
-	}
-	
-	@Override
-	public void update(GameContainer gc, int delta) throws SlickException {
-		//Send all control signals to model
-		Player[] players = game.getPlayers();
-		Input input = gc.getInput();
-		for(int i = 0; i<players.length; i++){
-			InputHandler handler = players[i].getInputHandler();
-			game.move(players[i], handler.getDirection(input));
-			
-			if(handler.isActive(input, GameKey.JUMP)){
-				game.jump(players[i]);
-			}
-			if(handler.isActive(input, GameKey.FIRE)){
-				//game.fireProjectile(players[i]);		//FIXME how to perform this?
-			}
-		}
-
-		//Update model
-		game.update(delta);
-	}
-	
-	public void render(GameContainer gc, Graphics g){
-		view.render(gc, g);
+		this.enterState(Constants.GAMESTATE_PLAY);
+		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players);
 	}
 
 }

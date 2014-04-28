@@ -10,4 +10,7 @@ package edu.chalmers.brawlbuddies;
 public class Constants {
 
 	public static final int MODIFIER = 1000;
+
+	public static final int GAMESTATE_MENU = 0;
+	public static final int GAMESTATE_PLAY = 1;
 }
