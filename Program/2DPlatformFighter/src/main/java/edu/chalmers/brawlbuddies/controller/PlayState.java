@@ -20,24 +20,16 @@ public class PlayState extends BasicGameState{
 	
 	private GameView view;
 	private BrawlBuddies game;
-	private GameContainer gcTmp;
 
 	public PlayState() {
 		//Nothing.
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-		this.gcTmp = gc;
+		//Do nothing.
 	}
 	
 	public void startGame(Player[] players){
-		//TODO fix this. not good looking at all atm.
-		for(Player p : players){
-			if(p.getInputHandler() instanceof KeyInputHandler){
-				((KeyInputHandler)(p.getInputHandler())).setInput(gcTmp.getInput());
-			}
-		}
-		
 		game = new BrawlBuddies(players, new World(players, new GameMap()));
 	}
 	
@@ -46,6 +38,10 @@ public class PlayState extends BasicGameState{
 		Player[] players = game.getPlayers();
 		for(int i = 0; i<players.length; i++){
 			InputHandler handler = players[i].getInputHandler();
+			if(handler == null){
+				players[i].setInputHandler(new KeyInputHandler(gc.getInput()));
+				handler = players[i].getInputHandler();
+			}
 			game.move(players[i], handler.getDirection());
 			
 			if(handler.isActivated(GameKey.JUMP)){

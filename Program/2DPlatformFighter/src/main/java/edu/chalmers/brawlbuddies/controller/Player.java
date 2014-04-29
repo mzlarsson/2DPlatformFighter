@@ -1,7 +1,5 @@
 package edu.chalmers.brawlbuddies.controller;
 
-import org.newdawn.slick.Input;
-
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.Character;
 
@@ -25,7 +23,7 @@ public class Player {
 	 * @param ch The character to use
 	 */
 	public Player(String name, Character ch) {
-		this(name, ch, new KeyInputHandler(new Input(0)));		//FIXME random initialization. change.
+		this(name, ch, null);
 	}
 	
 	/**
@@ -62,6 +60,14 @@ public class Player {
 	 */
 	public InputHandler getInputHandler(){
 		return this.handler;
+	}
+	
+	/**
+	 * Sets the input handler of this player to the given one
+	 * @param handler The new input handler
+	 */
+	public void setInputHandler(InputHandler handler){
+		this.handler = handler;
 	}
 	
 	/**
