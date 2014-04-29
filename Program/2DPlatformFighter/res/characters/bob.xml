@@ -3,7 +3,7 @@
 
 	<name>Test Guy Bob</name>
 	<bio>Bob was walking down the road one day and was suddenly cast into another dimension filled with like-minded buddies who liked to fight. Bob was happy.</bio>
-	<health> 9001</health>
+	<health>500</health>
 	<movespeed>500</movespeed>
 	<jumpingpower>750</jumpingpower>
 	<maxjumps>2</maxjumps>

@@ -12,7 +12,7 @@ public class GameMap {
 	
 	public GameMap() {
 		try {
-			map = new TiledMap("res/flatTestMap.tmx");
+			map = new TiledMap("res/basic16Map.tmx");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

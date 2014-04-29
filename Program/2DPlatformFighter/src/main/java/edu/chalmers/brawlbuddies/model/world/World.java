@@ -790,9 +790,9 @@ public class World {
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
 			if (projectiles.get(i).isActive()) {
-				projectiles.get(i).update(delta);
-				List<GameObject> goList = getCollisions(projectiles.get(i)
-						.getShape(), getImpassableObjects());
+				Position newPos = projectiles.get(i).update(delta);
+				Shape shape = getConnectedShape(projectiles.get(i), newPos);
+				List<GameObject> goList = getCollisions(shape, getImpassableObjects());
 				for (GameObject o : goList) {
 					projectiles.get(i).onCollision(o, Alignment.NONE);
 				}
@@ -800,10 +800,16 @@ public class World {
 				for (Player p : players) {
 					chList.add(p.getCharacter());
 				}
-				goList = getCollisions(projectiles.get(i).getShape(),
-						chList);
+				goList = getCollisions(shape, chList);
 				for (GameObject o : goList) {
 					projectiles.get(i).onCollision(o, Alignment.NONE);
+				}
+				if(projectiles.get(i).isActive()) {
+					if (getValidTilePosition(projectiles.get(i), newPos).equals(newPos)) {
+						projectiles.get(i).setCenterPosition(newPos);
+					} else {
+						projectiles.remove(i--);
+					}
 				}
 			} else {
 				projectiles.remove(i--);

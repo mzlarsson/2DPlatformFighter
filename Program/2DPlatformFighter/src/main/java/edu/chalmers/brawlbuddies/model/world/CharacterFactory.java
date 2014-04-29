@@ -58,7 +58,7 @@ public class CharacterFactory {
 		
 		//TODO temporary Solution to set a Character Skills
 		List<Effect>effects1  = new ArrayList<Effect>();
-		effects1.add(new DamageEffect(150));
+		effects1.add(new DamageEffect(50));
 		Skill firstSkill  = new ProjectileSkill(new Circle(0,0,10), 1000, 5000 , 0, effects1);
 		List<Effect> effects2 = new ArrayList<Effect>();
 		effects2.add( new HealEffect(50));

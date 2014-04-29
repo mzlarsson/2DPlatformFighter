@@ -53,15 +53,10 @@ public class Projectile extends GameObject {
 		return null;
 	}
 
-	// TODO Currently unaffected by gravity.
 	@Override
 	public Position update(int delta) {
 		lifetime -= delta;
-		Position oldPos = this.getCenterPosition().copy();
-		Position newPos = this.getMovement().nextPosition(
-				this.getCenterPosition(), delta);
-		this.setCenterPosition(newPos);
-		return oldPos;
+		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
 	public void onCollision(GameObject o, Movement.Alignment alignment) {

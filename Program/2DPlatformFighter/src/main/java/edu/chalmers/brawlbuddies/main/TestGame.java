@@ -131,23 +131,28 @@ public class TestGame extends BasicGame {
 		game.move(players[0], dir);
 		game.move(players[1], dir2);
 		
-		if (gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
+		if (gc.getInput().isKeyPressed(Input.KEY_LCONTROL)) {
 			game.jump(players[0]);
 		}
-		if (gc.getInput().isKeyDown(Input.KEY_LSHIFT)) {
+		if (gc.getInput().isKeyPressed(Input.KEY_LSHIFT)) {
 			players[0].getCharacter().activateSkill(0);
 		}
-		if (gc.getInput().isKeyDown(Input.KEY_R)) {
+		if (gc.getInput().isKeyPressed(Input.KEY_R)) {
 			players[0].getCharacter().activateSkill(1);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_I)){
 			game.jump(players[1]);
 		}
-		if( gc.getInput().isKeyDown(Input.KEY_O)){
+		if( gc.getInput().isKeyPressed(Input.KEY_O)){
 			players[1].getCharacter().activateSkill(0);
 		}
-		if( gc.getInput().isKeyDown(Input.KEY_P)){
+		if( gc.getInput().isKeyPressed(Input.KEY_P)){
 			players[1].getCharacter().activateSkill(1);
+		}
+		if( gc.getInput().isKeyDown(Input.KEY_ESCAPE)){
+			for (Player p : players) {
+				p.getCharacter().restoreHealth();
+			}
 		}
 		game.update(delta);
 	}
@@ -162,7 +167,7 @@ public class TestGame extends BasicGame {
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(game);
 
-			appgc.setDisplayMode(1024, 768, false);
+			appgc.setDisplayMode(1600, 800, false);
 			appgc.start();
 		} catch (SlickException ex) {
 			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
