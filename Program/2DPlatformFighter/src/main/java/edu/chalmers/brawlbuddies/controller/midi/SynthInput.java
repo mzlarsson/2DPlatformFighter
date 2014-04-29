@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.device;
+package edu.chalmers.brawlbuddies.controller.midi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +120,7 @@ public class SynthInput {
 	public static final int KEY_Gb8 = 126;
 	public static final int KEY_G8 = 127;
 	
-	private DeviceCommunicator communicator;
+	private MidiDeviceCommunicator communicator;
 
 	/**
 	 * Creates a new SynthInput object that is linked to a MidiDevice
@@ -134,21 +134,21 @@ public class SynthInput {
 			} catch (MidiUnavailableException e) {}
 		}
 		
-		this.communicator = new DeviceCommunicator(device.getDeviceInfo().getName(), device.getTransmitters().get(0));
+		this.communicator = new MidiDeviceCommunicator(device.getDeviceInfo().getName(), device.getTransmitters().get(0));
 	}
 	
 	/**
 	 * Adds a listener for events from the device
 	 * @param listener The listener to add
 	 */
-	public void addDeviceListener(DeviceListener listener){
+	public void addDeviceListener(MidiDeviceListener listener){
 		this.communicator.addDeviceListener(listener);
 	}
 	/**
 	 * Removes a listener from the device
 	 * @param listener The listener to remove
 	 */
-	public void removeDeviceListener(DeviceListener listener){
+	public void removeDeviceListener(MidiDeviceListener listener){
 		this.communicator.addDeviceListener(listener);
 	}
 	

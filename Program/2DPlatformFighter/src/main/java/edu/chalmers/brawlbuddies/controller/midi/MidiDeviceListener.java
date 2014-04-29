@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.device;
+package edu.chalmers.brawlbuddies.controller.midi;
 
 /**
  * Interface for handling events from a MIDI device.
@@ -8,7 +8,7 @@ package edu.chalmers.brawlbuddies.controller.device;
  *
  */
 
-public interface DeviceListener {
+public interface MidiDeviceListener {
 
 	/**
 	 * Triggered when the key of the MIDI device is pressed

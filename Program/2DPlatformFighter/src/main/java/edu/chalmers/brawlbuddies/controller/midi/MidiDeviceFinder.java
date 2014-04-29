@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.device;
+package edu.chalmers.brawlbuddies.controller.midi;
 
 import java.util.ArrayList;
 
@@ -15,14 +15,14 @@ import javax.sound.midi.Transmitter;
  *
  */
 
-public class DeviceFinder {
+public class MidiDeviceFinder {
 	
     private ArrayList<MidiDevice> devices = new ArrayList<MidiDevice>();
 
     /**
      * Creates a new DeviceFinder and reads in all data.
      */
-	public DeviceFinder() {
+	public MidiDeviceFinder() {
 		init();
 	}
 	

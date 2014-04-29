@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
-import edu.chalmers.brawlbuddies.controller.device.DeviceFinder;
-import edu.chalmers.brawlbuddies.controller.device.SynthInput;
+import edu.chalmers.brawlbuddies.controller.midi.MidiDeviceFinder;
+import edu.chalmers.brawlbuddies.controller.midi.SynthInput;
 import edu.chalmers.brawlbuddies.model.Direction;
 
 public class SynthInputHandler implements InputHandler {
@@ -18,7 +18,7 @@ public class SynthInputHandler implements InputHandler {
 	}
 	
 	public SynthInputHandler(int deviceID){
-		DeviceFinder df = new DeviceFinder();
+		MidiDeviceFinder df = new MidiDeviceFinder();
 		if(deviceID>=0 && deviceID<df.getCount()){
 			this.input = new SynthInput(df.getDevice(deviceID));
 			this.keys = new TreeMap<GameKey, Integer>();
