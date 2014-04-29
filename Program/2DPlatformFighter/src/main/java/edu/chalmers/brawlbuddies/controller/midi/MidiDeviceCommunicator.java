@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.device;
+package edu.chalmers.brawlbuddies.controller.midi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,34 +15,34 @@ import javax.sound.midi.Transmitter;
  *
  */
 
-public class DeviceCommunicator implements Receiver{
+public class MidiDeviceCommunicator implements Receiver{
 
 	private int[] keys;
 	private boolean[] pressed;
 	private String name;
 	private boolean on = true;
 	
-	private List<DeviceListener> listeners;
+	private List<MidiDeviceListener> listeners;
 
 	/**
 	 * Creates a new communicator as a bridge towards a Transmitter.
 	 * @param name The name of the device
 	 * @param trans A transmitter from the device
 	 */
-	public DeviceCommunicator(String name, Transmitter trans) {
+	public MidiDeviceCommunicator(String name, Transmitter trans) {
 		this.name = name;
 		this.keys = new int[128];
 		this.pressed = new boolean[128];
 		trans.setReceiver(this);
 
-		this.listeners = new ArrayList<DeviceListener>();
+		this.listeners = new ArrayList<MidiDeviceListener>();
 	}
 	
 	/**
 	 * Adds a listener to retrieve updates about pressed/released keys
 	 * @param listener The listener to add
 	 */
-	public void addDeviceListener(DeviceListener listener){
+	public void addDeviceListener(MidiDeviceListener listener){
 		this.listeners.add(listener);
 	}
 	
@@ -50,7 +50,7 @@ public class DeviceCommunicator implements Receiver{
 	 * Removes a listener which no longer gets updates about pressed/released keys
 	 * @param listener The listener to remove
 	 */
-	public void removeDeviceListener(DeviceListener listener){
+	public void removeDeviceListener(MidiDeviceListener listener){
 		this.listeners.remove(listener);
 	}
 	
@@ -60,7 +60,7 @@ public class DeviceCommunicator implements Receiver{
 	 * @param pressed <code>true</code> if key is pressed, <code>false</code> if released
 	 */
 	private void notifyAll(int key, boolean pressed){
-		for(DeviceListener listener : this.listeners){
+		for(MidiDeviceListener listener : this.listeners){
 			if(pressed){
 				listener.keyPressed(key);
 			}else{
