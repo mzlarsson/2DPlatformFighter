@@ -35,12 +35,12 @@ import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Skills.Effect;
 import edu.chalmers.brawlbuddies.model.world.Character;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.GameObject;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.World;
+import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 
 /**
@@ -158,7 +158,7 @@ public class TestGame extends BasicGame {
 	}
 
 	private Character generateBob() {
-		return CharacterFactory.createCharacter("bob");
+		return CharacterFactory.create("bob");
 	}
 
 	public static void main(String[] args) {

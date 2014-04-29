@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="24" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="testMapSet" tilewidth="32" tileheight="32">
+  <image source="textures/testMapSet.png" width="64" height="32"/>
+  <tile id="1">
+   <properties>
+    <property name="block" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQ0AAAzDoM6/6Qs5JKyaqqr64gE6bJiTAAwAAA==
+  </data>
+ </layer>
+ <layer name="environment" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjABMwYcGjYBQMNjCaTkfBUAb0TK/Y8spA5pdR+weH/aN45GIA7lVzTAAMAAA=
+  </data>
+ </layer>
+ <objectgroup name="env_group" width="32" height="24">
+  <object x="1" y="482" width="30" height="288"/>
+  <object x="864" y="480" width="158" height="29"/>
+  <object x="992" y="507" width="35" height="260"/>
+  <object x="29" y="638" width="962" height="132"/>
+  <object x="165" y="390" width="167" height="30"/>
+ </objectgroup>
+</map>

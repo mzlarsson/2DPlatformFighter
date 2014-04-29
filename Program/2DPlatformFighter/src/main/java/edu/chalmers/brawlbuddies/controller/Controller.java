@@ -8,7 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.Constants;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
+import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
 
 public class Controller extends StateBasedGame {
 
@@ -24,7 +24,7 @@ public class Controller extends StateBasedGame {
 			this.addState(state);
 		}
 		
-		Player[] players = { new Player("BobTheSparklyMidget", CharacterFactory.createCharacter("bob")) };
+		Player[] players = { new Player("BobTheSparklyMidget", CharacterFactory.create("bob")) };
 		this.startGame(players);
 	}
 	
