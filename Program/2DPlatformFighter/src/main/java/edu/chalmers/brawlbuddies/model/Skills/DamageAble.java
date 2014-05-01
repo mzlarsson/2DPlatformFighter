@@ -6,6 +6,6 @@ package edu.chalmers.brawlbuddies.model.Skills;
  */
 public interface DamageAble {
 	public void takeDamage(float a);
-	public int getId();
+	public int getID();
 
 }

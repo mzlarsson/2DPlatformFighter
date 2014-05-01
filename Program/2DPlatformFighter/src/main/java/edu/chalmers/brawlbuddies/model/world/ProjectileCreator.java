@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Shape;
 
+import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
@@ -23,6 +24,7 @@ public class ProjectileCreator {
 	private Shape shape;
 	private float speed;
 	private float lifetime;
+	private Velocity gravity;
 	private int creatorId;
 
 	/**
@@ -33,20 +35,23 @@ public class ProjectileCreator {
 	 *            The Shape of the projectile.
 	 * @param speed
 	 *            How fast the projectile shall travel.
+	 * @param gravity
+	 *            What the gravity should be, uses default if null.
 	 * @param lifetime
 	 *            How long the projectile shall exist in milliseconds.
 	 */
-	public ProjectileCreator(Shape shape, float speed, float lifetime,
-			List<Effect> effects) {
+	public ProjectileCreator(Shape shape, float speed, float lifetime
+			, Velocity gravity, List<Effect> effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;
+		this.gravity = gravity==null?Constants.DEFAULT_GRAVITY.copy():gravity;
 		this.effects = effects;
 	}
 
-	public void setCreatorId(int a) {
+	public void setCreatorID(int a) {
+		this.creatorId = a;
 		if (effects != null) {
-			System.out.println("effects is not null");
 			for (int i = 0; i < effects.size(); i++) {
 				if (effects.get(i) instanceof DamageEffect) {
 					((DamageEffect) effects.get(i)).setCreatorId(a);
@@ -70,7 +75,7 @@ public class ProjectileCreator {
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());
 		return new Projectile(tmp,
-				new Movement(new Velocity(aim, speed), true), lifetime, effects);
+				new Movement(new Velocity(aim, speed), gravity, true), lifetime, effects);
 	}
 
 }

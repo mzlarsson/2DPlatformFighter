@@ -1,6 +1,5 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
-import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.GameObject;
 /**
  * A class describing a healing effect 
@@ -15,9 +14,11 @@ public class HealEffect implements Effect {
 	
 	public boolean effect(GameObject o) {
 		if(o instanceof HealAble){
-		((HealAble) o).heal(healAmount);
+			((HealAble) o).heal(healAmount);
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 }

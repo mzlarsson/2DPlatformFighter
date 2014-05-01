@@ -13,9 +13,10 @@ import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.CharacterInterface;
+import edu.chalmers.brawlbuddies.model.Skills.ICharacter;
+import edu.chalmers.brawlbuddies.model.Skills.ISkill;
 import edu.chalmers.brawlbuddies.model.Skills.ProjectileSkill;
-import edu.chalmers.brawlbuddies.model.Skills.Skill;
+import edu.chalmers.brawlbuddies.model.Skills.SkillPart;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
 
@@ -28,7 +29,7 @@ import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
  * @revised Matz Larsson
  */
 @XStreamAlias("character")
-public class Character extends GameObject implements CharacterInterface {
+public class Character extends GameObject implements ICharacter {
 	@XStreamAlias("name")
 	private String name;
 	@XStreamAlias("bio")
@@ -36,12 +37,13 @@ public class Character extends GameObject implements CharacterInterface {
 	@XStreamAlias("health")
 	private Health health;
 
-	private Skill[] skills;
+	private ISkill[] skills;
 
 	private Aim aim = new Aim(1, 0);
 	private Direction lastDir = Direction.NONE;
 	private boolean lastAimLeft;
 
+	private static int nbrOfCharacters = 0;
 	private int id;
 	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
@@ -55,6 +57,8 @@ public class Character extends GameObject implements CharacterInterface {
 	 */
 	public Character(Shape shape) {
 		super(new JumpMovement(), shape);
+		System.out.println("Settign character ID to: " + nbrOfCharacters);
+		this.id = nbrOfCharacters++;
 	}
 
 	public void setName(String name) {
@@ -68,7 +72,7 @@ public class Character extends GameObject implements CharacterInterface {
 	 * Set the skills for the character
 	 * @param skills
 	 */
-	public void setSkills(Skill[] skills) {
+	public void setSkills(ISkill[] skills) {
 		this.skills = skills;
 	}
 
@@ -118,6 +122,7 @@ public class Character extends GameObject implements CharacterInterface {
 	 * @return The position after the movement.
 	 */
 	public Position update(int delta) {
+		updateCooldowns(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
@@ -154,6 +159,16 @@ public class Character extends GameObject implements CharacterInterface {
 	}
 
 	/**
+	 * Updates the cooldown of the skills with the time passed.
+	 * @param delta Time past in milliseconds.
+	 */
+	private void updateCooldowns(int delta) {
+		for (ISkill s : skills) {
+			s.decreaseCooldown(delta);
+		}
+	}
+	
+	/**
 	 * Makes the character jump if able.
 	 */
 	public void makeJump() {
@@ -176,19 +191,14 @@ public class Character extends GameObject implements CharacterInterface {
 	 * 
 	 * @param playerId
 	 */
-	public void setId(int playerId) {
+	public void setID(int playerId) {
 		this.id = playerId;
-		for(int i = 0; i < skills.length; i++){
-			if(skills[i] instanceof ProjectileSkill){
-				((ProjectileSkill)skills[i]).setCreatorId(playerId);
-			}
-		}
 	}
 
 	/**
 	 * Returns a int describing the players Id
 	 */
-	public int getId() {
+	public int getID() {
 		return this.id;
 	}
 

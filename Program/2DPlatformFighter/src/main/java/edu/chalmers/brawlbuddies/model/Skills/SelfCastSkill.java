@@ -4,22 +4,24 @@ import java.util.List;
 
 import edu.chalmers.brawlbuddies.model.world.GameObject;
 
-public class SelfCastSkill implements Skill {
-	private float cooldownCount = 0;
-	private float cooldownTime;
+public class SelfCastSkill implements SkillPart {
 	private List<Effect> effects;
 	
-	public SelfCastSkill(float cooldownTime, List<Effect> effects) {
+	public SelfCastSkill(List<Effect> effects) {
 		this.effects = effects;
-		this.cooldownTime = cooldownTime;
 	}
-
-	public void activate(CharacterInterface c) {
+	
+	public void activate(ICharacter c) {
 		if (c instanceof GameObject) {
 			for (int i = 0; i < effects.size(); i++) {
 				effects.get(i).effect(((GameObject) c));
 			}
 		}
+	}
+
+	public void setCreatorID(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

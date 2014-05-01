@@ -22,11 +22,8 @@ public class XMLReader {
 			factory.setIgnoringComments(true);
 			// Ignore white space in elements
 			factory.setIgnoringElementContentWhitespace(true);
-			// Validate the XML as it is parsed
-			factory.setValidating(true);
 			// Provides access to the documents data
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			new InputSource(docString);
 			// Takes the document
 			return builder.parse(new InputSource(docString));
 		} catch (Exception ex) {

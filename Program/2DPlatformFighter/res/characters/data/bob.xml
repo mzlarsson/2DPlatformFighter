@@ -8,5 +8,9 @@
 	<movespeed>500</movespeed>
 	<jumpingpower>750</jumpingpower>
 	<maxjumps>2</maxjumps>
+	<skills>
+		<skill>bob_basic_ball</skill>
+		<skill>bob_big_ball</skill>
+	</skills>
 
 </character>

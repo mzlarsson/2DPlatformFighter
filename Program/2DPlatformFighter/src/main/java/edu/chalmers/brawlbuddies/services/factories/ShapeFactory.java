@@ -7,16 +7,33 @@ import org.newdawn.slick.geom.Shape;
 
 public class ShapeFactory {
 	
+	/**
+	 * Creates a Shape based on the given parameters.
+	 * @param effectName The name of the Shape.
+	 * @param parameters The parameters for the Shape.
+	 * @return
+	 */
 	public static Shape create(String shape, String parameters) {
 		return create(shape, parameters, 0, 0);
 	}
 	
+	/**
+	 * Creates a Shape based on the given parameters.
+	 * @param effectName The name of the Shape.
+	 * @param parameters The parameters for the Shape.
+	 * @param x The x-location of the created Shape.
+	 * @param y The y-location of the created Shape.
+	 * @return
+	 */
 	public static Shape create(String shape, String parameters, float x, float y) {
 		if (shape.equalsIgnoreCase("rectangle")) {
 			String[] params = parameters.split(",");
 			if (params.length == 2) {
-				return new Rectangle(x, y, Float.parseFloat(params[0])
-						,Float.parseFloat(params[1]));				
+				Rectangle rect = new Rectangle(0, 0, Float.parseFloat(params[0])
+						,Float.parseFloat(params[1]));
+				rect.setCenterX(x);
+				rect.setCenterY(y);
+				return rect;
 			} else {
 				throw new IllegalArgumentException("Rectangle with: " + params.length
 						+ " parameters not supported");
@@ -38,7 +55,9 @@ public class ShapeFactory {
 				throw new IllegalArgumentException("Ellipse with: " + params.length
 						+ " parameters not supported");
 			}
+		} else {
+			throw new IllegalArgumentException("The shape: \"" + shape
+					+ "\" is not supported");
 		}
-		return null;
 	}
 }

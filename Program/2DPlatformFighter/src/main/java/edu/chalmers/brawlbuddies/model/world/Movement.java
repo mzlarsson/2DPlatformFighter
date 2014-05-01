@@ -38,7 +38,7 @@ public class Movement {
 	 * @param baseSpeed The base speed for this Movement object
 	 */
 	public Movement(Velocity baseSpeed){
-		this(baseSpeed, new Velocity(0, 1000));
+		this(baseSpeed, Constants.DEFAULT_GRAVITY.copy());
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Movement {
 	 * @param immidiate true if the movement should start immediately.
 	 */
 	public Movement(Velocity baseSpeed, boolean immediate){
-		this(baseSpeed, new Velocity(0, 1000), immediate);
+		this(baseSpeed, Constants.DEFAULT_GRAVITY.copy(), immediate);
 	}
 	
 	/**

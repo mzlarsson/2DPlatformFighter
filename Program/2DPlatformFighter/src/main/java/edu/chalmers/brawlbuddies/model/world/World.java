@@ -25,8 +25,6 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  */
 
 public class World {
-	// Used to set playerId
-	private int nbrOfPlayers = 0;
 
 	private Player[] players;
 	private List<GameObject> objects;
@@ -48,11 +46,7 @@ public class World {
 	 */
 	public World(Player[] players, GameMap map) {
 		this.players = players;
-		// TODO Temporary solution with player to set playerId to characters
-		for (int i = 0; i < players.length; i++) {
-			nbrOfPlayers += 1;
-			players[i].getCharacter().setId(nbrOfPlayers);
-		}
+		
 		this.objects = new ArrayList<GameObject>();
 		this.map = map.getMap();
 		this.numberXTiles = map.getMap().getWidth();

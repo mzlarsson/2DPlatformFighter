@@ -6,7 +6,7 @@ import java.util.List;
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Skills.CharacterInterface;
+import edu.chalmers.brawlbuddies.model.Skills.ICharacter;
 import edu.chalmers.brawlbuddies.model.Skills.Effect;
 import edu.chalmers.brawlbuddies.util.ListCopy;
 
@@ -60,18 +60,16 @@ public class Projectile extends GameObject {
 	}
 
 	public void onCollision(GameObject o, Movement.Alignment alignment) {
-		if (o instanceof CharacterInterface) {
+		if (o instanceof ICharacter) {
 			if(!effects.isEmpty()){
 				for(int i = 0 ; i < effects.size(); i++){
-					if(effects.get(i).effect(o)){
-						System.out.println("Effective");
+					if(effects.get(i).effect(o)){	//TODO This probably need to be changed.
 						effects.remove(i);
 						i--;
 					}
 				}
 			}
 			if( effects.isEmpty() ){
-				System.out.println("No more effects");
 				lifetime = -1;
 			}
 		} else {

@@ -93,8 +93,8 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		Player[] players = { new Player("Player1", generateBob()),
-				new Player("Player2", generateBob()) };
+		Player[] players = { new Player("Player1", generateBob(200,200)),
+				new Player("Player2", generateBob(1400,200)) };
 		// Make this testgame a listener for events from character
 		this.startGame(players);
 	}
@@ -131,22 +131,22 @@ public class TestGame extends BasicGame {
 		game.move(players[0], dir);
 		game.move(players[1], dir2);
 		
-		if (gc.getInput().isKeyPressed(Input.KEY_LCONTROL)) {
+		if (gc.getInput().isKeyPressed(Input.KEY_LALT)) {
 			game.jump(players[0]);
 		}
-		if (gc.getInput().isKeyPressed(Input.KEY_LSHIFT)) {
+		if (gc.getInput().isKeyDown(Input.KEY_LSHIFT)) {
 			players[0].getCharacter().activateSkill(0);
 		}
-		if (gc.getInput().isKeyPressed(Input.KEY_R)) {
+		if (gc.getInput().isKeyDown(Input.KEY_LCONTROL)) {
 			players[0].getCharacter().activateSkill(1);
 		}
 		if (gc.getInput().isKeyPressed(Input.KEY_I)){
 			game.jump(players[1]);
 		}
-		if( gc.getInput().isKeyPressed(Input.KEY_O)){
+		if( gc.getInput().isKeyDown(Input.KEY_O)){
 			players[1].getCharacter().activateSkill(0);
 		}
-		if( gc.getInput().isKeyPressed(Input.KEY_P)){
+		if( gc.getInput().isKeyDown(Input.KEY_P)){
 			players[1].getCharacter().activateSkill(1);
 		}
 		if( gc.getInput().isKeyDown(Input.KEY_ESCAPE)){
@@ -157,8 +157,8 @@ public class TestGame extends BasicGame {
 		game.update(delta);
 	}
 
-	private Character generateBob() {
-		return CharacterFactory.create("bob");
+	private Character generateBob(float x, float y) {
+		return CharacterFactory.create("bob", x, y);
 	}
 
 	public static void main(String[] args) {

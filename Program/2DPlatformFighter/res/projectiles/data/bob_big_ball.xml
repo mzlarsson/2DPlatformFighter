@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectile name="bob_big_ball">
+
+	<hitbox shape="circle" parameters="30"></hitbox>
+	<speed gravity="0,100">200</speed>
+	<lifetime>5000</lifetime>
+	<effects>
+		<damage>500</damage>
+	</effects>
+	
+</projectile>

@@ -29,10 +29,10 @@ public class DamageEffect implements Effect {
 	}
 
 	public boolean effect(GameObject o) {
-		if (o instanceof CharacterInterface) {
-			if (!(((CharacterInterface) o).getId() == creatorId)) {
+		if (o instanceof ICharacter) {
+			if (((ICharacter) o).getID() != creatorId) {
 				System.out.println("i hit someone");
-				((CharacterInterface) o).takeDamage(damage);
+				((ICharacter) o).takeDamage(damage);
 				return true;
 			}
 		} else if (o instanceof DamageAble) {
