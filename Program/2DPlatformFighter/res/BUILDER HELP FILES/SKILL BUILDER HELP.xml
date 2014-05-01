@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This is a document to help showcase the current possible ways to build a skill.
+Some information is handled by the nodes value-node inside another node <node>Value</node>.
+Some information is handled by the attributes of the nodes (see name/cooldown below).
+Some of these are mandatory while others are optional for customization.
+The optional ones are surrounded by three stars in the document below.
+-->
+
+<skill ***name="Example name"*** cooldown="1337">
+	<!--
+		name:		(Optional) This is not currently used but is nice to have.
+		cooldown:	This is the skills cooldown in milliseconds.
+	-->
+
+	<skillparts>
+		<!--
+			Skillparts is all the parts the skill is made of, you can have however many you'd like.
+			They are built by the node which specifies what kind of skillpart it is followed by
+			attributes to customize it.
+		-->
+
+		<projectile name="exampleprojectile_1" ***aim_offset="15"*** ***aim="1,1"***></projectile>
+			<!--
+				<projectile>:	A projectile will be fired.
+				name:			The name of the projectile, must be the filename of the projectile to use.
+				aim_offset:		(Optional)  This will change the angle at which the projectile fires with
+											the given number in degrees clockwise, without this the
+											normal aim will be used without any offset.
+				aim:			(Optional)  If this attribute is used it will override the characters own
+											aim and fire the projectile	with the aim provided, which is
+											the parameters for a Aim-Vector (x and y) separated by a comma.
+			-->
+	
+		<selfcast>
+			<effect>...</effect> x?
+		</selfcast>
+			<!--
+			 <selfcast>:		The given effects will be cast on the skill-user.
+			 List of effects:	All the effects to to apply, chack out the EFFECT BUILDER HELP
+			 					for info on how to make effects.
+			-->
+		
+	</skillparts>
+
+</skill>

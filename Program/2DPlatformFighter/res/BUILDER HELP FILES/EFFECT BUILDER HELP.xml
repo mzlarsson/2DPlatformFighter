@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Effects are used in various skillcomponents and you can often have however many you'd like.
+	They are built by the node which specifies what kind of effect it is followed by
+	attributes and a value to customize it.
+	
+	Like this:
+-->
+	<effectname att1="Atrribute nr1">Value</effectname>
+
+
+
+
+<!-- Here is a list of all currently available effects and how to make them -->
+
+<damage>100</damage>
+	<!--
+		<damage>:	This projectile will deal damage when hitting a valid target.
+		
+		Value:		The damage to be dealt as a float.
+	-->
+
+<heal>100</heal>
+	<!--
+		<heal>:	This projectile will heal when hitting a valid target.
+		
+		Value:		The health to be healed as a float.
+	-->
