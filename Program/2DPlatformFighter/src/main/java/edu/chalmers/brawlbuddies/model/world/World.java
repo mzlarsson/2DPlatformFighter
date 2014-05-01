@@ -392,15 +392,8 @@ public class World {
 	 *            The new Position for the GameObject.
 	 * @return A Polygon covering both the old and new Position.
 	 */
-	public Polygon getConnectedShape(GameObject obj, Position newPos) { // TODO
-																		// Only
-																		// public
-																		// due
-																		// to
-																		// testing
-																		// purposes,
-																		// change
-																		// later.
+	private Polygon getConnectedShape(GameObject obj, Position newPos) {
+		
 		// Determines which way the object is moving to decide which corners to
 		// use.
 		boolean movingLeft = obj.getCenterX() > newPos.getX();
@@ -414,10 +407,9 @@ public class World {
 				.getMinX();
 		float yA = movingUp ? obj.getShape().getMaxY() : obj.getShape()
 				.getMinY();
-		float xB = movingLeft ? newPos.getX() - width / 2 : newPos.getX()
-				+ width / 2;
-		//TODO + 1 is temporary Solution to unknown problem
-		float yB = movingUp ? newPos.getY() - height / 2 : newPos.getY()
+		float xB = movingLeft ? newPos.getX() - width / 2 - 1: newPos.getX()
+				+ width / 2 + 1;
+		float yB = movingUp ? newPos.getY() - height / 2 - 1: newPos.getY()
 				+ height / 2 + 1;
 
 		float[] polypoints = new float[12];

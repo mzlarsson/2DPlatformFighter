@@ -233,7 +233,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	@Override
 	public GameObject copy() {
-		// FIXME temporary solution. implement correctly!
+		// FIXME temporary solution. No need to copy.
 		return new Character(new Rectangle(0, 0, 50, 80));
 	}
 
