@@ -29,7 +29,7 @@ public class ProjectileSkill implements SkillPart {
 			return aim;
 		} else {
 			Aim a = ch.getAim().copy();
-			a.setTheta(a.getTheta()+aimOffset);
+			a.setTheta(a.getTheta()+ (a.getX()<0 ? aimOffset : -aimOffset));
 			return a;
 		}
 	}

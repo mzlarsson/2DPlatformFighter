@@ -25,15 +25,13 @@ public class PushEffect implements Effect {
 			if (sender == null) {
 				if (reciever instanceof ICharacter) {
 					if (velocity == null) {
-						Aim a = ((ICharacter) reciever).getAim()
-								.getNormalized();
-						Velocity v = new Velocity ( a.getX() , a.y);
+						Aim a = ((ICharacter)reciever).getAim().getNormalized();
+						Velocity v = new Velocity(a.getX(), a.y);
 						v = v.scale(power);
-						v.setTheta(v.getTheta() + v.getX() < 0 ? pushOffset
-								: -pushOffset);
+						v.setTheta(v.getTheta() + (v.getX()<0 ? pushOffset : -pushOffset));
 						((PushAble) reciever).push(v);						
 					} else {
-						((PushAble) reciever).push(velocity);
+						((PushAble) reciever).push(velocity.getNormalized().scale(power));
 					}
 				}
 			} else {
@@ -41,10 +39,10 @@ public class PushEffect implements Effect {
 					if (velocity == null) {
 						Velocity v = sender.getMovement().getTotalVelocity().getNormalized();
 						v = v.scale(power);
-						v.setTheta(v.getTheta() + v.getX() < 0 ? pushOffset: -pushOffset);
+						v.setTheta(v.getTheta() + (v.getX()<0 ? pushOffset: -pushOffset));
 						((PushAble) reciever).push(v);
 					} else {
-						((PushAble) reciever).push(velocity);
+						((PushAble) reciever).push(velocity.getNormalized().scale(power));
 					}
 				} else {
 					return false;

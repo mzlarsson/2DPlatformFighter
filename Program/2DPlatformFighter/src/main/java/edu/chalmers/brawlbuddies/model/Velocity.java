@@ -39,8 +39,10 @@ public class Velocity extends Vector {
 	public Velocity copy() {
 		return new Velocity(x, y);
 	}
+	
 	public Velocity getNormalized(){
-		return (Velocity)super.getNormalized();
+		Vector v = super.getNormalized();
+		return new Velocity(v.getX(), v.getY());
 	}
 	
 	/**

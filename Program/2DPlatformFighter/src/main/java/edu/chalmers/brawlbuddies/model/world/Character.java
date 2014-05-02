@@ -250,9 +250,11 @@ public class Character extends GameObject implements ICharacter {
 		}
 		g.fill(this.getShape());
 	}
+	
 	public void addCharacterActionListener(CharacterActionListener listener){
 		sup.addListener(listener);
 	}
+	
 	public void removeCharacterActionListener(CharacterActionListener listener){
 		sup.removeListener(listener);
 	}
@@ -261,9 +263,11 @@ public class Character extends GameObject implements ICharacter {
 		// Sends a projectile to the projectilelist in the CharacterAction listener
 		sup.sendEvent(p);
 	}
+	
 	public boolean isDead(){
 		return health.isDead();
 	}
+	
 	private Object readResolve() throws ObjectStreamException {
 		this.setShape(new Rectangle(0, 0, 50, 80));
 		/*
@@ -272,9 +276,9 @@ public class Character extends GameObject implements ICharacter {
 		 */
 		return this;
 	}
+	
 	public void push(Velocity v) {
-		// TODO Auto-generated method stub
-		
+		Movement mov = getMovement();
+		mov.setOuterSpeed(mov.getOuterSpeed().getX()+v.getX(), mov.getOuterSpeed().getY()+v.getY());
 	}
-
 }

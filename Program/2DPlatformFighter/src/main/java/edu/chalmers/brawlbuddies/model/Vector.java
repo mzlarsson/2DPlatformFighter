@@ -90,10 +90,8 @@ public class Vector extends Vector2f {
 	 * @return A normalized Vector (same direction, length 1)
 	 */
 	public Vector getNormalized(){
-		Vector2f v = this.getNormal();
-		Vector result = this.copy();
-		result.set(v.getX() ,v.getY());
-		return result;		
+		Vector2f v = this.copy().normalise();
+		return new Vector(v.getX() ,v.getY());
 	}
 	
 	/**

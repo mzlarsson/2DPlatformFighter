@@ -55,9 +55,7 @@ public class SkillFactory {
 					List<Effect> effects = new ArrayList<Effect>();
 					for (int j=0; j<effectList.getLength(); j++) {
 						if (effectList.item(j).getNodeType() == Node.ELEMENT_NODE) {
-							effects.add(EffectFactory.create(
-									effectList.item(j).getNodeName()
-									, effectList.item(j).getChildNodes().item(0).getNodeValue()));
+							effects.add(EffectFactory.create(effectList.item(j)));
 						}
 					}
 					skill.addSkillPart(new SelfCastSkill(effects));

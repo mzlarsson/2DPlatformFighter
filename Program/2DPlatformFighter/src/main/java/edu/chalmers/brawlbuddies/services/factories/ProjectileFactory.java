@@ -60,9 +60,7 @@ public class ProjectileFactory {
 		List<Effect> effects = new ArrayList<Effect>();
 		for (int i=0; i<effectList.getLength(); i++) {
 			if (effectList.item(i).getNodeType() == Node.ELEMENT_NODE) {
-				effects.add(EffectFactory.create(
-						effectList.item(i).getNodeName()
-						, effectList.item(i).getChildNodes().item(0).getNodeValue()));
+				effects.add(EffectFactory.create(effectList.item(i)));
 			}
 		}
 		

@@ -3,7 +3,7 @@
 <!--
 	Effects are used in various skillcomponents and you can often have however many you'd like.
 	They are built by the node which specifies what kind of effect it is followed by
-	attributes and a value to customize it.
+	attributes (surrounded by stars are optional) and a value to customize it.
 	
 	Like this:
 -->
@@ -14,16 +14,27 @@
 
 <!-- Here is a list of all currently available effects and how to make them -->
 
-<damage>100</damage>
+<damage>Value</damage>
 	<!--
-		<damage>:	This projectile will deal damage when hitting a valid target.
+		<damage>:	This effect will deal damage when applied to a valid target.
 		
 		Value:		The damage to be dealt as a float.
 	-->
 
-<heal>100</heal>
+<heal>Value</heal>
 	<!--
-		<heal>:	This projectile will heal when hitting a valid target.
+		<heal>:		This effect will heal when applied to a valid target.
 		
 		Value:		The health to be healed as a float.
+	-->
+	
+<push ***aim="1,1"*** ***offset="15"***>Value</push>
+	<!--
+		<push>:		This effect will push when applied to a valid target.
+		
+		aim:		(Optional) This will override the objects relevant Vector and use this
+					Vector instead, two floats separated by a comma.
+		offset:		(Optional) This will angle the push in degrees upwards if positive
+					downwards if negative.
+		Value:		The power with which to push as a float.
 	-->

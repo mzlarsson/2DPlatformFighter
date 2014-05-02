@@ -28,7 +28,8 @@ public class Aim extends Vector {
 		return (Aim)super.add(x, y);
 	}
 	public Aim getNormalized() {
-		return (Aim)super.getNormalized();
+		Vector v = super.getNormalized();
+		return new Aim(v.getX(), v.getY());
 	}
 	public Aim scale(float f) {
 		return (Aim)super.scale(f);
