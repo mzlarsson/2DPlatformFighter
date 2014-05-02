@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<character>
+
+	<name>Coding Nano</name>
+	<bio>Nano was sitting at his computer coding when Bob came in and asked him to come along out. "I'm going for an adventure", Nano shouted and ran out the door.</bio>
+	<hitbox shape="rectangle" parameters="40,80"></hitbox>
+	<health>1000</health>
+	<movespeed>750</movespeed>
+	<jumpingpower>600</jumpingpower>
+	<maxjumps>3</maxjumps>
+	<skills>
+		<skill>nano_back_shot</skill>
+		<skill>nano_multi_shot</skill>
+	</skills>
+
+</character>

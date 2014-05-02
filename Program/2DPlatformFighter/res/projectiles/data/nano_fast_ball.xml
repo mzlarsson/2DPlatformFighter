@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectile name="nano_fast_ball">
+
+	<hitbox shape="circle" parameters="8"></hitbox>
+	<speed>800</speed>
+	<lifetime>1200</lifetime>
+	<effects>
+		<damage>50</damage>
+	</effects>
+	
+</projectile>
