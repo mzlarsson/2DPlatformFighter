@@ -48,16 +48,16 @@ public class PlayState extends BasicGameState{
 			if(handler.isActivated(GameKey.JUMP)){
 				game.jump(players[i]);
 			}
-			if(handler.isActivated(GameKey.SKILL1)){
+			if(handler.isActive(GameKey.SKILL1)){
 				players[i].getCharacter().activateSkill(0);
 			}
-			if(handler.isActivated(GameKey.SKILL2)){
+			if(handler.isActive(GameKey.SKILL2)){
 				players[i].getCharacter().activateSkill(1);
 			}
-			if(handler.isActivated(GameKey.SKILL3)){
+			if(handler.isActive(GameKey.SKILL3)){
 				players[i].getCharacter().activateSkill(2);
 			}
-			if(handler.isActivated(GameKey.SKILL4)){
+			if(handler.isActive(GameKey.SKILL4)){
 				players[i].getCharacter().activateSkill(3);
 			}
 		}
