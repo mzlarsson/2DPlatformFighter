@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.controller;
 
+import org.newdawn.slick.Input;
+
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.Character;
 
@@ -18,12 +20,12 @@ public class Player {
 
 
 	/**
-	 * Creates a new player.
+	 * Creates a new player with deafult key input.
 	 * @param name The name of the player
 	 * @param ch The character to use
 	 */
 	public Player(String name, Character ch) {
-		this(name, ch, null);
+		this(name, ch, new KeyInputHandler(new Input(0)));
 	}
 	
 	/**

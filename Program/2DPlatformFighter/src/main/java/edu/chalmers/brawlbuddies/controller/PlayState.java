@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
+import edu.chalmers.brawlbuddies.model.world.GameObject;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.World;
 import edu.chalmers.brawlbuddies.view.GameView;
@@ -38,9 +39,9 @@ public class PlayState extends BasicGameState{
 		Player[] players = game.getPlayers();
 		for(int i = 0; i<players.length; i++){
 			InputHandler handler = players[i].getInputHandler();
-			if(handler == null){
-				players[i].setInputHandler(new KeyInputHandler(gc.getInput()));
-				handler = players[i].getInputHandler();
+			//FIXME do other implementation.
+			if(handler instanceof KeyInputHandler && ((KeyInputHandler)handler).getInput() == null){
+				((KeyInputHandler)handler).setInput(gc.getInput());
 			}
 			game.move(players[i], handler.getDirection());
 			
@@ -67,27 +68,18 @@ public class PlayState extends BasicGameState{
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		//view.render(gc, g);
-		game.getWorld().getMap().render(0,0);
-
-		for(Player p:game.getPlayers()){
+		game.getWorld().getMap().render(0, 0);
+		List<GameObject> gameOB = game.getWorld().getImpassableObjects();
+		for (GameObject o : gameOB) {
+			g.setColor(Color.darkGray);
+			g.draw(o.getShape());
+		}
+		for (Player p : game.getPlayers()) {
 			p.getCharacter().draw();
-			// Following Code is used to check if bob takes damage or if hes dead
-			if( p.getCharacter().isDead()){
-				g.setColor(Color.gray);
-				g.drawString("Bob is dead. RIP BOB", 25, 25);
-			}
-			else if( p.getCharacter().getMaxHealth() != p.getCharacter().getHealth()){
-				g.setColor(Color.darkGray);
-				g.drawString("Bob is hurt", 25 , 25);
-			}
-			else{
-				g.setColor(Color.black);
-				g.drawString("Bob is ok", 25, 25);
-			}
 
 		}
-		List <Projectile> projectiles = game.getProjectiles();
-		for(int i=0; i< projectiles.size(); i++) {
+		List<Projectile> projectiles = game.getProjectiles();
+		for (int i = 0; i < projectiles.size(); i++) {
 			g.setColor(Color.black);
 			g.fill(projectiles.get(i).getShape());
 		}

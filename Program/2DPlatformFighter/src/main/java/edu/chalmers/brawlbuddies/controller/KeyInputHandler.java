@@ -19,6 +19,12 @@ public class KeyInputHandler implements InputHandler{
 	
 	private Map<GameKey, Integer> keys;
 	private Input input;
+	
+	public KeyInputHandler(){
+		this.keys = new TreeMap<GameKey, Integer>();
+		this.input = null;
+		resetDefault();
+	}
 
 	public KeyInputHandler(Input input) {
 		this.keys = new TreeMap<GameKey, Integer>();
@@ -45,6 +51,10 @@ public class KeyInputHandler implements InputHandler{
 		this.setValue(GameKey.SKILL2, Input.KEY_2);
 		this.setValue(GameKey.SKILL3, Input.KEY_3);
 		this.setValue(GameKey.SKILL4, Input.KEY_4);
+	}
+	
+	public Input getInput(){
+		return this.input;
 	}
 	
 	public void setInput(Input input){

@@ -26,8 +26,8 @@ public class Main {
 		try {
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(controller);
-	
-			appgc.setDisplayMode(1024, 768, false);
+
+			appgc.setDisplayMode(1600, 800, false);
 			appgc.start();
 		} catch (SlickException ex) {
 			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
