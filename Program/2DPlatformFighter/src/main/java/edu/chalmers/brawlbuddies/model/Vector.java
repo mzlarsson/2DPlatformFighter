@@ -91,7 +91,9 @@ public class Vector extends Vector2f {
 	 */
 	public Vector getNormalized(){
 		Vector2f v = this.getNormal();
-		return new Vector(v.getX() , v.getY());		
+		Vector result = this.copy();
+		result.set(v.getX() ,v.getY());
+		return result;		
 	}
 	
 	/**

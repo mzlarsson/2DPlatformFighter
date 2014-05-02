@@ -63,7 +63,7 @@ public class Projectile extends GameObject {
 		if (o instanceof ICharacter) {
 			if(!effects.isEmpty()){
 				for(int i = 0 ; i < effects.size(); i++){
-					if(effects.get(i).effect(o)){	//TODO This probably need to be changed.
+					if(effects.get(i).effect(this, o)){	//TODO This probably need to be changed.
 						effects.remove(i);
 						i--;
 					}

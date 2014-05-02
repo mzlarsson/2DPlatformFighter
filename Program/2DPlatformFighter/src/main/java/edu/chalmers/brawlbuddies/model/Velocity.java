@@ -39,7 +39,9 @@ public class Velocity extends Vector {
 	public Velocity copy() {
 		return new Velocity(x, y);
 	}
-
+	public Velocity getNormalized(){
+		return (Velocity)super.getNormalized();
+	}
 	
 	/**
 	 * Adds these x and y value of this velocity with given x and y values.

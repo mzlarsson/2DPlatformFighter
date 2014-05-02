@@ -12,9 +12,9 @@ public class HealEffect implements Effect {
 	this.healAmount = a;
 	}
 	
-	public boolean effect(GameObject o) {
-		if(o instanceof HealAble){
-			((HealAble) o).heal(healAmount);
+	public boolean effect(GameObject o, GameObject reciever) {
+		if(reciever instanceof HealAble){
+			((HealAble) reciever).heal(healAmount);
 			return true;
 		} else {
 			return false;

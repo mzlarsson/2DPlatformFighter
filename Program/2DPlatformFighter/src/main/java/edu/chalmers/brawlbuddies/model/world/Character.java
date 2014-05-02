@@ -272,8 +272,7 @@ public class Character extends GameObject implements ICharacter {
 		 */
 		return this;
 	}
-
-	public void tryNewPosition(Position newPosition) {
+	public void push(Velocity v) {
 		// TODO Auto-generated method stub
 		
 	}

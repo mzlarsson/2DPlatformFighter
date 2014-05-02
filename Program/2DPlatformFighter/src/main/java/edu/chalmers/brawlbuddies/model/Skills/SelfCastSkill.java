@@ -14,7 +14,7 @@ public class SelfCastSkill implements SkillPart {
 	public void activate(ICharacter c) {
 		if (c instanceof GameObject) {
 			for (int i = 0; i < effects.size(); i++) {
-				effects.get(i).effect(((GameObject) c));
+				effects.get(i).effect(null ,((GameObject) c));
 			}
 		}
 	}

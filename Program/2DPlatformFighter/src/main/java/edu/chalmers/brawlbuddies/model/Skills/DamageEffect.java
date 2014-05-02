@@ -28,15 +28,16 @@ public class DamageEffect implements Effect {
 		this.creatorId = creatorId;
 	}
 
-	public boolean effect(GameObject o) {
-		if (o instanceof ICharacter) {
-			if (((ICharacter) o).getID() != creatorId) {
+	public boolean effect(GameObject sender , GameObject reciever) {
+		if (reciever instanceof ICharacter) {
+			if (((ICharacter) reciever).getID() != creatorId) { //TODO fix when gameObject have ID
 				System.out.println("i hit someone");
-				((ICharacter) o).takeDamage(damage);
+				((ICharacter) reciever).takeDamage(damage);
 				return true;
 			}
-		} else if (o instanceof DamageAble) {
-			((DamageAble) o).takeDamage(damage);
+		} else if (reciever instanceof DamageAble) {
+			((DamageAble) reciever).takeDamage(damage);
+			return true;
 		}
 		return false;
 	}
