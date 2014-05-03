@@ -1,9 +1,12 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import java.awt.Font;
 import java.io.ObjectStreamException;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -15,7 +18,7 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.Skills.ICharacter;
 import edu.chalmers.brawlbuddies.model.Skills.ISkill;
-import edu.chalmers.brawlbuddies.model.Skills.ProjectileSkill;
+import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.Skills.SkillPart;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
@@ -47,6 +50,9 @@ public class Character extends GameObject implements ICharacter {
 	private int id;
 	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
+	//TODO Temporary for drawing hp
+	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
+	
 	/**
 	 * Creates a Character.
 	 * 
@@ -164,7 +170,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	private void updateCooldowns(int delta) {
 		for (ISkill s : skills) {
-			s.decreaseCooldown(delta);
+			s.update(delta);
 		}
 	}
 	
@@ -248,6 +254,9 @@ public class Character extends GameObject implements ICharacter {
 		if( isDead()){
 		g.setColor(Color.red);
 		}
+		
+		g.setFont(font);
+		g.drawString(""+health.getHp(), getX(), getY()-30);
 		g.fill(this.getShape());
 	}
 	

@@ -4,12 +4,12 @@ import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 /**
- * Describes a projectile creating skill for testing purposes
+ * Describes a projectile creating SkillPart.
  * @author David Gustafsson
  * @revised Patrik Haar
  * @version 0.1
  */
-public class ProjectileSkill implements SkillPart {
+public class ProjectilePart implements SkillPart {
 	private ProjectileCreator shooter;
 	private Aim aim;
 	private float aimOffset;
@@ -18,7 +18,7 @@ public class ProjectileSkill implements SkillPart {
 		shooter.setCreatorID(a);
 	}
 
-	public ProjectileSkill(ProjectileCreator pc, Aim aim, float aimOffset) {
+	public ProjectilePart(ProjectileCreator pc, Aim aim, float aimOffset) {
 		this.shooter = pc;
 		this.aim = aim;
 		this.aimOffset = aimOffset;
@@ -34,10 +34,11 @@ public class ProjectileSkill implements SkillPart {
 		}
 	}
 	
-	public void activate(ICharacter ch) {
+	public boolean activate(ICharacter ch, int delta) {
 		// Create a projectile with the character and the projectileCreator
 		Projectile p = shooter.fire(ch.getCenterPosition(), getAim(ch));
 		// Tell the character to update the projectile to the listener
 		ch.updateProjectile(p); //FIXME Character should not have anything with updating projectiles.
+		return true;
 	}
 }

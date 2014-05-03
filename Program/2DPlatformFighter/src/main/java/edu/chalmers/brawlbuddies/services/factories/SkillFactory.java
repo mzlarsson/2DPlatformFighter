@@ -12,9 +12,10 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Skills.Effect;
-import edu.chalmers.brawlbuddies.model.Skills.ProjectileSkill;
-import edu.chalmers.brawlbuddies.model.Skills.SelfCastSkill;
+import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
+import edu.chalmers.brawlbuddies.model.Skills.SelfCastPart;
 import edu.chalmers.brawlbuddies.model.Skills.Skill;
+import edu.chalmers.brawlbuddies.model.Skills.WaitPart;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 public class SkillFactory {
@@ -47,7 +48,7 @@ public class SkillFactory {
 							aimOffset = Float.parseFloat(projParams.item(j).getNodeValue());
 						}
 					}
-					skill.addSkillPart(new ProjectileSkill(projectile, aim, aimOffset));
+					skill.addSkillPart(new ProjectilePart(projectile, aim, aimOffset));
 					
 				// Self Cast
 				} else if (skillPart.getNodeName().equalsIgnoreCase("selfcast")) {
@@ -58,7 +59,11 @@ public class SkillFactory {
 							effects.add(EffectFactory.create(effectList.item(j)));
 						}
 					}
-					skill.addSkillPart(new SelfCastSkill(effects));
+					skill.addSkillPart(new SelfCastPart(effects));
+					
+				// Wait
+				} else if (skillPart.getNodeName().equalsIgnoreCase("wait")) {
+					skill.addSkillPart(new WaitPart(Integer.parseInt(skillPart.getFirstChild().getNodeValue())));
 					
 				// Not supported
 				} else {

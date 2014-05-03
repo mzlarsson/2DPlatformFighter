@@ -8,8 +8,10 @@ package edu.chalmers.brawlbuddies.model.Skills;
 public interface SkillPart {
 	/**
 	 * Activate the SkillPart with the Casting Character as a argument
-	 * @param Character
+	 * @param c The ICharacter activating the skill.
+	 * @param delta The time passed since last call in milliseconds.
+	 * @return <code>true</code> if the SkillPart executed, <code>false</code> otherwise.
 	 */
-	public void activate(ICharacter c);
+	public boolean activate(ICharacter c, int delta);
 	public void setCreatorID(int id);
 }

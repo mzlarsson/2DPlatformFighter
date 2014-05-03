@@ -13,9 +13,9 @@ public interface ISkill {
 	public void activate(ICharacter c);
 	
 	/**
-	 * Decreases the cooldown with the given amount.
+	 * Updates the Skill.
 	 * @param delta The time to deduct in milliseconds.
 	 * @return <code>true</code> if skill is ready, <code>false</code> otherwise.
 	 */
-	public boolean decreaseCooldown(int delta);
+	public boolean update(int delta);
 }

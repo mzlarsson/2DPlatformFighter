@@ -101,11 +101,6 @@ public class World {
 						.getShape().getHeight() / 2 + 1));
 		int xdiff = newXTile<0&&movingLeft ? -numberXTiles : newXTile<0&&!movingLeft ? numberXTiles : newXTile - oldXTile;
 		int ydiff = newYTile<0&&movingUp ? -numberYTiles : newYTile<0&&!movingUp ? numberYTiles : newYTile - oldYTile;
-		if (oldXTile < 5) {
-			System.out.println(obj.getX());
-			System.out.println("OldX: " + oldXTile + " NewX: " + newXTile);
-			System.out.println(xdiff);
-		}
 
 		// Checks if object has entered a new tile.
 		if (xdiff != 0 || ydiff != 0) {

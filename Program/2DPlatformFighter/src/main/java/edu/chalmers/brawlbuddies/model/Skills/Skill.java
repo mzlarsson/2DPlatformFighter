@@ -11,6 +11,10 @@ public class Skill implements ISkill{
 	
 	private List<SkillPart> skillParts = new ArrayList<SkillPart>();
 	
+	private boolean skillActive;
+	private int currentSkillpart;
+	private ICharacter currentCaster;
+	
 	public Skill(int cd, int id) {
 		this.cooldown = cd;
 		this.ownerID = id;
@@ -21,10 +25,27 @@ public class Skill implements ISkill{
 	 */
 	public void activate(ICharacter ch) {
 		if (isReady()) {
-			for (SkillPart s : skillParts) {
-				s.activate(ch);
-			}
+			activate(ch, 0);
+		}
+	}
+	
+	private void activate(ICharacter ch, int delta) {
+		if (!skillActive) {
+			skillActive = true;
+			currentCaster = ch;
 			resetCooldown();
+		}
+		boolean aborted = false;
+		for (int i=currentSkillpart; i<skillParts.size(); i++) {
+			if (!skillParts.get(i).activate(ch, delta)) {
+				currentSkillpart = i;
+				aborted = true;
+				break;
+			}
+		}
+		if (!aborted) {
+			currentSkillpart = 0;
+			skillActive = false;
 		}
 	}
 	
@@ -48,12 +69,17 @@ public class Skill implements ISkill{
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean decreaseCooldown(int delta) {
-		cooldownLeft -= delta;
-		if (isReady()){
-			cooldownLeft = 0;
-			return true;
+	public boolean update(int delta) {
+		if (!skillActive) {
+			cooldownLeft -= delta;
+			if (isReady()){
+				cooldownLeft = 0;
+				return true;
+			} else {
+				return false;
+			}
 		} else {
+			activate(currentCaster, delta);
 			return false;
 		}
 	}

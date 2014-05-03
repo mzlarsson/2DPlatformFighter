@@ -37,11 +37,17 @@ The optional ones are surrounded by three stars in the document below.
 			<effect>...</effect> x?
 		</selfcast>
 			<!--
-			 <selfcast>:		The given effects will be cast on the skill-user.
-			 List of effects:	All the effects to to apply, chack out the EFFECT BUILDER HELP
-			 					for info on how to make effects.
+				<selfcast>:			The given effects will be cast on the skill-user.
+				List of effects:	All the effects to to apply, check out the EFFECT BUILDER HELP
+			 						for info on how to make effects.
 			-->
 		
+		<wait>Value</wait>
+			<!--
+				<wait>:		This will put a delay between the previous and next SkillPart.
+				Value:		The desired delay in milliseconds as an int.
+			-->
+			
 	</skillparts>
 
 </skill>
