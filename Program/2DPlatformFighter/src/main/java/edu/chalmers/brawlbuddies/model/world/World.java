@@ -99,20 +99,25 @@ public class World {
 		int newYTile = getTilePositionY(newPos.getY()
 				+ (movingUp ? -obj.getShape().getHeight() / 2 - 1 : obj
 						.getShape().getHeight() / 2 + 1));
-		int xdiff = newXTile < 0 ? 1 : Math.abs(newXTile - oldXTile);
-		int ydiff = newYTile < 0 ? 1 : Math.abs(newYTile - oldYTile);
+		int xdiff = newXTile<0&&movingLeft ? -numberXTiles : newXTile<0&&!movingLeft ? numberXTiles : newXTile - oldXTile;
+		int ydiff = newYTile<0&&movingUp ? -numberYTiles : newYTile<0&&!movingUp ? numberYTiles : newYTile - oldYTile;
+		if (oldXTile < 5) {
+			System.out.println(obj.getX());
+			System.out.println("OldX: " + oldXTile + " NewX: " + newXTile);
+			System.out.println(xdiff);
+		}
 
 		// Checks if object has entered a new tile.
 		if (xdiff != 0 || ydiff != 0) {
-			Direction movedir = Direction.getDirection(newXTile - oldXTile,
-					newYTile - oldYTile);
+			Direction movedir = Direction.getDirection(xdiff, ydiff);
+			xdiff = Math.abs(xdiff);
+			ydiff = Math.abs(ydiff);
 			Shape shape = SlickUtil.copy(obj.getShape());
 			boolean xFound = xdiff == 0;
 			boolean yFound = ydiff == 0;
 			for (int i = 0; i < Math.max(xdiff, ydiff); i++) {
 				if (!isNextTileValid(shape, movedir)) {
-					if (!xFound
-							&& !isNextTileValid(shape, movedir.getXDirection())) {
+					if (!xFound	&& !isNextTileValid(shape, movedir.getXDirection())) {
 						xFound = true;
 						// If obj collides after just one tile it uses it's old
 						// x-value to prevent shimmering edges.
@@ -137,8 +142,7 @@ public class World {
 						movedir = movedir.getYDirection();
 						obj.onCollision(null, Movement.Alignment.HORIZONTAL);
 					}
-					if (!yFound
-							&& !isNextTileValid(shape, movedir.getYDirection())) {
+					if (!yFound	&& !isNextTileValid(shape, movedir.getYDirection())) {
 						yFound = true;
 						// If obj collides after just one tile it uses it's old
 						// x-value to prevent shimmering edges.
@@ -332,7 +336,7 @@ public class World {
 	 */
 	private int getTilePositionX(float x) {
 		int tilePosition = (int) x / map.getTileWidth();
-		if (0 > tilePosition || tilePosition > numberXTiles - 1) {
+		if (x<0 || tilePosition > numberXTiles - 1) {
 			return -1;
 		} else {
 			return tilePosition;
@@ -348,7 +352,7 @@ public class World {
 	 */
 	private int getTilePositionY(float y) {
 		int tilePosition = (int) y / map.getTileHeight();
-		if (0 > tilePosition || tilePosition > numberYTiles - 1) {
+		if (y<0 || tilePosition > numberYTiles - 1) {
 			return -1;
 		} else {
 			return tilePosition;
