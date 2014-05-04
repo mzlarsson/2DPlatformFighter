@@ -6,6 +6,7 @@
 	<lifetime>5000</lifetime>
 	<effects>
 		<damage>50</damage>
+		<push>350</push>
 	</effects>
 	
 </projectile>

@@ -25,6 +25,8 @@ public class Movement {
 	private Velocity gravitySpeed;
 	private Velocity outerSpeed;
 	
+	private static final Velocity outerspeedReducer = new Velocity(1000, 1000);
+	
 	/**
 	 * Creates a new Movement object with no base speed at all.
 	 * This means it will not be movable by controls.
@@ -154,7 +156,7 @@ public class Movement {
 	 * Removes an outer speed of the Movement
 	 * @param outerSpeed The outer speed to remove
 	 */
-	public void removeOuterSpeed(Velocity outerSpeed){
+	public void decreaseOuterSpeed(Velocity outerSpeed){
 		this.outerSpeed.decrease(outerSpeed);
 	}
 	/**
@@ -215,12 +217,41 @@ public class Movement {
 	}
 	
 	/**
+	 * Get the current direction of this movement
+	 * @return The direction of this movement.
+	 */
+	public Direction getDirection(){
+		Velocity total = this.getTotalVelocity();
+		return Direction.getDirection(total.getX(), total.getY());
+	}
+	
+	/**
 	 * Increases the gravity
 	 * @param delta The time since last update
 	 */
 	private void increaseGravitySpeed(int delta){
 		Velocity tmpGrav = this.gravity.scale(((float)(delta))/Constants.MODIFIER);
 		this.gravitySpeed.increase(tmpGrav);
+	}
+	
+	/**
+	 * Reduces the outer speed if possible
+	 * @param delta The time since last update
+	 */
+	private void reduceOuterSpeed(int delta){
+		Velocity tmp = outerspeedReducer.scale(((float)(delta))/Constants.MODIFIER);
+		
+		float x = this.outerSpeed.getX()+(this.outerSpeed.getX()<0?1:-1)*tmp.getX();
+		float y = this.outerSpeed.getY()+(this.outerSpeed.getX()<0?1:-1)*tmp.getY();
+		
+		if((x>0 && this.outerSpeed.getX()<0) || (x<0 && this.outerSpeed.getX()>=0)){
+			x = 0;
+		}
+		if((y>0 && this.outerSpeed.getY()<0) || (y<0 && this.outerSpeed.getY()>=0)){
+			y = 0;
+		}
+		
+		this.setOuterSpeed(x, y);
 	}
 	
 	/**
@@ -231,6 +262,7 @@ public class Movement {
 	 */
 	public Position nextPosition(Position previous, int delta){
 		increaseGravitySpeed(delta);
+		reduceOuterSpeed(delta);
 		
 		//Calculate next position
 		Velocity totalSpeed = this.getTotalVelocity();
