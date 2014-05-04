@@ -10,21 +10,36 @@ public class WaitPart implements SkillPart {
 
 	private int delayTotal;
 	private int delayLeft;
+	private boolean delayDone;
 	
 	public WaitPart(int delay) {
 		this.delayTotal = delay;
 		this.delayLeft = delay;
 	}
 	
-	public boolean activate(ICharacter c, int delta) {
-		delayLeft -= delta;
-		if (delayLeft<=0) {
+	public boolean activate(ICharacter c) {
+		if (delayDone) {
+			delayDone = false;
 			delayLeft = delayTotal;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public int update(int delta) {
+		delayLeft -= delta;
+		if (delayLeft<=0) {
+			delayDone = true;
+			return -delayLeft;
+		} else {
+			return delta;
+		}
+	}
+	
 	public void setCreatorID(int id) {
 	}
 

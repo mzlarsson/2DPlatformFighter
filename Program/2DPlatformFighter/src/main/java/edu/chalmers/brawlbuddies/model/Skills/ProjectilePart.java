@@ -34,7 +34,17 @@ public class ProjectilePart implements SkillPart {
 		}
 	}
 	
-	public boolean activate(ICharacter ch, int delta) {
+	/**
+	 * {@inheritDoc}
+	 */
+	public int update(int delta) {
+		return 0;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean activate(ICharacter ch) {
 		// Create a projectile with the character and the projectileCreator
 		Projectile p = shooter.fire(ch.getCenterPosition(), getAim(ch));
 		// Tell the character to update the projectile to the listener

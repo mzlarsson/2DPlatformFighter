@@ -25,7 +25,7 @@ public class Skill implements ISkill{
 	 */
 	public void activate(ICharacter ch) {
 		if (isReady()) {
-			activate(ch, 0);
+			activate(ch, 1);
 		}
 	}
 	
@@ -37,8 +37,10 @@ public class Skill implements ISkill{
 		}
 		boolean aborted = false;
 		for (int i=currentSkillpart; i<skillParts.size(); i++) {
-			if (!skillParts.get(i).activate(ch, delta)) {
+			delta -= skillParts.get(i).update(delta);
+			if (!skillParts.get(i).activate(ch)) {
 				currentSkillpart = i;
+				delta -= 3;
 				aborted = true;
 				break;
 			}

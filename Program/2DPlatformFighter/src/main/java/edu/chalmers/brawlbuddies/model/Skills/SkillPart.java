@@ -9,9 +9,15 @@ public interface SkillPart {
 	/**
 	 * Activate the SkillPart with the Casting Character as a argument
 	 * @param c The ICharacter activating the skill.
-	 * @param delta The time passed since last call in milliseconds.
 	 * @return <code>true</code> if the SkillPart executed, <code>false</code> otherwise.
 	 */
-	public boolean activate(ICharacter c, int delta);
+	public boolean activate(ICharacter c);
+	
+	/**
+	 * Updates the SkillPart with the time passed for timed actions.
+	 * @param delta The time passed in milliseconds.
+	 * @return How much time the SkillPart consumed in milliseconds.
+	 */
+	public int update(int delta);
 	public void setCreatorID(int id);
 }
