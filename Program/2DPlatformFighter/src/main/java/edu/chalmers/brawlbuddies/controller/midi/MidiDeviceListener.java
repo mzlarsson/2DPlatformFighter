@@ -22,4 +22,10 @@ public interface MidiDeviceListener {
 	 */
 	public void keyReleased(int key);
 	
+	/**
+	 * Triggered each 10ms when a key is held down
+	 * @param key The key which is held down
+	 */
+	public void keyHeld(int key);
+	
 }

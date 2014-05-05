@@ -138,7 +138,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void move(Direction dir) {
 		this.getMovement().move(dir);
-		updateAim(dir);
+		//updateAim(dir);
 		lastDir = dir;
 	}
 
@@ -148,7 +148,8 @@ public class Character extends GameObject implements ICharacter {
 	 * @param dir
 	 *            The Direction to aim in.
 	 */
-	private void updateAim(Direction dir) {
+	//TODO remove when testing is done.
+	public void updateAim(Direction dir) {
 		// Logic for the aiming.
 		if (dir != Direction.NONE) {
 			// Sets the aim to current movement.
@@ -190,6 +191,14 @@ public class Character extends GameObject implements ICharacter {
 
 	public Aim getAim() {
 		return this.aim;
+	}
+	
+	public void setAim(Position aimPosition, boolean isRelative){
+		if(isRelative){
+			this.aim.set(aimPosition);
+		}else{
+			this.aim.set(aimPosition.subtract(this.getCenterPosition()));
+		}
 	}
 
 	/**

@@ -35,8 +35,19 @@ public class Position extends Vector{
 	public Position add(Vector v){
 		return (Position)super.add(v);
 	}
-	public Position add(float x , float y){
+	
+	/**
+	 * Adds a Position to the previous one
+	 * @param x The x-coordinate of the vector to add
+	 * @param y The y-coordinate of the vector to add
+	 * @return The Position which is the result of an addition
+	 */
+	public Position add(float x, float y){
 		return (Position)super.add(x, y);
+	}
+	
+	public Position scale(float scale){
+		return (Position)super.scale(scale);
 	}
 
 }

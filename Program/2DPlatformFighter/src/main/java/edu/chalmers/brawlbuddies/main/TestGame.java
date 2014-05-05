@@ -129,7 +129,9 @@ public class TestGame extends BasicGame {
 			dir = dir.add(Direction.LEFT);
 		}
 		game.move(players[0], dir);
+		players[0].getCharacter().updateAim(dir);
 		game.move(players[1], dir2);
+		players[1].getCharacter().updateAim(dir2);
 		
 		if (gc.getInput().isKeyPressed(Input.KEY_LALT)) {
 			game.jump(players[0]);

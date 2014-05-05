@@ -1,11 +1,14 @@
 package edu.chalmers.brawlbuddies.controller.midi;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.Transmitter;
+import javax.swing.Timer;
 
 /**
  * Communicator between the computer and a MIDI device such as a synth.
@@ -52,6 +55,16 @@ public class MidiDeviceCommunicator implements Receiver{
 	 */
 	public void removeDeviceListener(MidiDeviceListener listener){
 		this.listeners.remove(listener);
+	}
+	
+	/**
+	 * Notifies all listeners about a key that is held down
+	 * @param key The key that is held down
+	 */
+	private void notifyHeld(int key){
+		for(MidiDeviceListener listener : this.listeners){
+			listener.keyHeld(key);
+		}
 	}
 	
 	/**
@@ -108,14 +121,29 @@ public class MidiDeviceCommunicator implements Receiver{
 	 */
 	public void send(MidiMessage message, long timeStamp) {
 		if(on && message.getLength()>1){
+			//Fetch the information
 			byte[] messageContent = message.getMessage();
 			final int tone = (int)messageContent[1];
 			final int hardness = (int)messageContent[2];
 			
+			//Set all variables
 			this.keys[tone] = hardness;
 			this.pressed[tone] = true;
 			
+			//Notify listeners about change
 			notifyAll(tone, hardness>0);
+			
+			//Start timer to take care of events for key held down
+			final Timer heldTimer = new Timer(10, new ActionListener(){
+				public void actionPerformed(ActionEvent ae){
+					if(!isKeyPressed(tone)){
+						((Timer)ae.getSource()).stop();
+					}else{
+						notifyHeld(tone);
+					}
+				}
+			});
+			heldTimer.start();
 		}
 	}
 
