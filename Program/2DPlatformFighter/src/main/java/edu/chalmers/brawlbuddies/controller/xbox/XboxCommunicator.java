@@ -16,6 +16,7 @@ public class XboxCommunicator {
 	private boolean[] buttonPressed;
 	private boolean[] buttonHeld;
 	private float[] axis;
+	private float[] axisMinimum;
 	private boolean[] axisChanged;
 	private Timer updateTimer;
 	
@@ -34,8 +35,12 @@ public class XboxCommunicator {
 		this.buttonPressed = new boolean[controller.getButtonCount()+4];
 		this.buttonHeld = new boolean[controller.getButtonCount()+4];
 		this.axis = new float[controller.getAxisCount()];
+		this.axisMinimum = new float[controller.getAxisCount()];
 		this.axisChanged = new boolean[controller.getAxisCount()];
 		for(int i = 0; i<this.controller.getAxisCount(); i++){
+			this.axis[i] = 0.0f;
+			this.axisMinimum[i] = 0.0f;
+			this.axisChanged[i] = false;
 			this.controller.setDeadZone(i, deadZone);
 		}
 		
@@ -76,6 +81,15 @@ public class XboxCommunicator {
 	public String getName(){
 		return this.controller.getName();
 	}
+	
+	/**
+	 * Sets the chosen axis dead zone to given value
+	 * @param axis The axis to use
+	 * @param deadZone The value of the dead zone
+	 */
+	public void setDeadZone(int axis, float deadZone){
+		this.controller.setDeadZone(axis, deadZone);
+	}
 
 	/**
 	 * Retrieves the current value of the axis with given index
@@ -102,7 +116,7 @@ public class XboxCommunicator {
 			this.axisChanged[axisIndex] = false;
 			return changed;
 		}else{
-			throw new IllegalArgumentException("Button does not exist");
+			throw new IllegalArgumentException("Axis does not exist");
 		}
 	}
 	
@@ -142,6 +156,14 @@ public class XboxCommunicator {
 	 */
 	public void setUpdateInterval(int updateInterval){
 		this.updateTimer.setDelay(updateInterval);
+	}
+	
+	public void setMinimumAxisValue(int axisIndex, float value){
+		if(axisIndex>=0 && axisIndex<this.axisChanged.length){
+			this.axisMinimum[axisIndex] = Math.abs(value);
+		}else{
+			throw new IllegalArgumentException("Axis does not exist");
+		}
 	}
 	
 	/**
@@ -273,19 +295,25 @@ public class XboxCommunicator {
 	 */
 	private void updateAxis(){
 		for(int i = 0; i<this.axis.length; i++){
-			if(this.axis[i] != controller.getAxisValue(i)){
+			if(isInsideInterval(this.axis[i], -axisMinimum[i], axisMinimum[i]) != 
+			   isInsideInterval(controller.getAxisValue(i), -axisMinimum[i], axisMinimum[i])){
 				this.notifyAll(i);
 				
-				if(this.axis[i] == 0){
+				if(isInsideInterval(this.axis[i], -this.axisMinimum[i], this.axisMinimum[i])){
 					this.axisChanged[i] = true;
+					this.axis[i] = 0.0f;
 					this.axisNotifyAll(i, false);
-				}else if(controller.getAxisValue(i) == 0){
+				}else if(isInsideInterval(controller.getAxisValue(i), -this.axisMinimum[i], this.axisMinimum[i])){
 					this.axisNotifyAll(i, true);
 				}
 			}
 			
 			this.axis[i] = controller.getAxisValue(i);
 		}
+	}
+	
+	private boolean isInsideInterval(float value, float min, float max){
+		return value >= min && value <= max;
 	}
 	
 }

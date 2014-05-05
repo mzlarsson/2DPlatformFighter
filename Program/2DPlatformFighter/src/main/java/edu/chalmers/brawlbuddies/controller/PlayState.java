@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
+import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.GameObject;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
@@ -60,6 +61,9 @@ public class PlayState extends BasicGameState{
 			if(handler.isActive(GameKey.SKILL4)){
 				players[i].getCharacter().activateSkill(3);
 			}
+			
+			//Update mouse position
+			game.setPlayerAim(players[i], handler.getMousePosition(), handler.isMousePositionRelative());
 		}
 
 		//Update model
@@ -76,6 +80,9 @@ public class PlayState extends BasicGameState{
 		}
 		for (Player p : game.getPlayers()) {
 			p.getCharacter().draw();
+			Position aimPos = p.getCharacter().getCenterPosition().add(p.getCharacter().getAim());
+			g.setColor(Color.red);
+			g.drawOval(aimPos.getX()-10, aimPos.getY()-10, 20, 20);
 
 		}
 		List<Projectile> projectiles = game.getProjectiles();

@@ -114,7 +114,16 @@ public class Vector extends Vector2f {
 	 */
 	public Vector getNormalized(){
 		Vector2f v = this.copy().normalise();
-		return new Vector(v.getX() ,v.getY());
+		return (Vector)this.copy().set(v.getX() ,v.getY());
+	}
+	
+	/**
+	 * Creates a new Vector that is a scaled version of this vector
+	 * @param scale The scale to use
+	 * @return A scaled version of this vector
+	 */
+	public Vector scale(float scale){
+		return (Vector)this.copy().set(this.getX()*scale, this.getY()*scale);
 	}
 	
 	/**

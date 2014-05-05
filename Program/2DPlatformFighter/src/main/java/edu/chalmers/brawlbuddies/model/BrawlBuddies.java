@@ -62,6 +62,15 @@ public class BrawlBuddies implements CharacterActionListener {
 	public void jump(Player player) {
 		player.getCharacter().makeJump();
 	}
+	
+	/**
+	 * Sets the aim of the character of the given player
+	 * @param player The player
+	 * @param aimPosition The position to aim at
+	 */
+	public void setPlayerAim(Player player, Position aimPosition, boolean isRelative){
+		player.getCharacter().setAim(aimPosition, isRelative);
+	}
 
 	/**
 	 * Updates the Player´s positions and states.

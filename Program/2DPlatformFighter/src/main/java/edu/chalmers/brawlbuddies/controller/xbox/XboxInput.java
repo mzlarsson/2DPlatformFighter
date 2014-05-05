@@ -19,6 +19,9 @@ public class XboxInput {
 	public static final int BUTTON_DPAD_LEFT = 12;
 	public static final int BUTTON_DPAD_UP = 13;
 
+	public static final int BUTTON_LT = 22;
+	public static final int BUTTON_RT = 23;
+
 	public static final int AXIS_Y_POS = 14;
 	public static final int AXIS_Y_NEG = 15;
 	public static final int AXIS_X_POS = 16;
@@ -30,7 +33,14 @@ public class XboxInput {
 	public static final int AXIS_Z_POS = 22;
 	public static final int AXIS_Z_NEG = 23;
 	
+	public static final int AXIS_Y = 24;
+	public static final int AXIS_X = 25;
+	public static final int AXIS_ROTATE_Y = 26;
+	public static final int AXIS_ROTATE_X = 27;
+	public static final int AXIS_Z = 28;
+	
 	private static final int nbrOfButtons = 14;
+	private static final int nbrOfAxis = 5;
 	
 	private XboxCommunicator communicator;
 	
@@ -56,6 +66,22 @@ public class XboxInput {
 	 */
 	public void removeXboxListener(XboxListener listener){
 		this.communicator.addXboxListener(listener);
+	}
+	
+	public void setDeadZone(int index, float deadZone){
+		if(isAxis(index)){
+			this.communicator.setDeadZone(buttonToAxis(index), deadZone);
+		}else{
+			throw new IllegalArgumentException("The given ID was not an axis");
+		}
+	}
+	
+	public void setMinumumAxisValue(int index, float minimumValue){
+		if(isAxis(index)){
+			this.communicator.setMinimumAxisValue(buttonToAxis(index), minimumValue);
+		}else{
+			throw new IllegalArgumentException("The given ID was not an axis");
+		}
 	}
 	
 	public boolean isButtonPressed(int buttonIndex){
@@ -87,16 +113,31 @@ public class XboxInput {
 		return this.communicator.getAxisValue(axisIndex);
 	}
 	
-	private int buttonToAxis(int index){
-		return (index-nbrOfButtons)/2;
+	public static boolean axisEquals(int axisIndex, int index){
+		return axisIndex == buttonToAxis(index);
 	}
 	
-	public boolean isButton(int index){
+	private static int buttonToAxis(int index){
+		if(isAxisButton(index)){
+			return (index-nbrOfButtons)/2;
+		}else if(isAxis(index)){
+			return index-nbrOfButtons-2*nbrOfAxis;
+		}else{
+			return -1;
+		}
+	}
+	
+	public static boolean isButton(int index){
 		return index<nbrOfButtons && index>=0;
 	}
 	
-	public boolean isAxis(int index){
-		return index>=nbrOfButtons;
+	public static boolean isAxisButton(int index){
+		return index>=nbrOfButtons && index<nbrOfButtons+nbrOfAxis*2;
+	}
+	
+	public static boolean isAxis(int index){
+		int firstIndex = nbrOfButtons+nbrOfAxis*2;
+		return index>=firstIndex && index<firstIndex+nbrOfAxis;
 	}
 	
 	public void close(){
