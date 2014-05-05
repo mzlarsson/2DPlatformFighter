@@ -16,8 +16,8 @@ public class PushEffect implements Effect {
 		this.pushOffset = pushOffset;
 	}
 
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
+	public void setCreatorID(int creatorID) {
+		this.creatorId = creatorID;
 	}
 
 	public boolean effect(GameObject sender, GameObject reciever) {
@@ -35,7 +35,7 @@ public class PushEffect implements Effect {
 					}
 				}
 			} else {
-				if(!(reciever instanceof ICharacter && ((ICharacter) reciever).getID() == creatorId)){ //TODO When ID is implemented fix this
+				if(!(reciever instanceof ICharacter && ((ICharacter)reciever).getID() == creatorId)){
 					if (velocity == null) {
 						Velocity v = sender.getMovement().getTotalVelocity().getNormalized();
 						v = v.scale(power);

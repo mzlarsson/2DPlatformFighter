@@ -33,6 +33,9 @@ import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
  */
 @XStreamAlias("character")
 public class Character extends GameObject implements ICharacter {
+	
+	private int typeID;
+	
 	@XStreamAlias("name")
 	private String name;
 	@XStreamAlias("bio")
@@ -46,8 +49,6 @@ public class Character extends GameObject implements ICharacter {
 	private Direction lastDir = Direction.NONE;
 	private boolean lastAimLeft;
 
-	private static int nbrOfCharacters = 0;
-	private int id;
 	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
 	//TODO Temporary for drawing hp
@@ -61,10 +62,9 @@ public class Character extends GameObject implements ICharacter {
 	 * @param player
 	 *            The Player controlling the character.
 	 */
-	public Character(Shape shape) {
+	public Character(Shape shape, int id) {
 		super(new JumpMovement(), shape);
-		System.out.println("Settign character ID to: " + nbrOfCharacters);
-		this.id = nbrOfCharacters++;
+		this.typeID = id;
 	}
 
 	public void setName(String name) {
@@ -192,22 +192,6 @@ public class Character extends GameObject implements ICharacter {
 		return this.aim;
 	}
 
-	/**
-	 * Sets a int describing the players Id
-	 * 
-	 * @param playerId
-	 */
-	public void setID(int playerId) {
-		this.id = playerId;
-	}
-
-	/**
-	 * Returns a int describing the players Id
-	 */
-	public int getID() {
-		return this.id;
-	}
-
 	public void setMaxHealth(float a) {
 		health.setMaxHealth(a);
 	}
@@ -240,7 +224,7 @@ public class Character extends GameObject implements ICharacter {
 	@Override
 	public GameObject copy() {
 		// FIXME temporary solution. No need to copy.
-		return new Character(new Rectangle(0, 0, 50, 80));
+		return null;
 	}
 
 	// TODO Temporary draw method to use a shape as the image for the upcoming
@@ -289,5 +273,10 @@ public class Character extends GameObject implements ICharacter {
 	public void push(Velocity v) {
 		Movement mov = getMovement();
 		mov.setOuterSpeed(mov.getOuterSpeed().getX()+v.getX(), mov.getOuterSpeed().getY()+v.getY());
+	}
+
+	@Override
+	public int getTypeID() {
+		return typeID;
 	}
 }

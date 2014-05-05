@@ -7,7 +7,9 @@ import edu.chalmers.brawlbuddies.model.world.GameObject;
  *
  */
 public class HealEffect implements Effect {
+	private int creatorID;
 	private float healAmount;
+	
 	public HealEffect(float a) {
 	this.healAmount = a;
 	}
@@ -19,6 +21,10 @@ public class HealEffect implements Effect {
 		} else {
 			return false;
 		}
+	}
+
+	public void setCreatorID(int id) {
+		this.creatorID = id;
 	}
 
 }

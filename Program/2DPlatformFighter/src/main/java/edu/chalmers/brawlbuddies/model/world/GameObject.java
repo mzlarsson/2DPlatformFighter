@@ -5,6 +5,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.services.factories.IDFactory;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
@@ -19,6 +20,7 @@ public abstract class GameObject {
 	
 	private Movement movement;
 	private Shape shape;
+	private int id;
 	
 	/**
 	 * Constructor for a GameObject, assigns movement and shape.
@@ -29,6 +31,7 @@ public abstract class GameObject {
 	public GameObject(Movement m, Shape shape) {
 		this.movement = m;
 		this.shape = SlickUtil.copy(shape);
+		this.id = IDFactory.getInstance().getID();
 	}
 	
 	/**
@@ -245,6 +248,16 @@ public abstract class GameObject {
 		this.getMovement().resetSpeed(alignment);
 	}
 	
+	/**
+	 * Returns the unique ID of the GameObject.
+	 * @return The GameObjects unique ID.
+	 */
+	public int getID() {
+		return id;
+	}
+	
 	public abstract Position update(int delta);
 	public abstract GameObject copy();
+	public abstract int getTypeID();
+
 }

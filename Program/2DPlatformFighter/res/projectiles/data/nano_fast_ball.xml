@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<projectile name="nano_fast_ball">
+<projectile name="nano_fast_ball" id="32">
 
 	<hitbox shape="circle" parameters="8"></hitbox>
 	<speed>800</speed>

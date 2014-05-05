@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<skill name="Bob Ball" cooldown="500">
+<skill name="Bob Ball" cooldown="500" id="20">
 
 	<skillparts>
 		<projectile name="bob_ball"></projectile>

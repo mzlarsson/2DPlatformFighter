@@ -34,6 +34,9 @@ public class ProjectileFactory {
 
 		Element rootNode = xmlDoc.getDocumentElement();
 		
+		// Getting the type ID
+		int typeID = Integer.parseInt(rootNode.getAttribute("id"));
+		
 		// Making the hitbox
 		NamedNodeMap shapeParams = rootNode.getElementsByTagName("hitbox").item(0).getAttributes();
 		Shape shape = ShapeFactory.create(shapeParams.getNamedItem("shape").getNodeValue()
@@ -64,6 +67,6 @@ public class ProjectileFactory {
 			}
 		}
 		
-		return new ProjectileCreator(shape, speed, lifetime, gravity, effects);
+		return new ProjectileCreator(shape, speed, lifetime, typeID, gravity, effects);
 	}
 }

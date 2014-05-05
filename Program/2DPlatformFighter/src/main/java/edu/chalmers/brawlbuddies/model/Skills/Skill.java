@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Skill implements ISkill{
 	
+	private int typeID;
 	private int cooldown;
 	private int cooldownLeft = 0;
 	private int ownerID;
@@ -15,9 +16,10 @@ public class Skill implements ISkill{
 	private int currentSkillpart;
 	private ICharacter currentCaster;
 	
-	public Skill(int cd, int id) {
+	public Skill(int cd, int typeID, int ownerID) {
 		this.cooldown = cd;
-		this.ownerID = id;
+		this.typeID = typeID;
+		this.ownerID = ownerID;
 	}
 	
 	/**
@@ -49,6 +51,13 @@ public class Skill implements ISkill{
 			currentSkillpart = 0;
 			skillActive = false;
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getTypeID() {
+		return typeID;
 	}
 	
 	/**

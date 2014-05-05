@@ -147,7 +147,7 @@ public class TestGame extends BasicGame {
 			players[1].getCharacter().activateSkill(0);
 		}
 		if( gc.getInput().isKeyDown(Input.KEY_P)){
-			players[1].getCharacter().activateSkill(1);
+			players[1].getCharacter().activateSkill(2);
 		}
 		if( gc.getInput().isKeyDown(Input.KEY_ESCAPE)){
 			for (Player p : players) {

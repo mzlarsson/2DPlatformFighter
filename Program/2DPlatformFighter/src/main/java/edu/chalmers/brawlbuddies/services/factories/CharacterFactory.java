@@ -56,7 +56,8 @@ public class CharacterFactory {
 		// Setting the hitbox
 		NamedNodeMap shapeParams = rootNode.getElementsByTagName("hitbox").item(0).getAttributes();
 		Character character = new Character(ShapeFactory.create(shapeParams.getNamedItem("shape").getNodeValue()
-				, shapeParams.getNamedItem("parameters").getNodeValue(), x, y));
+				, shapeParams.getNamedItem("parameters").getNodeValue(), x, y),
+				Integer.parseInt(rootNode.getAttribute("id")));
 		// Setting the name
 		character.setName(rootNode.getElementsByTagName("name").item(0)
 				.getFirstChild().getNodeValue());

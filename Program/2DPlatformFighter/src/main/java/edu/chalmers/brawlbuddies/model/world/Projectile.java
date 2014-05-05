@@ -18,6 +18,7 @@ import edu.chalmers.brawlbuddies.util.ListCopy;
  */
 public class Projectile extends GameObject {
 
+	private int typeID;
 	private float lifetime;
 	private List<Effect> effects;
 
@@ -31,10 +32,11 @@ public class Projectile extends GameObject {
 	 * @param lifetime
 	 *            How long the projectile shall exist in milliseconds.
 	 */
-	public Projectile(Shape shape, Movement mov, float lifetime,
+	public Projectile(Shape shape, Movement mov, float lifetime, int id,
 			List<Effect> effects) {
 		super(mov, shape);
 		this.lifetime = lifetime;
+		this.typeID = id;
 		this.effects = ListCopy.simpleCopy(effects);
 	}
 
@@ -51,6 +53,11 @@ public class Projectile extends GameObject {
 	public GameObject copy() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public int getTypeID() {
+		return typeID;
 	}
 
 	@Override
@@ -76,4 +83,5 @@ public class Projectile extends GameObject {
 			lifetime = -1;
 		}
 	}
+
 }

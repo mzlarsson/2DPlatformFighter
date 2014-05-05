@@ -30,4 +30,9 @@ public class MapObject extends GameObject {
 		return null;
 	}
 
+	@Override
+	public int getTypeID() {
+		return 0;
+	}
+
 }

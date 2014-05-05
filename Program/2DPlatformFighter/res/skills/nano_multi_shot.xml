@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<skill name="Nano Back Shot" cooldown="1500">
+<skill name="Nano Back Shot" cooldown="1500" id="25">
 
 	<skillparts>
 		<projectile name="nano_fast_ball" aim_offset = "-10"></projectile>

@@ -18,4 +18,10 @@ public interface ISkill {
 	 * @return <code>true</code> if skill is ready, <code>false</code> otherwise.
 	 */
 	public boolean update(int delta);
+	
+	/**
+	 * Returns the type ID of the Skill.
+	 * @return The Skills type ID.
+	 */
+	public int getTypeID();
 }

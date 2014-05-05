@@ -25,6 +25,7 @@ public class ProjectileCreator {
 	private float speed;
 	private float lifetime;
 	private Velocity gravity;
+	private int typeID;
 	private int creatorId;
 
 	/**
@@ -40,11 +41,12 @@ public class ProjectileCreator {
 	 * @param lifetime
 	 *            How long the projectile shall exist in milliseconds.
 	 */
-	public ProjectileCreator(Shape shape, float speed, float lifetime
+	public ProjectileCreator(Shape shape, float speed, float lifetime, int id
 			, Velocity gravity, List<Effect> effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;
+		this.typeID = id;
 		this.gravity = gravity==null?Constants.DEFAULT_GRAVITY.copy():gravity;
 		this.effects = effects;
 	}
@@ -53,9 +55,7 @@ public class ProjectileCreator {
 		this.creatorId = a;
 		if (effects != null) {
 			for (int i = 0; i < effects.size(); i++) {
-				if (effects.get(i) instanceof DamageEffect) {
-					((DamageEffect) effects.get(i)).setCreatorId(a);
-				}
+				effects.get(i).setCreatorID(a);
 			}
 		}
 	}
@@ -75,7 +75,7 @@ public class ProjectileCreator {
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());
 		return new Projectile(tmp,
-				new Movement(new Velocity(aim, speed), gravity, true), lifetime, effects);
+				new Movement(new Velocity(aim, speed), gravity, true), lifetime, typeID,effects);
 	}
 
 }
