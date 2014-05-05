@@ -24,6 +24,8 @@ public class Movement {
 	private Velocity innerSpeed;
 	private Velocity gravitySpeed;
 	private Velocity outerSpeed;
+	private Velocity extraSpeed;
+	private float scale = 1.0f;
 	
 	private static final Velocity outerspeedReducer = new Velocity(1000, 1000);
 	
@@ -73,6 +75,8 @@ public class Movement {
 		this.innerSpeed = immediate?baseSpeed.copy():new Velocity(0, 0);
 		this.gravitySpeed = new Velocity(0, 0);
 		this.outerSpeed = new Velocity(0, 0);
+		this.extraSpeed = new Velocity(0, 0);
+		this.scale = 1.0f;
 	}
 	
 	/**
@@ -209,11 +213,50 @@ public class Movement {
 	}
 	
 	/**
+	 * Adds an additional speed to the total speed
+	 * @param vel The speed to add
+	 */
+	public void addSpeed(Velocity vel){
+		this.extraSpeed = this.extraSpeed.add(vel);
+	}
+	
+	/**
+	 * Removes an additional speed from the total speed
+	 * @param vel The speed to remove
+	 */
+	public void removeSpeed(Velocity vel){
+		this.extraSpeed.subtract(vel);
+	}
+	
+	/**
+	 * Adds a scale to apply to the base speed
+	 * @param scale The scale to add
+	 */
+	public void addScale(float scale){
+		this.scale += scale;
+	}
+	
+	/**
+	 * Remove a scale from the base speed
+	 * @param scale The scale to remove
+	 */
+	public void removeScale(float scale){
+		this.scale -= scale;
+	}
+	
+	/**
+	 * Restores the base speed scale to default
+	 */
+	public void restoreScale(){
+		this.scale = 1.0f;
+	}
+	
+	/**
 	 * Returns the total Velocity of the Movement at this very moment.
 	 * @return The current Velocity of the Movement
 	 */
 	public Velocity getTotalVelocity(){
-		return this.innerSpeed.add(this.outerSpeed).add(this.gravitySpeed);
+		return this.innerSpeed.scale(this.scale).add(this.outerSpeed).add(this.gravitySpeed);
 	}
 	
 	/**
@@ -242,7 +285,7 @@ public class Movement {
 		Velocity tmp = outerspeedReducer.scale(((float)(delta))/Constants.MODIFIER);
 		
 		float x = this.outerSpeed.getX()+(this.outerSpeed.getX()<0?1:-1)*tmp.getX();
-		float y = this.outerSpeed.getY()+(this.outerSpeed.getX()<0?1:-1)*tmp.getY();
+		float y = this.outerSpeed.getY()+(this.outerSpeed.getY()<0?1:-1)*tmp.getY();
 		
 		if((x>0 && this.outerSpeed.getX()<0) || (x<0 && this.outerSpeed.getX()>=0)){
 			x = 0;
