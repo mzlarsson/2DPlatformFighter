@@ -43,6 +43,29 @@ public class Vector extends Vector2f {
 	}
 	
 	/**
+	 * Returns a Vector which is a result of a subtraction of this vector and the Vector (x, y).
+	 * NOTE: This does not affect this vector.
+	 * @param x The x-coordinate to subtract
+	 * @param y The y-coordinate to subtract
+	 * @return A Vector which is the result of a subtraction with this and the Vector (x, y).
+	 */
+	public Vector subtract(float x , float y){
+		Vector v = 	this.copy();
+		v.set(this.getX() - x ,this.getY() - y);
+		return v;
+	}
+	
+	/**
+	 * Returns a Vector which is a result of a subtraction of this vector and the Vector v2.
+	 * NOTE: This does not affect this vector.
+	 * @param v2 The vector to subtract
+	 * @return A Vector which is the result of an subtraction with this and the Vector v2
+	 */
+	public Vector subtract(Vector v2){
+		return this.subtract(v2.getX(), v2.getY());
+	}
+	
+	/**
 	 * Copies the current Vector
 	 * @return A copy of this Vector
 	 */
