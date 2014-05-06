@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.model.world;
 import java.awt.Font;
 import java.io.ObjectStreamException;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
@@ -20,6 +21,7 @@ import edu.chalmers.brawlbuddies.model.Skills.ICharacter;
 import edu.chalmers.brawlbuddies.model.Skills.ISkill;
 import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.Skills.SkillPart;
+import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
 
@@ -51,8 +53,9 @@ public class Character extends GameObject implements ICharacter {
 
 	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
-	//TODO Temporary for drawing hp
+	//TODO Temporary for drawing stuff.
 	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
+	private Animation idleAnim;
 	
 	/**
 	 * Creates a Character.
@@ -65,6 +68,9 @@ public class Character extends GameObject implements ICharacter {
 	public Character(Shape shape, int id) {
 		super(new JumpMovement(), shape);
 		this.typeID = id;
+		this.idleAnim = AnimationMapFactory.create(id).get("idle"); // TODO Highly temporary test for animations.
+		idleAnim.setPingPong(true);
+		idleAnim.setAutoUpdate(true);
 	}
 
 	public void setName(String name) {
@@ -129,6 +135,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public Position update(int delta) {
 		updateCooldowns(delta);
+		idleAnim.update(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
@@ -250,7 +257,8 @@ public class Character extends GameObject implements ICharacter {
 		
 		g.setFont(font);
 		g.drawString(""+health.getHp(), getX(), getY()-30);
-		g.fill(this.getShape());
+		
+		idleAnim.getImage(idleAnim.getFrame()).draw(getX()+(lastAimLeft?0:idleAnim.getWidth()), getY(), lastAimLeft?idleAnim.getWidth():-idleAnim.getWidth(), idleAnim.getHeight());
 	}
 	
 	public void addCharacterActionListener(CharacterActionListener listener){
