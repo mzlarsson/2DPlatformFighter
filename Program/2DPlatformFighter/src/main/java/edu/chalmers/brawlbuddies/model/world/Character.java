@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.model.world;
 import java.awt.Font;
 import java.io.ObjectStreamException;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
@@ -17,6 +18,10 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.Skills.ISkill;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
+import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
+import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
+import edu.chalmers.brawlbuddies.statuseffects.StatusEffectList;
+
 
 /**
  * A class to represent a player-controlled character.
@@ -30,6 +35,7 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 public class Character extends GameObject implements ICharacter {
 	
 	private int typeID;
+	private StatusEffectList statusEffectList = new StatusEffectList();
 	
 	@XStreamAlias("name")
 	private String name;
@@ -41,10 +47,9 @@ public class Character extends GameObject implements ICharacter {
 	private ISkill[] skills;
 
 	private Aim aim = new Aim(1, 0);
-	private boolean lastAimLeft;
-
-	//TODO Temporary for drawing hp
 	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
+	private boolean lastAimLeft;
+	private Animation idleAnim;
 	
 	/**
 	 * Creates a Character.
@@ -57,6 +62,9 @@ public class Character extends GameObject implements ICharacter {
 	public Character(Shape shape, int id) {
 		super(new JumpMovement(), shape);
 		this.typeID = id;
+		this.idleAnim = AnimationMapFactory.create(id).get("idle"); // TODO Highly temporary test for animations.
+		idleAnim.setPingPong(true);
+		idleAnim.setAutoUpdate(true);
 	}
 
 	public void setName(String name) {
@@ -120,7 +128,9 @@ public class Character extends GameObject implements ICharacter {
 	 * @return The position after the movement.
 	 */
 	public Position update(int delta) {
+		statusEffectList.update(delta, (ICharacter)this);
 		updateCooldowns(delta);
+		idleAnim.update(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
@@ -130,29 +140,6 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void move(Direction dir) {
 		this.getMovement().move(dir);
-	}
-
-	/**
-	 * Updates the current Aim of the character.
-	 * 
-	 * @param dir
-	 *            The Direction to aim in.
-	 */
-	//TODO remove when testing is done.
-	public void updateAim(Direction dir) {
-		// Logic for the aiming.
-		if (dir != Direction.NONE) {
-			// Sets the aim to current movement.
-			this.aim = new Aim(dir);
-		} else {
-			// If no movement is done, aim is set to the last horizontal-facing
-			// direction.
-			this.aim = this.lastAimLeft ? new Aim(Direction.LEFT) : new Aim(
-					Direction.RIGHT);
-		}
-		if (dir.getX() != 0) {
-			lastAimLeft = dir.getX() < 0 ? true : false;
-		}
 	}
 
 	/**
@@ -231,7 +218,8 @@ public class Character extends GameObject implements ICharacter {
 		
 		g.setFont(font);
 		g.drawString(""+health.getHp(), getX(), getY()-30);
-		g.fill(this.getShape());
+		
+		idleAnim.getImage(idleAnim.getFrame()).draw(getX()+(lastAimLeft?0:idleAnim.getWidth()), getY(), lastAimLeft?idleAnim.getWidth():-idleAnim.getWidth(), idleAnim.getHeight());
 	}
 	
 	public boolean isDead(){
@@ -263,5 +251,28 @@ public class Character extends GameObject implements ICharacter {
 
 	public boolean isDestroyed() {
 		return this.isDead();
+	}	
+	
+	public void applyStatusEffect(IStatusEffect effect) {
+		statusEffectList.add(effect);
+		
+	}
+
+	public void addScale(float scale) {
+		super.getMovement().addScale(scale);
+		
+	}
+
+	public void removeScale(float scale) {
+		super.getMovement().removeScale(scale);
+	}
+
+	public void restoreScale() {
+		super.getMovement().restoreScale();
+		
+	}
+
+	public void resetGravity() {
+		super.getMovement().resetGravity(Movement.Alignment.BOTH);
 	}
 }

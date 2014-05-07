@@ -18,8 +18,19 @@ import edu.chalmers.brawlbuddies.model.Skills.Skill;
 import edu.chalmers.brawlbuddies.model.Skills.WaitPart;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
+/**
+ * A factory for building a skill from an XML file.
+ * @author Patrik Haar
+ * @version 0.1
+ */
 public class SkillFactory {
 
+	/**
+	 * Creates the Skill with the given name.
+	 * @param skillName The name of the Skill.
+	 * @param ownerID The unique ID of the owner of the Skill.
+	 * @return The created Skill.
+	 */
 	public static Skill create(String skillName, int ownerID) {
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.SKILLS + skillName.toLowerCase() + ".xml");

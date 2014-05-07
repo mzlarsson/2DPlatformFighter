@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Skills.DamageAble;
 import edu.chalmers.brawlbuddies.model.Skills.HealAble;
 import edu.chalmers.brawlbuddies.model.Skills.PushAble;
+import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
 
 /**
  * A interface for Character
