@@ -1,7 +1,9 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
 import edu.chalmers.brawlbuddies.model.Aim;
-import edu.chalmers.brawlbuddies.model.world.Projectile;
+import edu.chalmers.brawlbuddies.model.world.Creator;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+import edu.chalmers.brawlbuddies.model.world.IProjectile;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 /**
  * Describes a projectile creating SkillPart.
@@ -47,10 +49,8 @@ public class ProjectilePart implements SkillPart {
 	 * {@inheritDoc}
 	 */
 	public boolean activate(ICharacter ch) {
-		// Create a projectile with the character and the projectileCreator
-		Projectile p = shooter.fire(ch.getCenterPosition(), getAim(ch));
-		// Tell the character to update the projectile to the listener
-		ch.updateProjectile(p); //FIXME Character should not have anything with updating projectiles.
+		IProjectile p = shooter.fire(ch.getCenterPosition(), getAim(ch));
+		Creator.getInstance().fireEvent(p);
 		return true;
 	}
 }

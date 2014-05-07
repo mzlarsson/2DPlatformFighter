@@ -15,9 +15,6 @@ public class Constants {
 
 	public static final Velocity DEFAULT_GRAVITY = new Velocity(0,1000);
 	
-	public static final int GAMESTATE_MENU = 0;
-	public static final int GAMESTATE_PLAY = 1;
-	
 	public static final String CHARACTER_DATA = "res/characters/data/";
 	public static final String CHARACTER_IMAGES = "res/characters/imgs/";
 	public static final String PROJECTILES_DATA = "res/projectiles/data/";

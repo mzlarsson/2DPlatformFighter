@@ -183,4 +183,22 @@ public enum Direction {
 		return Direction.NONE.add(x<0?Direction.LEFT:x>0?Direction.RIGHT:Direction.NONE)
 				.add(y<0?Direction.UP:y>0?Direction.DOWN:Direction.NONE);
 	}
+	
+	public static Direction getDirection(double angle){
+		Direction dir = Direction.NONE;
+		if(angle<90 || angle>270){
+			dir.add(Direction.RIGHT);
+		}
+		if(angle>90 && angle<270){
+			dir.add(Direction.LEFT);
+		}
+		if(angle<180){
+			dir.add(Direction.UP);
+		}
+		if(angle>180){
+			dir.add(Direction.DOWN);
+		}
+		
+		return dir;
+	}
 }

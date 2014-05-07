@@ -1,5 +1,6 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 
 /**
@@ -86,6 +87,14 @@ public class JumpMovement extends Movement{
 	public void resetJumps(){
 		this.jumpsLeft = maxJumps;
 	}
+	
+	/**
+	 * Returns the amount of jumps left
+	 * @return The amount of jumps left
+	 */
+	public int getJumpsLeft(){
+		return this.jumpsLeft;
+	}
 
 	/**
 	 * Returns the amount of maximum jumps in a row that is allowed
@@ -149,7 +158,29 @@ public class JumpMovement extends Movement{
 	 * @return <code>true</code> if allowed to jump, <code>false</code> otherwise.
 	 */
 	public boolean canJump(){
-		return this.jumpsLeft>0;
+		return this.jumpsLeft>0 && this.isEnabled();
+	}
+	
+	/**
+	 * Determines if the movement is in the air
+	 * @return <code>true</code> if it is in the air, <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInAir(){
+		return this.jumpsLeft != this.maxJumps;
 	}
 
+	/**
+	 * Updates this movement with the happenings during the last [delta] ms
+	 * @param previous	The current position
+	 * @param delta		The time elapsed since the last call to this method
+	 * @return			The new calculated position
+	 */
+	@Override
+	public Position nextPosition(Position previous, int delta){
+		if(this.jumpsLeft == this.maxJumps && this.getCurrentGravitySpeed().getY() != 0.0f){
+			this.jumpsLeft--;
+		}
+		return super.nextPosition(previous, delta);
+	}
 }

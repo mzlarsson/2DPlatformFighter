@@ -6,7 +6,6 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import edu.chalmers.brawlbuddies.controller.Controller;
-import edu.chalmers.brawlbuddies.main.App;
 
 /**
  * This is the main class of the game Brawl Buddies, a 2D platform fighter game.
@@ -31,7 +30,7 @@ public class Main {
 			appgc.setDisplayMode(1600, 800, false);
 			appgc.start();
 		} catch (SlickException ex) {
-			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	

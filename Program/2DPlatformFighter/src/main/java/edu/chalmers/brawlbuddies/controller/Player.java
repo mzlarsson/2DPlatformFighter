@@ -1,10 +1,5 @@
 package edu.chalmers.brawlbuddies.controller;
 
-import org.newdawn.slick.Input;
-
-import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.world.Character;
-
 /**
  * A class to describe a player playing the game.
  * 
@@ -15,17 +10,33 @@ import edu.chalmers.brawlbuddies.model.world.Character;
 public class Player {
 	
 	private String name;
-	private Character ch;
+	private int characterID;
 	private InputHandler handler;
 
+	/**
+	 * Creates a player with a name and an invalid characterID
+	 * @param name The name of the player
+	 */
+	public Player(String name){
+		this(name, -1);
+	}
 
 	/**
 	 * Creates a new player with deafult key input.
 	 * @param name The name of the player
 	 * @param ch The character to use
 	 */
-	public Player(String name, Character ch) {
-		this(name, ch, new KeyInputHandler());
+	public Player(String name, int characterID) {
+		this(name, characterID, new KeyInputHandler());
+	}
+	
+	/**
+	 * Creates a new player with the given name and input handler
+	 * @param name The name of the player
+	 * @param handler The input handler of the player
+	 */
+	public Player(String name, InputHandler handler){
+		this(name, -1, handler);
 	}
 	
 	/**
@@ -34,9 +45,9 @@ public class Player {
 	 * @param ch Character to use
 	 * @param handler Handler for handling controls.
 	 */
-	public Player(String name, Character ch, InputHandler handler) {
+	public Player(String name, int characterID, InputHandler handler) {
 		this.name = name;
-		this.ch = ch;
+		this.characterID = characterID;
 		this.handler = handler;
 	}
 	
@@ -52,8 +63,8 @@ public class Player {
 	 * Returns the character connected with the player.
 	 * @return The character connected with the player.
 	 */
-	public Character getCharacter() {
-		return this.ch;
+	public int getCharacterID() {
+		return this.characterID;
 	}
 	
 	/**
@@ -65,19 +76,18 @@ public class Player {
 	}
 	
 	/**
+	 * Sets the characterID bound to this player
+	 * @param characterID The ID of the character
+	 */
+	public void setCharacterID(int characterID){
+		this.characterID = characterID;
+	}
+	
+	/**
 	 * Sets the input handler of this player to the given one
 	 * @param handler The new input handler
 	 */
 	public void setInputHandler(InputHandler handler){
 		this.handler = handler;
-	}
-	
-	/**
-	 * Updates the velocity and position of the Player´s Character and returns the old position.
-	 * @param delta The time passed since last update in milliseconds.
-	 * @return The position before movement.
-	 */
-	public Position update(int delta) {
-		return this.ch.update(delta);
 	}
 }

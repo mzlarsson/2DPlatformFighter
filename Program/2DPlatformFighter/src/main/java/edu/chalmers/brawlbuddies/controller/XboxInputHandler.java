@@ -13,7 +13,6 @@ import edu.chalmers.brawlbuddies.controller.xbox.XboxInput;
 import edu.chalmers.brawlbuddies.controller.xbox.XboxListener;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Vector;
 
 public class XboxInputHandler implements InputHandler, XboxListener {
 

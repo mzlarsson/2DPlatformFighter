@@ -2,7 +2,15 @@ package edu.chalmers.brawlbuddies.model.Skills;
 
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.world.GameObject;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+import edu.chalmers.brawlbuddies.model.world.IGameObject;
+
+/**
+ * A class describing a push effect 
+ * @author David Gustafsson
+ * @revised Matz Larsson
+ *
+ */
 
 public class PushEffect implements Effect {
 	private Velocity velocity = null;
@@ -20,7 +28,7 @@ public class PushEffect implements Effect {
 		this.creatorId = creatorID;
 	}
 
-	public boolean effect(GameObject sender, GameObject reciever) {
+	public boolean effect(IGameObject sender, IGameObject reciever) {
 		if (reciever instanceof PushAble) {
 			if (sender == null) {
 				if (reciever instanceof ICharacter) {
@@ -37,7 +45,7 @@ public class PushEffect implements Effect {
 			} else {
 				if(!(reciever instanceof ICharacter && ((ICharacter)reciever).getID() == creatorId)){
 					if (velocity == null) {
-						Velocity v = sender.getMovement().getTotalVelocity().getNormalized();
+						Velocity v = sender.getTotalVelocity().getNormalized();
 						v = v.scale(power);
 						v.setTheta(v.getTheta() + (v.getX()<0 ? pushOffset: -pushOffset));
 						((PushAble) reciever).push(v);

@@ -1,13 +1,8 @@
 package edu.chalmers.brawlbuddies.main;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -16,32 +11,18 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import com.thoughtworks.xstream.XStream;
 
 import edu.chalmers.brawlbuddies.controller.Player;
-import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.Direction;
-import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.GameObject;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
-import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.World;
 import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
-import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 
 /**
  * A test game for the basic function of the model
@@ -50,8 +31,10 @@ import edu.chalmers.brawlbuddies.util.CharacterActionListener;
  * 
  */
 
-public class TestGame extends BasicGame {
+public class TestGame /*extends BasicGame*/ {
+	
 	private BrawlBuddies game;
+	private TiledMap map;
 
 	/**
 	 * Creates a new instance of test game
@@ -60,18 +43,23 @@ public class TestGame extends BasicGame {
 	 *            the game model for this test game
 	 */
 	public TestGame() {
-		super("Demo");
+		//super("Demo");
 	}
 
-	public void startGame(Player[] players) {
-		game = new BrawlBuddies(players, new World(players, new GameMap()));
+	public void startGame(String[] characterNames) {
+		GameMap gm = new GameMap();
+		this.map = gm.getMap();
+		game = new BrawlBuddies(new World(gm));
+		for(String ch : characterNames){
+			game.addCharacter(ch);
+		}
 	}
 
 	/**
 	 * Renders the test game
-	 */
+	 *//*
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		game.getWorld().getMap().render(0, 0);
+		map.render(0, 0);
 		List<GameObject> gameOB = game.getWorld().getImpassableObjects();
 		for (GameObject o : gameOB) {
 			g.setColor(Color.darkGray);
@@ -174,5 +162,5 @@ public class TestGame extends BasicGame {
 		} catch (SlickException ex) {
 			Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}
+	}*/
 }

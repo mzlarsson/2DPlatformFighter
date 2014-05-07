@@ -1,113 +1,86 @@
 package edu.chalmers.brawlbuddies.model;
 
-import java.util.List;
-
-import edu.chalmers.brawlbuddies.controller.Player;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
-import edu.chalmers.brawlbuddies.model.world.Character;
-import edu.chalmers.brawlbuddies.model.world.GameObject;
-import edu.chalmers.brawlbuddies.model.world.Projectile;
+import edu.chalmers.brawlbuddies.model.world.GameMap;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+import edu.chalmers.brawlbuddies.model.world.IGameObject;
 import edu.chalmers.brawlbuddies.model.world.World;
-import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 
 /**
  * Holds the logic for the game.
  * 
  * @author Patrik Haar
- * @version 0.1
+ * @version 0.4
+ * @revised Matz Larsson
  */
-public class BrawlBuddies implements CharacterActionListener {
+public class BrawlBuddies{
 
 	private World world;
-	private Player[] players;
-
-	public BrawlBuddies(Player[] p, World w) {
-		players = p;
-		for(int i = 0 ; i < players.length ; i++){
-			players[i].getCharacter().addCharacterActionListener(this);
-			System.out.println("added a CharacterListener to player " + i);
-		}
-		world = w;
+	
+	public BrawlBuddies(){
+		this(new World(new GameMap()));
 	}
 
-	/**
-	 * Returns the players playing the game.
-	 * 
-	 * @return The Players.
-	 */
-	public Player[] getPlayers() {
-		return players;
+	public BrawlBuddies(World world) {
+		this.world = world;
 	}
-	public List<Projectile> getProjectiles(){
-		return world.getProjectiles();
-	}
-	/**
-	 * Moves the character connected to the player in the given direction.
-	 * 
-	 * @param player
-	 *            The Player connected to the event.
-	 * @param dir
-	 *            The Direction to move the character.
-	 */
-	public void move(Player player, Direction dir) {
-		player.getCharacter().move(dir);
-	}
-
-	/**
-	 * Make the character connected to the player jump.
-	 * 
-	 * @param player
-	 *            The Player connected to the event.
-	 */
-	public void jump(Player player) {
-		player.getCharacter().makeJump();
+	
+	public int addCharacter(String name){
+		return this.world.addCharacter(name);
 	}
 	
 	/**
-	 * Sets the aim of the character of the given player
-	 * @param player The player
-	 * @param aimPosition The position to aim at
+	 * Moves the character with given ID in the given direction.
+	 * @param characterID The ID of the character to move
+	 * @param dir The Direction to move the character.
 	 */
-	public void setPlayerAim(Player player, Position aimPosition, boolean isRelative){
-		player.getCharacter().setAim(aimPosition, isRelative);
+	public void move(int characterID, Direction dir) {
+		IGameObject object = world.getObjectById(characterID);
+		if(object instanceof ICharacter){
+			((ICharacter)object).move(dir);
+		}
 	}
 
 	/**
-	 * Updates the Player´s positions and states.
-	 * 
-	 * @param delta
-	 *            Time since last update in milliseconds.
+	 * Make the given character jump.
+	 * @param player The ID of the character to jump
+	 */
+	public void jump(int characterID) {
+		IGameObject object = world.getObjectById(characterID);
+		if(object instanceof ICharacter){
+			((ICharacter)object).makeJump();
+		}
+	}
+	
+	/**
+	 * Activates a skill of the character with the given characterID
+	 * @param characterID The ID of the wanted character
+	 * @param skillIndex The index of the skill
+	 */
+	public void activateSkill(int characterID, int skillIndex){
+		IGameObject object = world.getObjectById(characterID);
+		if(object instanceof ICharacter){
+			((ICharacter)object).activateSkill(skillIndex);
+		}
+	}
+	
+	/**
+	 * Sets the aim of the character with the given ID
+	 * @param characterID The ID of the character
+	 * @param aimPosition The position to aim at
+	 * @param isRelative If the position is given relatively
+	 */
+	public void setAim(int characterID, Position aimPosition, boolean isRelative){
+		IGameObject object = world.getObjectById(characterID);
+		if(object instanceof ICharacter){
+			((ICharacter)object).setAim(aimPosition, isRelative);
+		}
+	}
+
+	/**
+	 * Updates all the objects of the world
+	 * @param delta Time since last update in milliseconds.
 	 */
 	public void update(int delta) {
 		world.update(delta);
-	}
-
-	/**
-	 * Returns the world used by the game.
-	 * 
-	 * @return The world used by the game.
-	 */
-	public World getWorld() {
-		return world;
-	}
-
-	public void characterActionPerformed(Projectile p) {
-		world.getProjectiles().add(p);
-		
-	}
-
-	public void characterActionPerformed(GameObject o) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void characterActionPerformed(Character c, Effect e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void characterActionPerformed(Effect e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

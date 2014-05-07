@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.*;
  * Describes a damage effect
  * 
  * @author David Gustafsson
+ * @revised Matz Larsson
  * 
  */
 public class DamageEffect implements Effect {
@@ -27,7 +28,7 @@ public class DamageEffect implements Effect {
 		this.creatorId = creatorId;
 	}
 
-	public boolean effect(GameObject sender , GameObject reciever) {
+	public boolean effect(IGameObject sender, IGameObject reciever) {
 		if (reciever instanceof DamageAble) {
 			if (reciever.getID() != creatorId) {
 				((DamageAble)reciever).takeDamage(damage);

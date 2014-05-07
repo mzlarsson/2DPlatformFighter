@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+
 /**
  * An interface for describing a Character Skill.
  * @author Patrik Haar

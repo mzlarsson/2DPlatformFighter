@@ -3,6 +3,8 @@ package edu.chalmers.brawlbuddies.model.Skills;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+
 public class Skill implements ISkill{
 	
 	private int typeID;

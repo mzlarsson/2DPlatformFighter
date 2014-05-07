@@ -1,6 +1,5 @@
 package edu.chalmers.brawlbuddies.model;
 
-import org.newdawn.slick.geom.Vector2f;
 /**
  * A class describing a position object for our game
  * @author David Gustafsson

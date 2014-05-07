@@ -1,9 +1,10 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
-import edu.chalmers.brawlbuddies.model.world.GameObject;
+import edu.chalmers.brawlbuddies.model.world.IGameObject;
 /**
  * A interface describing effects
  * @author David Gustafsson
+ * @revised Matz Larsson
  *
  */
 public interface Effect {
@@ -14,7 +15,7 @@ public interface Effect {
 	 * @param reciever The object getting effected.
 	 * @return <code>true</code> if reciever successfully effected, <code>false</code> otherwise.
 	 */
-	public boolean effect(GameObject sender , GameObject reciever);
+	public boolean effect(IGameObject sender, IGameObject reciever);
 	/**
 	 * Sets the creator ID.
 	 * @param id The ID of the creator.

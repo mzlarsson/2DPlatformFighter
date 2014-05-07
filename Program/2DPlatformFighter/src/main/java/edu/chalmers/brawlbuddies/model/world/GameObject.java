@@ -5,6 +5,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.services.factories.IDFactory;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
@@ -16,7 +17,7 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * @revised Matz Larsson
  * 
  */
-public abstract class GameObject {
+public abstract class GameObject implements IGameObject{
 	
 	private Movement movement;
 	private Shape shape;
@@ -101,6 +102,10 @@ public abstract class GameObject {
 	 */
 	public Movement getMovement(){
 		return this.movement;
+	}
+	
+	public Velocity getTotalVelocity(){
+		return this.getMovement().getTotalVelocity();
 	}
 	
 	/**
@@ -257,7 +262,6 @@ public abstract class GameObject {
 	}
 	
 	public abstract Position update(int delta);
-	public abstract GameObject copy();
 	public abstract int getTypeID();
 
 }

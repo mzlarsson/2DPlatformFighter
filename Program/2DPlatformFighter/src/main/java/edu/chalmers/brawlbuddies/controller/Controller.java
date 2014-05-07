@@ -8,9 +8,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.Constants;
-import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
-
 public class Controller extends StateBasedGame {
 
 	public Controller() {
@@ -35,19 +32,19 @@ public class Controller extends StateBasedGame {
 		p2handler.setValue(GameKey.SKILL2, Input.KEY_P);
 		p2handler.setValue(GameKey.SKILL3, Input.KEY_K);
 		p2handler.setValue(GameKey.SKILL4, Input.KEY_L);
-		Player[] players = { new Player("BobTheSparklyMidget", CharacterFactory.create("bob", 200, 200)),
-							 new Player("Nano", CharacterFactory.create("bob", 1000, 200), p2handler)};
-		this.startGame(players);
+		Player[] players = { new Player("BobTheSparklyMidget"), new Player("Nano", p2handler)};
+		String[] characterNames = {"bob", "bob"};
+		this.startGame(players, characterNames);
 	}
 	
 	public void gotoMenu(){
 		this.enterState(Constants.GAMESTATE_MENU);
 	}
 	
-	public void startGame(Player[] players){
+	public void startGame(Player[] players, String[] characterNames){
 		System.out.println("start");
 		this.enterState(Constants.GAMESTATE_PLAY);
-		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players);
+		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players, characterNames);
 	}
 
 }

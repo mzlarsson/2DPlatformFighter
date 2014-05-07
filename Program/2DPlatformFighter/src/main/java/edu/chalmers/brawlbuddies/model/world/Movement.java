@@ -27,6 +27,8 @@ public class Movement {
 	private Velocity extraSpeed;
 	private float scale = 1.0f;
 	
+	private boolean enabled = true;
+	
 	private static final Velocity outerspeedReducer = new Velocity(1000, 1000);
 	
 	/**
@@ -77,6 +79,23 @@ public class Movement {
 		this.outerSpeed = new Velocity(0, 0);
 		this.extraSpeed = new Velocity(0, 0);
 		this.scale = 1.0f;
+	}
+	
+	/**
+	 * Enables or disables the controls of this movement.
+	 * NOTE: This will not effect outer speeds or other applied speeds.
+	 * @param enabled <code>true</code> to enable, <code>false</code> to disable
+	 */
+	public void enable(boolean enabled){
+		this.enabled = enabled;
+	}
+	
+	/**
+	 * Returns whether this movement is enabled or not
+	 * @return <code>true</code> if enabled, <code>false</code> otherwise
+	 */
+	public boolean isEnabled(){
+		return this.enabled;
 	}
 	
 	/**
@@ -141,6 +160,14 @@ public class Movement {
 	}
 	
 	/**
+	 * Returns a Velocity with the same size as the current speed created by gravity
+	 * @return The current speed created by gravity
+	 */
+	protected Velocity getCurrentGravitySpeed(){
+		return this.gravitySpeed.copy();
+	}
+	
+	/**
 	 * Sets up the speed for a movement depending on the direction.
 	 * The base speed will be used.
 	 * @param dir The direction to use.
@@ -181,19 +208,23 @@ public class Movement {
 	}
 	
 	/**
-	 * Increases the inner speed by the Velocity with coordinates (x, y)
+	 * Increases the inner speed by the Velocity with coordinates (x, y) if movement is enabled
 	 * @param x The x-coordinate of the Vector to add
 	 * @param y The y-coordinate of the Vector to add
 	 */
 	protected void increaseInnerSpeed(float x, float y){
-		this.innerSpeed.increase(x, y);
+		if(this.enabled){
+			this.innerSpeed.increase(x, y);
+		}
 	}
 	/**
-	 * Increases the inner speed by the Velocity v
+	 * Increases the inner speed by the Velocity v if movement is enabled
 	 * @param v The Vector to add
 	 */
 	protected void increaseInnerSpeed(Velocity v){
-		this.increaseInnerSpeed(v.getX(), v.getY());
+		if(this.enabled){
+			this.increaseInnerSpeed(v.getX(), v.getY());
+		}
 	}
 	/**
 	 * Returns the inner speed that is used by controlled movements
@@ -204,12 +235,14 @@ public class Movement {
 		return this.innerSpeed;
 	}
 	/**
-	 * Sets the inner speed to an absolute value.
+	 * Sets the inner speed to an absolute value if this movement is enabled.
 	 * @param x The x-coordinate
 	 * @param y The y-coordinate
 	 */
 	protected void setInnerSpeed(float x, float y){
-		this.innerSpeed.set(x, y);
+		if(this.enabled){
+			this.innerSpeed.set(x, y);
+		}
 	}
 	
 	/**
@@ -265,7 +298,16 @@ public class Movement {
 	 */
 	public Direction getDirection(){
 		Velocity total = this.getTotalVelocity();
-		return Direction.getDirection(total.getX(), total.getY());
+		double angle = total.getTheta();
+		return Direction.getDirection(angle);
+	}
+	
+	/**
+	 * Determines if the movement is in the air
+	 * @return <code>true</code> if the movement is in the air, <code>false</code> otherwise
+	 */
+	public boolean isInAir(){
+		return this.gravitySpeed.getY() != 0;
 	}
 	
 	/**
@@ -322,7 +364,19 @@ public class Movement {
 	 *
 	 */
 	public enum Alignment{
-		HORIZONTAL, VERTICAL, BOTH, NONE
+		HORIZONTAL, VERTICAL, BOTH, NONE;
+		
+		public static Alignment getAlignment(float x, float y){
+			if(x != 0 && y != 0){
+				return Alignment.BOTH;
+			}else if(x != 0){
+				return Alignment.HORIZONTAL;
+			}else if(y != 0){
+				return Alignment.VERTICAL;
+			}else{
+				return Alignment.NONE;
+			}
+		}
 	}
 
 }

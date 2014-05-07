@@ -1,6 +1,5 @@
 package edu.chalmers.brawlbuddies.model;
 
-import org.newdawn.slick.geom.Vector2f;
 /**
  * A class that describes velocity object to our game
  * @author David Gustafsson

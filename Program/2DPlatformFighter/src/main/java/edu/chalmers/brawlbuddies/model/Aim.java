@@ -1,12 +1,12 @@
 package edu.chalmers.brawlbuddies.model;
+
 /**
  * A class describing a Players aim 
  * @author David Gustafsson
  * @revised Patrik Haar
  *
  */
-//TODO Write more comments
-//TODO See if more functionality is needed
+
 public class Aim extends Vector {
 
 	public Aim(Position start, Position end) {

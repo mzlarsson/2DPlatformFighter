@@ -5,5 +5,8 @@ package edu.chalmers.brawlbuddies.model.Skills;
  *
  */
 public interface HealAble {
+	
 	public void heal(float a);
+	public void restoreHealth();
+	
 }

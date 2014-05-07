@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.model.Skills;
 
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+
 /**
  * A SkillPart for delaying the casting of skills.
  * @author Patrik Haar

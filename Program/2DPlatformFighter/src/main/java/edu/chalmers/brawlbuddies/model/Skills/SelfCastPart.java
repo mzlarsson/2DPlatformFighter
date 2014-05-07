@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.model.Skills;
 import java.util.List;
 
 import edu.chalmers.brawlbuddies.model.world.GameObject;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
 /**
  * Describes a self casting SkillPart.

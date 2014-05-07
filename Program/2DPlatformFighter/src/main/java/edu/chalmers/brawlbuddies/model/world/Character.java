@@ -6,7 +6,6 @@ import java.io.ObjectStreamException;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -16,12 +15,8 @@ import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.ICharacter;
 import edu.chalmers.brawlbuddies.model.Skills.ISkill;
-import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
-import edu.chalmers.brawlbuddies.model.Skills.SkillPart;
-import edu.chalmers.brawlbuddies.util.CharacterActionListener;
-import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
+import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 
 /**
  * A class to represent a player-controlled character.
@@ -46,10 +41,7 @@ public class Character extends GameObject implements ICharacter {
 	private ISkill[] skills;
 
 	private Aim aim = new Aim(1, 0);
-	private Direction lastDir = Direction.NONE;
 	private boolean lastAimLeft;
-
-	private CharacterActionSupport sup = new CharacterActionSupport(); 
 
 	//TODO Temporary for drawing hp
 	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
@@ -138,8 +130,6 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void move(Direction dir) {
 		this.getMovement().move(dir);
-		//updateAim(dir);
-		lastDir = dir;
 	}
 
 	/**
@@ -227,15 +217,6 @@ public class Character extends GameObject implements ICharacter {
 		health.restoreHp();
 	}
 
-	/**
-	 * Returns a copy of this character.
-	 */
-	@Override
-	public GameObject copy() {
-		// FIXME temporary solution. No need to copy.
-		return null;
-	}
-
 	// TODO Temporary draw method to use a shape as the image for the upcoming
 	// demo.
 	public void draw() {
@@ -251,19 +232,6 @@ public class Character extends GameObject implements ICharacter {
 		g.setFont(font);
 		g.drawString(""+health.getHp(), getX(), getY()-30);
 		g.fill(this.getShape());
-	}
-	
-	public void addCharacterActionListener(CharacterActionListener listener){
-		sup.addListener(listener);
-	}
-	
-	public void removeCharacterActionListener(CharacterActionListener listener){
-		sup.removeListener(listener);
-	}
-	
-	public void updateProjectile(Projectile p){
-		// Sends a projectile to the projectilelist in the CharacterAction listener
-		sup.sendEvent(p);
 	}
 	
 	public boolean isDead(){
@@ -287,5 +255,13 @@ public class Character extends GameObject implements ICharacter {
 	@Override
 	public int getTypeID() {
 		return typeID;
+	}
+
+	public void onCollision(IGameObject object, Alignment alignment) {
+		//FIXME do something?
+	}
+
+	public boolean isDestroyed() {
+		return this.isDead();
 	}
 }
