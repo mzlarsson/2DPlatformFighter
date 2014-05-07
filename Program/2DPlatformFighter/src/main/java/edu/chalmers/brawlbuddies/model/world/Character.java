@@ -22,6 +22,8 @@ import edu.chalmers.brawlbuddies.model.Skills.ISkill;
 import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.Skills.SkillPart;
 import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
+import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
+import edu.chalmers.brawlbuddies.statuseffects.StatusEffectList;
 import edu.chalmers.brawlbuddies.util.CharacterActionListener;
 import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
 
@@ -37,6 +39,7 @@ import edu.chalmers.brawlbuddies.util.CharacterActionSupport;
 public class Character extends GameObject implements ICharacter {
 	
 	private int typeID;
+	private StatusEffectList statusEffectList = new StatusEffectList();
 	
 	@XStreamAlias("name")
 	private String name;
@@ -134,6 +137,7 @@ public class Character extends GameObject implements ICharacter {
 	 * @return The position after the movement.
 	 */
 	public Position update(int delta) {
+		statusEffectList.Update(delta, this);
 		updateCooldowns(delta);
 		idleAnim.update(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
@@ -295,5 +299,29 @@ public class Character extends GameObject implements ICharacter {
 	@Override
 	public int getTypeID() {
 		return typeID;
+	}
+
+	public void applyStatusEffect(IStatusEffect effect) {
+		statusEffectList.add(effect);
+		
+	}
+
+	public void addScale(float scale) {
+		super.getMovement().addScale(scale);
+		
+	}
+
+	public void removeScale(float scale) {
+		super.getMovement().removeScale(scale);
+	}
+
+	public void restoreScale() {
+		super.getMovement().restoreScale();
+		
+	}
+
+	public void resetGravity() {
+		super.getMovement().resetGravity(Movement.Alignment.BOTH);
+		
 	}
 }
