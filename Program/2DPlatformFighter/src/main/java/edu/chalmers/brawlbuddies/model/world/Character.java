@@ -1,13 +1,11 @@
 package edu.chalmers.brawlbuddies.model.world;
 
 import java.awt.Font;
-import java.io.ObjectStreamException;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -37,12 +35,9 @@ public class Character extends GameObject implements ICharacter {
 	private int typeID;
 	private StatusEffectList statusEffectList = new StatusEffectList();
 	
-	@XStreamAlias("name")
 	private String name;
-	@XStreamAlias("bio")
 	private String bio;
-	@XStreamAlias("health")
-	private Health health;
+	private IHealth health;
 
 	private ISkill[] skills;
 
@@ -187,7 +182,11 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public void setHealth(float a) {
-		this.health = new Health(a);
+		if(health != null){
+			this.health.setHealth(a);
+		}else{
+			this.health = new Health(a);
+		}
 	}
 
 	public void takeDamage(float a) {
@@ -199,13 +198,13 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public float getHealth() {
-		return health.getHp();
+		return health.getHealth();
 	}
 	public float getMaxHealth(){
 		return health.getMaxHealth();
 	}
 	public void restoreHealth() {
-		health.restoreHp();
+		health.restoreHealth();
 	}
 
 	// TODO Temporary draw method to use a shape as the image for the upcoming
@@ -221,22 +220,13 @@ public class Character extends GameObject implements ICharacter {
 		}
 		
 		g.setFont(font);
-		g.drawString(""+health.getHp(), getX(), getY()-30);
+		g.drawString(""+health.getHealth(), getX(), getY()-30);
 		
 		idleAnim.getImage(idleAnim.getFrame()).draw(getX()+(lastAimLeft?0:idleAnim.getWidth()), getY(), lastAimLeft?idleAnim.getWidth():-idleAnim.getWidth(), idleAnim.getHeight());
 	}
 	
 	public boolean isDead(){
 		return health.isDead();
-	}
-	
-	private Object readResolve() throws ObjectStreamException {
-		this.setShape(new Rectangle(0, 0, 50, 80));
-		/*
-		 * this.setBaseVelocity(0, 0); this.setVariableVelocity(0, 0);
-		 * this.jumpsLeft = this.maxJumps;
-		 */
-		return this;
 	}
 	
 	public void push(Velocity v) {

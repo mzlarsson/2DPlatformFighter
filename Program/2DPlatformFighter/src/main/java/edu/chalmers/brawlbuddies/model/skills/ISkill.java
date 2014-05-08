@@ -22,6 +22,12 @@ public interface ISkill {
 	public boolean update(int delta);
 	
 	/**
+	 * Returns the unique ID of the skill
+	 * @return The unique ID of the skill
+	 */
+	public int getID();
+	
+	/**
 	 * Returns the type ID of the Skill.
 	 * @return The Skills type ID.
 	 */
