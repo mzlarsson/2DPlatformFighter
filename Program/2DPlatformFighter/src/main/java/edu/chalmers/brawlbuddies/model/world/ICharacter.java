@@ -23,6 +23,9 @@ public interface ICharacter extends IGameObject, HealAble, DamageAble, PushAble{
 	public void setAim(Position aimPosition, boolean isRelative);
 	public void activateSkill(int skillIndex);
 	
+	public Direction getDirection();
+	public boolean isInAir();
+	
 	public void applyStatusEffect(IStatusEffect copy);
 	public void addScale(float scale);
 	public void removeScale(float scale);

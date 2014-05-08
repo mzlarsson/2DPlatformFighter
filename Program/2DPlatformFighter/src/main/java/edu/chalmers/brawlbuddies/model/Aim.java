@@ -34,4 +34,8 @@ public class Aim extends Vector {
 	public Aim scale(float f) {
 		return (Aim)super.scale(f);
 	}
+	
+	public Direction getDirection(){
+		return Direction.getDirection(this.getTheta());
+	}
 }

@@ -284,4 +284,12 @@ public class Character extends GameObject implements ICharacter {
 	public void removeSpeed(Velocity velocity) {
 		super.getMovement().removeSpeed(velocity);
 	}
+
+	public Direction getDirection() {
+		return this.getMovement().getDirection();
+	}
+
+	public boolean isInAir() {
+		return this.getMovement().isInAir();
+	}
 }

@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.model;
 
+import java.util.List;
+
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.IGameObject;
@@ -12,7 +14,7 @@ import edu.chalmers.brawlbuddies.model.world.World;
  * @version 0.4
  * @revised Matz Larsson
  */
-public class BrawlBuddies{
+public class BrawlBuddies implements IBrawlBuddies{
 
 	private World world;
 	
@@ -24,8 +26,18 @@ public class BrawlBuddies{
 		this.world = world;
 	}
 	
-	public int addCharacter(String name){
-		return this.world.addCharacter(name);
+	/**
+	 * Returns all the IDs of the character in the order they were created
+	 * @return IDs of all the character sorted by creation time
+	 */
+	public int[] getCharacterIDs(){
+		List<IGameObject> characters = world.getObjectsByType(ICharacter.class);
+		int[] id = new int[characters.size()];
+		for(int i = 0; i<characters.size(); i++){
+			id[i] = characters.get(i).getID();
+		}
+		
+		return id;
 	}
 	
 	/**
