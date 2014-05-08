@@ -7,10 +7,11 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
 public class Skill implements ISkill{
 	
+	private int id;
 	private int typeID;
+	private int ownerID;
 	private int cooldown;
 	private int cooldownLeft = 0;
-	private int ownerID;
 	
 	private List<SkillPart> skillParts = new ArrayList<SkillPart>();
 	
@@ -19,8 +20,9 @@ public class Skill implements ISkill{
 	private ICharacter currentCaster;
 	private String animName;
 	
-	public Skill(int cd, int typeID, int ownerID, String animation) {
+	public Skill(int cd, int id, int typeID, int ownerID, String animation) {
 		this.cooldown = cd;
+		this.id = id;
 		this.typeID = typeID;
 		this.ownerID = ownerID;
 		this.animName = animation;
@@ -62,6 +64,13 @@ public class Skill implements ISkill{
 			currentSkillpart = 0;
 			skillActive = false;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getID() {
+		return this.id;
 	}
 	
 	/**

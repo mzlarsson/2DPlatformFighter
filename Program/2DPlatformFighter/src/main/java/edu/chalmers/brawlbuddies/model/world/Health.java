@@ -1,9 +1,5 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-import java.io.ObjectStreamException;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 //TODO check if percentage heal and damage is needed.
 
 /**
@@ -11,10 +7,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * 
  * @author David Gustafsson
  * @revised Patrik Haar
+ * @revised Matz Larsson
  */
-@XStreamAlias("health")
-public class Health {
-	@XStreamAlias("healthValue")
+
+public class Health implements IHealth{
+
 	private float maxHp;
 	private float currentHp;
 
@@ -43,11 +40,7 @@ public class Health {
 	 * @param damage
 	 */
 	public void takeDamage(float damage) {
-		if (currentHp - damage <= 0) {
-			currentHp = 0;
-		} else {
-			currentHp -= damage;
-		}
+		this.setHealth(currentHp-damage);
 	};
 
 	/**
@@ -102,11 +95,7 @@ public class Health {
 	 * @param a
 	 */
 	public void heal(float a) {
-		if (currentHp + a > maxHp) {
-			currentHp = maxHp;
-		} else {
-			currentHp += a;
-		}
+		this.setHealth(currentHp+a);
 	}
 
 	/**
@@ -153,23 +142,22 @@ public class Health {
 	 * 
 	 * @return
 	 */
-	public float getHp() {
+	public float getHealth() {
 		return currentHp;
 	}
 
 	/**
 	 * Set current health to maximum health
 	 */
-	public void restoreHp() {
-		currentHp = maxHp;
+	public void restoreHealth() {
+		this.setHealth(maxHp);
 	}
 	public boolean isDead(){
-		return currentHp == 0;
+		return getHealth() == 0;
 	}
 
 	/**
 	 * Set max health
-	 * 
 	 * @param a
 	 */
 	public void setMaxHealth(float a) {
@@ -177,26 +165,20 @@ public class Health {
 	}
 
 	/**
-	 * Set current health
-	 * 
-	 * @param a
+	 * Set current health. If the given variable is invalid the closest value
+	 * is calculated.
+	 * @param a The new health. Should be in the interval 0<= a <= maxHp
 	 */
 	public void setHealth(float a) {
-		currentHp = a;
+		currentHp = Math.min(Math.max(0, a), maxHp);
 	}
 
 	/**
 	 * Get missing health
-	 * 
 	 * @return missing health
 	 */
 	public float getMissingHealth() {
-		return maxHp - currentHp;
-	}
-
-	private Object readResolve() throws ObjectStreamException {
-		this.currentHp = maxHp;
-		return this;
+		return getMaxHealth()-getHealth();
 	}
 
 	public float getMaxHealth() {
