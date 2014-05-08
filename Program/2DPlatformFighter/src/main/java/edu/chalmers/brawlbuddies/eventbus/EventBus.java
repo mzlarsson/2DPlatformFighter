@@ -25,7 +25,7 @@ public class EventBus {
 	 * 
 	 * @return the instance
 	 */
-	public static EventBus getIntstance() {
+	public static EventBus getInstance() {
 		if (instance == null) {
 			instance = new EventBus();
 		}
