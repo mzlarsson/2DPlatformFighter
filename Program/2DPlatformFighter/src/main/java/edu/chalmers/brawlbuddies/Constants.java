@@ -22,6 +22,6 @@ public class Constants {
 	public static final String PROJECTILES_IMAGES = "res/imgs/projectiles/";
 	public static final String TILEMAPS = "res/maps/";
 	public static final String SKILLS = "res/data/skills/";
-	public static final String MELEES_DATA = "res/data/melee/";
+	public static final String MELEES_DATA = "res/data/melees/";
 	
 }
