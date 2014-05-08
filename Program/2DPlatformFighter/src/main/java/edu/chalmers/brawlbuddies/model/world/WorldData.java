@@ -57,7 +57,7 @@ public class WorldData {
 	public List<IGameObject> getObjectsByType(Class c, boolean match){
 		List<IGameObject> objects = new ArrayList<IGameObject>();
 		for(IGameObject obj : this.objects.values()){
-			if((c.isAssignableFrom(obj.getClass())) == !match){
+			if((c.isAssignableFrom(obj.getClass())) == match){
 				objects.add(obj);
 			}
 		}
