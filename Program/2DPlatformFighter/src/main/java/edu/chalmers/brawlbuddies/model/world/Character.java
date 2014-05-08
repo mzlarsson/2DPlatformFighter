@@ -40,6 +40,7 @@ public class Character extends GameObject implements ICharacter {
 	private IHealth health;
 
 	private ISkill[] skills;
+	private Position projOffset;
 
 	private Aim aim = new Aim(1, 0);
 	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
@@ -54,10 +55,11 @@ public class Character extends GameObject implements ICharacter {
 	 * @param player
 	 *            The Player controlling the character.
 	 */
-	public Character(Shape shape, int id) {
+	public Character(Shape shape, int id, Position projOffset) {
 		super(new JumpMovement(), shape);
 		this.typeID = id;
-		this.idleAnim = AnimationMapFactory.create(id).get("idle"); // TODO Highly temporary test for animations.
+		this.projOffset = projOffset;
+		this.idleAnim = AnimationMapFactory.create(id).get("idleLeft"); // TODO Highly temporary test for animations.
 		idleAnim.setPingPong(true);
 		idleAnim.setAutoUpdate(true);
 	}
@@ -165,6 +167,10 @@ public class Character extends GameObject implements ICharacter {
 		this.getMovement().cancelJump();
 	}
 
+	public Position getProjFirePos() {
+		return new Position(this.getCenterPosition().add(this.aim.getX()<0?-projOffset.getX():projOffset.getX(),projOffset.getY()));
+	}
+	
 	public Aim getAim() {
 		return this.aim;
 	}

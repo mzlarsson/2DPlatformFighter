@@ -18,6 +18,7 @@ import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 public interface ICharacter extends IGameObject, HealAble, DamageAble, PushAble{
 	
 	public Aim getAim();
+	public Position getProjFirePos();
 	public void move(Direction dir);
 	public void makeJump();
 	public void setAim(Position aimPosition, boolean isRelative);
