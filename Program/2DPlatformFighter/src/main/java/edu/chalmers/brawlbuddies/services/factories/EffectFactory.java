@@ -13,9 +13,11 @@ import edu.chalmers.brawlbuddies.model.skills.SEEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.DamageImmunityStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.DamageStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.HealStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.ImmobilizeStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.PushStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.ShieldStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.SlowSpeedStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.StunStatusEffect;
 
 public class EffectFactory {
 	
@@ -137,7 +139,21 @@ public class EffectFactory {
 				priority  = Integer.parseInt(attributes.getNamedItem("priority").getNodeValue());
 			}
 			return new SEEffect(new DamageImmunityStatusEffect(duration, priority));
-		} else {
+		} else if ( effectName.equalsIgnoreCase("stun")){
+			NamedNodeMap attributes = effectNode.getAttributes();
+			int duration = 5000;
+			if( attributes.getNamedItem("duration") != null){
+				duration = Integer.parseInt(attributes.getNamedItem("duration").getNodeValue());
+			}
+			return new SEEffect(new StunStatusEffect(duration));
+		} else if ( effectName.equalsIgnoreCase("immobilize")){
+			NamedNodeMap attributes = effectNode.getAttributes();
+			int duration = 5000;
+			if( attributes.getNamedItem("duration") != null){
+				duration = Integer.parseInt(attributes.getNamedItem("duration").getNodeValue());
+			}
+			return new SEEffect(new ImmobilizeStatusEffect(duration));
+		}else {
 			throw new IllegalArgumentException("The effect: \"" + effectName
 					+ "\" is not supported");
 		}

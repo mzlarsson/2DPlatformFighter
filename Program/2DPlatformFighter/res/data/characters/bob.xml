@@ -10,6 +10,7 @@
 	<maxjumps>2</maxjumps>
 	<skills>
 		<skill>bob_basic_ball</skill>
+		<skill>bob_lick</skill>
 		<skill>bob_big_ball</skill>
 	</skills>
 

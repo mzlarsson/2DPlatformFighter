@@ -10,8 +10,10 @@ public class StatusEffectList {
 	private List<IStatusEffect> statusEffects = new ArrayList<IStatusEffect>();
 	private List<IStatusEffect> movementEffecting = new ArrayList<IStatusEffect>();
 	private List<IPreDamageStatusEffect> preDamage = new ArrayList<IPreDamageStatusEffect>();
-	private List<IPreMovementStatusEffect> preMove = new ArrayList<IPreMovementStatusEffect>();
-
+	private List<IPreActStatusEffect> preAct = new ArrayList<IPreActStatusEffect>();
+	public enum Actions{
+		SKILL,MOVE,JUMP
+	}
 	public void add(IStatusEffect effect) {
 		if (effect instanceof SlowSpeedStatusEffect) {
 			movementEffecting.add(effect);
@@ -19,8 +21,8 @@ public class StatusEffectList {
 			preDamage.add((IPreDamageStatusEffect) effect);
 			sortPreDamage();
 		}
-		else if (effect instanceof IPreMovementStatusEffect) {
-			preMove.add((IPreMovementStatusEffect) effect);
+		else if (effect instanceof IPreActStatusEffect) {
+			preAct.add((IPreActStatusEffect) effect);
 		} else {
 			statusEffects.add(effect);
 		}
@@ -31,8 +33,8 @@ public class StatusEffectList {
 			movementEffecting.remove(effect);
 		} else if (effect instanceof IPreDamageStatusEffect) {
 			preDamage.remove((IPreDamageStatusEffect) effect);
-		}else if (effect instanceof IPreMovementStatusEffect) {
-			preMove.remove((IPreMovementStatusEffect) effect);
+		}else if (effect instanceof IPreActStatusEffect) {
+			preAct.remove((IPreActStatusEffect) effect);
 		} else {
 			statusEffects.remove(effect);
 		}
@@ -51,12 +53,31 @@ public class StatusEffectList {
 	}
 	public boolean canMove(){
 		boolean canMove = true;
-		for( IPreMovementStatusEffect effect: preMove){
-			if(!effect.canMove()){
+		for( IPreActStatusEffect effect: preAct){
+			if(!effect.canAct(Actions.MOVE)){
 				canMove = false;
 			}
 		}
 		return canMove;
+	}
+	public boolean canJump(){
+		boolean canJump = true;
+		for( IPreActStatusEffect effect: preAct){
+			if(!effect.canAct(Actions.JUMP)){
+				canJump = false;
+			}
+		}
+		return canJump;
+	}
+	public boolean canUseSkill(){
+		boolean canAct = true;
+		for( IPreActStatusEffect effect: preAct){
+			if(!effect.canAct(Actions.SKILL)){
+				canAct = false;
+			}
+		}
+		return canAct;
+	
 	}
 	public void update(float delta, ICharacter c) {
 		for(int i = 0 ; !statusEffects.isEmpty() && i < statusEffects.size(); i++){
@@ -76,10 +97,10 @@ public class StatusEffectList {
 				}
 			}
 		}
-		for(int i = 0; !preMove.isEmpty() && i < preMove.size(); i++){
-			preMove.get(i).update(c, delta);
-			if( !preMove.get(i).isActive()){
-				preMove.remove(i);
+		for(int i = 0; !preAct.isEmpty() && i < preAct.size(); i++){
+			preAct.get(i).update(c, delta);
+			if( !preAct.get(i).isActive()){
+				preAct.remove(i);
 				i--;
 			}
 		}

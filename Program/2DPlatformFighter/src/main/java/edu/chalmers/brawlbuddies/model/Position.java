@@ -48,5 +48,8 @@ public class Position extends Vector{
 	public Position scale(float scale){
 		return (Position)super.scale(scale);
 	}
+	public Position subtract(float x, float y){
+		return (Position)super.subtract(x, y);
+	}
 
 }

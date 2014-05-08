@@ -89,7 +89,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void activateSkill(int positionNbr) {
 		if (skills != null && (positionNbr > -1) && (positionNbr < skills.length)
-				&& skills[positionNbr] != null) {
+				&& skills[positionNbr] != null && statusEffectList.canUseSkill()) {
 			skills[positionNbr].activate(this);
 		}
 	}
@@ -139,7 +139,9 @@ public class Character extends GameObject implements ICharacter {
 	 * Direction.
 	 */
 	public void move(Direction dir) {
+		if( statusEffectList.canMove()){
 		this.getMovement().move(dir);
+		}
 	}
 
 	/**
@@ -156,7 +158,9 @@ public class Character extends GameObject implements ICharacter {
 	 * Makes the character jump if able.
 	 */
 	public void makeJump() {
+		if(statusEffectList.canJump()){
 		this.getMovement().jump();
+		}
 	}
 
 	/**

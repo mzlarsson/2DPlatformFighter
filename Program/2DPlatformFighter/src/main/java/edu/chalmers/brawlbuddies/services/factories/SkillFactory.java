@@ -12,10 +12,12 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.MeleePart;
 import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.skills.WaitPart;
+import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 /**
@@ -61,7 +63,22 @@ public class SkillFactory {
 						}
 					}
 					skill.addSkillPart(new ProjectilePart(projectile, aim, aimOffset));
-					
+				} else if ( skillPart.getNodeName().equalsIgnoreCase("melee")){
+					MeleeCreator meleeCreator = MeleeFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
+					Aim aim = null;
+					float aimOffset = 0;
+					NamedNodeMap projParams = skillPart.getAttributes();
+					for (int j=0; j<projParams.getLength(); j++) {
+						String attribute = projParams.item(j).getNodeName();
+						if (attribute.equalsIgnoreCase("aim")) {
+							String[] aimParams = projParams.item(j).getNodeValue().split(",");
+							aim = new Aim(Float.parseFloat(aimParams[0]),Float.parseFloat(aimParams[1]));
+						} else if (attribute.equalsIgnoreCase("aim_offset")) {
+							aimOffset = Float.parseFloat(projParams.item(j).getNodeValue());
+						}
+					}
+					skill.addSkillPart(new MeleePart(meleeCreator, aim, aimOffset));
+				
 				// Self Cast
 				} else if (skillPart.getNodeName().equalsIgnoreCase("selfcast")) {
 					NodeList effectList = skillPart.getChildNodes();

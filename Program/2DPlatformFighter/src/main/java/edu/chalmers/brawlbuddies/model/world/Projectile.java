@@ -56,17 +56,16 @@ public class Projectile extends GameObject implements IProjectile{
 	}
 
 	public void onCollision(IGameObject obj, Movement.Alignment alignment) {
-		if (obj instanceof ICharacter) {
-			if(!effects.isEmpty()){
+		if(obj instanceof Impassible){
+			this.destroyed = true;
+		}
+		else if(!effects.isEmpty()){
 				for(int i = 0 ; i < effects.size(); i++){
 					if(effects.get(i).effect(this, obj)){
 						effects.remove(i);
 						i--;
 					}
 				}
-			}
-		}else if(obj instanceof Impassible){
-			this.destroyed = true;
 		}
 	}
 

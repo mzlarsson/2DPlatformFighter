@@ -8,6 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
+import edu.chalmers.brawlbuddies.services.factories.GameFactory;
 import edu.chalmers.brawlbuddies.view.GameView;
 
 public class PlayState extends BasicGameState{
