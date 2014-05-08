@@ -17,11 +17,13 @@ public class Skill implements ISkill{
 	private boolean skillActive;
 	private int currentSkillpart;
 	private ICharacter currentCaster;
+	private String animName;
 	
-	public Skill(int cd, int typeID, int ownerID) {
+	public Skill(int cd, int typeID, int ownerID, String animation) {
 		this.cooldown = cd;
 		this.typeID = typeID;
 		this.ownerID = ownerID;
+		this.animName = animation;
 	}
 	
 	/**
@@ -31,6 +33,13 @@ public class Skill implements ISkill{
 		if (isReady()) {
 			activate(ch, 1);
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getAnimationName() {
+		return this.animName;
 	}
 	
 	private void activate(ICharacter ch, int delta) {

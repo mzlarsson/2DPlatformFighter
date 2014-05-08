@@ -40,7 +40,7 @@ public class SkillFactory {
 		Element rootNode = xmlDoc.getDocumentElement();
 		// Creating the Skill with it's cooldown
 		Skill skill = new Skill(Integer.parseInt(rootNode.getAttribute("cooldown")),
-				Integer.parseInt(rootNode.getAttribute("id")),ownerID);
+				Integer.parseInt(rootNode.getAttribute("id")), ownerID, rootNode.getAttribute("animation"));
 		// Start building the skill with it's different parts
 		NodeList skillParts = rootNode.getElementsByTagName("skillparts").item(0).getChildNodes();
 		for (int i=0; i<skillParts.getLength(); i++) {

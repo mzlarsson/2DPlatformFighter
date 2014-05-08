@@ -26,4 +26,10 @@ public interface ISkill {
 	 * @return The Skills type ID.
 	 */
 	public int getTypeID();
+	
+	/**
+	 * Returns the name of the animation this skill prefers to use.
+	 * @return The animation name of this skill.
+	 */
+	public String getAnimationName();
 }
