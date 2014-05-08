@@ -10,15 +10,116 @@ package edu.chalmers.brawlbuddies.model;
 
 public enum Direction {
 	//All values are self explaining.
-	LEFT(-1,0),
-	RIGHT(1,0),
-	UP(0,-1),
-	DOWN(0,1),
-	NORTHWEST(-1,-1),
-	NORTHEAST(1,-1),
-	SOUTHWEST(-1,1),
-	SOUTHEAST(1,1),
-	NONE(0,0);
+	LEFT(-1, 0) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.UP) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	RIGHT(1, 0) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.UP) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	UP(0, -1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.LEFT) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	DOWN(0, 1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.RIGHT) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.UP) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NORTHWEST(-1, -1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.RIGHT) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.SOUTHEAST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NORTHEAST(1, -1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.LEFT) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.DOWN) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.SOUTHWEST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	SOUTHWEST(-1, 1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.UP) {
+				return Direction.NORTHWEST;
+			} else if (dir == Direction.RIGHT) {
+				return Direction.SOUTHEAST;
+			} else if (dir == Direction.NORTHEAST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	SOUTHEAST(1, 1) {
+		@Override
+		public Direction add(Direction dir) {
+			if (dir == Direction.UP) {
+				return Direction.NORTHEAST;
+			} else if (dir == Direction.LEFT) {
+				return Direction.SOUTHWEST;
+			} else if (dir == Direction.NORTHWEST) {
+				return Direction.NONE;
+			}
+			return this;
+		}
+	},
+	NONE(0, 0) {
+		@Override
+		public Direction add(Direction dir) {
+			return dir;
+		}
+	 	};
 	
 	private int x;
 	private int y;
@@ -53,7 +154,7 @@ public enum Direction {
 	 * @return A new Direction that is the same, none, or turned 45 degrees depending on the given direction.
 	 */
 	public Direction add(Direction dir) {
-		return getDirection(this.getX()+dir.getX(), this.getY()+dir.getY());
+		return this;
 	}
 	
 	/**
