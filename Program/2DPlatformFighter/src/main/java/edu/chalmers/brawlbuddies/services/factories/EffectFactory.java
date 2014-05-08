@@ -5,17 +5,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.DamageEffect;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
-import edu.chalmers.brawlbuddies.model.Skills.HealEffect;
-import edu.chalmers.brawlbuddies.model.Skills.PushEffect;
-import edu.chalmers.brawlbuddies.model.Skills.SEEffect;
-import edu.chalmers.brawlbuddies.statuseffects.DamageImmunityStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.DamageStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.HealStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.PushStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.ShieldStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.SlowSpeedStatusEffect;
+import edu.chalmers.brawlbuddies.model.skills.DamageEffect;
+import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.HealEffect;
+import edu.chalmers.brawlbuddies.model.skills.PushEffect;
+import edu.chalmers.brawlbuddies.model.skills.SEEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.DamageImmunityStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.DamageStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.HealStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.PushStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.ShieldStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.SlowSpeedStatusEffect;
 
 public class EffectFactory {
 	
@@ -92,7 +92,7 @@ public class EffectFactory {
 				String[] veloParams = attributes.getNamedItem("static").getNodeValue().split(",");
 				v = new Velocity( Float.parseFloat(veloParams[0]), Float.parseFloat(veloParams[1]));
 			}
-			return new SEEffect( new SlowSpeedStatusEffect(duration, scaleAmount));	
+			return new SEEffect( new SlowSpeedStatusEffect(duration, scaleAmount, v));	
 		
 		// Push over time
 		} else if(effectName.equals("push_over_time")) {

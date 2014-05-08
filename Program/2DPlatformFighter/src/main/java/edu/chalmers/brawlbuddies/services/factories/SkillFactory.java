@@ -11,11 +11,11 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
-import edu.chalmers.brawlbuddies.model.Skills.ProjectilePart;
-import edu.chalmers.brawlbuddies.model.Skills.SelfCastPart;
-import edu.chalmers.brawlbuddies.model.Skills.Skill;
-import edu.chalmers.brawlbuddies.model.Skills.WaitPart;
+import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
+import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
+import edu.chalmers.brawlbuddies.model.skills.Skill;
+import edu.chalmers.brawlbuddies.model.skills.WaitPart;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 /**

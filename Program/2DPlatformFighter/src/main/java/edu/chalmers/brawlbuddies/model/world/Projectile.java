@@ -5,7 +5,7 @@ import java.util.List;
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.Effect;
 import edu.chalmers.brawlbuddies.util.ListCopy;
 
 /**

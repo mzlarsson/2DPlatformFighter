@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.ISkill;
+import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.JumpMovement;
 

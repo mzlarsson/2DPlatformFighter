@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.statuseffects;
+package edu.chalmers.brawlbuddies.model.statuseffects;
 
 import java.util.ArrayList;
 import java.util.Collections;

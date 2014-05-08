@@ -1,26 +1,26 @@
-package edu.chalmers.brawlbuddies.statuseffects;
+package edu.chalmers.brawlbuddies.model.statuseffects;
 
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
-public class HealStatusEffect implements IStatusEffect {
+public class DamageStatusEffect implements IStatusEffect {
 	private int duration;
 	private int intervall;
-	private float healAmount;
+	private float damage;
 	private int prevIndex;
 	/**
 	 * Creates a new DamageStatusEffect
 	 * @param duration
 	 * @param intervall
-	 * @param heal
+	 * @param damage
 	 * @throws IllegalArgumentException if intervall <= 0
 	 */
-	public HealStatusEffect(int duration, int intervall, float heal) {
+	public DamageStatusEffect(int duration, int intervall, float damage) {
 		if(intervall <= 0){
 			throw new IllegalArgumentException();
 		}
 		this.duration = duration;
 		this.intervall = intervall;
-		this.healAmount = heal;
+		this.damage = damage;
 		this.prevIndex = duration / intervall;
 		
 	}
@@ -32,7 +32,7 @@ public class HealStatusEffect implements IStatusEffect {
 	public void update(ICharacter c, float delta) {
 		duration -= delta;
 		while(prevIndex != duration/intervall && prevIndex != 0){
-		c.heal(healAmount);
+		c.takeDamage(damage);
 		System.out.println("character takes damage");
 		prevIndex -= 1;
 		}
@@ -43,6 +43,6 @@ public class HealStatusEffect implements IStatusEffect {
 	}
 
 	public IStatusEffect copy() {
-		return new HealStatusEffect(this.duration, this.intervall, this.healAmount);
+		return new DamageStatusEffect(this.duration, this.intervall, this.damage);
 	}
 }

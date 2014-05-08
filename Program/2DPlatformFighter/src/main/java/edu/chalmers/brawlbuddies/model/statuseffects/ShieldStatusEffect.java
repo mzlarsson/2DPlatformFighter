@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.statuseffects;
+package edu.chalmers.brawlbuddies.model.statuseffects;
 
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 

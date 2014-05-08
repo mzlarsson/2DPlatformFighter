@@ -3,10 +3,11 @@ package edu.chalmers.brawlbuddies.model.world;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Skills.DamageAble;
-import edu.chalmers.brawlbuddies.model.Skills.HealAble;
-import edu.chalmers.brawlbuddies.model.Skills.PushAble;
-import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
+import edu.chalmers.brawlbuddies.model.Velocity;
+import edu.chalmers.brawlbuddies.model.skills.DamageAble;
+import edu.chalmers.brawlbuddies.model.skills.HealAble;
+import edu.chalmers.brawlbuddies.model.skills.PushAble;
+import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 
 /**
  * A interface for Character
@@ -27,5 +28,7 @@ public interface ICharacter extends IGameObject, HealAble, DamageAble, PushAble{
 	public void removeScale(float scale);
 	public void restoreScale();
 	public void resetGravity();
+	public void addSpeed(Velocity velocity);
+	public void removeSpeed(Velocity velocity);
 
 }

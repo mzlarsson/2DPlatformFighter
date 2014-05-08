@@ -16,11 +16,11 @@ import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.ISkill;
+import edu.chalmers.brawlbuddies.model.skills.ISkill;
+import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
+import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
-import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
-import edu.chalmers.brawlbuddies.statuseffects.StatusEffectList;
 
 
 /**
@@ -274,5 +274,14 @@ public class Character extends GameObject implements ICharacter {
 
 	public void resetGravity() {
 		super.getMovement().resetGravity(Movement.Alignment.BOTH);
+	}
+
+	public void addSpeed(Velocity velocity) {
+		super.getMovement().addSpeed(velocity);
+		
+	}
+
+	public void removeSpeed(Velocity velocity) {
+		super.getMovement().removeSpeed(velocity);
 	}
 }

@@ -8,7 +8,7 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.Effect;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**

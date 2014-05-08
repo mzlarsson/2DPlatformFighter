@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.Skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.Effect;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 /**

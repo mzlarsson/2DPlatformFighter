@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.model.Skills;
+package edu.chalmers.brawlbuddies.model.skills;
 
 import edu.chalmers.brawlbuddies.model.Velocity;
 

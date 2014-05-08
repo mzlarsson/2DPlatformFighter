@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.statuseffects;
+package edu.chalmers.brawlbuddies.model.statuseffects;
 
 
 public interface IPreDamageStatusEffect extends IStatusEffect, Comparable<IPreDamageStatusEffect> {

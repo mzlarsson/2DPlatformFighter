@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.model.Skills;
+package edu.chalmers.brawlbuddies.model.skills;
 /**
  * A interface to be used if a object can take damage
  * @author David Gustafsson

@@ -1,8 +1,8 @@
-package edu.chalmers.brawlbuddies.model.Skills;
+package edu.chalmers.brawlbuddies.model.skills;
 
+import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.IGameObject;
-import edu.chalmers.brawlbuddies.statuseffects.IStatusEffect;
 
 public class SEEffect implements Effect{
 	private IStatusEffect statusEffect;
