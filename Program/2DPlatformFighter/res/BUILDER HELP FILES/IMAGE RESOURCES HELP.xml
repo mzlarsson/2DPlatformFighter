@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 	The type ID		x- and y-size of sprites									Duration between frames				true for looping animation											-->
+<!-- 		 |					  | 														   |									 |														-->
+<resource id="10" name="bob" size="50,80" idleLeft="0,0,3,0,100,true,true" idleRight="4,0,7,0,100,true,true" rangeLeft="0,1,3,1,25,false,false" rangeRight="4,1,7,1,25,false,false"></resource>
+<!-- 				   |					 |										 |-------|											   |												-->
+<!-- 		The Spritesheet's name 	The name of the animation		x an y for the first and last sprite in the animation	  true for pingpong animation									-->
