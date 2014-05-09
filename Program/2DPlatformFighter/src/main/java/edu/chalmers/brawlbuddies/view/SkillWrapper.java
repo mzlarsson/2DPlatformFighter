@@ -10,9 +10,11 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 public class SkillWrapper implements IWrapper, ISkill {
 
 	private Skill skill;
+	
 	public SkillWrapper(int cd, int id, int typeID, int ownerID, String animation){
 		skill= new Skill(cd, id, typeID, ownerID, animation);
 	}
+	
 	public void activate(ICharacter c) {
 		skill.activate(c);
 		EventBus eb = EventBus.getInstance();
@@ -38,6 +40,6 @@ public class SkillWrapper implements IWrapper, ISkill {
 		return skill.getID();
 	}
 	public int getOwnerID(){
-		return skill.getOwnerId();
+		return skill.getOwnerID();
 	}
 }
