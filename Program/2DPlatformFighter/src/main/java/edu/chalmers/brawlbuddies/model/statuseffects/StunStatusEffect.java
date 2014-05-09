@@ -1,6 +1,6 @@
 package edu.chalmers.brawlbuddies.model.statuseffects;
 
-import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList.Actions;
+import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList.Action;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
 public class StunStatusEffect implements IPreActStatusEffect {
@@ -26,7 +26,7 @@ public class StunStatusEffect implements IPreActStatusEffect {
 		return new StunStatusEffect(this.duration);
 	}
 
-	public boolean canAct(Actions action) {
+	public boolean canAct(Action action) {
 		return false;
 	}
 

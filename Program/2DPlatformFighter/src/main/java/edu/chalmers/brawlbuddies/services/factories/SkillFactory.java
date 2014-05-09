@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.skills.MeleePart;
 import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
@@ -83,7 +83,7 @@ public class SkillFactory {
 				// Self Cast
 				} else if (skillPart.getNodeName().equalsIgnoreCase("selfcast")) {
 					NodeList effectList = skillPart.getChildNodes();
-					List<Effect> effects = new ArrayList<Effect>();
+					List<IEffect> effects = new ArrayList<IEffect>();
 					for (int j=0; j<effectList.getLength(); j++) {
 						if (effectList.item(j).getNodeType() == Node.ELEMENT_NODE) {
 							effects.add(EffectFactory.create(effectList.item(j)));

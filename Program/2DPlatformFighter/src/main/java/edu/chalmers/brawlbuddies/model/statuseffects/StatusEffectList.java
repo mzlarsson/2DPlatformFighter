@@ -11,7 +11,8 @@ public class StatusEffectList {
 	private List<IStatusEffect> movementEffecting = new ArrayList<IStatusEffect>();
 	private List<IPreDamageStatusEffect> preDamage = new ArrayList<IPreDamageStatusEffect>();
 	private List<IPreActStatusEffect> preAct = new ArrayList<IPreActStatusEffect>();
-	public enum Actions{
+	
+	public enum Action{
 		SKILL,MOVE,JUMP
 	}
 	public void add(IStatusEffect effect) {
@@ -54,7 +55,7 @@ public class StatusEffectList {
 	public boolean canMove(){
 		boolean canMove = true;
 		for( IPreActStatusEffect effect: preAct){
-			if(!effect.canAct(Actions.MOVE)){
+			if(!effect.canAct(Action.MOVE)){
 				canMove = false;
 			}
 		}
@@ -63,7 +64,7 @@ public class StatusEffectList {
 	public boolean canJump(){
 		boolean canJump = true;
 		for( IPreActStatusEffect effect: preAct){
-			if(!effect.canAct(Actions.JUMP)){
+			if(!effect.canAct(Action.JUMP)){
 				canJump = false;
 			}
 		}
@@ -72,7 +73,7 @@ public class StatusEffectList {
 	public boolean canUseSkill(){
 		boolean canAct = true;
 		for( IPreActStatusEffect effect: preAct){
-			if(!effect.canAct(Actions.SKILL)){
+			if(!effect.canAct(Action.SKILL)){
 				canAct = false;
 			}
 		}

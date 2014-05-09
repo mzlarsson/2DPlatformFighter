@@ -5,7 +5,7 @@ import java.util.List;
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.ListCopy;
 
 /**
@@ -18,7 +18,7 @@ public class Projectile extends GameObject implements IProjectile{
 
 	private int typeID;
 	private float lifetime;
-	private List<Effect> effects;
+	private List<IEffect> effects;
 	private boolean destroyed = false;
 
 	/**
@@ -28,7 +28,7 @@ public class Projectile extends GameObject implements IProjectile{
 	 * @param vel The base Velocity of the projectile.
 	 * @param lifetime How long the projectile shall exist in milliseconds.
 	 */
-	public Projectile(Shape shape, Movement mov, float lifetime, int id, List<Effect> effects) {
+	public Projectile(Shape shape, Movement mov, float lifetime, int id, List<IEffect> effects) {
 		super(mov, shape);
 		this.lifetime = lifetime;
 		this.typeID = id;

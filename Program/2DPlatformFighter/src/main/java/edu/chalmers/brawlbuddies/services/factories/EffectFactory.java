@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.DamageEffect;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.skills.HealEffect;
 import edu.chalmers.brawlbuddies.model.skills.PushEffect;
 import edu.chalmers.brawlbuddies.model.skills.SEEffect;
@@ -26,7 +26,7 @@ public class EffectFactory {
 	 * @param effectNode The node with the parameters.
 	 * @return The created effect.
 	 */
-	public static Effect create(Node effectNode) {
+	public static IEffect create(Node effectNode) {
 		String effectName = effectNode.getNodeName();
 		
 		// Damage

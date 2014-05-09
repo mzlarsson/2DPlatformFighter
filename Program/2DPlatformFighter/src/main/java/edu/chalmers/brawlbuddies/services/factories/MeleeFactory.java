@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
 
 public class MeleeFactory {
@@ -32,7 +32,7 @@ public class MeleeFactory {
 		
 		// Getting the effects
 		NodeList effectList = rootNode.getElementsByTagName("effects").item(0).getChildNodes();
-		List<Effect> effects = new ArrayList<Effect>();
+		List<IEffect> effects = new ArrayList<IEffect>();
 		for (int i=0; i<effectList.getLength(); i++) {
 			if (effectList.item(i).getNodeType() == Node.ELEMENT_NODE) {
 				effects.add(EffectFactory.create(effectList.item(i)));

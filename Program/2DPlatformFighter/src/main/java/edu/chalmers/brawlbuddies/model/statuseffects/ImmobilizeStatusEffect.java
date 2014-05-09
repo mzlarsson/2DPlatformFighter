@@ -1,8 +1,6 @@
 package edu.chalmers.brawlbuddies.model.statuseffects;
 
-import java.awt.Desktop.Action;
-
-import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList.Actions;
+import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList.Action;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
 public class ImmobilizeStatusEffect implements IPreActStatusEffect {
@@ -27,8 +25,8 @@ public class ImmobilizeStatusEffect implements IPreActStatusEffect {
 		return new ImmobilizeStatusEffect(this.duration);
 	}
 
-	public boolean canAct(Actions action) {
-		if(action == Actions.JUMP && action == Actions.MOVE){
+	public boolean canAct(Action action) {
+		if(action == Action.JUMP && action == Action.MOVE){
 			return false;
 		}
 		return true;

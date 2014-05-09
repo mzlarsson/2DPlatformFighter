@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.world.IGameObject;
 import edu.chalmers.brawlbuddies.model.world.IProjectile;
 import edu.chalmers.brawlbuddies.model.world.Movement;
@@ -24,7 +24,7 @@ public class ProjectileWrapper implements IWrapper, IProjectile {
 		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
 	}
 	public ProjectileWrapper(Shape shape, Movement mov, float lifetime, int id,
-			List<Effect> effects) {
+			List<IEffect> effects) {
 		this(new Projectile(shape, mov, lifetime, id, effects));
 	}
 

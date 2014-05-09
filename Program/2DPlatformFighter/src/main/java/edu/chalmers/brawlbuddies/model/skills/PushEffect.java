@@ -12,7 +12,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  *
  */
 
-public class PushEffect implements Effect {
+public class PushEffect implements IEffect {
 	private Velocity velocity = null;
 	private int creatorId;
 	private float pushOffset;

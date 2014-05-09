@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.*;
  * @revised Matz Larsson
  * 
  */
-public class DamageEffect implements Effect {
+public class DamageEffect implements IEffect {
 	private int creatorId;
 	private float damage;
 

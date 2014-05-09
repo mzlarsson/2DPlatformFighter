@@ -5,15 +5,15 @@ import java.util.List;
 import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 
 public class Melee extends GameObject {
 	private boolean destroyed = false;
-	private List<Effect> effects;
+	private List<IEffect> effects;
 	private int typeID;
 	
-	public Melee(Shape shape, Movement move, int id , List<Effect> effects){
+	public Melee(Shape shape, Movement move, int id , List<IEffect> effects){
 		super(move, shape);
 		this.effects = effects;
 		this.typeID = id;

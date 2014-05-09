@@ -8,7 +8,7 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
@@ -18,7 +18,7 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * @version 0.1
  */
 public class ProjectileCreator implements IProjectileCreator {
-	private List<Effect> effects;
+	private List<IEffect> effects;
 	private Shape shape;
 	private float speed;
 	private float lifetime;
@@ -38,7 +38,7 @@ public class ProjectileCreator implements IProjectileCreator {
 	 * @param effects The effects to apply to the projectile
 	 */
 	public ProjectileCreator(Shape shape, float speed, float lifetime, int typeID,
-			Velocity gravity, List<Effect> effects) {
+			Velocity gravity, List<IEffect> effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;

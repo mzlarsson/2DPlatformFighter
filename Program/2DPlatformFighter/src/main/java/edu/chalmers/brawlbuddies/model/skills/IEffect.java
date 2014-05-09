@@ -7,7 +7,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  * @revised Matz Larsson
  *
  */
-public interface Effect {
+public interface IEffect {
 
 	/**
 	 * Trigger the Effect.
