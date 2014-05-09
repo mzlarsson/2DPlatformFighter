@@ -7,15 +7,15 @@ import org.newdawn.slick.geom.Shape;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 public class MeleeCreator {
-	private List<Effect> effects;
+	private List<IEffect> effects;
 	private int typeID;
 	private Shape shape;
 	private int creatorID = 0;
-	public MeleeCreator(List<Effect> effects, Shape shape , int id) {
+	public MeleeCreator(List<IEffect> effects, Shape shape , int id) {
 		this.effects = effects;
 		this.shape = shape;
 		this.typeID  = id;

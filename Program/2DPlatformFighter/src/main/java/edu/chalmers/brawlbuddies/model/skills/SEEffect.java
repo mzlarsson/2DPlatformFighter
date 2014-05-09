@@ -4,7 +4,7 @@ import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.IGameObject;
 
-public class SEEffect implements Effect{
+public class SEEffect implements IEffect{
 	private IStatusEffect statusEffect;
 	private int creatorID;
 	public SEEffect(IStatusEffect statusEffect){

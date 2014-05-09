@@ -5,6 +5,9 @@ import java.util.Map;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
+import edu.chalmers.brawlbuddies.eventbus.EventBus;
+import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
@@ -15,11 +18,12 @@ public class SkillImage implements IDrawable {
 	
 	public SkillImage(SkillWrapper skill){
 		mapAnimation = AnimationMapFactory.create(skill.getTypeID());
-		//TODO set animation
+		animation = mapAnimation.get("idle");
+		animation.start();
 	}
 	
 	public void render(GameContainer gc, Graphics g) {
-		animation.draw();
+		animation.draw(position.getX(), position.getY());
 
 	}
 

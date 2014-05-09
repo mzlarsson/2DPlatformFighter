@@ -2,6 +2,7 @@ package edu.chalmers.brawlbuddies.util;
 
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
+import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -29,6 +30,15 @@ public class SlickUtil {
 			throw new IllegalArgumentException("The Shape: " + shape.getClass() + " is not supported for copying.");
 		}
 		return copy;
+	}
+	
+	/**
+	 * Converts a shape to a polygon
+	 * @param shape The shape to convert
+	 * @return A polygon representing the given shape
+	 */
+	public static Polygon shapeToPolygon(Shape shape){
+		return new Polygon(shape.getPoints());
 	}
 	
 }

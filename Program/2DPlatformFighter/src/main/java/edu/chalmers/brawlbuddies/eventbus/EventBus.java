@@ -1,5 +1,6 @@
 package edu.chalmers.brawlbuddies.eventbus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class EventBus {
 	 * Private constructor for singelton EventBus
 	 */
 	private EventBus() {
-		instance = this;
+		this.subscribers = new ArrayList<IEventBusSubscriber>();
 	}
 
 	/**

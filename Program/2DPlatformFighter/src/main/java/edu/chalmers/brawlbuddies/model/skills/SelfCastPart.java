@@ -13,9 +13,9 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
  *
  */
 public class SelfCastPart implements SkillPart {
-	private List<Effect> effects;
+	private List<IEffect> effects;
 	
-	public SelfCastPart(List<Effect> effects) {
+	public SelfCastPart(List<IEffect> effects) {
 		this.effects = effects;
 	}
 	

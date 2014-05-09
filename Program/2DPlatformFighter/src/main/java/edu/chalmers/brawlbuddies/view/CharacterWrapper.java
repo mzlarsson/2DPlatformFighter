@@ -18,8 +18,12 @@ import edu.chalmers.brawlbuddies.model.world.Character;
 public class CharacterWrapper implements IWrapper, ICharacter {
 	private Character character;
 
-	public CharacterWrapper(Shape shape, int id) {
-		character = new Character(shape, id);
+	public CharacterWrapper(Character character) {
+		this.character = character;
+		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
+	}
+	public CharacterWrapper(Shape shape, int id, Position projOffset) {
+		this(new Character(shape, id, projOffset));
 	}
 
 	public int getTypeID() {
@@ -67,15 +71,13 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 
 	public void setPosition(Position pos) {
 		character.setPosition(pos);
-		EventBus eb = EventBus.getInstance();
-		eb.fireEvent(new EventBusEvent("updateObject", this, null));
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 
 	}
 
 	public void setCenterPosition(Position pos) {
 		character.setCenterPosition(pos);
-		EventBus eb = EventBus.getInstance();
-		eb.fireEvent(new EventBusEvent("updateObject", this, null));
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 	}
 
 	public Shape getShape() {
@@ -176,6 +178,10 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 	public void removeSpeed(Velocity velocity) {
 		character.removeSpeed(velocity);
 
+	}
+
+	public Position getProjFirePos() {
+		return character.getProjFirePos();
 	}
 
 }

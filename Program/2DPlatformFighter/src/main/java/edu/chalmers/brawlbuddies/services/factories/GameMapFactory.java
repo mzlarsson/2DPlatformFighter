@@ -6,6 +6,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.eventbus.EventBus;
+import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 
@@ -40,7 +42,8 @@ public class GameMapFactory {
 		for (int i=0; i<spawns.length; i++) {
 			spawns[i] = new Position(Float.parseFloat(spawnString[i*2]),Float.parseFloat(spawnString[i*2+1]));
 		}
-		
+
+		EventBus.getInstance().fireEvent(new EventBusEvent("createMap", map, null));
 		return new GameMap(map, spawns);
 	}
 }

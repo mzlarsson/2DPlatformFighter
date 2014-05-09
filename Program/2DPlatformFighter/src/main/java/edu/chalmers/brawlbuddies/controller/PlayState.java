@@ -9,6 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.services.factories.GameFactory;
+import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.IView;
 
 public class PlayState extends BasicGameState{
@@ -25,6 +26,7 @@ public class PlayState extends BasicGameState{
 	}
 	
 	public void startGame(Player[] players, String[] names){
+		view = new GameView();
 		this.players = players;
 		game = GameFactory.create("basic16Map", names);
 		int[] id = game.getCharacterIDs();
@@ -73,7 +75,7 @@ public class PlayState extends BasicGameState{
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		//view.render(gc, g);
+		view.render(gc, g);
 	}
 	
 	@Override

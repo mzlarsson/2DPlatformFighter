@@ -11,14 +11,14 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.model.skills.MeleePart;
 import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.skills.WaitPart;
+import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
-import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 /**
  * A factory for building a skill from an XML file.
@@ -50,7 +50,7 @@ public class SkillFactory {
 				
 				// Projectiles
 				if (skillPart.getNodeName().equalsIgnoreCase("projectile")) {
-					ProjectileCreator projectile = ProjectileFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
+					IProjectileCreator projectile = ProjectileFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
 					Aim aim = null;
 					float aimOffset = 0;
 					NamedNodeMap projParams = skillPart.getAttributes();
@@ -83,7 +83,7 @@ public class SkillFactory {
 				// Self Cast
 				} else if (skillPart.getNodeName().equalsIgnoreCase("selfcast")) {
 					NodeList effectList = skillPart.getChildNodes();
-					List<Effect> effects = new ArrayList<Effect>();
+					List<IEffect> effects = new ArrayList<IEffect>();
 					for (int j=0; j<effectList.getLength(); j++) {
 						if (effectList.item(j).getNodeType() == Node.ELEMENT_NODE) {
 							effects.add(EffectFactory.create(effectList.item(j)));

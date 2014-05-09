@@ -10,7 +10,9 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.world.Character;
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.JumpMovement;
+import edu.chalmers.brawlbuddies.view.CharacterWrapper;
 
 /**
  * A factory for creating characters.
@@ -25,7 +27,7 @@ public class CharacterFactory {
 	 * @param charName The name of the character.
 	 * @return The created character with all stats set.
 	 */
-	public static Character create(String charName) {
+	public static ICharacter create(String charName) {
 		return create(charName, 0, 0);
 	}
 	
@@ -36,7 +38,7 @@ public class CharacterFactory {
 	 * @param pos The Position of the character.
 	 * @return The created character with all stats set.
 	 */
-	public static Character create(String charName, Position pos) {
+	public static ICharacter create(String charName, Position pos) {
 		return create(charName, pos.getX(), pos.getY());
 	}
 	
@@ -48,7 +50,7 @@ public class CharacterFactory {
 	 * @param y The y-location of the created Character.
 	 * @return The created character with all stats set.
 	 */
-	public static Character create(String charName, float x, float y) {
+	public static ICharacter create(String charName, float x, float y) {
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.CHARACTER_DATA + charName.toLowerCase() + ".xml");
 
@@ -86,6 +88,6 @@ public class CharacterFactory {
 		}
 		character.setSkills(skills);
 		
-		return character;
+		return new CharacterWrapper(character);
 	}
 }

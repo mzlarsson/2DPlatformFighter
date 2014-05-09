@@ -38,4 +38,10 @@ public interface ISkill {
 	 * @return The animation name of this skill.
 	 */
 	public String getAnimationName();
+	
+	/**
+	 * Returns the id of the character that owns the skill
+	 * @return The ID of the character that owns the skill
+	 */
+	public int getOwnerID();
 }

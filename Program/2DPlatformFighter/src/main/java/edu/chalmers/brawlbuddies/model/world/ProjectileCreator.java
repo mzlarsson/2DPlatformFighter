@@ -8,7 +8,7 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
@@ -17,8 +17,8 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * @author Patrik Haar
  * @version 0.1
  */
-public class ProjectileCreator {
-	private List<Effect> effects;
+public class ProjectileCreator implements IProjectileCreator {
+	private List<IEffect> effects;
 	private Shape shape;
 	private float speed;
 	private float lifetime;
@@ -38,7 +38,7 @@ public class ProjectileCreator {
 	 * @param effects The effects to apply to the projectile
 	 */
 	public ProjectileCreator(Shape shape, float speed, float lifetime, int typeID,
-			Velocity gravity, List<Effect> effects) {
+			Velocity gravity, List<IEffect> effects) {
 		this.shape = shape;
 		this.speed = speed;
 		this.lifetime = lifetime;
@@ -61,7 +61,7 @@ public class ProjectileCreator {
 	 * @param character The character which fires it
 	 * @return The created projectile
 	 */
-	public IProjectile fire(Character character){
+	public Projectile fire(Character character){
 		return this.fire(character.getCenterPosition(), character.getAim());
 	}
 
@@ -72,7 +72,7 @@ public class ProjectileCreator {
 	 * @param aim The direction the projectile will fly.
 	 * @return The projectile created.
 	 */
-	public IProjectile fire(Position pos, Aim aim) {
+	public Projectile fire(Position pos, Aim aim) {
 		Shape tmp = SlickUtil.copy(shape);
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());

@@ -4,7 +4,7 @@ import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.world.Creator;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.IProjectile;
-import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
+import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 /**
  * Describes a projectile creating SkillPart.
  * @author David Gustafsson
@@ -12,7 +12,7 @@ import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
  * @version 0.1
  */
 public class ProjectilePart implements SkillPart {
-	private ProjectileCreator shooter;
+	private IProjectileCreator shooter;
 	private Aim aim;
 	private float aimOffset;
 	
@@ -20,7 +20,7 @@ public class ProjectilePart implements SkillPart {
 		shooter.setCreatorID(a);
 	}
 
-	public ProjectilePart(ProjectileCreator pc, Aim aim, float aimOffset) {
+	public ProjectilePart(IProjectileCreator pc, Aim aim, float aimOffset) {
 		this.shooter = pc;
 		this.aim = aim;
 		this.aimOffset = aimOffset;
