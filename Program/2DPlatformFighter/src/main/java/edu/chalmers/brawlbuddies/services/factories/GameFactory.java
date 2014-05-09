@@ -15,9 +15,9 @@ public class GameFactory {
 		Position tmpPos = null;
 		for(int i = 0; i<characterNames.length; i++){
 			if(map.getSpawnCount()>i){
-				tmpPos = map.getRandomSpawn();
-			}else{
 				tmpPos = map.getSpawn(i);
+			}else{
+				tmpPos = map.getRandomSpawn();
 			}
 			
 			world.add(CharacterFactory.create(characterNames[i], tmpPos));

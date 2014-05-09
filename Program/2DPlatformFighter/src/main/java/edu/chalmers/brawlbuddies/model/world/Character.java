@@ -269,4 +269,11 @@ public class Character extends GameObject implements ICharacter {
 	public boolean isInAir() {
 		return this.getMovement().isInAir();
 	}
+
+	public void reset() {
+		this.restoreHealth();
+		this.getMovement().resetSpeed(Alignment.BOTH);
+		this.restoreScale();
+		this.statusEffectList.reset();
+	}
 }

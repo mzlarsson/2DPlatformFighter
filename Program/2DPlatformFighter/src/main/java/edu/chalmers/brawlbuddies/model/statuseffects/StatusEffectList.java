@@ -41,6 +41,13 @@ public class StatusEffectList {
 		}
 
 	}
+	
+	public void reset(){
+		this.statusEffects.clear();
+		this.movementEffecting.clear();
+		this.preAct.clear();
+		this.preDamage.clear();
+	}
 
 	public float calculateDamage(float damage) {
 		for (IPreDamageStatusEffect effect : preDamage) {
