@@ -22,34 +22,46 @@ public class Position extends Vector{
 		this(f.getX(), f.getY());
 	}
 	/**
-	 * Returns a copy of this position
-	 * @return a copy of this position
+	 * {@inheritDoc}
 	 */
 	public Position copy() {
 		return new Position(x, y); 
 	}
 	/**
-	 * Add a vector to this position and return the resulting position
+	 * {@inheritDoc}
 	 */
 	public Position add(Vector v){
 		return (Position)super.add(v);
 	}
-	
 	/**
-	 * Adds a Position to the previous one
-	 * @param x The x-coordinate of the vector to add
-	 * @param y The y-coordinate of the vector to add
-	 * @return The Position which is the result of an addition
+	 * {@inheritDoc}
 	 */
 	public Position add(float x, float y){
 		return (Position)super.add(x, y);
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Position scale(float scale){
 		return (Position)super.scale(scale);
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	public Position subtract(float x, float y){
 		return (Position)super.subtract(x, y);
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public Position subtract(Vector v){
+		return (Position)super.subtract(v);
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "Position (" + this.getX() + " , " + this.getY() + ")";
 	}
 
 }

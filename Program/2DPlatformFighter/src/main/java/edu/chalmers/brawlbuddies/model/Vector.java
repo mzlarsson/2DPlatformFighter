@@ -135,4 +135,10 @@ public class Vector extends Vector2f {
 		dir = dir.add( ( this.getY()<0 ? Direction.UP : (this.getY()>0 ? Direction.DOWN : Direction.NONE) ) );
 		return dir;
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "Vector ("+ this.getX()+ " , " + this.getY() + ")";  
+	}
 }

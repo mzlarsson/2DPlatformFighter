@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.model;
 
+import org.lwjgl.Sys;
+
 /**
  * Enum for holding and calculating simple movement directions.
  * 
@@ -19,6 +21,8 @@ public enum Direction {
 				return Direction.SOUTHWEST;
 			} else if (dir == Direction.RIGHT) {
 				return Direction.NONE;
+			} else if (dir == Direction.SOUTHWEST || dir == Direction.NORTHWEST) {
+				return dir;
 			}
 			return this;
 		}
@@ -32,6 +36,8 @@ public enum Direction {
 				return Direction.SOUTHEAST;
 			} else if (dir == Direction.LEFT) {
 				return Direction.NONE;
+			} else if ( dir == Direction.SOUTHEAST || dir == Direction.NORTHEAST) {
+				return dir;
 			}
 			return this;
 		}
@@ -45,6 +51,8 @@ public enum Direction {
 				return Direction.NORTHEAST;
 			} else if (dir == Direction.DOWN) {
 				return Direction.NONE;
+			} else if( dir == Direction.NORTHEAST || dir == Direction.NORTHWEST) {
+				return dir;
 			}
 			return this;
 		}
@@ -58,6 +66,8 @@ public enum Direction {
 				return Direction.SOUTHWEST;
 			} else if (dir == Direction.UP) {
 				return Direction.NONE;
+			} else if ( dir == Direction.SOUTHEAST || dir == Direction.SOUTHWEST){
+				return dir;
 			}
 			return this;
 		}
@@ -71,6 +81,10 @@ public enum Direction {
 				return Direction.SOUTHWEST;
 			} else if (dir == Direction.SOUTHEAST) {
 				return Direction.NONE;
+			} else if (dir == Direction.SOUTHWEST){
+				return Direction.LEFT;
+			} else if ( dir == Direction.NORTHEAST){
+				return Direction.UP;
 			}
 			return this;
 		}
@@ -84,6 +98,10 @@ public enum Direction {
 				return Direction.SOUTHEAST;
 			} else if (dir == Direction.SOUTHWEST) {
 				return Direction.NONE;
+			} else if ( dir == Direction.SOUTHEAST){
+				return Direction.RIGHT;
+			} else if ( dir == Direction.NORTHWEST){
+				return Direction.UP;
 			}
 			return this;
 		}
@@ -97,6 +115,10 @@ public enum Direction {
 				return Direction.SOUTHEAST;
 			} else if (dir == Direction.NORTHEAST) {
 				return Direction.NONE;
+			} else if (dir == Direction.NORTHWEST){
+				return Direction.LEFT;
+			} else if ( dir == Direction.SOUTHEAST){
+				return Direction.DOWN;
 			}
 			return this;
 		}
@@ -110,6 +132,10 @@ public enum Direction {
 				return Direction.SOUTHWEST;
 			} else if (dir == Direction.NORTHWEST) {
 				return Direction.NONE;
+			} else if (dir == Direction.NORTHEAST){
+				return Direction.RIGHT;
+			} else if ( dir == Direction.SOUTHWEST){
+				return Direction.DOWN;
 			}
 			return this;
 		}
@@ -119,7 +145,7 @@ public enum Direction {
 		public Direction add(Direction dir) {
 			return dir;
 		}
-	 	};
+	};
 	
 	private int x;
 	private int y;
@@ -183,22 +209,25 @@ public enum Direction {
 		return Direction.NONE.add(x<0?Direction.LEFT:x>0?Direction.RIGHT:Direction.NONE)
 				.add(y<0?Direction.UP:y>0?Direction.DOWN:Direction.NONE);
 	}
-	
+	/**
+	 * Return a direction based on a angle
+	 * @param angle to be converted to a direction
+	 * @return a direction to match the angel
+	 */
 	public static Direction getDirection(double angle){
 		Direction dir = Direction.NONE;
 		if(angle<90 || angle>270){
-			dir.add(Direction.RIGHT);
+			dir = dir.add(Direction.RIGHT);
 		}
 		if(angle>90 && angle<270){
-			dir.add(Direction.LEFT);
+			dir = dir.add(Direction.LEFT);
 		}
-		if(angle<180){
-			dir.add(Direction.UP);
+		if(angle<180 && angle>0){
+			dir = dir.add(Direction.UP);
 		}
-		if(angle>180){
-			dir.add(Direction.DOWN);
+		if(angle>180 && angle < 360){
+			dir = dir.add(Direction.DOWN);
 		}
-		
 		return dir;
 	}
 }

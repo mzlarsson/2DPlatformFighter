@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
 
 import static org.junit.Assert.*;
 
@@ -14,9 +14,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
  * 
  */
 public class VelocityTest {
-	/**
-	 * A test for the constructors in velocity
-	 */
+	
 	@Test
 	public void testNewVelocity() {
 		Velocity v1 = new Velocity(1f, 2f);
@@ -26,9 +24,7 @@ public class VelocityTest {
 		assertTrue(v2.x == 3f);
 		assertTrue(v2.y == 4f);
 	}
-	/**
-	 * A test for the copy method in velocity
-	 */
+	
 	@Test
 	public void testCopy() {
 		Velocity v1 = new Velocity(1f, 2f);
@@ -39,9 +35,7 @@ public class VelocityTest {
 		assertTrue(v2.x == 1f);
 		assertTrue(v2.y == 2f);
 	}
-	/**
-	 * A test for add(float x , float y) in velocity
-	 */
+	
 	@Test
 	public void testAddFloats() {
 		Velocity v1 = new Velocity(1f, 2f);
@@ -51,9 +45,7 @@ public class VelocityTest {
 		assertTrue(v2.getX() == 4f);
 		assertTrue(v2.getY() == 6f);
 	}
-	/**
-	 * A test for add(Vector v) in velocity
-	 */
+	
 	@Test
 	public void testAddVelocity() {
 		Velocity v1 = new Velocity(1f, 2f);
@@ -66,9 +58,7 @@ public class VelocityTest {
 		assertTrue(v3.getX() == 4f);
 		assertTrue(v3.getY() == 6f);
 	}
-	/**
-	 * A test for scale in velocity
-	 */
+	
 	@Test
 	public void testScale() {
 		Velocity v1 = new Velocity(1f, 2f);
@@ -78,5 +68,20 @@ public class VelocityTest {
 		assertTrue(v2.getX() == 4f);
 		assertTrue(v2.getY() == 8f);
 	}
+	
+	@Test
+	public void testGetNormalized(){
+		Velocity v1 = new Velocity(10f, 30f);
+		Velocity v2 = v1.getNormalized();
+		assertTrue(v1.x == 10f);
+		assertTrue(v1.y == 30f);
+		assertTrue(v2.x * v2.x + v2.y * v2.y > 1 - 0.0000001);
+	}
+	public void testToString(){
+		Velocity v1 = new Velocity(10f, 30f);
+		String s1 = "Velocity (10.0 , 30.0)";
+		assertTrue(v1.toString().equals(s1));
+	}
+	
 
 }

@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies;
+package edu.chalmers.brawlbuddies.model;
 
 import static org.junit.Assert.*;
 
@@ -27,10 +27,6 @@ public class PositionTest {
 		assertTrue(p2.y == 5f);
 	}
 	
-	
-	/**
-	 * Testing copy method in Position
-	 */
 	@Test
 	public void copyTest(){
 		Position p1 = new Position(1f,1f);
@@ -42,9 +38,7 @@ public class PositionTest {
 		assertTrue(p2.y == 1f);
 		
 	}
-	/**
-	 * Testing add(Vector v) in Position
-	 */
+	
 	@Test
 	public void addVectorTest(){
 		Position p1 = new Position(1f, 2f);
@@ -57,9 +51,7 @@ public class PositionTest {
 		assertTrue(p3.x == 4f);
 		assertTrue(p3.y == 6f);
 	}
-	/**
-	 * Testing add(float x , float y) in Position
-	 */
+	
 	@Test
 	public void addFloatsTest(){
 		Position p1 = new Position(1f, 2f);
@@ -68,6 +60,19 @@ public class PositionTest {
 		assertTrue(p1.y == 2f);
 		assertTrue(p2.x == 4f);
 		assertTrue(p2.y == 6f);
+	}
+	@Test
+	public void testSubtractFloats(){
+		Position p1 = new Position(8f, 10f);
+		Position p2 = p1.subtract(5f, 3f);
+		assertTrue(p2.x == 3f && p2.y == 7f);
+		assertTrue(p1.x == 8f && p1.y == 10f);
+	}
+	@Test
+	public void testToString(){
+		Position p1 = new Position(1f , 2f);
+		String s1 = "Position (1.0 , 2.0)";
+		assertTrue(p1.toString().equals(s1));
 	}
 
 }
