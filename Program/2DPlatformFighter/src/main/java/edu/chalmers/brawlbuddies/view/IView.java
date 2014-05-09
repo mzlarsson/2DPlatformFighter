@@ -6,5 +6,5 @@ import org.newdawn.slick.Graphics;
 public interface IView {
 
 	public void render(GameContainer gc, Graphics g);
-	
+
 }
