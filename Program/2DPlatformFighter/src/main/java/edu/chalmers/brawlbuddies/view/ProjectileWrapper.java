@@ -22,6 +22,8 @@ public class ProjectileWrapper implements IWrapper, IProjectile {
 	public ProjectileWrapper(Shape shape, Movement mov, float lifetime, int id,
 			List<Effect> effects) {
 		projectile = new Projectile(shape, mov, lifetime, id, effects);
+		EventBus eb = EventBus.getInstance();
+		eb.fireEvent(new EventBusEvent("createObject", this, null));
 	}
 
 	public int getTypeID() {

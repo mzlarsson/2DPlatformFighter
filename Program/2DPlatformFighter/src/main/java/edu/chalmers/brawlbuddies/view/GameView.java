@@ -62,7 +62,8 @@ public class GameView implements IEventBusSubscriber, IView {
 			return new ProjectileImage((ProjectileWrapper) obj);
 		}
 		if (obj.getClass() == Skill.class) {
-			return new SkillImage((SkillWrapper) obj);
+			SkillWrapper skill= (SkillWrapper)obj;
+			return new SkillImage( skill, objects.get(skill.getOwnerID()));
 		}
 		return null;
 	}
