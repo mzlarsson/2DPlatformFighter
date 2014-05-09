@@ -221,7 +221,9 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public void onCollision(IGameObject object, Alignment alignment) {
-		//FIXME do something?
+		if(object == null || object instanceof Impassible){
+			this.getMovement().resetSpeed(alignment);
+		}
 	}
 
 	public boolean isDestroyed() {

@@ -93,10 +93,14 @@ public class World implements CreatorListener{
 	 * with environmental tiles.
 	 * 
 	 * @param obj The moving GameObject
-	 * @param newPos The new position of obj
+	 * @param newPos The new center position of obj
 	 * @return The best calculated position that is valid
 	 */
 	public Position getValidTilePosition(IGameObject obj, Position newPos) {
+		if(newPos == null){
+			return obj.getCenterPosition();
+		}
+		
 		Position newGoodPos = newPos.copy();
 		// Determines which way the object is moving to decide which corners to
 		// use.
@@ -379,6 +383,9 @@ public class World implements CreatorListener{
 	 * @return A Polygon covering both the old and new Position.
 	 */
 	private Polygon getConnectedShape(IGameObject obj, Position newPos) {
+		if(newPos == null){
+			return SlickUtil.shapeToPolygon(obj.getShape());
+		}
 		
 		// Determines which way the object is moving to decide which corners to
 		// use.
@@ -495,20 +502,16 @@ public class World implements CreatorListener{
 			}
 			if (align == Alignment.BOTH || align == Alignment.HORIZONTAL) {
 				newGoodPos.set(obj.getCenterPosition().getX(), newGoodPos.getY());
-				obj.onCollision(vertColl, align); // TODO It doesn't feel good
-													// to send collision events
-													// when you're just checking
-													// for a new position.
+				obj.onCollision(vertColl, align);
+				// TODO It doesn't feel good to send collision events
+				//when you're just checking for a new position.
 			}
 			if (align == Alignment.BOTH || align == Alignment.VERTICAL) {
 				newGoodPos.set(newGoodPos.getX(), obj.getCenterPosition().getY());
 				if (vertColl != horiColl) {
-					obj.onCollision(vertColl, align); // TODO It doesn't feel
-														// good to send
-														// collision events
-														// when you're just
-														// checking for a new
-														// position.
+					obj.onCollision(vertColl, align);
+					// TODO It doesn't feel good to send collision events
+					//when you're just checking for a new position.
 				}
 			}
 		}
@@ -593,7 +596,7 @@ public class World implements CreatorListener{
 		for(IGameObject character : this.getObjectsByType(ICharacter.class)){
 			Position newPos = character.update(delta);
 			Position newShapePos = getValidPosition(character, newPos, this.getObjectsByType(Impassible.class));
-			if (!newPos.equals(newShapePos)) {
+			if(!newPos.equals(newShapePos)) {
 				character.setCenterPosition(newShapePos);
 			} else {
 				character.setCenterPosition(getValidTilePosition(character, newPos));

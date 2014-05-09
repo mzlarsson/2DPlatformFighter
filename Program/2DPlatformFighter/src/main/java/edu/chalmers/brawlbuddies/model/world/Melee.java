@@ -30,7 +30,6 @@ public class Melee extends GameObject {
 		}else{
 			for(int i = 0 ; i < effects.size(); i++){
 				effects.get(i).effect(this, object);
-				
 			}
 		}
 	}
