@@ -17,7 +17,7 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * @author Patrik Haar
  * @version 0.1
  */
-public class ProjectileCreator {
+public class ProjectileCreator implements IProjectileCreator {
 	private List<Effect> effects;
 	private Shape shape;
 	private float speed;
@@ -61,7 +61,7 @@ public class ProjectileCreator {
 	 * @param character The character which fires it
 	 * @return The created projectile
 	 */
-	public IProjectile fire(Character character){
+	public Projectile fire(Character character){
 		return this.fire(character.getCenterPosition(), character.getAim());
 	}
 
@@ -72,7 +72,7 @@ public class ProjectileCreator {
 	 * @param aim The direction the projectile will fly.
 	 * @return The projectile created.
 	 */
-	public IProjectile fire(Position pos, Aim aim) {
+	public Projectile fire(Position pos, Aim aim) {
 		Shape tmp = SlickUtil.copy(shape);
 		tmp.setCenterX(pos.getX());
 		tmp.setCenterY(pos.getY());

@@ -4,7 +4,7 @@
 <!-- 			As:	(String)="(int,int,int,int,int,boolean,boolean)" -->
 
 <!-- Characters	1### -->
-<resource id="10" name="bob" size="50,80" idleLeft="0,0,3,0,100,true,true" idleRight="4,0,7,0,100,true,true" rangeLeft="0,1,3,1,25,false,false" rangeRight="4,1,7,1,25,false,false"></resource>
+<resource id="10" name="bob" size="50,80" idleNone="0,0,3,0,100,true,true" idleLeft="0,0,3,0,100,true,true" idleRight="4,0,7,0,100,true,true" rangeLeft="0,1,3,1,25,false,false" rangeRight="4,1,7,1,25,false,false"></resource>
 
 
 <!-- Skills	2### -->

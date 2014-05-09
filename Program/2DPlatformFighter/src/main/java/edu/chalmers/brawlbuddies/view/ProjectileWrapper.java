@@ -19,9 +19,13 @@ import edu.chalmers.brawlbuddies.model.world.Projectile;
 public class ProjectileWrapper implements IWrapper, IProjectile {
 	private Projectile projectile;
 
+	public ProjectileWrapper(Projectile proj) {
+		this.projectile = proj;
+		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
+	}
 	public ProjectileWrapper(Shape shape, Movement mov, float lifetime, int id,
 			List<Effect> effects) {
-		projectile = new Projectile(shape, mov, lifetime, id, effects);
+		this(new Projectile(shape, mov, lifetime, id, effects));
 	}
 
 	public int getTypeID() {

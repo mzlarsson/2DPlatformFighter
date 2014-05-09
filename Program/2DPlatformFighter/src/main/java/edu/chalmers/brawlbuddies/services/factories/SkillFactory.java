@@ -17,8 +17,8 @@ import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.skills.WaitPart;
+import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
-import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 /**
  * A factory for building a skill from an XML file.
@@ -50,7 +50,7 @@ public class SkillFactory {
 				
 				// Projectiles
 				if (skillPart.getNodeName().equalsIgnoreCase("projectile")) {
-					ProjectileCreator projectile = ProjectileFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
+					IProjectileCreator projectile = ProjectileFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
 					Aim aim = null;
 					float aimOffset = 0;
 					NamedNodeMap projParams = skillPart.getAttributes();

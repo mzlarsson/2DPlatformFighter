@@ -13,7 +13,9 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.Effect;
+import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
+import edu.chalmers.brawlbuddies.view.ProjectileCreatorWrapper;
 
 /**
  * A factory for creating ProjectileCreators
@@ -28,7 +30,7 @@ public class ProjectileFactory {
 	 * @param projName The name of the projectile.
 	 * @return The created character with all stats and effects set.
 	 */
-	public static ProjectileCreator create(String projName) {
+	public static IProjectileCreator create(String projName) {
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.PROJECTILES_DATA + projName.toLowerCase() + ".xml");
 
@@ -67,6 +69,6 @@ public class ProjectileFactory {
 			}
 		}
 		
-		return new ProjectileCreator(shape, speed, lifetime, typeID, gravity, effects);
+		return new ProjectileCreatorWrapper(new ProjectileCreator(shape, speed, lifetime, typeID, gravity, effects));
 	}
 }

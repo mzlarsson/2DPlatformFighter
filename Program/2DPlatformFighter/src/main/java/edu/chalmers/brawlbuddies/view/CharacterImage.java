@@ -16,12 +16,12 @@ public class CharacterImage implements IDrawable {
 	private Direction aimDirection;
 	private Direction moveDirection;
 	private Boolean inAir;
-	private String movementName = "idle";
+	private String movementName = "idleLeft";
 	private boolean isAttacking = false;
 
 	public CharacterImage(CharacterWrapper character) {
 		int tmpID = character.getTypeID();
-		position = character.getCenterPosition();
+		position = character.getPosition();
 		mapAnimation = AnimationMapFactory.create(tmpID);
 		animation = mapAnimation.get(movementName);
 		animation.start();
@@ -49,24 +49,25 @@ public class CharacterImage implements IDrawable {
 		}
 
 		// TODO fix direction and set animation
-		if (obj2.getClass() == SkillWrapper.class) {
-			SkillWrapper skill = (SkillWrapper) obj2;
-			isAttacking = true;
-			if (tmpAimDirection != Direction.NONE) {
-				tmpMovementName = skill.getAnimationName()
-						+ correctStringFormat(tmpAimDirection.toString());
-
-			} else {
-				tmpMovementName = skill.getAnimationName()
-						+ correctStringFormat(aimDirection.toString());
-
+		if (obj2!=null) {
+			if (obj2.getClass() == SkillWrapper.class) {
+				SkillWrapper skill = (SkillWrapper) obj2;
+				isAttacking = true;
+				if (tmpAimDirection != Direction.NONE) {
+					tmpMovementName = skill.getAnimationName()
+							+ correctStringFormat(tmpAimDirection.toString());
+	
+				} else {
+					tmpMovementName = skill.getAnimationName()
+							+ correctStringFormat(aimDirection.toString());
+	
+				}
+				// Set correct animation if neccesary
+				setAnimation(tmpMovementName);
 			}
-			// Set correct animation if neccesary
-			setAnimation(tmpMovementName);
 		}
 
 		if (!isAttacking) {
-
 			if (tmpMoveDirection == Direction.NONE) {
 				tmpMovementName = "idle"
 						+ correctStringFormat(moveDirection.toString());
@@ -116,7 +117,7 @@ public class CharacterImage implements IDrawable {
 			aimDirection = tmpAimDirection;
 		}
 		inAir = character.isInAir();
-		position = character.getCenterPosition();
+		position = character.getPosition();
 	}
 
 	private void setAnimation(String tmpMovementName) {

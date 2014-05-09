@@ -43,9 +43,6 @@ public class Character extends GameObject implements ICharacter {
 	private Position projOffset;
 
 	private Aim aim = new Aim(1, 0);
-	private TrueTypeFont font = new TrueTypeFont(new Font("Serif", Font.PLAIN, 20), false);
-	private boolean lastAimLeft;
-	private Animation idleAnim;
 	
 	/**
 	 * Creates a Character.
@@ -59,9 +56,6 @@ public class Character extends GameObject implements ICharacter {
 		super(new JumpMovement(), shape);
 		this.typeID = id;
 		this.projOffset = projOffset;
-		this.idleAnim = AnimationMapFactory.create(id).get("idleLeft"); // TODO Highly temporary test for animations.
-		idleAnim.setPingPong(true);
-		idleAnim.setAutoUpdate(true);
 	}
 
 	public void setName(String name) {
@@ -127,7 +121,6 @@ public class Character extends GameObject implements ICharacter {
 	public Position update(int delta) {
 		statusEffectList.update(delta, (ICharacter)this);
 		updateCooldowns(delta);
-		idleAnim.update(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
 
@@ -211,24 +204,6 @@ public class Character extends GameObject implements ICharacter {
 	}
 	public void restoreHealth() {
 		health.restoreHealth();
-	}
-
-	// TODO Temporary draw method to use a shape as the image for the upcoming
-	// demo.
-	public void draw() {
-		Graphics g = new Graphics();
-		g.setColor(Color.black);
-		if( health.getMissingHealth() > 0){
-		g.setColor(Color.yellow);
-		}
-		if( isDead()){
-		g.setColor(Color.red);
-		}
-		
-		g.setFont(font);
-		g.drawString(""+health.getHealth(), getX(), getY()-30);
-		
-		idleAnim.getImage(idleAnim.getFrame()).draw(getX()+(lastAimLeft?0:idleAnim.getWidth()), getY(), lastAimLeft?idleAnim.getWidth():-idleAnim.getWidth(), idleAnim.getHeight());
 	}
 	
 	public boolean isDead(){
