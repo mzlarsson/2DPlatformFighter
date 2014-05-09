@@ -12,7 +12,7 @@ import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.world.Projectile;
 import edu.chalmers.brawlbuddies.model.world.Character;
 
-public class GameView implements IEventBusSubscriber, IView{
+public class GameView implements IEventBusSubscriber, IView {
 	public Map<Integer, IDrawable> objects;
 
 	public GameView() {
@@ -28,13 +28,14 @@ public class GameView implements IEventBusSubscriber, IView{
 
 	public void eventPerformed(EventBusEvent event) {
 		if (event.getName().equals("createObject")) {
-			addObjectImage((IWrapper)event.getRecipient());
+			addObjectImage((IWrapper) event.getRecipient());
 		}
 		if (event.getName().equals("removeObject")) {
-			removeObjectImage((IWrapper)event.getRecipient());
+			removeObjectImage((IWrapper) event.getRecipient());
 		}
 		if (event.getName().equals("updateObject")) {
-			updateObject((IWrapper)event.getRecipient(), (IWrapper)event.getActor());
+			updateObject((IWrapper) event.getRecipient(),
+					(IWrapper) event.getActor());
 		}
 	}
 
@@ -50,7 +51,7 @@ public class GameView implements IEventBusSubscriber, IView{
 	}
 
 	private void addObjectImage(IWrapper obj) {
-			objects.put(obj.getUniqeID(), createObjectImage(obj));			
+		objects.put(obj.getUniqeID(), createObjectImage(obj));
 	}
 
 	private IDrawable createObjectImage(IWrapper obj) {

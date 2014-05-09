@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
-public class ProjectileImage implements IDrawable{
+public class ProjectileImage implements IDrawable {
 	private Map<String, Animation> mapAnimation;
 	private Animation animation;
 	private Position position;
@@ -31,7 +31,7 @@ public class ProjectileImage implements IDrawable{
 		ProjectileWrapper projectile = (ProjectileWrapper) obj1;
 		position = projectile.getCenterPosition();
 		angle = projectile.getTheta();
-		
+
 	}
 
 }
