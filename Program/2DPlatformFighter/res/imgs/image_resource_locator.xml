@@ -10,4 +10,6 @@
 <!-- Skills	2### -->
 
 
-<!-- Characters	3### -->
+
+<!-- Projectile	3### -->
+<resource id="30" name="small_poison_projectile" size="40,40" idle="0,0,8,0,100,true,false"></resource>
