@@ -19,17 +19,15 @@ public class ProjectileImage implements IDrawable {
 
 	public ProjectileImage(ProjectileWrapper projectile) {
 		position = projectile.getCenterPosition();
-//		mapAnimation = AnimationMapFactory.create(projectile.getTypeID()); //TODO Temporary until we have projectile images
-//		angle = projectile.getTheta();
-//		animation = mapAnimation.get("idle");
-//		animation.start();
+		mapAnimation = AnimationMapFactory.create(projectile.getTypeID());
+		angle = projectile.getTheta();
+		animation = mapAnimation.get("idle");
+		animation.start();
 	}
 
 	public void render(GameContainer gc, Graphics g) {
 		g.rotate(centerPos.getX(), centerPos.getY(), (float) angle);
-		g.setColor(Color.black);									//TODO Temporary until we have projectile images
-		g.fillOval(position.getX(), position.getY(), 20, 20);
-//		animation.draw(position.getX(), position.getY());
+		animation.draw(position.getX(), position.getY());
 		g.rotate(centerPos.getX(), centerPos.getY(), (float) -angle);
 	}
 
