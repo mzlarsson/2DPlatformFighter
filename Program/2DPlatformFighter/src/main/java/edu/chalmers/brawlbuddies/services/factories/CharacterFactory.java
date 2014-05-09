@@ -53,11 +53,15 @@ public class CharacterFactory {
 		Document xmlDoc = XMLReader.getDocument(Constants.CHARACTER_DATA + charName.toLowerCase() + ".xml");
 
 		Element rootNode = xmlDoc.getDocumentElement();
+		// Setting the projectile fire offset
+		String[] projParams = rootNode.getElementsByTagName("projOffset").item(0).getFirstChild().getNodeValue().split(",");
+		Position projOffset = new Position(Float.parseFloat(projParams[0]),Float.parseFloat(projParams[1]));
 		// Setting the hitbox
 		NamedNodeMap shapeParams = rootNode.getElementsByTagName("hitbox").item(0).getAttributes();
+		// Initiating the Character
 		Character character = new Character(ShapeFactory.create(shapeParams.getNamedItem("shape").getNodeValue()
 				, shapeParams.getNamedItem("parameters").getNodeValue(), x, y),
-				Integer.parseInt(rootNode.getAttribute("id")));
+				Integer.parseInt(rootNode.getAttribute("id")), projOffset);
 		// Setting the name
 		character.setName(rootNode.getElementsByTagName("name").item(0)
 				.getFirstChild().getNodeValue());

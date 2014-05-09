@@ -49,7 +49,7 @@ public class ProjectilePart implements SkillPart {
 	 * {@inheritDoc}
 	 */
 	public boolean activate(ICharacter ch) {
-		IProjectile p = shooter.fire(ch.getCenterPosition(), getAim(ch));
+		IProjectile p = shooter.fire(ch.getProjFirePos(), getAim(ch));
 		Creator.getInstance().fireEvent(p);
 		return true;
 	}

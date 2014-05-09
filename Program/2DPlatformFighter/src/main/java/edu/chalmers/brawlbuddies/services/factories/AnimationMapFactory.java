@@ -57,9 +57,12 @@ public class AnimationMapFactory {
 		for (int i=0; i<attr.getLength(); i++) {
 			String nodeName = attr.item(i).getNodeName();
 			if (nodeName!="id" && nodeName!="name" && nodeName!="size") {
-				String[] spritePos = attr.item(i).getNodeValue().split(",");
-				Animation ani = new Animation(sheet, Integer.parseInt(spritePos[0]), Integer.parseInt(spritePos[1])
-						, Integer.parseInt(spritePos[2]), Integer.parseInt(spritePos[3]), true, 100, false);
+				String[] animAttributes = attr.item(i).getNodeValue().split(",");
+				Animation ani = new Animation(sheet, Integer.parseInt(animAttributes[0]), Integer.parseInt(animAttributes[1])
+						, Integer.parseInt(animAttributes[2]), Integer.parseInt(animAttributes[3]), true, Integer.parseInt(animAttributes[4]), true);
+				ani.setLooping(Boolean.parseBoolean(animAttributes[5]));
+				ani.setPingPong(Boolean.parseBoolean(animAttributes[6]));
+				ani.stop();
 				map.put(nodeName, ani);
 			}
 		}
