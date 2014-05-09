@@ -56,6 +56,10 @@ public class ProjectileCreator implements IProjectileCreator {
 		}
 	}
 	
+	public int getTypeID() {
+		return typeID;
+	}
+	
 	/**
 	 * Creates a projectile with given data
 	 * @param character The character which fires it

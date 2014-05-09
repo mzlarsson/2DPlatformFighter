@@ -18,6 +18,7 @@ public class SkillImage implements IDrawable {
 	
 	public SkillImage(SkillWrapper skill){
 		mapAnimation = AnimationMapFactory.create(skill.getTypeID());
+		position = new Position(10,10);
 		animation = mapAnimation.get("idle");
 		animation.start();
 	}

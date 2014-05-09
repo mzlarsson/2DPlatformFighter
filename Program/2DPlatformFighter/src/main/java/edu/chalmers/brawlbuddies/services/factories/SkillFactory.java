@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.skills.IEffect;
+import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.skills.MeleePart;
 import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
 import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
@@ -19,6 +20,7 @@ import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.skills.WaitPart;
 import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
+import edu.chalmers.brawlbuddies.view.SkillWrapper;
 
 /**
  * A factory for building a skill from an XML file.
@@ -33,7 +35,7 @@ public class SkillFactory {
 	 * @param ownerID The unique ID of the owner of the Skill.
 	 * @return The created Skill.
 	 */
-	public static Skill create(String skillName, int ownerID) {
+	public static ISkill create(String skillName, int ownerID) {
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.SKILLS + skillName.toLowerCase() + ".xml");
 
@@ -103,7 +105,7 @@ public class SkillFactory {
 			}
 		}
 		
-		return skill;
+		return new SkillWrapper(skill);
 	}
 	
 }

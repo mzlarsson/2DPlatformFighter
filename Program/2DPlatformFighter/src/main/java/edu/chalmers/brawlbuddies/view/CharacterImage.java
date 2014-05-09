@@ -38,6 +38,15 @@ public class CharacterImage implements IDrawable {
 				+ str.substring(1).toLowerCase();
 	}
 
+	public void useSkill(IWrapper wrapper) { //TODO Temporary until better implemented Event handling
+		SkillWrapper skill = (SkillWrapper) wrapper;
+		isAttacking = true;
+		String tmpMovementName = skill.getAnimationName()
+				+ correctStringFormat(aimDirection.getXDirection().toString());
+		// Set correct animation if neccesary
+		setAnimation(tmpMovementName);
+	}
+	
 	public void update(IWrapper obj1, IWrapper obj2) {
 		CharacterWrapper character = (CharacterWrapper) obj1;
 		Direction tmpAimDirection = character.getAim().getDirection();
@@ -69,10 +78,7 @@ public class CharacterImage implements IDrawable {
 
 		if (!isAttacking) {
 			if (tmpMoveDirection != Direction.NONE) {
-				System.out.println("character is moving");
-				System.out.println(inAir);
 				if (inAir) {
-					System.out.println("character moving in air");
 					if (tmpAimDirection == Direction.NONE) {
 						tmpMovementName = "move"
 								+ "Air"
@@ -88,7 +94,6 @@ public class CharacterImage implements IDrawable {
 										.toString());
 					}
 				} else {
-					System.out.println("character moving on ground");
 					if (tmpAimDirection == Direction.NONE) {
 						tmpMovementName = "move"
 								+ "Ground"
@@ -105,7 +110,6 @@ public class CharacterImage implements IDrawable {
 					}
 				}
 			}else{
-				System.out.println("CHaracter not moving");
 				if(tmpAimDirection == Direction.NONE){
 					tmpMovementName = "idleLeft";
 				} else {
@@ -132,14 +136,15 @@ public class CharacterImage implements IDrawable {
 
 	private void setAnimation(String tmpMovementName) {
 		if(!mapAnimation.containsKey(tmpMovementName)){
-			tmpMovementName="idle" + correctStringFormat(aimDirection.getXDirection().toString());
+			tmpMovementName="idle" + (aimDirection.getXDirection()!=Direction.NONE
+					? correctStringFormat(aimDirection.getXDirection().toString())
+					: correctStringFormat(Direction.LEFT.toString()));
 		}
 		if (!(tmpMovementName.equals(movementName))) {
 			animation.stop();
 			movementName = tmpMovementName;
-			System.out.println(movementName);
 			animation = mapAnimation.get(movementName);
-			animation.setCurrentFrame(0);
+			animation.restart();
 			animation.start();
 		}
 	}

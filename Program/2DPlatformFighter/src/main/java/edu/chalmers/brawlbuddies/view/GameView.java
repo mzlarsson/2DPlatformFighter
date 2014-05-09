@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.view;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.tiled.TiledMap;
@@ -10,12 +11,15 @@ import org.newdawn.slick.tiled.TiledMap;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.eventbus.IEventBusSubscriber;
+import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class GameView implements IEventBusSubscriber, IView {
-	public TiledMap map;
-	public Map<Integer, IDrawable> objects;
+	private TiledMap map;
+	private Map<Integer, Animation> objectAnims;
+	private Map<Integer, IDrawable> objects;
 
 	public GameView() {
+		objectAnims = new TreeMap<Integer, Animation>();
 		objects = new TreeMap<Integer, IDrawable>();
 		EventBus.getInstance().addSubscriber(this);
 	}
@@ -35,8 +39,15 @@ public class GameView implements IEventBusSubscriber, IView {
 		} else if (event.getName().equals("updateObject")) {
 			updateObject((IWrapper) event.getRecipient(),
 					(IWrapper) event.getActor());
+		} else if (event.getName().equals("skillUsed")) {
+			((CharacterImage)objects.get((Integer)event.getRecipient())).useSkill((IWrapper)event.getActor());;
 		} else if (event.getName().equals("createMap")) {
 			this.map = (TiledMap)event.getRecipient();
+		} else if (event.getName().equals("createAnimation")) {
+			this.objectAnims.put(((IWrapper)event.getRecipient()).getTypeID()
+					, AnimationMapFactory.create(
+							((IWrapper)event.getRecipient()).getTypeID())
+							.get("idle"));
 		}
 	}
 
@@ -46,9 +57,7 @@ public class GameView implements IEventBusSubscriber, IView {
 	}
 
 	public void updateObject(IWrapper obj1, IWrapper obj2) {
-		int uniqeID = obj1.getUniqeID();
-		IDrawable object = objects.get(uniqeID);
-		object.update(obj1, obj2);
+		objects.get(obj1.getUniqeID()).update(obj1, obj2);
 	}
 
 	private void addObjectImage(IWrapper obj) {
@@ -59,8 +68,8 @@ public class GameView implements IEventBusSubscriber, IView {
 		if (obj.getClass() == CharacterWrapper.class) {
 			return new CharacterImage((CharacterWrapper) obj);
 		} else if (obj.getClass() == ProjectileWrapper.class) {
-			return new ProjectileImage((ProjectileWrapper) obj);
-		}else if (obj.getClass() == SkillWrapper.class) {
+			return new ProjectileImage(objectAnims.get(obj.getTypeID()));
+		} else if (obj.getClass() == SkillWrapper.class) {
 			return new SkillImage((SkillWrapper) obj);
 		}
 		return null;

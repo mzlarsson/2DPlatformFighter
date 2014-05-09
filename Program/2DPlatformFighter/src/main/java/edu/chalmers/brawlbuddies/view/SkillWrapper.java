@@ -11,14 +11,22 @@ public class SkillWrapper implements IWrapper, ISkill {
 
 	private Skill skill;
 	
-	public SkillWrapper(int cd, int id, int typeID, int ownerID, String animation){
-		skill= new Skill(cd, id, typeID, ownerID, animation);
+	public SkillWrapper(Skill skill) {
+		this.skill = skill;
+		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
+		System.out.println("Skill created");
 	}
 	
-	public void activate(ICharacter c) {
-		skill.activate(c);
-		EventBus eb = EventBus.getInstance();
-		eb.fireEvent(new EventBusEvent("updateObject",c, this));
+	public SkillWrapper(int cd, int id, int typeID, int ownerID, String animation){
+		this(new Skill(cd, id, typeID, ownerID, animation));
+	}
+	
+	public boolean activate(ICharacter c) {
+		if (skill.activate(c)) {
+			EventBus.getInstance().fireEvent(new EventBusEvent("skillUsed",c.getID(), this));
+			return true;
+		}
+		return false;
 	}
 
 	public int getTypeID() {

@@ -31,10 +31,12 @@ public class Skill implements ISkill{
 	/**
 	 * {@inheritDoc}
 	 */
-	public void activate(ICharacter ch) {
+	public boolean activate(ICharacter ch) {
 		if (isReady()) {
 			activate(ch, 1);
+			return true;
 		}
+		return false;
 	}
 	
 	/**

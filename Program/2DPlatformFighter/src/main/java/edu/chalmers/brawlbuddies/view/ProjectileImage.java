@@ -11,17 +11,13 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class ProjectileImage implements IDrawable {
-	private Map<String, Animation> mapAnimation;
 	private Animation animation;
 	private Position position;
 	private Position centerPos;
 	private double angle;
 
-	public ProjectileImage(ProjectileWrapper projectile) {
-		position = projectile.getCenterPosition();
-		mapAnimation = AnimationMapFactory.create(projectile.getTypeID());
-		angle = projectile.getTheta();
-		animation = mapAnimation.get("idle");
+	public ProjectileImage(Animation anim) {
+		animation = anim.copy();
 		animation.start();
 	}
 

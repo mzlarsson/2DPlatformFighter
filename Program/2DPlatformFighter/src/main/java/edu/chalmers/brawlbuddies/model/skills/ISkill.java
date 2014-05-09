@@ -11,8 +11,9 @@ public interface ISkill {
 	/**
 	 * Activate the skill with the Casting Character as a argument
 	 * @param Character
+	 * @return true if the skill was successfully activated.
 	 */
-	public void activate(ICharacter c);
+	public boolean activate(ICharacter c);
 	
 	/**
 	 * Updates the Skill.

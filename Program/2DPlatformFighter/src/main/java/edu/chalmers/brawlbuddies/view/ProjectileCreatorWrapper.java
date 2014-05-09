@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.view;
 
+import edu.chalmers.brawlbuddies.eventbus.EventBus;
+import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.IProjectile;
@@ -12,11 +14,11 @@ public class ProjectileCreatorWrapper implements IWrapper, IProjectileCreator {
 	
 	public ProjectileCreatorWrapper(ProjectileCreator pc) {
 		this.pc = pc;
+		EventBus.getInstance().fireEvent(new EventBusEvent("createAnimation", this, null));
 	}
 
 	public int getTypeID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return pc.getTypeID();
 	}
 
 	public int getUniqeID() {

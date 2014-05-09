@@ -43,11 +43,15 @@ public class AnimationMapFactory {
 			}
 		}
 		SpriteSheet sheet = null;
-		try {
-			String[] size = el.getAttribute("size").split(",");
-			sheet = new SpriteSheet((Constants.IMAGES + typeName[Character.getNumericValue(String.valueOf(id).charAt(0))] + "/" + el.getAttribute("name") + ".png"), Integer.parseInt(size[0]), Integer.parseInt(size[1]));
-		} catch (SlickException e) {
-			e.printStackTrace();
+		if (el!=null) {
+			try {
+				String[] size = el.getAttribute("size").split(",");
+				sheet = new SpriteSheet((Constants.IMAGES + typeName[Character.getNumericValue(String.valueOf(id).charAt(0))] + "/" + el.getAttribute("name") + ".png"), Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+		} else {
+			throw new IllegalArgumentException("ID: " + id + " does not have a valid resource");
 		}
 		
 		HashMap<String, Animation> map = new HashMap<String,Animation>();
