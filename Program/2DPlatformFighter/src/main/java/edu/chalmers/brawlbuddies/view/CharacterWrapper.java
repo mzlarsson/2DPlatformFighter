@@ -183,5 +183,9 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 	public Position getProjFirePos() {
 		return character.getProjFirePos();
 	}
+	
+	public void reset(){
+		character.reset();
+	}
 
 }

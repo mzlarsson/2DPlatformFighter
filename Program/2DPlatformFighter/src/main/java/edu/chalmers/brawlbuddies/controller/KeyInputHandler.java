@@ -91,6 +91,10 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		}
 	}
 	
+	public void useMouse(boolean useMouse){
+		this.useMouse = useMouse;
+	}
+	
 	private GameKey[] getAllControlNames(){
 		Object[] keys = this.keys.keySet().toArray();
 		return Arrays.copyOf(keys, keys.length, GameKey[].class);

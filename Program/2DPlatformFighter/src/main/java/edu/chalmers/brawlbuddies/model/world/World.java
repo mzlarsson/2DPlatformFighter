@@ -1,6 +1,7 @@
 package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.newdawn.slick.geom.Polygon;
@@ -43,7 +44,7 @@ public class World implements CreatorListener{
 	public World(GameMap map) {
 		//Set up world data
 		this.data = new WorldData();
-		this.data.addMapData(map.getMap());
+		this.data.setMap(map);
 		Creator.getInstance().addListener(this);
 		
 		//Set up own variables
@@ -604,9 +605,9 @@ public class World implements CreatorListener{
 
 			if(character.isDestroyed()){
 				//TODO fix this.
-				ICharacter ch = (Character)character;
-				ch.restoreHealth();
-				ch.setCenterPosition(new Position(200, 200));
+				ICharacter ch = (ICharacter)character;
+				ch.reset();
+				ch.setCenterPosition(this.data.getGameMap().getRandomSpawn());
 			}
 		}
 
@@ -618,7 +619,9 @@ public class World implements CreatorListener{
 			
 			Position newPos = object.update(delta);
 			Shape shape = getConnectedShape(object, newPos);
-			List<IGameObject> goList = getCollisions(shape, this.getObjectsByType(Impassible.class));
+			//Check collisions with all that is not the same
+			//o(projectiles does not collide with projectiles)
+			List<IGameObject> goList = getCollisions(shape, this.getObjectsByType(object.getClass(), false));
 			
 			Velocity velocity = object.getTotalVelocity();
 			for (IGameObject obj : goList) {

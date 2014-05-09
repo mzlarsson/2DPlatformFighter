@@ -28,8 +28,8 @@ public class Controller extends StateBasedGame {
 		p2handler.setValue(GameKey.LEFT, Input.KEY_LEFT);
 		p2handler.setValue(GameKey.RIGHT, Input.KEY_RIGHT);
 		p2handler.setValue(GameKey.JUMP, Input.KEY_I);
-		p2handler.setValue(GameKey.SKILL1, Input.KEY_O);
-		p2handler.setValue(GameKey.SKILL2, Input.KEY_P);
+		//p2handler.setValue(GameKey.SKILL1, Input.KEY_O);
+		//p2handler.setValue(GameKey.SKILL2, Input.KEY_P);
 		p2handler.setValue(GameKey.SKILL3, Input.KEY_K);
 		p2handler.setValue(GameKey.SKILL4, Input.KEY_L);
 		Player[] players = { new Player("BobTheSparklyMidget"), new Player("Nano", p2handler)};

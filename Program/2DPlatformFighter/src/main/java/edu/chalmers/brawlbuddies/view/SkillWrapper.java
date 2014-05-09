@@ -37,5 +37,7 @@ public class SkillWrapper implements IWrapper, ISkill {
 	public int getID() {
 		return skill.getID();
 	}
-
+	public int getOwnerID(){
+		return skill.getOwnerId();
+	}
 }

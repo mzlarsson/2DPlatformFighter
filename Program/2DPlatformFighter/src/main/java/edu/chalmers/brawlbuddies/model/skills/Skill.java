@@ -121,4 +121,12 @@ public class Skill implements ISkill{
 	public void resetCooldown() {
 		cooldownLeft = cooldown;
 	}
+	
+	/**
+	 * Returns the ownerID
+	 * return the ID of the character owning the skill
+	 */
+	public int getOwnerID() {
+		return ownerID;
+	}
 }

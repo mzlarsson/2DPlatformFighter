@@ -12,6 +12,7 @@ import org.newdawn.slick.tiled.TiledMap;
 public class WorldData {
 	
 	private Map<Integer, IGameObject> objects;
+	private GameMap gameMap = null;
 
 	public WorldData() {
 		objects = new TreeMap<Integer, IGameObject>();
@@ -21,15 +22,30 @@ public class WorldData {
 		this.objects.put(object.getID(), object);
 	}
 	
-	public void addMapData(TiledMap map){
-		Rectangle tmp = null;
-		for (int i = 0; i < map.getObjectGroupCount(); i++) {
-			for (int j = 0; j < map.getObjectCount(i); j++) {
-				tmp = new Rectangle(map.getObjectX(i, j), map.getObjectY(i, j),
-									map.getObjectWidth(i, j), map.getObjectHeight(i, j));
-				this.add(new MapObject(tmp));
+	public void setMap(GameMap gameMap){
+		//Reset old map
+		for(Integer i : this.objects.keySet()){
+			if(this.objects.get(i) instanceof MapObject){
+				this.objects.remove(i);
 			}
 		}
+		
+		this.gameMap = gameMap;
+		if(gameMap != null){
+			TiledMap map = gameMap.getMap();
+			Rectangle tmp = null;
+			for (int i = 0; i < map.getObjectGroupCount(); i++) {
+				for (int j = 0; j < map.getObjectCount(i); j++) {
+					tmp = new Rectangle(map.getObjectX(i, j), map.getObjectY(i, j),
+										map.getObjectWidth(i, j), map.getObjectHeight(i, j));
+					this.add(new MapObject(tmp));
+				}
+			}
+		}
+	}
+	
+	public GameMap getGameMap(){
+		return this.gameMap;
 	}
 	
 	public void remove(IGameObject object){
