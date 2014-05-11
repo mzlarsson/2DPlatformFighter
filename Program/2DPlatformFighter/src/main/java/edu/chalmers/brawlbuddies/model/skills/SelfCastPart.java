@@ -15,6 +15,10 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 public class SelfCastPart implements SkillPart {
 	private List<IEffect> effects;
 	
+	/**
+	 * Creates a new SelfCastPart with a list of given Effects
+	 * @param effects- a list of Effects
+	 */
 	public SelfCastPart(List<IEffect> effects) {
 		this.effects = effects;
 	}
@@ -38,9 +42,11 @@ public class SelfCastPart implements SkillPart {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setCreatorID(int id) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 }

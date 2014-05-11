@@ -14,11 +14,17 @@ public class WaitPart implements SkillPart {
 	private int delayLeft;
 	private boolean delayDone;
 	
+	/**
+	 * Creates a new WaitPart with a amount of delay
+	 * @param delay- the amount of delay
+	 */
 	public WaitPart(int delay) {
 		this.delayTotal = delay;
 		this.delayLeft = delay;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean activate(ICharacter c) {
 		if (delayDone) {
 			delayDone = false;
@@ -41,7 +47,9 @@ public class WaitPart implements SkillPart {
 			return delta;
 		}
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setCreatorID(int id) {
 	}
 

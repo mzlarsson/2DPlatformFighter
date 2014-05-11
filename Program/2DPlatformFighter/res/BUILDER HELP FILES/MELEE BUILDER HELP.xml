@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This is a document to help showcase the current possible ways to build a meele.
+Some information is handled by the nodes value-node inside another node <node>Value</node>.
+Some information is handled by the attributes of the nodes (see name below).
+Some of these are mandatory while others are optional for customization.
+The optional ones are surrounded by three stars in the document below.
+-->
+
+<melee ***name="examplemelee_1"***>
+	<!-- 
+		name:	(Optional) This is not currently used but is nice to have.
+	-->
+
+	<hitbox shape="rectangle" parameters="30,40"></hitbox>
+		<!--
+			This will build the hitbox with the given shape and the parameters
+			for that shape separated by commas.
+			
+			The possible shapes are:
+			Rectangle	shape: "rectangle" (as is)
+						parameters: "width,height" (in floats)
+			Circle		shape: "circle" (as is)
+						parameters: "radius" (in float)
+			Ellipse		shape: "ellispe" (as is)
+						parameters: "width,height" (in floats)
+		-->
+	<effects>
+		<effect>...</effect> x?
+		<!--
+			Effects is all the effects on the melee, you can have however many you'd like.
+			Check out the EFFECT BUILDER HELP for info on how to make effects.
+		-->
+			
+	</effects>
+	
+</melee>	

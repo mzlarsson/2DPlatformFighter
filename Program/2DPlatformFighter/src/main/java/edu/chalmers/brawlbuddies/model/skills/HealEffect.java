@@ -8,15 +8,22 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  * @revised Matz Larsson
  *
  */
-
 public class HealEffect implements IEffect {
 	private int creatorID;
 	private float healAmount;
 	
-	public HealEffect(float a) {
-		this.healAmount = a;
+	/**
+	 * Creates a new Heal Effect that will heal a object when exposed to the effect.
+	 * 
+	 * A HealEffect will not heal a object that is'nt a instance of HealAble
+	 * @param healAmount- the amount the Effect will heal
+	 */
+	public HealEffect(float healAmount) {
+		this.healAmount = healAmount;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean effect(IGameObject sender, IGameObject reciever) {
 		if(reciever instanceof HealAble){
 			((HealAble) reciever).heal(healAmount);
@@ -25,7 +32,9 @@ public class HealEffect implements IEffect {
 			return false;
 		}
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setCreatorID(int id) {
 		this.creatorID = id;
 	}

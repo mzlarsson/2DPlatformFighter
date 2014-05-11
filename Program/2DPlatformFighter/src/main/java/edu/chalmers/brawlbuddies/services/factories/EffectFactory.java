@@ -62,7 +62,7 @@ public class EffectFactory {
 			if( attributes.getNamedItem("intervall") != null){
 				intervall = Integer.parseInt(attributes.getNamedItem("intervall").getNodeValue());
 			}
-			return new SEEffect(new DamageStatusEffect(Integer.parseInt(effectNode.getFirstChild().getNodeValue()),1000, 0.5F));
+			return new SEEffect(new DamageStatusEffect(duration, intervall, Integer.parseInt(effectNode.getFirstChild().getNodeValue())));
 		
 		// Heal over time
 		} else if(effectName.equalsIgnoreCase("heal_over_time")){
@@ -89,7 +89,6 @@ public class EffectFactory {
 			if( attributes.getNamedItem("percent") != null){
 				scaleAmount += Float.parseFloat(effectNode.getFirstChild().getNodeValue())/ 100;
 			}
-			//TODO fix this with SlowSpeedStatusEffect
 			if( attributes.getNamedItem("static") != null){
 				String[] veloParams = attributes.getNamedItem("static").getNodeValue().split(",");
 				v = new Velocity( Float.parseFloat(veloParams[0]), Float.parseFloat(veloParams[1]));
@@ -101,7 +100,7 @@ public class EffectFactory {
 			NamedNodeMap attributes = effectNode.getAttributes();
 			Velocity v = null;
 			int duration = 5000;
-			int scaleAmount = 1;
+			int power = 1;
 			if(attributes.getNamedItem("velocity") != null){
 				String[] veloParams = attributes.getNamedItem("static").getNodeValue().split(",");
 				v = new Velocity( Float.parseFloat(veloParams[0]), Float.parseFloat(veloParams[1]));	
@@ -110,9 +109,9 @@ public class EffectFactory {
 				duration = Integer.parseInt(attributes.getNamedItem("duration").getNodeValue());
 			}
 			if( attributes.getNamedItem("strength") != null){
-				scaleAmount = Integer.parseInt(attributes.getNamedItem("strength").getNodeValue());
+				power = Integer.parseInt(attributes.getNamedItem("strength").getNodeValue());
 			}
-			return new SEEffect(new PushStatusEffect(duration, scaleAmount , v));
+			return new SEEffect(new PushStatusEffect(duration, power , v));
 		
 		// Shield
 		}else if( effectName.equalsIgnoreCase("shield")){
@@ -139,6 +138,8 @@ public class EffectFactory {
 				priority  = Integer.parseInt(attributes.getNamedItem("priority").getNodeValue());
 			}
 			return new SEEffect(new DamageImmunityStatusEffect(duration, priority));
+		
+		//Stun
 		} else if ( effectName.equalsIgnoreCase("stun")){
 			NamedNodeMap attributes = effectNode.getAttributes();
 			int duration = 5000;
@@ -146,6 +147,8 @@ public class EffectFactory {
 				duration = Integer.parseInt(attributes.getNamedItem("duration").getNodeValue());
 			}
 			return new SEEffect(new StunStatusEffect(duration));
+		
+		//Immobilize
 		} else if ( effectName.equalsIgnoreCase("immobilize")){
 			NamedNodeMap attributes = effectNode.getAttributes();
 			int duration = 5000;

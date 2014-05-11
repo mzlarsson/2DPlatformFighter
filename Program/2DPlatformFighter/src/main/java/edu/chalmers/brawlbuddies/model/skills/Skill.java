@@ -20,6 +20,14 @@ public class Skill implements ISkill{
 	private ICharacter currentCaster;
 	private String animName;
 	
+	/**
+	 * Creates a new Skill with
+	 * @param cd
+	 * @param id
+	 * @param typeID
+	 * @param ownerID
+	 * @param animation
+	 */
 	public Skill(int cd, int id, int typeID, int ownerID, String animation) {
 		this.cooldown = cd;
 		this.id = id;
@@ -46,6 +54,11 @@ public class Skill implements ISkill{
 		return this.animName;
 	}
 	
+	/**
+	 * Activates the skill
+	 * @param ch
+	 * @param delta
+	 */
 	private void activate(ICharacter ch, int delta) {
 		if (!skillActive) {
 			skillActive = true;
@@ -118,7 +131,7 @@ public class Skill implements ISkill{
 	}
 	
 	/**
-	 * Resets the cooldown to full.
+	 * Resets the cooldown time;
 	 */
 	public void resetCooldown() {
 		cooldownLeft = cooldown;

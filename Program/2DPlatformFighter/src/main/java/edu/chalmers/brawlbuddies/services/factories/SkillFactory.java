@@ -66,6 +66,8 @@ public class SkillFactory {
 						}
 					}
 					skill.addSkillPart(new ProjectilePart(projectile, aim, aimOffset));
+				
+				// Melee
 				} else if ( skillPart.getNodeName().equalsIgnoreCase("melee")){
 					MeleeCreator meleeCreator = MeleeFactory.create(skillPart.getAttributes().getNamedItem("name").getNodeValue());
 					Aim aim = null;

@@ -15,16 +15,22 @@ public class ProjectilePart implements SkillPart {
 	private IProjectileCreator shooter;
 	private Aim aim;
 	private float aimOffset;
-	
-	public void setCreatorID(int a){
-		shooter.setCreatorID(a);
-	}
-
+	/**
+	 * Creates a new Projectilepart with a projectilecreator, aim and aimOffset;
+	 * @param pc- the ProjectileCreator that will create and fire the projectile.
+	 * @param aim - the aim from which the object will be fired from.
+	 * @param aimOffset - the offset that will be added to the aim.
+	 */
 	public ProjectilePart(IProjectileCreator pc, Aim aim, float aimOffset) {
 		this.shooter = pc;
 		this.aim = aim;
 		this.aimOffset = aimOffset;
 	}
+	/**
+	 * Get the resulting aim from a character and the aimOffset
+	 * @param ch - the Character the aim will be taken from
+	 * @return the resulting aim
+	 */
 	
 	private Aim getAim(ICharacter ch) {
 		if (aim!=null) {
@@ -52,5 +58,12 @@ public class ProjectilePart implements SkillPart {
 		IProjectile p = shooter.fire(ch.getProjFirePos(), getAim(ch));
 		Creator.getInstance().fireEvent(p);
 		return true;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setCreatorID(int a){
+		shooter.setCreatorID(a);
 	}
 }

@@ -32,7 +32,18 @@ The optional ones are surrounded by three stars in the document below.
 											aim and fire the projectile	with the aim provided, which is
 											the parameters for a Aim-Vector (x and y) separated by a comma.
 			-->
-	
+		<melee name="examplemelee_1" ***aim_offset="15"*** ***aim="1,1"***> </melee>
+		    <!--
+		    	<melee>:  		A melee that will be created 
+		    	name:  	  		The name of the melee, must be the filename of the melee to be used.
+		    	aim_offset:   	(Optional) This will change the angle at which the projectile fires with
+										   the given number in degrees clockwise, without this the
+										   normal aim will be used without any offset.
+				aim:			(Optional) If this attribute is used it will override the characters own
+										   aim and fire the projectile	with the aim provided, which is
+										   the parameters for a Aim-Vector (x and y) separated by a comma. 
+		     -->
+		
 		<selfcast>
 			<effect>...</effect> x?
 		</selfcast>
