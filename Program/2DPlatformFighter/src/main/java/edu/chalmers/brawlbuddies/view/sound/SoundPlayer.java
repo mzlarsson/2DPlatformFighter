@@ -72,7 +72,9 @@ public class SoundPlayer implements IEventBusSubscriber{
 				this.sounds.put(typeID, new SoundData(typeID));
 			}
 			
-			String soundName = getSoundName((IWrapper)event.getActor(), (IWrapper)event.getRecipient(), event.getName());
+			IWrapper actor = (event.getActor() instanceof IWrapper?(IWrapper)event.getActor():null);
+			IWrapper recipient = (event.getRecipient() instanceof IWrapper?(IWrapper)event.getRecipient():null);
+			String soundName = getSoundName(actor, recipient, event.getName());
 			this.sounds.get(typeID).playSound(uniqueID, soundName!=null?soundName:event.getName());
 		}
 	}
