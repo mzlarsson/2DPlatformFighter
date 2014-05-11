@@ -18,8 +18,12 @@ public class DamageEffect implements IEffect {
 	 * A DamageEffect will not effect a target with the same ID as its creatorID 
 	 * or a target that is'nt a instance of DamageAble.
 	 * @param damage- the amount of damage that exposed objects will take
+	 * @throws IllegalArgumentException if damage is below zero
 	 */
 	public DamageEffect(float damage) {
+		if( damage < 0){
+			throw new IllegalArgumentException("damage can't be below zero");
+		}
 		this.damage = damage;
 	}
 	/**

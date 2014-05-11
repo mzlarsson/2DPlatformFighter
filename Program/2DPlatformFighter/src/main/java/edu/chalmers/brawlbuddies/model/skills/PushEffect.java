@@ -21,14 +21,15 @@ public class PushEffect implements IEffect {
 	/**
 	 * Creates a new Push Effect that will push a object when exposed to the effect. 
 	 * 
-	 * If velocity is null the exposed object will be pushed with a velocity of the magnitude of power 
-	 * and the direction of the sending object and aimOffset. 
+	 * If velocity is null the exposed object will be pushed with a velocity of the scale of power 
+	 * and the direction of the velocity from sending object with the offset of aimOffset. 
 	 * 
-	 * If velocity is'nt null the exposed object will be pushed with velocity
+	 * If velocity is'nt null the exposed object will be pushed with a velocity of the scale of power
+	 * and the direction of velocity
 	 * 
 	 * A Push Effect will not effect a target with the same ID as its creatorID 
 	 * or a target that is'nt a instance of PushAble.
-	 * @param power - the magnitude of the push if no velocity is set
+	 * @param power - the magnitude of the push
 	 * @param v - the velocity of the push
 	 * @param aimOffset - the aim offset that will be added if no velocity is set.
 	 */

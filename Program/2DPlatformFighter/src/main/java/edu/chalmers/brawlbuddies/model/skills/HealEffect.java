@@ -17,8 +17,12 @@ public class HealEffect implements IEffect {
 	 * 
 	 * A HealEffect will not heal a object that is'nt a instance of HealAble
 	 * @param healAmount- the amount the Effect will heal
+	 * @throws IllegalArgumentException if healAmount is below zero
 	 */
 	public HealEffect(float healAmount) {
+		if(healAmount < 0){
+			throw new IllegalArgumentException("heal cant be below zero");
+		}
 		this.healAmount = healAmount;
 	}
 	/**
