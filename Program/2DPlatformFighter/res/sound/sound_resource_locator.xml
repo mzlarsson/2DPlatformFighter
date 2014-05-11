@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+
+	<!-- Characters	1### -->
+	
+	
+	<!-- Skills	2### -->
+	
+	
+	
+	<!-- Projectile	3### -->
+	<resource id="ID_30">
+	    <name>small_poison_projectile</name>
+	    <sound>
+	        <trigger>createObject</trigger>
+	        <source>shoot.wav</source>
+	    </sound>
+	    <sound>
+	        <trigger>removeeObject</trigger>
+	        <source>bigshot.ogg</source>
+	    </sound>
+	</resource>
+
+</resources>

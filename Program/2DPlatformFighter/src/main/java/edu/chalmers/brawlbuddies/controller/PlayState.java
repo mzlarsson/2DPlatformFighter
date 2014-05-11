@@ -6,11 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.model.BrawlBuddies;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.services.factories.GameFactory;
 import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.IView;
+import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 public class PlayState extends BasicGameState{
 	
@@ -81,11 +81,13 @@ public class PlayState extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Entering Play state");
+		SoundPlayer.getInstance().start();
 	}
 	
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Leaving Play state");
+		SoundPlayer.getInstance().stop();
 	}
 	
 	@Override

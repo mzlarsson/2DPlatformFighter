@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">	
+
+	<!-- Simple elements -->
+	<xs:element name="trigger" type="xs:string"/>
+	<xs:element name="source" type="xs:string"/>
+	<xs:element name="name" type="xs:string"/>
+	<xs:element name="stopper" type="xs:string"/>
+
+	<!-- Elements -->
+	<xs:element name="stoppers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="stopper" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+    <xs:element name="sound">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="trigger"/>
+    			<xs:element ref="source"/>
+    		</xs:sequence>
+    		<xs:attribute name="looping" type="xs:boolean"/>
+    	</xs:complexType>
+    </xs:element>
+    
+    
+    <xs:element name="resource">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="name"/>
+    			<xs:element ref="sound" minOccurs="0" maxOccurs="unbounded"/>
+    		</xs:sequence>
+    		<xs:attribute name="id" type="xs:ID" use="required"/>
+    	</xs:complexType>
+    </xs:element>
+	
+
+    <xs:element name="resources">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="resource" minOccurs="0" maxOccurs="unbounded"/>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+</xs:schema>

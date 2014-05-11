@@ -1,10 +1,14 @@
 package edu.chalmers.brawlbuddies.util;
 
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioImpl;
+import org.newdawn.slick.openal.SoundStore;
 
 /**
  * A type of wrapper to cover the holes in Slick with some functionality it lacks.
@@ -31,6 +35,10 @@ public class SlickUtil {
 		}
 		return copy;
 	}
+	
+	/*public static Sound copy(Sound sound){
+		return sound;
+	}*/
 	
 	/**
 	 * Converts a shape to a polygon
