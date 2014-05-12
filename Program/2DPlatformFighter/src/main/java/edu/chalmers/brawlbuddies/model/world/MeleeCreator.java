@@ -42,8 +42,6 @@ public class MeleeCreator {
 		Shape tmp = SlickUtil.copy(shape);
 		tmp.setCenterX(newPos.getX());
 		tmp.setCenterY(newPos.getY());
-		
-		System.out.println(pos+"  "+newPos);
 		return new Melee(tmp, new Movement(new Velocity(aim, 1), true) , this.typeID, effects);
 	}
 	

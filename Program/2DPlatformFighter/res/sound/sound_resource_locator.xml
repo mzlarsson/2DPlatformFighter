@@ -6,6 +6,13 @@
 	
 	
 	<!-- Skills	2### -->
+	<resource id="ID_22">
+	    <name>bob_lick</name>
+	    <sound>
+	        <trigger>skillUsed</trigger>
+	        <source>lick.ogg</source>
+	    </sound>
+	</resource>
 	
 	
 	
