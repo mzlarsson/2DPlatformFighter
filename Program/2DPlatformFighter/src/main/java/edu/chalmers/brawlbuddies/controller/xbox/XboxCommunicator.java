@@ -10,6 +10,13 @@ import javax.swing.Timer;
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 
+/**
+ * Class for handling the connection and data transfer with an XBOX 360 controller
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class XboxCommunicator {
 	
 	private Controller controller;
@@ -22,18 +29,38 @@ public class XboxCommunicator {
 	
 	private List<XboxListener> listeners;
 
+	/**
+	 * Creates a new communicator with the given controller and
+	 * with 20 ms between the data pulls. The dead zone is 0.3.
+	 * @param controller The controller to use
+	 */
 	public XboxCommunicator(Controller controller) {
 		this(controller, 20);
 	}
 	
+	/**
+	 * Creates a new communicator with the given controller and update interval.
+	 * The dead zone is set to 0.3.
+	 * @param controller The controller to use
+	 * @param updateInterval The time (in ms) between pull updates
+	 */
 	public XboxCommunicator(Controller controller, int updateInterval){
 		this(controller, updateInterval, 0.3f);
 	}
 	
+	/**
+	 * Creates a new communicator with given controller, update interval and dead zone.
+	 * @param controller The controller to use
+	 * @param updateInterval The time (in ms) between pull updates
+	 * @param deadZone The minimum change that will be reckoned for an axis
+	 */
 	public XboxCommunicator(Controller controller, int updateInterval, float deadZone){
 		this.controller = controller;
+		//Setup button variables
 		this.buttonPressed = new boolean[controller.getButtonCount()+4];
 		this.buttonHeld = new boolean[controller.getButtonCount()+4];
+		
+		//Setup axis variables
 		this.axis = new float[controller.getAxisCount()];
 		this.axisMinimum = new float[controller.getAxisCount()];
 		this.axisChanged = new boolean[controller.getAxisCount()];
@@ -44,8 +71,10 @@ public class XboxCommunicator {
 			this.controller.setDeadZone(i, deadZone);
 		}
 		
+		//Set up event variable
 		listeners = new ArrayList<XboxListener>();
 		
+		//Set up pull timer
 		updateTimer = new Timer(updateInterval, new ActionListener(){
 			public void actionPerformed(ActionEvent ae){
 				updateData();
@@ -158,6 +187,13 @@ public class XboxCommunicator {
 		this.updateTimer.setDelay(updateInterval);
 	}
 	
+	/**
+	 * Sets the minimum axis value that is allowed. Values below this
+	 * minimum value will be interpreted as 0.
+	 * @param axisIndex The real index of the axis
+	 * @param value The value to use
+	 * @throws IllegalArgumentException If the given index does not answer for an axis
+	 */
 	public void setMinimumAxisValue(int axisIndex, float value){
 		if(axisIndex>=0 && axisIndex<this.axisChanged.length){
 			this.axisMinimum[axisIndex] = Math.abs(value);
@@ -295,6 +331,7 @@ public class XboxCommunicator {
 	 */
 	private void updateAxis(){
 		for(int i = 0; i<this.axis.length; i++){
+			//Think of all values below axisMinimum as 0
 			if(isInsideInterval(this.axis[i], -axisMinimum[i], axisMinimum[i]) != 
 			   isInsideInterval(controller.getAxisValue(i), -axisMinimum[i], axisMinimum[i])){
 				this.notifyAll(i);
@@ -312,6 +349,13 @@ public class XboxCommunicator {
 		}
 	}
 	
+	/**
+	 * Checks whether a value is within an interval or not
+	 * @param value The value to check for
+	 * @param min The minimum value in the interval
+	 * @param max The maximum value in the interval
+	 * @return <code>true</code> if the value is inside the interval, <code>false</false> otherwise
+	 */
 	private boolean isInsideInterval(float value, float min, float max){
 		return value >= min && value <= max;
 	}

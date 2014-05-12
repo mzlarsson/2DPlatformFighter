@@ -8,9 +8,9 @@ import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 
 /**
- * Class for handling connections towards XBOX 360 controllers.
+ * Class for finding connections towards XBOX 360 controllers.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

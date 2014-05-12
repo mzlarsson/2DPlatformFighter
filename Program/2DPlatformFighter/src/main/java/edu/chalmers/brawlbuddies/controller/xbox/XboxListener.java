@@ -1,5 +1,12 @@
 package edu.chalmers.brawlbuddies.controller.xbox;
 
+/**
+ * Interface for accessing listener methods for XBOX 360 controllers
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public interface XboxListener {
 
 	/**

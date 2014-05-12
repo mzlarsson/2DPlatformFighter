@@ -14,7 +14,7 @@ import javax.swing.Timer;
  * Communicator between the computer and a MIDI device such as a synth.
  * This class requires a Transmitter retrieved from a MIDI device.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

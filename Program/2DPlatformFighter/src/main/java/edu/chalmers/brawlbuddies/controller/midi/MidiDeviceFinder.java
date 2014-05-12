@@ -11,7 +11,7 @@ import javax.sound.midi.Transmitter;
 /**
  * Class for finding MIDI devices and connect to their Transmissions.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

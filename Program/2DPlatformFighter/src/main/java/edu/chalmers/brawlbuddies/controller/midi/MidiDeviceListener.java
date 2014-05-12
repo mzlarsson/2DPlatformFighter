@@ -4,7 +4,7 @@ package edu.chalmers.brawlbuddies.controller.midi;
  * Interface for handling events from a MIDI device.
  * Recommended is to use a DeviceCommunicator.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

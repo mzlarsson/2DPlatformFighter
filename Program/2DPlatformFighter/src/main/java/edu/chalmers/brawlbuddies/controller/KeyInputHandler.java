@@ -11,7 +11,7 @@ import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 
 /**
- * Class for handling input control settings.
+ * Class for handling input control settings from keyboard and mouse.
  * @author Matz Larsson
  * @version 0.1
  *
@@ -19,8 +19,11 @@ import edu.chalmers.brawlbuddies.model.Position;
 
 public class KeyInputHandler implements InputHandler, KeyListener{
 	
+	/** ID of the left mouse button */
 	public static final int MOUSE_LEFT_BUTTON = 1000+Input.MOUSE_LEFT_BUTTON;
+	/** ID of the right mouse button */
 	public static final int MOUSE_RIGHT_BUTTON = 1000+Input.MOUSE_RIGHT_BUTTON;
+	/** ID of the middle mouse button */
 	public static final int MOUSE_MIDDLE_BUTTON = 1000+Input.MOUSE_MIDDLE_BUTTON;
 	
 	private Map<GameKey, Integer> keys;
@@ -29,10 +32,21 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	private float mouseAngle = 0.0f;
 	private boolean useMouse = true;
 	
+	/**
+	 * Creates a new KeyInputHandler which uses the mouse to aim
+	 * NOTE: No input is connected to this handler while using this constructor.
+	 * @see edu.chalmers.brawlbuddies.controller.KeyInputHandler.setInput(Input)
+	 */
 	public KeyInputHandler(){
 		this(true);
 	}
 	
+	/**
+	 * Creates a new KeyInputHandler which may use the mouse to aim
+	 * @param useMouse If the mouse should be used for aiming
+	 * NOTE: No input is connected to this handler while using this constructor.
+	 * @see edu.chalmers.brawlbuddies.controller.KeyInputHandler.setInput(Input)
+	 */
 	public KeyInputHandler(boolean useMouse){
 		this.keys = new TreeMap<GameKey, Integer>();
 		this.useMouse = useMouse;
@@ -40,10 +54,19 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		resetDefault();
 	}
 
+	/**
+	 * Creates a new KeyInputHandler which uses the mouse for aiming
+	 * @param input The input object to fetch data from
+	 */
 	public KeyInputHandler(Input input){
 		this(input, true);
 	}
 	
+	/**
+	 * Creates a new KeyInputHandler which may use the mouse for aiming
+	 * @param input The input object to fetch data from
+	 * @param useMouse If the mouse should be used for aiming
+	 */
 	public KeyInputHandler(Input input, boolean useMouse) {
 		this.keys = new TreeMap<GameKey, Integer>();
 		this.useMouse = useMouse;
@@ -51,6 +74,10 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		resetDefault();
 	}
 	
+	/**
+	 * Constructs a new KeyInputHandler in the same way as the given handler
+	 * @param handler The KeyInputHandler to fetch data from
+	 */
 	public KeyInputHandler(KeyInputHandler handler){
 		GameKey[] hKeys = handler.getAllControlNames();
 		for(int i = 0; i<hKeys.length; i++){
@@ -61,6 +88,9 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		this.useMouse = handler.useMouse;
 	}
 	
+	/**
+	 * Resets all input settings to default
+	 */
 	public void resetDefault(){
 		this.setValue(GameKey.UP, Input.KEY_W);
 		this.setValue(GameKey.DOWN, Input.KEY_S);
@@ -73,10 +103,18 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		this.setValue(GameKey.SKILL4, Input.KEY_E);
 	}
 
+	/**
+	 * Returns the input this object fetches data from
+	 * @return The input this object fetches data from
+	 */
 	public Input getInput(){
 		return this.input;
 	}
 	
+	/**
+	 * Removes the previous input and sets the given input as the new one
+	 * @param input The input object to use
+	 */
 	public void setInput(Input input){
 		if(this.input != null){
 			this.input.removeKeyListener(this);
@@ -91,15 +129,28 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		}
 	}
 	
+	/**
+	 * Set if this handler should consider the mouse as aiming device
+	 * @param useMouse <code>true</code> if the mouse should be used for aiming, <code>false</code> otherwise
+	 */
 	public void useMouse(boolean useMouse){
 		this.useMouse = useMouse;
 	}
 	
+	/**
+	 * Returns the names of the GameKeys that is set in this object
+	 * @return The names of the GameKeys that is set
+	 */
 	private GameKey[] getAllControlNames(){
 		Object[] keys = this.keys.keySet().toArray();
 		return Arrays.copyOf(keys, keys.length, GameKey[].class);
 	}
 	
+	/**
+	 * Gets the numeric key value (current settings) of a certain GameKey
+	 * @param key The GameKey to get value for
+	 * @return The numeric current key value for the GameKey
+	 */
 	public int getValue(GameKey key){
 		Integer keyValue = this.keys.get(key);
 		if(keyValue != null){
@@ -109,14 +160,23 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		}
 	}
 	
+	/**
+	 * Sets a given GameKey to a new custom value
+	 * NOTE: For setting mouse controls, see public variables of this class
+	 * NOTE: For setting key controls, see public variables of the Input class
+	 * @param key The GameKey to set
+	 * @param value The value to use for the given GameKey
+	 */
 	public void setValue(GameKey key, int ch){
 		this.keys.put(key, ch);
 	}
 	
-	public void clearValue(GameKey key){
-		this.keys.remove(key);
-	}
-	
+	/**
+	 * Determines if this GameKey has been activated.
+	 * E.g. keys are activated when they are pressed, not held down.
+	 * @param key The GameKey to check
+	 * @return <code>true</code> if the GameKey is activated, <code>false</code> otherwise
+	 */
 	public boolean isActivated(GameKey key){
 		if(this.isMouseButton(this.getValue(key))){
 			return this.input.isMousePressed(this.getMouseIndex(this.getValue(key)));
@@ -124,7 +184,13 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 			return this.input.isKeyPressed(this.getValue(key));
 		}
 	}
-	
+
+	/**
+	 * Determines if the GameKey currently is active
+	 * E.g. keys are active when they are held down
+	 * @param key The GameKey to check
+	 * @return <code>true</code> if the GameKey is active, <code>false</code> otherwise
+	 */
 	public boolean isActive(GameKey key){
 		if(this.isMouseButton(this.getValue(key))){
 			return this.input.isMouseButtonDown(this.getMouseIndex(this.getValue(key)));
@@ -133,6 +199,10 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		}
 	}
 	
+	/**
+	 * Calculates a Direction depending on the directional GameKeys (LEFT, RIGHT, UP, DOWN)
+	 * @return A move Direction depending on current input state
+	 */
 	public Direction getDirection(){
 		Direction dir = Direction.NONE;
 		if (this.input.isKeyDown(this.getValue(GameKey.UP))) {
@@ -151,6 +221,10 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		return dir;
 	}
 
+	/**
+	 * Determines the position of the virtual mouse of this input
+	 * @return The position of the virtual mouse
+	 */
 	public Position getMousePosition() {
 		if(!this.isMousePositionRelative()){
 			return new Position(this.input.getMouseX(), this.input.getMouseY());
@@ -159,17 +233,35 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		}
 	}
 	
+	/**
+	 * Determines if the given index is connected to a mouse button
+	 * @param index The index to check
+	 * @return <code>true</code> if the index is connected to a mouse button, <code>false</code> otherwise
+	 */
 	public boolean isMouseButton(int index){
 		return index>=1000;
 	}
-	public int getMouseIndex(int index){
+	
+	/**
+	 * Converts an KeyInputHandler mouse index to a Slick mouse index
+	 * @param index The KeyInputHandler index as given 
+	 * @return The Slick mouse index
+	 */
+	private int getMouseIndex(int index){
 		return index-1000;
 	}
 	
+	/**
+	 * Determines whether the method getMousePosition() returns a relative or absolute position
+	 * @return <code>true</code> if the position is relative, <code>false</code> if it is absolute
+	 */
 	public boolean isMousePositionRelative(){
 		return !this.useMouse;
 	}
 
+	/**
+	 * Sets up the position of the virtual mouse depending on directional GameKeys
+	 */
 	private void setupMouse(){
 		float mouseAngle = this.mouseAngle;
 		if(isActive(GameKey.LEFT)){
@@ -209,6 +301,11 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		this.mousePos.set((float)Math.cos(Math.toRadians(mouseAngle))*100, (float)Math.sin(Math.toRadians(mouseAngle))*100);
 	}
 
+	/**
+	 * Determines if the given key is connected to a directional GameKey
+	 * @param key The value to test
+	 * @return <code>true</code> if the given key is connected to a directional GameKey, <code>false</code> otherwise
+	 */
 	public boolean isDirectionKey(int key){
 		return key == getValue(GameKey.LEFT) || 
 			   key == getValue(GameKey.RIGHT) || 
@@ -216,20 +313,44 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 			   key == getValue(GameKey.DOWN);
 	}
 
+	/**
+	 * Triggered when a key is pressed
+	 * @param key The key which is pressed
+	 * @param The char the pressed key represents
+	 */
 	public void keyPressed(int key, char ch) {
 		if(isMousePositionRelative() && isDirectionKey(key)){
 			setupMouse();
 		}
 	}
 
+	/**
+	 * Triggered when a key is released
+	 * @param key The key which is pressed
+	 * @param The char the pressed key represents
+	 */
 	public void keyReleased(int key, char ch) {
 		if(isMousePositionRelative() && isDirectionKey(key)){
 			setupMouse();
 		}
 	}
 	
+	/**
+	 * Triggered when the input object has been stopped.
+	 * NOTE: Not used.
+	 */
 	public void inputEnded() {}
+	
+	/**
+	 * Triggered when the input object has been started
+	 * NOTE: Not used.
+	 */
 	public void inputStarted() {}
+	
+	/**
+	 * Determines whether this handler accepts inputs.
+	 * @return <code>true</code> if the handler accepts inputs, <code>false</code> otherwise
+	 */
 	public boolean isAcceptingInput() {
 		return true;
 	}
