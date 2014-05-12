@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.xbox;
+package edu.chalmers.brawlbuddies.controller.input.xbox;
 
 import java.util.ArrayList;
 import java.util.List;

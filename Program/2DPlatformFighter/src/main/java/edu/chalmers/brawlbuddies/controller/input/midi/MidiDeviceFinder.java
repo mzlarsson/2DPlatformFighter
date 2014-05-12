@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.midi;
+package edu.chalmers.brawlbuddies.controller.input.midi;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class MidiDeviceFinder {
 	
 	/**
 	 * Retrieves the number of recognized devices
-	 * @return
+	 * @return The number of recognized devices
 	 */
 	public int getCount(){
 		return this.devices.size();

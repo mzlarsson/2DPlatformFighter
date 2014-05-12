@@ -1,5 +1,8 @@
 package edu.chalmers.brawlbuddies.controller;
 
+import edu.chalmers.brawlbuddies.controller.input.InputHandler;
+import edu.chalmers.brawlbuddies.controller.input.KeyInputHandler;
+
 /**
  * A class to describe a player playing the game.
  * 
@@ -24,7 +27,7 @@ public class Player {
 	/**
 	 * Creates a new player with deafult key input.
 	 * @param name The name of the player
-	 * @param ch The character to use
+	 * @param characterID The ID of the character to use
 	 */
 	public Player(String name, int characterID) {
 		this(name, characterID, new KeyInputHandler());
@@ -42,7 +45,7 @@ public class Player {
 	/**
 	 * Creates a new player with predefined control settings.
 	 * @param name Name of the player
-	 * @param ch Character to use
+	 * @param characterID The ID of the character to use
 	 * @param handler Handler for handling controls.
 	 */
 	public Player(String name, int characterID, InputHandler handler) {

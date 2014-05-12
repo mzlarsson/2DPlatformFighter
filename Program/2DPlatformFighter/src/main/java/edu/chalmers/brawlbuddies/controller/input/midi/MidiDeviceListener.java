@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.midi;
+package edu.chalmers.brawlbuddies.controller.input.midi;
 
 /**
  * Interface for handling events from a MIDI device.

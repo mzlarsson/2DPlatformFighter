@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.xbox;
+package edu.chalmers.brawlbuddies.controller.input.xbox;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -153,7 +153,7 @@ public class XboxCommunicator {
 	 * Returns whether this button is pressed
 	 * @param buttonIndex The index of the button
 	 * @return <code>true</code> if the button is pressed, <code>false</code> otherwise
-	 * @see isButtonHeld(int buttonIndex)
+	 * @see #isButtonHeld(int)
 	 */
 	public boolean isButtonPressed(int buttonIndex){
 		if(buttonIndex>=0 && buttonIndex<this.buttonPressed.length){
@@ -169,7 +169,7 @@ public class XboxCommunicator {
 	 * Returns whether this button is held down
 	 * @param buttonIndex The index of the button
 	 * @return <code>true</code> if the button is held down, <code>false</code> otherwise
-	 * @see isButtonPressed(int buttonIndex)
+	 * @see #isButtonPressed(int)
 	 */
 	public boolean isButtonHeld(int buttonIndex){
 		if(buttonIndex>=0 && buttonIndex<this.buttonHeld.length){

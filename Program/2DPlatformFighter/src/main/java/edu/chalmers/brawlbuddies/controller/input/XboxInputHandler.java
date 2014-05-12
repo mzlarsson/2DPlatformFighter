@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.input;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,9 +8,9 @@ import java.util.TreeMap;
 
 import javax.swing.Timer;
 
-import edu.chalmers.brawlbuddies.controller.xbox.XboxFinder;
-import edu.chalmers.brawlbuddies.controller.xbox.XboxInput;
-import edu.chalmers.brawlbuddies.controller.xbox.XboxListener;
+import edu.chalmers.brawlbuddies.controller.input.xbox.XboxFinder;
+import edu.chalmers.brawlbuddies.controller.input.xbox.XboxInput;
+import edu.chalmers.brawlbuddies.controller.input.xbox.XboxListener;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 
@@ -78,11 +78,11 @@ public class XboxInputHandler implements InputHandler, XboxListener {
 		this.setValue(GameKey.DOWN, XboxInput.AXIS_Y_POS);
 		this.setValue(GameKey.RIGHT, XboxInput.AXIS_X_POS);
 		this.setValue(GameKey.LEFT, XboxInput.AXIS_X_NEG);
-		this.setValue(GameKey.JUMP, XboxInput.BUTTON_LT);
+		this.setValue(GameKey.JUMP, XboxInput.BUTTON_A);
 		this.setValue(GameKey.SKILL1, XboxInput.BUTTON_RT);
-		this.setValue(GameKey.SKILL2, XboxInput.BUTTON_RB);
+		this.setValue(GameKey.SKILL2, XboxInput.BUTTON_LT);
 		this.setValue(GameKey.SKILL3, XboxInput.BUTTON_LB);
-		this.setValue(GameKey.SKILL4, XboxInput.BUTTON_LEFTSTICK);
+		this.setValue(GameKey.SKILL4, XboxInput.BUTTON_RB);
 	}
 	
 	/**
@@ -262,5 +262,20 @@ public class XboxInputHandler implements InputHandler, XboxListener {
 			mouseTimer.start();
 		}
 	}
-
+	
+	/**
+	 * Returns a formatted string describing this object
+	 */
+	public String toString(){
+		String ans = "XboxInputHandler [";
+		
+		boolean firstDone = false;
+		for(GameKey key : this.getAllControlNames()){
+			ans += (firstDone?", ":"")+key+"="+this.getValue(key);
+			firstDone = true;
+		}
+		
+		ans += "]";
+		return ans;
+	}
 }

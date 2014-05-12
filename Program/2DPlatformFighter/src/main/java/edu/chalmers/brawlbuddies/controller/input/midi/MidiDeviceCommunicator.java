@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.midi;
+package edu.chalmers.brawlbuddies.controller.input.midi;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

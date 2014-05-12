@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.input;
 
 /**
  * Enum for defining the different possible commands in the game.
