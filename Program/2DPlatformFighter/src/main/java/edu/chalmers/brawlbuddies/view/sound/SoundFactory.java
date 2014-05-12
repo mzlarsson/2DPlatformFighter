@@ -24,7 +24,7 @@ public class SoundFactory {
 	 */
 	private SoundFactory() {
 		this.document = XMLReader.getDocument(Constants.SOUND + "sound_resource_locator.xml", Constants.SOUND + "sound_schema.xsd");
-		this.typeName = new String[]{null, "characters", "skills", "projectiles"};
+		this.typeName = new String[]{null, "characters", "skills", "projectiles", "melees"};
 	}
 	
 	/**
@@ -55,9 +55,9 @@ public class SoundFactory {
 			
 			NodeList soundNodes = el.getElementsByTagName("sound");
 			NodeList stopNodes = null;
-			Element soundNode = null, stoppersNode = null;
+			Element soundNode = null;
 			SoundKeeper sound = null;
-			String key = "", filePath = "", stop = "";
+			String key = "", filePath = "";
 			boolean looping = false;
 			for(int i = 0; i<soundNodes.getLength(); i++){
 				//Basic nodes
