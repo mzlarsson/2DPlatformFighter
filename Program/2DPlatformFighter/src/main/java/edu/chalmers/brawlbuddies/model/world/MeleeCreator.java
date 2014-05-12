@@ -15,11 +15,13 @@ public class MeleeCreator {
 	private int typeID;
 	private Shape shape;
 	private int creatorID = 0;
+	
 	public MeleeCreator(List<IEffect> effects, Shape shape , int id) {
 		this.effects = effects;
 		this.shape = shape;
 		this.typeID  = id;
 	}
+	
 	public void setCreatorID(int a) {
 		this.creatorID = a;
 		if (effects != null) {
@@ -28,16 +30,21 @@ public class MeleeCreator {
 			}
 		}
 	}
+	
 	public Melee fire(ICharacter character){
-		Position pos = character.getAim().getX() > 0? (character.getCenterPosition().subtract(this.shape.getWidth() / 2, 0)) 
-				: character.getCenterPosition().add(this.shape.getWidth(), 0);
 		return this.fire(character.getCenterPosition(), character.getAim());
 	}
+	
 	public Melee fire(Position pos, Aim aim){
+		Position newPos = aim.getX() > 0? (pos.add(this.shape.getWidth() / 2, 0)) 
+				: pos.subtract(this.shape.getWidth(), 0);
+		
 		Shape tmp = SlickUtil.copy(shape);
-		tmp.setCenterX(pos.getX());
-		tmp.setCenterY(pos.getY());
-		return new Melee(this.shape , new Movement(new Velocity(aim, 1), true) , this.typeID, effects);
+		tmp.setCenterX(newPos.getX());
+		tmp.setCenterY(newPos.getY());
+		
+		System.out.println(pos+"  "+newPos);
+		return new Melee(tmp, new Movement(new Velocity(aim, 1), true) , this.typeID, effects);
 	}
 	
 	

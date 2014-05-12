@@ -21,23 +21,25 @@ public class Melee extends GameObject {
 		
 	}
 	public boolean isDestroyed() {
-		return false; 
+		return this.destroyed; 
 	}
 
-	public void onCollision(IGameObject object, Alignment alignment) {
-		if(object instanceof Impassible){
-			this.destroyed = true;
-		}else{
-			for(int i = 0 ; i < effects.size(); i++){
-				effects.get(i).effect(this, object);
+	public void onCollision(IGameObject object, Alignment alignment){
+		if(object != null){
+			if(object instanceof Impassible){
+				this.destroyed = true;
+			}else{
+				for(int i = 0 ; i < effects.size(); i++){
+					effects.get(i).effect(this, object);
+				}
 			}
 		}
 	}
 
 	@Override
 	public Position update(int delta) {
-		destroyed = true;
-		return null;
+		this.destroyed = true;
+		return this.getCenterPosition();
 	}
 
 	@Override
