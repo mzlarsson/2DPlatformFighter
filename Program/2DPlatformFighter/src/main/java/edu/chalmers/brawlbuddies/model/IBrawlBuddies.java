@@ -41,4 +41,16 @@ public interface IBrawlBuddies {
 	 * @return IDs of all the character sorted by creation time
 	 */
 	public int[] getCharacterIDs();
+	
+	/**
+	 * Adds the given GameListener as a listener to catch game events.
+	 * @param gl The GameListener to handle the events this class throws.
+	 */
+	public void addGameListener(GameListener gl);
+	
+	/**
+	 * Removes the given GameListener as a listener to this class.
+	 * @param gl The GameListener to be removed.
+	 */
+	public void removeGameListener(GameListener gl);
 }

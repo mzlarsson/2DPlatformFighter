@@ -2,6 +2,7 @@ package edu.chalmers.brawlbuddies.model.world;
 
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.DamageAble;
@@ -35,5 +36,17 @@ public interface ICharacter extends IGameObject, HealAble, DamageAble, PushAble{
 	public void resetGravity();
 	public void addSpeed(Velocity velocity);
 	public void removeSpeed(Velocity velocity);
+	
+	/**
+	 * Adds the given GameListener as a listener to catch game events.
+	 * @param gl The GameListener to handle the events this class throws.
+	 */
+	public void addGameListener(GameListener gl);
+	
+	/**
+	 * Removes the given GameListener as a listener to this class.
+	 * @param gl The GameListener to be removed.
+	 */
+	public void removeGameListener(GameListener gl);
 
 }

@@ -52,7 +52,7 @@ public class PlayState extends BasicGameState{
 	public void startGame(Player[] players, String[] names){
 		view = new GameView();
 		this.players = players;
-		game = GameFactory.create("basic16Map", names);
+		game = GameFactory.create("basic16Map", names, 0, 3);
 		int[] id = game.getCharacterIDs();
 		for(int i = 0; i<players.length; i++){
 			players[i].setCharacterID(id[i]);

@@ -7,6 +7,7 @@ import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
@@ -186,6 +187,14 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 	
 	public void reset(){
 		character.reset();
+	}
+	
+	public void addGameListener(GameListener gl) {
+		character.addGameListener(gl);
+	}
+	
+	public void removeGameListener(GameListener gl) {
+		character.removeGameListener(gl);
 	}
 
 }
