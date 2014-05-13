@@ -130,7 +130,10 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void move(Direction dir) {
 		if( statusEffectList.canMove()){
-		this.getMovement().move(dir);
+			this.getMovement().move(dir);
+		} else {
+			this.getMovement().move(Direction.NONE);
+			this.cancelJump();
 		}
 	}
 
@@ -149,7 +152,9 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void makeJump() {
 		if(statusEffectList.canJump()){
-		this.getMovement().jump();
+			this.getMovement().jump();
+		} else {
+			this.cancelJump();
 		}
 	}
 

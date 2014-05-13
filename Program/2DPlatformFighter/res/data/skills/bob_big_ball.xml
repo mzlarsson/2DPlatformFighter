@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<skill name="Bobs Big Ball" cooldown="5000" id="21">
-
-	<skillparts>
-		<projectile name="bob_big_ball"></projectile>
-	</skillparts>
-
-</skill>

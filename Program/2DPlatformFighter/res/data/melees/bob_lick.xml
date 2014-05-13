@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectile name="bob_lick" id="40">
 
-	<hitbox shape="circle" parameters="100"></hitbox>
+	<hitbox shape="circle" parameters="30"></hitbox>
 	<effects>
-		<damage>40</damage>
-		<push>100</push>
+		<damage_over_time duration="3000" intervall="1000">30</damage_over_time>
+		<push offset="30">200</push>
+		<slow duration="3000" percent="-30"></slow>
 	</effects>
 	
 </projectile>

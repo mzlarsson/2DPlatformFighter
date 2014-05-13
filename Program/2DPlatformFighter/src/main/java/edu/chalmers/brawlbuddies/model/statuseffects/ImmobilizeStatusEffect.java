@@ -52,7 +52,7 @@ public class ImmobilizeStatusEffect implements IPreActStatusEffect {
 	 * {@inheritDoc}
 	 */
 	public boolean canAct(Action action) {
-		if(action == Action.JUMP && action == Action.MOVE){
+		if(action == Action.JUMP || action == Action.MOVE){
 			return false;
 		}
 		return true;

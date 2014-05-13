@@ -45,7 +45,6 @@ public class DamageStatusEffect implements IStatusEffect {
 		duration -= delta;
 		while(prevIndex != duration/intervall && prevIndex != 0){
 		c.takeDamage(damage);
-		System.out.println("character takes damage");
 		prevIndex -= 1;
 		}
 	}

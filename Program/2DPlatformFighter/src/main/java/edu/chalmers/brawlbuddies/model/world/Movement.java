@@ -258,7 +258,7 @@ public class Movement {
 	 * @param vel The speed to remove
 	 */
 	public void removeSpeed(Velocity vel){
-		this.extraSpeed.subtract(vel);
+		this.extraSpeed = (Velocity)this.extraSpeed.subtract(vel);
 	}
 	
 	/**
@@ -289,7 +289,7 @@ public class Movement {
 	 * @return The current Velocity of the Movement
 	 */
 	public Velocity getTotalVelocity(){
-		return this.innerSpeed.scale(this.scale).add(this.outerSpeed).add(this.gravitySpeed);
+		return this.innerSpeed.scale(this.scale).add(this.outerSpeed).add(this.gravitySpeed).add(this.extraSpeed);
 	}
 	
 	/**
