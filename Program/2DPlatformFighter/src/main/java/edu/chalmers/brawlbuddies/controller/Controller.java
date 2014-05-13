@@ -41,8 +41,8 @@ public class Controller extends StateBasedGame {
 		
 		//Sets up and starts a new game. NOTE: This is only temporarily.
 		//TODO remove this when the menu is in place.
-		Player[] players = { new Player("Player1"),
-							 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(3, false))};
+		Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(1, false)),
+							 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(2, true))};
 		String[] characterNames = {"bob", "bob"};
 		this.startGame(players, characterNames);
 	}
