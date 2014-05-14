@@ -289,7 +289,8 @@ public class Movement {
 	 * @return The current Velocity of the Movement
 	 */
 	public Velocity getTotalVelocity(){
-		return this.innerSpeed.scale(this.scale).add(this.outerSpeed).add(this.gravitySpeed).add(this.extraSpeed);
+		float tmpScale = this.scale < 0? 0 : this.scale;
+		return this.innerSpeed.scale(tmpScale).add(this.outerSpeed).add(this.gravitySpeed).add(this.extraSpeed);
 	}
 	
 	/**

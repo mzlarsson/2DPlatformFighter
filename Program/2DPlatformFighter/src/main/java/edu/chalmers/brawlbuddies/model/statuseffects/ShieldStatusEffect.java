@@ -12,10 +12,15 @@ public class ShieldStatusEffect implements IPreDamageStatusEffect {
 	private int priority;
 
 	/**
-	 * Creates a new ShieldStatusEffect
-	 * @param duration
-	 * @param priority
-	 * @param shieldAmount
+	 * Creates a new ShieldStatusEffect with a duration, priority and shieldAmount.
+	 * Duration is the time the effect is active
+	 * The priority is a number that decides when the effect shall be called
+	 * a low number in priority will make the effect be called first.
+	 * The shieldAmount is the amount of damage the effect will absorbed before becoming
+	 * inactive.
+	 * @param duration - the duration of the effect
+	 * @param priority - the priority of the effect
+	 * @param shieldAmount - the amount of damage the effect will absorbed.
 	 */
 	public ShieldStatusEffect(int duration, int priority, float shieldAmount) {
 	this.duration = duration;
