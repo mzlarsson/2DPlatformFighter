@@ -17,7 +17,6 @@ import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 
-
 /**
  * A class to represent a player-controlled character.
  * 
@@ -28,10 +27,10 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
  */
 @XStreamAlias("character")
 public class Character extends GameObject implements ICharacter {
-	
+
 	private int typeID;
 	private StatusEffectList statusEffectList = new StatusEffectList();
-	
+
 	private String name;
 	private String bio;
 	private IHealth health;
@@ -40,9 +39,9 @@ public class Character extends GameObject implements ICharacter {
 	private Position projOffset;
 
 	private Aim aim = new Aim(1, 0);
-	
+
 	private List<GameListener> listeners;
-	
+
 	/**
 	 * Creates a Character.
 	 * 
@@ -65,8 +64,10 @@ public class Character extends GameObject implements ICharacter {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
+
 	/**
 	 * Set the skills for the character
+	 * 
 	 * @param skills
 	 */
 	public void setSkills(ISkill[] skills) {
@@ -74,13 +75,15 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	/**
-	 * Activate a Skill in the skills array with the given positionNbr in the array if it exists
+	 * Activate a Skill in the skills array with the given positionNbr in the
+	 * array if it exists
 	 * 
 	 * @param positionNbr
 	 */
 	public void activateSkill(int positionNbr) {
-		if (skills != null && (positionNbr > -1) && (positionNbr < skills.length)
-				&& skills[positionNbr] != null && statusEffectList.canUseSkill()) {
+		if (skills != null && (positionNbr > -1)
+				&& (positionNbr < skills.length) && skills[positionNbr] != null
+				&& statusEffectList.canUseSkill()) {
 			skills[positionNbr].activate(this);
 		}
 	}
@@ -115,11 +118,12 @@ public class Character extends GameObject implements ICharacter {
 	 * Updates the velocity and position of the Character and returns the new
 	 * position.
 	 * 
-	 * @param delta The time passed since last update in milliseconds.
+	 * @param delta
+	 *            The time passed since last update in milliseconds.
 	 * @return The position after the movement.
 	 */
 	public Position update(int delta) {
-		statusEffectList.update(delta, (ICharacter)this);
+		statusEffectList.update(delta, (ICharacter) this);
 		updateCooldowns(delta);
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
@@ -129,7 +133,7 @@ public class Character extends GameObject implements ICharacter {
 	 * Direction.
 	 */
 	public void move(Direction dir) {
-		if( statusEffectList.canMove()){
+		if (statusEffectList.canMove()) {
 			this.getMovement().move(dir);
 		} else {
 			this.getMovement().move(Direction.NONE);
@@ -139,19 +143,21 @@ public class Character extends GameObject implements ICharacter {
 
 	/**
 	 * Updates the cooldown of the skills with the time passed.
-	 * @param delta Time past in milliseconds.
+	 * 
+	 * @param delta
+	 *            Time past in milliseconds.
 	 */
 	private void updateCooldowns(int delta) {
 		for (ISkill s : skills) {
 			s.update(delta);
 		}
 	}
-	
+
 	/**
 	 * Makes the character jump if able.
 	 */
 	public void makeJump() {
-		if(statusEffectList.canJump()){
+		if (statusEffectList.canJump()) {
 			this.getMovement().jump();
 		} else {
 			this.cancelJump();
@@ -166,17 +172,19 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public Position getProjFirePos() {
-		return new Position(this.getCenterPosition().add(this.aim.getX()<0?-projOffset.getX():projOffset.getX(),projOffset.getY()));
+		return new Position(this.getCenterPosition().add(
+				this.aim.getX() < 0 ? -projOffset.getX() : projOffset.getX(),
+				projOffset.getY()));
 	}
-	
+
 	public Aim getAim() {
 		return this.aim;
 	}
-	
-	public void setAim(Position aimPosition, boolean isRelative){
-		if(isRelative){
+
+	public void setAim(Position aimPosition, boolean isRelative) {
+		if (isRelative) {
 			this.aim.set(aimPosition);
-		}else{
+		} else {
 			this.aim.set(aimPosition.subtract(this.getCenterPosition()));
 		}
 	}
@@ -185,12 +193,12 @@ public class Character extends GameObject implements ICharacter {
 		health.setMaxHealth(a);
 	}
 
+	public void setHealth(IHealth hlth) {
+		this.health = hlth;
+	}
+
 	public void setHealth(float a) {
-		if(health != null){
-			this.health.setHealth(a);
-		}else{
-			this.health = new Health(a);
-		}
+		this.health.setHealth(a);
 	}
 
 	public void takeDamage(float a) {
@@ -207,20 +215,23 @@ public class Character extends GameObject implements ICharacter {
 	public float getHealth() {
 		return health.getHealth();
 	}
-	public float getMaxHealth(){
+
+	public float getMaxHealth() {
 		return health.getMaxHealth();
 	}
+
 	public void restoreHealth() {
 		health.restoreHealth();
 	}
-	
-	public boolean isDead(){
+
+	public boolean isDead() {
 		return health.isDead();
 	}
-	
+
 	public void push(Velocity v) {
 		Movement mov = getMovement();
-		mov.setOuterSpeed(mov.getOuterSpeed().getX()+v.getX(), mov.getOuterSpeed().getY()+v.getY());
+		mov.setOuterSpeed(mov.getOuterSpeed().getX() + v.getX(), mov
+				.getOuterSpeed().getY() + v.getY());
 	}
 
 	@Override
@@ -229,23 +240,23 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public void onCollision(IGameObject object, Alignment alignment) {
-		if(object == null || object instanceof Impassible){
+		if (object == null || object instanceof Impassible) {
 			this.getMovement().resetSpeed(alignment);
 		}
 	}
 
 	public boolean isDestroyed() {
 		return this.isDead();
-	}	
-	
+	}
+
 	public void applyStatusEffect(IStatusEffect effect) {
 		statusEffectList.add(effect);
-		
+
 	}
 
 	public void addScale(float scale) {
 		super.getMovement().addScale(scale);
-		
+
 	}
 
 	public void removeScale(float scale) {
@@ -254,7 +265,7 @@ public class Character extends GameObject implements ICharacter {
 
 	public void restoreScale() {
 		super.getMovement().restoreScale();
-		
+
 	}
 
 	public void resetGravity() {
@@ -263,7 +274,7 @@ public class Character extends GameObject implements ICharacter {
 
 	public void addSpeed(Velocity velocity) {
 		super.getMovement().addSpeed(velocity);
-		
+
 	}
 
 	public void removeSpeed(Velocity velocity) {
@@ -286,14 +297,15 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	/**
-	 * This method will send an event to all listeners that this character has been killed.
+	 * This method will send an event to all listeners that this character has
+	 * been killed.
 	 */
 	private void characterKilled() {
 		for (GameListener gl : listeners) {
 			gl.playerKilled(getID());
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

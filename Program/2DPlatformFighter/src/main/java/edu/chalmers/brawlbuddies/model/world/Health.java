@@ -14,23 +14,25 @@ public class Health implements IHealth{
 
 	private float maxHp;
 	private float currentHp;
+	private int ownerID;
 
 	/**
 	 * Creates a Health object with a max and current health value.
 	 * @param max The maximum health value.
 	 * @param curr The current health value.
 	 */
-	public Health(float max, float curr) {
+	public Health(float max, float curr, int id) {
 		this.maxHp = max;
 		this.currentHp = curr;
+		ownerID=id;
 	}
 	
 	/**
 	 * Creates a Health object with a max value.
 	 * @param max The maximum health value.
 	 */
-	public Health(float max) {
-		this(max, max);
+	public Health(float max, int id) {
+		this(max, max, id);
 	}
 	
 	/**
@@ -183,5 +185,8 @@ public class Health implements IHealth{
 
 	public float getMaxHealth() {
 		return maxHp;
+	}
+	public int getID(){
+		return ownerID;
 	}
 }

@@ -13,5 +13,6 @@ public interface IHealth {
 	public float getMaxHealth();
 	public float getMissingHealth();
 	public boolean isDead();
+	public int getID();
 	
 }
