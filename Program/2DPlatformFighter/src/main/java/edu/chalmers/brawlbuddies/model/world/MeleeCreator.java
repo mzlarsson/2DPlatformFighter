@@ -36,18 +36,11 @@ public class MeleeCreator {
 	}
 	
 	public Melee fire(Position pos, Aim aim){
-		Position newPos = aim.getX() > 0? (pos.add(this.shape.getWidth() / 2, 0)) 
-				: pos.subtract(this.shape.getWidth(), 0);
+		Position newPos = aim.getX() > 0? pos : pos.subtract(this.shape.getWidth(), 0);
 		
 		Shape tmp = SlickUtil.copy(shape);
-		tmp.setCenterX(newPos.getX());
+		tmp.setX(newPos.getX());
 		tmp.setCenterY(newPos.getY());
-		
-		System.out.println(pos+"  "+newPos);
 		return new Melee(tmp, new Movement(new Velocity(aim, 1), true) , this.typeID, effects);
 	}
-	
-	
-	
-	
 }

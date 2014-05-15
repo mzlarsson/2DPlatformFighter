@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill name="Bobs Lightning Dash" cooldown="10000" id="22">
+
+	<skillparts>
+		<selfcast>
+			<push_over_time duration="250" power="2200" aim="0,-1" aimOffset="-90"></push_over_time>
+			<immobilize duration="250"></immobilize>
+		</selfcast>
+	</skillparts>
+
+</skill>

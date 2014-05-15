@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.midi;
+package edu.chalmers.brawlbuddies.controller.input.midi;
 
 import java.util.ArrayList;
 import java.util.List;

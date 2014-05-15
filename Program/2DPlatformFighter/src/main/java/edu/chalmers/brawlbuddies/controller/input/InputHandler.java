@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.input;
 
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;

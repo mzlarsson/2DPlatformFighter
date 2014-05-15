@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller.xbox;
+package edu.chalmers.brawlbuddies.controller.input.xbox;
 
 /**
  * Interface for accessing listener methods for XBOX 360 controllers

@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
@@ -173,6 +174,14 @@ public class Dummy implements IGameObject, ICharacter {
 	}
 	public float getMissingHealth() {
 		return maxHealth - currentHealth;
+	}
+	public void addGameListener(GameListener gl) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void removeGameListener(GameListener gl) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

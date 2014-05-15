@@ -5,16 +5,29 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
-
+/**
+ * A class that describes a list that handles a characters status effects. 
+ * @author David Gustafsson
+ *
+ */
 public class StatusEffectList {
 	private List<IStatusEffect> statusEffects = new ArrayList<IStatusEffect>();
 	private List<IStatusEffect> movementEffecting = new ArrayList<IStatusEffect>();
 	private List<IPreDamageStatusEffect> preDamage = new ArrayList<IPreDamageStatusEffect>();
 	private List<IPreActStatusEffect> preAct = new ArrayList<IPreActStatusEffect>();
 	
+	/**
+	 * A enum to describe a characters actions.
+	 * @author David Gustafsson
+	 *
+	 */
 	public enum Action{
 		SKILL,MOVE,JUMP
 	}
+	/**
+	 * Add a effect to the list
+	 * @param effect - the effect to be added
+	 */
 	public void add(IStatusEffect effect) {
 		if (effect instanceof SlowSpeedStatusEffect) {
 			movementEffecting.add(effect);
@@ -28,7 +41,11 @@ public class StatusEffectList {
 			statusEffects.add(effect);
 		}
 	}
-
+	
+	/**
+	 * Remove a effect to the list
+	 * @param effect - the effect to be removed
+	 */
 	public void remove(IStatusEffect effect) {
 		if (effect instanceof SlowSpeedStatusEffect) {
 			movementEffecting.remove(effect);
@@ -42,23 +59,39 @@ public class StatusEffectList {
 
 	}
 	
+	/**
+	 * Remove all status effect of the list
+	 */
 	public void reset(){
 		this.statusEffects.clear();
 		this.movementEffecting.clear();
 		this.preAct.clear();
 		this.preDamage.clear();
 	}
-
+	
+	/**
+	 * Calculate how much damage is absorbed by the status effect in the list
+	 * @param damage - the incoming damage.
+	 * @return float - the resulting damage.
+	 */
 	public float calculateDamage(float damage) {
 		for (IPreDamageStatusEffect effect : preDamage) {
 			damage = effect.calculateDamage(damage);
 		}
 		return damage;
 	}
-
+	
+	/**
+	 * Sort the preDamage list 
+	 */
 	public void sortPreDamage() {
 		Collections.sort(preDamage);
 	}
+	
+	/**
+	 * Return if the current status effect will allow movement
+	 * @return boolean - true if the status effects will allow movement
+	 */
 	public boolean canMove(){
 		boolean canMove = true;
 		for( IPreActStatusEffect effect: preAct){
@@ -68,6 +101,11 @@ public class StatusEffectList {
 		}
 		return canMove;
 	}
+	
+	/**
+	 * Return if the current status effects will allow jumping
+	 * @return boolean - true if the status effects will allow jumping
+	 */
 	public boolean canJump(){
 		boolean canJump = true;
 		for( IPreActStatusEffect effect: preAct){
@@ -77,6 +115,11 @@ public class StatusEffectList {
 		}
 		return canJump;
 	}
+	
+	/**
+	 * Return if the current status effects will allow the use of skills
+	 * @return boolean - true if the status effects will allow the use of skills
+	 */
 	public boolean canUseSkill(){
 		boolean canAct = true;
 		for( IPreActStatusEffect effect: preAct){
@@ -87,6 +130,12 @@ public class StatusEffectList {
 		return canAct;
 	
 	}
+	
+	/**
+	 * Updates the status effect in the list.
+	 * @param delta - the time gone since the last update. 
+	 * @param c - the character that shall be effected by the status effect.
+	 */
 	public void update(float delta, ICharacter c) {
 		for(int i = 0 ; !statusEffects.isEmpty() && i < statusEffects.size(); i++){
 			statusEffects.get(i).update(c, delta);

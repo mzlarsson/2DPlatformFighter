@@ -8,7 +8,7 @@ import edu.chalmers.brawlbuddies.model.world.World;
 
 public class GameFactory {
 
-	public static IBrawlBuddies create(String mapName, String[] characterNames){
+	public static IBrawlBuddies create(String mapName, String[] characterNames, int timeLimit, int LifeLimit){
 		GameMap map = GameMapFactory.create(mapName);
 		World world = new World(map);
 		
@@ -23,7 +23,7 @@ public class GameFactory {
 			world.add(CharacterFactory.create(characterNames[i], tmpPos));
 		}
 		
-		return new BrawlBuddies(world);
+		return new BrawlBuddies(world, timeLimit, LifeLimit);
 	}
 
 }

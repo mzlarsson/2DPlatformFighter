@@ -1,0 +1,65 @@
+﻿Meeting Agenda 2014-04-08
+Meeting begins at: 13:30
+Participants: Lisa Lipkin, Patrik Haar, Matz Larsson, David Gustafsson
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+	2.1 Structure up the classes into packages.
+
+3. Discussion items:
+        3.1 How do we do:
+   	      General structure of the code.
+        3.2 What to do:
+       		 --- 
+         3.3 Why is:
+         	 ---
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+	5.2 Next meeting
+
+Meeting ends at: 16:30
+
+
+________________
+
+
+Meeting Agenda 2014-04-08
+Meeting begins at: 13:30
+Participants: Lisa Lipkin, Patrik Haar, Matz Larsson, David Gustafsson
+
+1. Reports from previous meeting:
+
+
+2. Objectives:
+	2.1 Structure up the classes into packages.
+        	Code was separated into the packages: main, model, view, eventbus, util,
+		controller, services with some sub-packages in the bigger ones.
+
+3. Discussion items:
+        3.1 How do we do:
+	         General structure of the code.
+        	        We will use XML:s for most of the data reading, for this we will use
+			XStream.
+
+
+
+
+	3.2 What to do:
+        	 --- 
+        3.3 Why is:
+        	 ---
+
+4. Outcomes and assignments:
+        Look deeper into XStream to check if it truly meets our needs.
+	Continue coding our respective parts.
+	Continue overall structuring of the code.
+5. Wrap up:
+        5.1 Unsolved issues
+	5.2 Next meeting
+
+Meeting ends at: 16:30

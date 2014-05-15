@@ -3,13 +3,13 @@ package edu.chalmers.brawlbuddies.view.sound;
 import java.util.Map;
 import java.util.TreeMap;
 
-import edu.chalmers.brawlbuddies.view.CharacterWrapper;
-import edu.chalmers.brawlbuddies.view.ProjectileWrapper;
-
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.eventbus.IEventBusSubscriber;
+import edu.chalmers.brawlbuddies.view.CharacterWrapper;
 import edu.chalmers.brawlbuddies.view.IWrapper;
+import edu.chalmers.brawlbuddies.view.ProjectileWrapper;
+import edu.chalmers.brawlbuddies.model.skills.ISkill;
 
 public class SoundPlayer implements IEventBusSubscriber{
 	

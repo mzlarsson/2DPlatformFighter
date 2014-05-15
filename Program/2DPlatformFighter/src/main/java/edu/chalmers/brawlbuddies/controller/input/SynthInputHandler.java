@@ -1,12 +1,13 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.input;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
-import edu.chalmers.brawlbuddies.controller.midi.MidiDeviceFinder;
-import edu.chalmers.brawlbuddies.controller.midi.MidiDeviceListener;
-import edu.chalmers.brawlbuddies.controller.midi.SynthInput;
+import edu.chalmers.brawlbuddies.controller.input.InputHandler;
+import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceFinder;
+import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceListener;
+import edu.chalmers.brawlbuddies.controller.input.midi.SynthInput;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 
@@ -250,5 +251,21 @@ public class SynthInputHandler implements InputHandler, MidiDeviceListener {
 	 * @param key The key which is pressed
 	 */
 	public void keyHeld(int key) {
+	}
+	
+	/**
+	 * Returns a formatted string describing this object
+	 */
+	public String toString(){
+		String ans = "SynthInputHandler [";
+		
+		boolean firstDone = false;
+		for(GameKey key : this.getAllControlNames()){
+			ans += (firstDone?", ":"")+key+"="+this.getValue(key);
+			firstDone = true;
+		}
+		
+		ans += "]";
+		return ans;
 	}
 }

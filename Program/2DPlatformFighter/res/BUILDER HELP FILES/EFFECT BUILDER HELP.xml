@@ -43,7 +43,7 @@
 	<!--
 		<damage_over_time>:	This effect will apply a dot to a valid target.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect
 		intervall:		(Optional) this will set the intervall between the ticks.
 		Value:		The amount of damage the dot will apply with each tick.
 	-->
@@ -52,47 +52,50 @@
 	<!--
 		<heal_over_time>:	This effect will apply a heal over time to a valid target.
 		
-		duaration:		(Optional) this will set the duration of the effect
-		intervall:		(Optional) this will set the intervall between the ticks.
+		duration:		(Optional) this will set the duration of the effect in milliseconds.
+		intervall:		(Optional) this will set the intervall between the ticks in milliseconds..
 		Value:		The amount of healing the healing over time will apply with each tick.
 	-->
 	
-<slow  ***duration="5000"*** ***scaleAmount="0"*** ***velocity="1,1"></slow>
+<slow  ***duration="5000"*** ***percent="0"*** ***static="1,1"***></slow>
 	<!--
 		<slow>:	This effect will apply a slow to a valid target.
 		
-		duaration:		(Optional) this will set the duration of the effect
-		scaleAmount:	(Optional) this will scale the targets movementspeed 
+		duration:		(Optional) this will set the duration of the effect in milliseconds.
+		percent:	(Optional) this will scale the targets movementspeed in percent
 						 a negative number will slow the target a postive will increase it's speed 
-		velocity:		(Optional) this will add a velocity to the target over the duration.
+		static:		(Optional) this will add a velocity vector statically to the target over the duration.
 	-->
-	
-<speed  ***duration="5000"*** ***scaleAmount="0"*** ***velocity="1,1"></speed>
+**************************************************************************************************************
+							static probably won't work without resetting the speed
+**************************************************************************************************************
+<speed  ***duration="5000"*** ***percent="0"*** ***static="1,1"***></speed>
 	<!--
 		<speed>:	This effect will apply a speedup to a valid target.
 		
-		duaration:		(Optional) this will set the duration of the effect
-		scaleAmount:	(Optional) this will scale the targets movementspeed 
-						 a negative number will slow the target a postive will increase it's speed
-		velocity:		(Optional) this will add a velocity to the target over the duration.
+		duration:		(Optional) this will set the duration of the effect in milliseconds.
+		percent:	(Optional) this will scale the targets movementspeed in percent
+						 a negative number will slow the target a postive will increase it's speed 
+		static:		(Optional) this will add a velocity vector statically to the target over the duration.
 	-->
 		
-<push_over_time  ***duration="5000"*** ***scaleAmount="0"*** ***velocity="1,1"></push_over_time>
+<push_over_time  ***duration="5000"*** ***power="100"*** ***aim="1,1"*** ***aimOffset="10"***></push_over_time>
 	<!--
 		<push_over_time>:	This effect will push and remove the gravity of a valid target 
 							over a specific time.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect. Default 5000.
 		power:			(Optional) this will push the target with velocity based on power and 
-						it's own aim.
-		velocity:		(Optional) this will push the target with a velocity.
+						it's own aim. Default is 1.
+		aim:			(Optional) Set this and it will override the transmitters own aim.
+		aimOffset:		(Optional) The offset of the aim in degrees upwards.
 	-->
 <shield  ***duration="5000"***   ***priority="0"***>Value</shield>
 	<!--
 		<shield>:	This effect will put on a shield to a valid target 
 					over a specific time.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect
 		priority:		(Optional) this will set the priority of the effect a lower prority number
 						will take damage first.
 		value:			The amount of damage the shield effect can take.
@@ -102,7 +105,7 @@
 		<damage_immunity>:	This effect will put on a render a valid target 
 							immune to damage.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect
 		priority:		(Optional) this will set the priority of the effect a lower prority number
 						will take damage first.
 	-->
@@ -110,14 +113,14 @@
 	<!--
 		<stun>:	This effect will stun a valid target over a duration.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect
 		
 	-->
-<immoblize  ***duration="5000"***></immoblize>
+<immobilize  ***duration="5000"***></immobilize>
 	<!--
-		<stun>:	This effect will immoblizie a valid target over a duration.
+		<stun>:			This effect will immobilize a valid target over a duration.
 		
-		duaration:		(Optional) this will set the duration of the effect
+		duration:		(Optional) this will set the duration of the effect
 		
 	-->
 

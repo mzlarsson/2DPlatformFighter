@@ -3,10 +3,12 @@ package edu.chalmers.brawlbuddies.controller;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
+import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceFinder;
 
 /**
  * Basic controller used for handling the general aspects of the
@@ -39,18 +41,8 @@ public class Controller extends StateBasedGame {
 		
 		//Sets up and starts a new game. NOTE: This is only temporarily.
 		//TODO remove this when the menu is in place.
-		KeyInputHandler p2handler = new KeyInputHandler();
-		p2handler.setValue(GameKey.DOWN, Input.KEY_DOWN);
-		p2handler.setValue(GameKey.UP, Input.KEY_UP);
-		p2handler.setValue(GameKey.LEFT, Input.KEY_LEFT);
-		p2handler.setValue(GameKey.RIGHT, Input.KEY_RIGHT);
-		p2handler.setValue(GameKey.JUMP, Input.KEY_I);
-		//p2handler.setValue(GameKey.SKILL1, Input.KEY_O);
-		//p2handler.setValue(GameKey.SKILL2, Input.KEY_P);
-		p2handler.setValue(GameKey.SKILL3, Input.KEY_K);
-		p2handler.setValue(GameKey.SKILL4, Input.KEY_L);
-
-		Player[] players = { new Player("BobTheSparklyMidget"), new Player("Nano", p2handler)};
+		Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(1, false)),
+							 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(2, true))};
 		String[] characterNames = {"bob", "bob"};
 		this.startGame(players, characterNames);
 	}

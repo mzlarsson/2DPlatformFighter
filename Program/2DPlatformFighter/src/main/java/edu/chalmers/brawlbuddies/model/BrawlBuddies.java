@@ -1,6 +1,9 @@
 package edu.chalmers.brawlbuddies.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
@@ -14,16 +17,60 @@ import edu.chalmers.brawlbuddies.model.world.World;
  * @version 0.4
  * @revised Matz Larsson
  */
-public class BrawlBuddies implements IBrawlBuddies{
+public class BrawlBuddies implements IBrawlBuddies, GameListener{
 
 	private World world;
+	private List<GameListener> listeners;
+	
+	private boolean timeLimit;
+	private int time;
+	
+	private boolean lifeLimit;
+	private Map<Integer,Integer> lives;
 	
 	public BrawlBuddies(){
-		this(new World(new GameMap()));
+		this(new World(new GameMap()), 0, 0);
 	}
 
-	public BrawlBuddies(World world) {
+	/**
+	 * Creates the BrawlBuddies game with some rules.
+	 * @param world The World the game will be using.
+	 * @param timeLimit Time limit of the game in milliseconds, if lower than 1 it will not be used.
+	 * If higher the game will end after the given time has passed.
+	 * @param lifeLimit Life limit of the game, if lower than 1 it will not be used.
+	 * 
+	 */
+	public BrawlBuddies(World world, int timeLimit, int lifeLimit) {
 		this.world = world;
+		this.listeners = new ArrayList<GameListener>();
+		for (IGameObject ch : this.world.getObjectsByType(ICharacter.class)) {
+			((ICharacter)ch).addGameListener(this);
+		}
+		if (timeLimit>0) {
+			this.timeLimit = true;
+			this.time = timeLimit;
+		}
+		if (lifeLimit>0) {
+			this.lifeLimit = true;
+			this.lives = new HashMap<Integer,Integer>();
+			for(int playerID : getCharacterIDs()) {
+				this.lives.put(playerID, lifeLimit);
+			}
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addGameListener(GameListener gl) {
+		listeners.add(gl);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removeGameListener(GameListener gl) {
+		listeners.remove(gl);
 	}
 	
 	/**
@@ -89,10 +136,56 @@ public class BrawlBuddies implements IBrawlBuddies{
 	}
 
 	/**
+	 * If the game is on a timer it is reduced.
+	 * @param delta The time to be subtracted in milliseconds.
+	 * @return <code>true</code> if there is time left on the clock. <code>false</code> if not.
+	 */
+	private boolean decreaseGameTime(int delta) {
+		if (timeLimit) {
+			this.time -= delta;
+			return this.time>0;
+		}
+		return true;
+	}
+
+	/**
+	 * Will call the gameOver() method on all the listening classes.
+	 */
+	public void gameOver() {
+		for(GameListener gl : listeners) {
+			gl.gameOver();
+		}
+	}
+	
+	/**
+	 *  {@inheritDoc}
+	 */
+	public void playerKilled(int playerID) {
+		if (lifeLimit) {
+			lives.put(playerID, lives.get(playerID)-1);
+			int pplAlive = 0;
+			for(int i : lives.values()) {
+				if (i>=0) {
+					pplAlive += 1;
+				}
+			}
+			if (pplAlive < 2) {
+				gameOver();
+			}
+		}
+	}
+	
+	/**
 	 * Updates all the objects of the world
 	 * @param delta Time since last update in milliseconds.
 	 */
 	public void update(int delta) {
-		world.update(delta);
+		if (decreaseGameTime(delta)) {
+			world.update(delta);
+		} else {
+			gameOver();
+		}
 	}
+
+
 }

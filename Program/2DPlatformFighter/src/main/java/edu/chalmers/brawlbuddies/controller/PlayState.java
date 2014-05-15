@@ -6,6 +6,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.chalmers.brawlbuddies.controller.input.GameKey;
+import edu.chalmers.brawlbuddies.controller.input.InputHandler;
+import edu.chalmers.brawlbuddies.controller.input.KeyInputHandler;
+
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.services.factories.GameFactory;
 import edu.chalmers.brawlbuddies.view.GameView;
@@ -33,8 +37,8 @@ public class PlayState extends BasicGameState{
 	
 	/**
 	 * Inits all variables that are needed etc.
-	 * @param container The slick game container
-	 * @param game The parent controller
+	 * @param gc The slick game container
+	 * @param sbg The parent controller
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		//Do nothing.
@@ -48,7 +52,7 @@ public class PlayState extends BasicGameState{
 	public void startGame(Player[] players, String[] names){
 		view = new GameView();
 		this.players = players;
-		game = GameFactory.create("basic16Map", names);
+		game = GameFactory.create("basic16Map", names, 0, 3);
 		int[] id = game.getCharacterIDs();
 		for(int i = 0; i<players.length; i++){
 			players[i].setCharacterID(id[i]);
@@ -57,8 +61,8 @@ public class PlayState extends BasicGameState{
 	
 	/**
 	 * Handles all control signals and updates all the data
-	 * @param container The slick game container
-	 * @param game The parent controller
+	 * @param gc The slick game container
+	 * @param sbg The parent controller
 	 * @param delta The time in ms since the last update
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
@@ -103,8 +107,8 @@ public class PlayState extends BasicGameState{
 
 	/**
 	 * Renders the game on the screen
-	 * @param container The slick game container
-	 * @param game The parent controller
+	 * @param gc The slick game container
+	 * @param sbg The parent controller
 	 * @param g The graphics object to draw with
 	 * @throws SlickException If the slick engine finds invalid data
 	 */

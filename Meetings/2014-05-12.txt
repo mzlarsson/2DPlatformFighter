@@ -1,0 +1,132 @@
+﻿Meeting Agenda 2014-05-12
+Meeting begins at:
+Participants: 
+
+1. Reports from previous meeting:
+        
+2. Objectives:
+        2.1 Set the limit of the project scope
+        2.2 Menu system and preliminary solutions
+        2.3 Assign the work to group members
+ 
+3. Discussion items:
+        3.1 How do we do:
+		Menu systems.
+
+        3.2 What to do:
+        	Set limit for the lowest acceptable FPS
+	        Search for remove work-heavy parts of the code.
+        	Analysis with STAN
+        	SDD
+		RAD
+		Update Use Cases
+
+         3.3 Why is:
+	         The FPS sinking? Ideas?
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+	5.2 Next meeting
+
+Meeting ends at:
+
+________________
+
+
+Meeting Agenda 2014-05-12
+Meeting begins at: 13:22
+Participants: Matz Larsson, Patrik Haar, Lisa Lipkin, David Gustafsson
+
+1. Reports from previous meeting:
+	The code has been well structured up. XStream were tested but did not work as well as we expected. It was therefore substituted with Java’s built in support for SAX and DOM.
+
+
+2. Objectives:        
+        2.1 Set the limit of the project scope
+                Controller - 
+                	Overall Controll class that controlls the other controllers.
+	                Be able to choice input contolller(keyboard, xbox , mouse + keyboard)
+        	        Be able to change keys bindings. 
+                	Don’t have support for network controll
+                	Have a menu system.
+                
+		Model - 
+        		Have a goal - number of lives
+			time or rounds?
+			Environmental interactions shall not be able to damage the character.
+                View - 
+                        A HUD shall be implemented with a health bar.
+			Skills should have casting animation.
+			Skills cooldown shall be visible.
+        		Characters shall always have animation playing.
+		        All moving object shall be visible.
+        		The view shall be able to zoom in/out and scroll.        
+                Menu - 
+			A new Game menu shall exist, one should be able to choose input controller and character in this menu.
+                
+	2.2 Plan the next coming two weeks        
+        	Make the game fit the limit of the scope
+        	Write SDD
+        	Write Report
+        	Update RAD
+	2.3 Assign the work to group members
+        	Characters animation, projectile and skills design-
+                	Nika - Busunge
+		        Volt - Bob the Blob
+
+
+		Code 
+        		Nika - HUD
+        		Nika- skills cooldown visibility.  
+        		Nika - Healthbar
+        		Nano - scroll/zoom
+        		Nano - menu and new game
+        		Nano - overall control class
+        		Volt  - Goal and end of game
+         		Boarman - write tests
+
+
+		Documentation
+		Boarman -SDD
+		All - RAD
+		All - Rapport
+		Boarman - Comments in code          
+	
+3. Discussion items:
+        3.1 How do we do:
+		Menu systems.
+        	See 2.4.
+
+        3.2 What to do:
+         	Set limit for the lowest acceptable FPS
+                	60FPS (150FPS without enabling vsync)
+        	Search for work-heavy parts of the code.
+                	Check if FPS goes below the amount set above.
+        	Analysis with STAN
+                	Positive but work will still be needed in the outer packages.
+		SDD
+        		Work is needed.
+		RAD
+        		Some changes needed.
+		Update Use Cases
+        		Some changes needed.
+
+	3.3 Why is:
+                The FPS sinking? Ideas?
+                Further investigation deemed this as not important.
+
+4. Outcomes and assignments:
+        Code - deadline code set to monday- no new features after this date 19/5.
+	Some changes to the structure in packages should be made, particularly for the model.world and skill package.
+	Additions and changes will be made to improve the documentations.
+	Meeting - next meeting set to wednesday 14/5
+	
+
+5. Wrap up:
+        5.1 Unsolved issues - 
+                Assign parts of the report to group members
+	5.2 Next meeting - 14/5 RAD and SDD shall be looked upon and improved.
+
+Meeting ends at: 15.33

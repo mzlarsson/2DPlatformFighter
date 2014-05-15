@@ -12,7 +12,8 @@
 	<skills>
 		<skill>bob_basic_ball</skill>
 		<skill>bob_lick</skill>
-		<skill>bob_big_ball</skill>
+		<skill>bob_dash</skill>
+		<skill>bob_bomb</skill>
 	</skills>
 
 </character>

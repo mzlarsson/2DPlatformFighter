@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.input;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	/**
 	 * Creates a new KeyInputHandler which uses the mouse to aim
 	 * NOTE: No input is connected to this handler while using this constructor.
-	 * @see edu.chalmers.brawlbuddies.controller.KeyInputHandler.setInput(Input)
+	 * @see #setInput(Input)
 	 */
 	public KeyInputHandler(){
 		this(true);
@@ -45,7 +45,7 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	 * Creates a new KeyInputHandler which may use the mouse to aim
 	 * @param useMouse If the mouse should be used for aiming
 	 * NOTE: No input is connected to this handler while using this constructor.
-	 * @see edu.chalmers.brawlbuddies.controller.KeyInputHandler.setInput(Input)
+	 * @see #setInput(Input)
 	 */
 	public KeyInputHandler(boolean useMouse){
 		this.keys = new TreeMap<GameKey, Integer>();
@@ -97,10 +97,17 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 		this.setValue(GameKey.RIGHT, Input.KEY_D);
 		this.setValue(GameKey.LEFT, Input.KEY_A);
 		this.setValue(GameKey.JUMP, Input.KEY_SPACE);
-		this.setValue(GameKey.SKILL1, KeyInputHandler.MOUSE_LEFT_BUTTON);
-		this.setValue(GameKey.SKILL2, KeyInputHandler.MOUSE_RIGHT_BUTTON);
-		this.setValue(GameKey.SKILL3, Input.KEY_Q);
-		this.setValue(GameKey.SKILL4, Input.KEY_E);
+		if(!this.isUsingMouse()){
+			this.setValue(GameKey.SKILL1, Input.KEY_T);
+			this.setValue(GameKey.SKILL2, Input.KEY_Y);
+			this.setValue(GameKey.SKILL3, Input.KEY_U);
+			this.setValue(GameKey.SKILL4, Input.KEY_I);
+		}else{
+			this.setValue(GameKey.SKILL1, KeyInputHandler.MOUSE_LEFT_BUTTON);
+			this.setValue(GameKey.SKILL2, KeyInputHandler.MOUSE_RIGHT_BUTTON);
+			this.setValue(GameKey.SKILL3, Input.KEY_Q);
+			this.setValue(GameKey.SKILL4, Input.KEY_E);
+		}
 	}
 
 	/**
@@ -167,8 +174,8 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	 * @param key The GameKey to set
 	 * @param value The value to use for the given GameKey
 	 */
-	public void setValue(GameKey key, int ch){
-		this.keys.put(key, ch);
+	public void setValue(GameKey key, int value){
+		this.keys.put(key, value);
 	}
 	
 	/**
@@ -252,11 +259,19 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	}
 	
 	/**
+	 * Determines whether this handler uses the mouse
+	 * @return <code>true</code> if this handler uses the mouse, <code>false</code> otherwise
+	 */
+	public boolean isUsingMouse(){
+		return this.useMouse;
+	}
+	
+	/**
 	 * Determines whether the method getMousePosition() returns a relative or absolute position
 	 * @return <code>true</code> if the position is relative, <code>false</code> if it is absolute
 	 */
 	public boolean isMousePositionRelative(){
-		return !this.useMouse;
+		return !this.isUsingMouse();
 	}
 
 	/**
@@ -316,7 +331,7 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	/**
 	 * Triggered when a key is pressed
 	 * @param key The key which is pressed
-	 * @param The char the pressed key represents
+	 * @param ch The char the pressed key represents
 	 */
 	public void keyPressed(int key, char ch) {
 		if(isMousePositionRelative() && isDirectionKey(key)){
@@ -327,7 +342,7 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	/**
 	 * Triggered when a key is released
 	 * @param key The key which is pressed
-	 * @param The char the pressed key represents
+	 * @param ch The char the pressed key represents
 	 */
 	public void keyReleased(int key, char ch) {
 		if(isMousePositionRelative() && isDirectionKey(key)){
@@ -353,5 +368,21 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	 */
 	public boolean isAcceptingInput() {
 		return true;
+	}
+	
+	/**
+	 * Returns a formatted string describing this object
+	 */
+	public String toString(){
+		String ans = "KeyInputHandler [";
+		
+		boolean firstDone = false;
+		for(GameKey key : this.getAllControlNames()){
+			ans += (firstDone?", ":"")+key+"="+this.getValue(key);
+			firstDone = true;
+		}
+		
+		ans += "]";
+		return ans;
 	}
 }

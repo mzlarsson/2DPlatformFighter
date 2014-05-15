@@ -35,7 +35,7 @@ public class ProjectilePart implements SkillPart {
 	private Aim getAim(ICharacter ch) {
 		if (aim!=null) {
 			Aim a = aim.copy();
-			a.setTheta(a.getTheta()+ (a.getX()<0 ? aimOffset : -aimOffset));
+			a.setTheta(a.getTheta()+ (ch.getAim().getX()<0 ? aimOffset : -aimOffset));
 			return a;
 		} else {
 			Aim a = ch.getAim().copy();

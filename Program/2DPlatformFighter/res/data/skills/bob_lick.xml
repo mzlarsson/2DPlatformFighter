@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<skill name="Bob Lick" cooldown="100" id="22">
+<skill name="Bob Lick" cooldown="5000" id="21">
 
 	<skillparts>
 		<melee name="bob_lick"></melee>

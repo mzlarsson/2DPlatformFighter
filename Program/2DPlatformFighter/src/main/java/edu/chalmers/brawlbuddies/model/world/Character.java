@@ -1,31 +1,28 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Shape;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
-import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 
 /**
  * A class to represent a player-controlled character.
  * 
  * @author Patrik Haar
- * @version 0.3
+ * @version 0.4
  * @revised David Gustafsson
  * @revised Matz Larsson
  */
@@ -44,6 +41,8 @@ public class Character extends GameObject implements ICharacter {
 
 	private Aim aim = new Aim(1, 0);
 	
+	private List<GameListener> listeners;
+	
 	/**
 	 * Creates a Character.
 	 * 
@@ -56,6 +55,7 @@ public class Character extends GameObject implements ICharacter {
 		super(new JumpMovement(), shape);
 		this.typeID = id;
 		this.projOffset = projOffset;
+		this.listeners = new ArrayList<GameListener>();
 	}
 
 	public void setName(String name) {
@@ -130,7 +130,10 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void move(Direction dir) {
 		if( statusEffectList.canMove()){
-		this.getMovement().move(dir);
+			this.getMovement().move(dir);
+		} else {
+			this.getMovement().move(Direction.NONE);
+			this.cancelJump();
 		}
 	}
 
@@ -149,7 +152,9 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void makeJump() {
 		if(statusEffectList.canJump()){
-		this.getMovement().jump();
+			this.getMovement().jump();
+		} else {
+			this.cancelJump();
 		}
 	}
 
@@ -190,6 +195,9 @@ public class Character extends GameObject implements ICharacter {
 
 	public void takeDamage(float a) {
 		health.takeDamage(a);
+		if (isDead()) {
+			characterKilled();
+		}
 	}
 
 	public void heal(float a) {
@@ -275,5 +283,28 @@ public class Character extends GameObject implements ICharacter {
 		this.getMovement().resetSpeed(Alignment.BOTH);
 		this.restoreScale();
 		this.statusEffectList.reset();
+	}
+
+	/**
+	 * This method will send an event to all listeners that this character has been killed.
+	 */
+	private void characterKilled() {
+		for (GameListener gl : listeners) {
+			gl.playerKilled(getID());
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addGameListener(GameListener gl) {
+		listeners.add(gl);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removeGameListener(GameListener gl) {
+		listeners.remove(gl);
 	}
 }
