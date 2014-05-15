@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
-import edu.chalmers.brawlbuddies.services.factories.XMLReader;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 
 public class SoundFactory {
 	

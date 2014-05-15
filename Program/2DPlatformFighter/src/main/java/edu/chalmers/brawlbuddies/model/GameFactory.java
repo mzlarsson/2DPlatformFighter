@@ -1,9 +1,8 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model;
 
-import edu.chalmers.brawlbuddies.model.BrawlBuddies;
-import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
-import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.GameMap;
+import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
 import edu.chalmers.brawlbuddies.model.world.World;
 
 public class GameFactory {

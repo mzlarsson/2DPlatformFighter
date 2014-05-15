@@ -14,7 +14,6 @@ public class SkillWrapper implements IWrapper, ISkill {
 	public SkillWrapper(Skill skill) {
 		this.skill = skill;
 		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
-		System.out.println("Skill created");
 	}
 	
 	public SkillWrapper(int cd, int id, int typeID, int ownerID, String animation){

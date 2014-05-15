@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model.skills;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -6,11 +6,6 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.model.skills.DamageEffect;
-import edu.chalmers.brawlbuddies.model.skills.IEffect;
-import edu.chalmers.brawlbuddies.model.skills.HealEffect;
-import edu.chalmers.brawlbuddies.model.skills.PushEffect;
-import edu.chalmers.brawlbuddies.model.skills.SEEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.DamageImmunityStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.DamageStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.HealStatusEffect;

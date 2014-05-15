@@ -4,9 +4,9 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
+import edu.chalmers.brawlbuddies.model.IDFactory;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
-import edu.chalmers.brawlbuddies.services.factories.IDFactory;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**

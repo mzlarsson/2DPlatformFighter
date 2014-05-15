@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model.world;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,10 +9,11 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.ISkill;
-import edu.chalmers.brawlbuddies.model.world.Character;
-import edu.chalmers.brawlbuddies.model.world.ICharacter;
-import edu.chalmers.brawlbuddies.model.world.JumpMovement;
+import edu.chalmers.brawlbuddies.model.skills.SkillFactory;
+import edu.chalmers.brawlbuddies.util.ShapeFactory;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 import edu.chalmers.brawlbuddies.view.CharacterWrapper;
+import edu.chalmers.brawlbuddies.view.HealthWrapper;
 
 /**
  * A factory for creating characters.
@@ -64,13 +65,15 @@ public class CharacterFactory {
 		Character character = new Character(ShapeFactory.create(shapeParams.getNamedItem("shape").getNodeValue()
 				, shapeParams.getNamedItem("parameters").getNodeValue(), x, y),
 				Integer.parseInt(rootNode.getAttribute("id")), projOffset);
+		CharacterWrapper wrapper = new CharacterWrapper(character);
 		// Setting the name
 		character.setName(rootNode.getElementsByTagName("name").item(0)
 				.getFirstChild().getNodeValue());
 		// Setting the biography
 		character.setBio(xmlDoc.getElementsByTagName("bio").item(0).getFirstChild().getNodeValue());
 		// Setting the health
-		character.setHealth(Float.parseFloat(xmlDoc.getElementsByTagName("health").item(0).getFirstChild().getNodeValue()));
+		HealthWrapper health= new HealthWrapper(Float.parseFloat(xmlDoc.getElementsByTagName("health").item(0).getFirstChild().getNodeValue()), character.getID());
+		character.setHealth(health);
 		// Setting the movement
 		float moveSpeed = Float.parseFloat(xmlDoc
 				.getElementsByTagName("movespeed").item(0).getFirstChild().getNodeValue());
@@ -88,6 +91,6 @@ public class CharacterFactory {
 		}
 		character.setSkills(skills);
 		
-		return new CharacterWrapper(character);
+		return wrapper;
 	}
 }

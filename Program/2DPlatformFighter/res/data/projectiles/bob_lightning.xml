@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectile name="bob_lightning" id="33">
+
+	<hitbox shape="circle" parameters="20"></hitbox>
+	<speed gravity="0,0">2200</speed>
+	<lifetime>250</lifetime>
+	<effects>
+		<damage>100</damage>
+		<push aim="0,1">1000</push>
+	</effects>
+	
+</projectile>

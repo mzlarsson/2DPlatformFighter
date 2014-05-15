@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
-import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
 /**
  * A class to test DamageEffect
  * @author David Gustafsson

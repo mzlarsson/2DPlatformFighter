@@ -16,6 +16,9 @@ import edu.chalmers.brawlbuddies.model.Velocity;
 
 public class Movement {
 	
+	public static final int MODIFIER = 1000;
+	public static final Velocity DEFAULT_GRAVITY = new Velocity(0,1000);
+
 	/* Parameters to set for different objects */
 	private Velocity baseSpeed;
 	private Velocity gravity;
@@ -28,6 +31,7 @@ public class Movement {
 	private float scale = 1.0f;
 	
 	private boolean enabled = true;
+
 	
 	private static final Velocity outerspeedReducer = new Velocity(1000, 1000);
 	
@@ -44,7 +48,7 @@ public class Movement {
 	 * @param baseSpeed The base speed for this Movement object
 	 */
 	public Movement(Velocity baseSpeed){
-		this(baseSpeed, Constants.DEFAULT_GRAVITY.copy());
+		this(baseSpeed, DEFAULT_GRAVITY.copy());
 	}
 
 	/**
@@ -53,7 +57,7 @@ public class Movement {
 	 * @param immidiate true if the movement should start immediately.
 	 */
 	public Movement(Velocity baseSpeed, boolean immediate){
-		this(baseSpeed, Constants.DEFAULT_GRAVITY.copy(), immediate);
+		this(baseSpeed, DEFAULT_GRAVITY.copy(), immediate);
 	}
 	
 	/**
@@ -316,7 +320,7 @@ public class Movement {
 	 * @param delta The time since last update
 	 */
 	private void increaseGravitySpeed(int delta){
-		Velocity tmpGrav = this.gravity.scale(((float)(delta))/Constants.MODIFIER);
+		Velocity tmpGrav = this.gravity.scale(((float)(delta))/MODIFIER);
 		this.gravitySpeed.increase(tmpGrav);
 	}
 	
@@ -325,7 +329,7 @@ public class Movement {
 	 * @param delta The time since last update
 	 */
 	private void reduceOuterSpeed(int delta){
-		Velocity tmp = outerspeedReducer.scale(((float)(delta))/Constants.MODIFIER);
+		Velocity tmp = outerspeedReducer.scale(((float)(delta))/MODIFIER);
 		
 		float x = this.outerSpeed.getX()+(this.outerSpeed.getX()<0?1:-1)*tmp.getX();
 		float y = this.outerSpeed.getY()+(this.outerSpeed.getY()<0?1:-1)*tmp.getY();
@@ -352,8 +356,8 @@ public class Movement {
 		
 		//Calculate next position
 		Velocity totalSpeed = this.getTotalVelocity();
-		Position diff = new Position((totalSpeed.getX()*((float)(delta))/Constants.MODIFIER),
-									 (totalSpeed.getY()*((float)(delta))/Constants.MODIFIER));
+		Position diff = new Position((totalSpeed.getX()*((float)(delta))/MODIFIER),
+									 (totalSpeed.getY()*((float)(delta))/MODIFIER));
 		return previous.add(diff);
 	}
 	

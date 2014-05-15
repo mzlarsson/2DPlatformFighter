@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.util;
 
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;

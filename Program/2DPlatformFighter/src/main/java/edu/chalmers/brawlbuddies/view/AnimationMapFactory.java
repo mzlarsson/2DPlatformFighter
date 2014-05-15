@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.view;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 
 /**
  * A factory for getting a map of Animations
@@ -28,7 +29,7 @@ public class AnimationMapFactory {
 	 */
 	public static Map<String, Animation> create(int id) {
 		
-		String[] typeName = { null, "characters", "skills", "projectiles" };
+		String[] typeName = { null, "characters", "skills", "projectiles", "hud" };
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.IMAGES + "image_resource_locator.xml");
 		

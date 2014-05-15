@@ -12,7 +12,6 @@ import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
-import edu.chalmers.brawlbuddies.services.factories.CharacterFactory;
 import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
