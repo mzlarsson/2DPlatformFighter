@@ -11,7 +11,6 @@ import org.newdawn.slick.SlickException;
 
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.Health;
-import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class HudImage implements IDrawable {
 	private int hudID;
