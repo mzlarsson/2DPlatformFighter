@@ -1,70 +1,76 @@
 package edu.chalmers.brawlbuddies.view;
 
+import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.IHealth;
 
 public class HealthWrapper implements IWrapper, IHealth {
+
+	private IHealth health;
+
+	public HealthWrapper(Health health){
+		this.health=health;
+	}
 	
-	public HealthWrapper(float max, float curr){
-		public Health(float max, float curr);
+	public HealthWrapper(float max, float curr, int id){
+		this(new Health(max, curr, id));
 		
 	}
-public Health(float max){
-	this(max, max);
-}
+
+	public HealthWrapper(float max, int id) {
+		this(max, max, id);
+	}
 
 	public void heal(float healAmount) {
-		// TODO Auto-generated method stub
+		health.heal(healAmount);
 
 	}
 
 	public void takeDamage(float damage) {
-		// TODO Auto-generated method stub
+		health.takeDamage(damage);
 
 	}
 
 	public void restoreHealth() {
-		// TODO Auto-generated method stub
+		health.restoreHealth();
 
 	}
 
 	public void setHealth(float health) {
-		// TODO Auto-generated method stub
+		this.health.setHealth(health);
 
 	}
 
 	public void setMaxHealth(float health) {
-		// TODO Auto-generated method stub
+		this.health.setMaxHealth(health);
 
 	}
 
 	public float getHealth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return health.getHealth();
 	}
 
 	public float getMaxHealth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return health.getMaxHealth();
 	}
 
 	public float getMissingHealth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return health.getMissingHealth();
 	}
 
 	public boolean isDead() {
-		// TODO Auto-generated method stub
-		return false;
+		return health.isDead();
 	}
 
 	public int getTypeID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 	public int getUniqeID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getID();
+	}
+
+	public int getID() {
+		return health.getID();
 	}
 
 }
