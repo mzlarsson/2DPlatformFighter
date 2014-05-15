@@ -29,7 +29,7 @@ public class AnimationMapFactory {
 	 */
 	public static Map<String, Animation> create(int id) {
 		
-		String[] typeName = { null, "characters", "skills", "projectiles" };
+		String[] typeName = { null, "characters", "skills", "projectiles", "hud" };
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.IMAGES + "image_resource_locator.xml");
 		

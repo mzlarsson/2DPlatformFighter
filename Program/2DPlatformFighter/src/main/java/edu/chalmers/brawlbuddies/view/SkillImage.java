@@ -11,13 +11,14 @@ import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
 
 public class SkillImage implements IDrawable {
-	private Position position;
+	private Position position= new Position(0,0);
 	private Map<String, Animation> mapAnimation;
 	private Animation animation;
+	private int ID = 90;
 	
 	public SkillImage(SkillWrapper skill){
+		ID=skill.getOwnerID();
 		mapAnimation = AnimationMapFactory.create(skill.getTypeID());
-		position = new Position(10,10);
 		animation = mapAnimation.get("idle");
 		animation.start();
 	}
@@ -26,10 +27,17 @@ public class SkillImage implements IDrawable {
 		animation.draw(position.getX(), position.getY());
 
 	}
+	public void place(Position p){
+		position = p;
+	}
 
 	public void update(IWrapper obj1, IWrapper obj2) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stu
+		SkillWrapper skill = (SkillWrapper) obj1;
+	
+	}
+	public int getID(){
+		return ID;
 	}
 
 }

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="10" version="2.0">
+<workbenchAdvisor/>
+<window height="768" maximized="true" width="1024" x="64" y="64">
+<fastViewData fastViewLocation="1024"/>
+<perspectiveBar/>
+<coolbarLayout/>
+<page focus="true" label="&lt;Unknown Label&gt; - STAN Perspective">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</editorArea>
+</editors>
+<views>
+<view id="de.odysseus.stan.eclipse.views.query" partName="Query"/>
+<view id="de.odysseus.stan.eclipse.views.distance" partName="Distance">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.sandbox" partName="Sandbox">
+<viewState compressNodeLabels="true" horizontal="false" narrow="false" suppressEdgeLabels="false"/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.explorer" partName="Structure Explorer">
+<viewState flatPackages="false" linkWithView="true" showLibraries="true"/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.metrics" partName="Metrics">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.violations.ranking" partName="Violations">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.projects" partName="Projects">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.dependencies" partName="Dependencies">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.violations.contribution" partName="Pollution">
+<viewState group="metric"/>
+</view>
+<view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
+<view id="de.odysseus.stan.eclipse.views.composition" partName="Composition">
+<viewState compressNodeLabels="true" horizontal="false" narrow="false" partition="false" policy="MIN_WEIGHT" suppressEdgeLabels="false" tanglesAlwaysVertical="true"/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.couplings" partName="Couplings">
+<viewState compressNodeLabels="true" horizontal="true" narrow="false" policy="MIN_WEIGHT" showIncoming="true" showIntermediate="false" showOutgoing="true" suppressEdgeLabels="false"/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.overview" partName="Overview">
+<viewState/>
+</view>
+<view id="de.odysseus.stan.eclipse.views.metrics.map" partName="Map"/>
+</views>
+<perspectives activePart="de.odysseus.stan.eclipse.views.violations.contribution" activePerspective="de.odysseus.stan.eclipse.perspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="0" fixed="0" version="0.016">
+<descriptor class="de.odysseus.stan.eclipse.rcp.Perspective" id="de.odysseus.stan.eclipse.perspective" label="STAN Perspective"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.composition"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.couplings"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.sandbox"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.dependencies"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.distance"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.metrics"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.overview"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.violations.ranking"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.violations.contribution"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.metrics.map"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.query"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="de.odysseus.stan.eclipse.views.report"/>
+<view id="de.odysseus.stan.eclipse.views.composition"/>
+<view id="de.odysseus.stan.eclipse.views.couplings"/>
+<view id="de.odysseus.stan.eclipse.views.sandbox"/>
+<view id="de.odysseus.stan.eclipse.views.violations.contribution"/>
+<view id="de.odysseus.stan.eclipse.views.distance"/>
+<fastViewBars>
+<fastViewBar fastViewLocation="16384" id="de.odysseus.stan.eclipse.perspective.west" orientation="512" selectedTabId="de.odysseus.stan.eclipse.views.explorer" style="1">
+<fastViews>
+<view id="de.odysseus.stan.eclipse.views.explorer" ratio="0.29978472"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="16384" id="de.odysseus.stan.eclipse.perspective.south_west" orientation="256" selectedTabId="de.odysseus.stan.eclipse.views.projects" style="1">
+<fastViews>
+<view id="de.odysseus.stan.eclipse.views.projects" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="131072" id="de.odysseus.stan.eclipse.perspective.east" orientation="256" selectedTabId="de.odysseus.stan.eclipse.views.metrics" style="1">
+<fastViews>
+<view id="de.odysseus.stan.eclipse.views.metrics" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="131072" id="de.odysseus.stan.eclipse.perspective.south" orientation="256" selectedTabId="de.odysseus.stan.eclipse.views.violations.ranking" style="1">
+<fastViews>
+<view id="de.odysseus.stan.eclipse.views.violations.ranking" ratio="0.29978815"/>
+<view id="de.odysseus.stan.eclipse.views.dependencies" ratio="0.29978815"/>
+<view id="org.eclipse.ui.views.PropertySheet" ratio="0.3"/>
+<view id="de.odysseus.stan.eclipse.views.query" ratio="0.3"/>
+<view id="de.odysseus.stan.eclipse.views.metrics.map" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="131072" id="de.odysseus.stan.eclipse.perspective.north_east" orientation="256" selectedTabId="de.odysseus.stan.eclipse.views.overview" style="1">
+<fastViews>
+<view id="de.odysseus.stan.eclipse.views.overview" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
+<viewLayoutRec closeable="false" id="de.odysseus.stan.eclipse.views.explorer"/>
+<viewLayoutRec closeable="false" id="de.odysseus.stan.eclipse.views.projects"/>
+<layout>
+<mainWindow maximized="de.odysseus.stan.eclipse.perspective.center">
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.west">
+<folder appearance="2" expanded="0">
+<page content="de.odysseus.stan.eclipse.views.explorer" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.749499" ratioLeft="748" ratioRight="250" relationship="2" relative="de.odysseus.stan.eclipse.perspective.west">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.79909366" ratioLeft="529" ratioRight="133" relationship="4" relative="de.odysseus.stan.eclipse.perspective.west"/>
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.center" ratio="0.1993988" ratioLeft="199" ratioRight="799" relationship="2" relative="de.odysseus.stan.eclipse.perspective.west">
+<folder activePageID="de.odysseus.stan.eclipse.views.violations.contribution" appearance="2" expanded="1">
+<page content="de.odysseus.stan.eclipse.views.composition" label="Composition"/>
+<page content="de.odysseus.stan.eclipse.views.couplings" label="Couplings"/>
+<page content="de.odysseus.stan.eclipse.views.sandbox" label="Sandbox"/>
+<page content="de.odysseus.stan.eclipse.views.violations.contribution" label="Pollution"/>
+<page content="de.odysseus.stan.eclipse.views.distance" label="Distance"/>
+<page content="de.odysseus.stan.eclipse.views.report" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.south" ratio="0.52603614" ratioLeft="495" ratioRight="446" relationship="4" relative="de.odysseus.stan.eclipse.perspective.center">
+<folder appearance="2" expanded="0">
+<page content="de.odysseus.stan.eclipse.views.violations.ranking" label="LabelNotFound"/>
+<page content="de.odysseus.stan.eclipse.views.dependencies" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<page content="de.odysseus.stan.eclipse.views.query" label="LabelNotFound"/>
+<page content="de.odysseus.stan.eclipse.views.metrics.map" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.north_east" ratio="0.71934426" ratioLeft="1097" ratioRight="428" relationship="2" relative="de.odysseus.stan.eclipse.perspective.center">
+<folder appearance="2" expanded="0">
+<page content="de.odysseus.stan.eclipse.views.overview" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.east" ratio="0.73373985" ratioLeft="361" ratioRight="131" relationship="4" relative="de.odysseus.stan.eclipse.perspective.north_east">
+<folder appearance="2" expanded="0">
+<page content="de.odysseus.stan.eclipse.views.metrics" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="de.odysseus.stan.eclipse.perspective.south_west" ratio="0.74858224" ratioLeft="396" ratioRight="133" relationship="4" relative="de.odysseus.stan.eclipse.perspective.west">
+<folder appearance="2" expanded="0">
+<page content="de.odysseus.stan.eclipse.views.projects" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="de.odysseus.stan.eclipse.perspective.west"/>
+<trimItem IMemento.internal.id="de.odysseus.stan.eclipse.perspective.south_west"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="de.odysseus.stan.eclipse.perspective.south"/>
+<trimItem IMemento.internal.id="de.odysseus.stan.eclipse.perspective.east"/>
+<trimItem IMemento.internal.id="de.odysseus.stan.eclipse.perspective.north_east"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.HeapStatus"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList/>
+</workbench>
