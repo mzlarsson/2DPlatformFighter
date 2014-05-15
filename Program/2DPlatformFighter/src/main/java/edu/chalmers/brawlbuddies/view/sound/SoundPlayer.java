@@ -13,6 +13,9 @@ import edu.chalmers.brawlbuddies.model.skills.ISkill;
 
 public class SoundPlayer implements IEventBusSubscriber{
 	
+	private float musicVolume = 1.0f;
+	private float soundVolume = 1.0f;
+	
 	private static SoundPlayer instance;
 	private Map<Integer, SoundData> sounds;
 
@@ -36,16 +39,36 @@ public class SoundPlayer implements IEventBusSubscriber{
 	}
 	
 	/**
+	 * Sets the volume of the music
+	 * @param volume The volume to use
+	 */
+	public void setMusicVolume(float volume){
+		this.musicVolume = volume;
+		//TODO implement music & volume.
+	}
+	
+	/**
+	 * Sets the volume of all the sounds
+	 * @param volume The volume to use
+	 */
+	public void setSoundVolume(float volume){
+		this.soundVolume = volume;
+		for(SoundData data : this.sounds.values()){
+			data.setVolume(volume);
+		}
+	}
+	
+	/**
 	 * Starts this sound player
 	 */
-	public void start(){
+	public void startSounds(){
 		EventBus.getInstance().addSubscriber(this);
 	}
 	
 	/**
 	 * Stops this sound player
 	 */
-	public void stop(){
+	public void stopSounds(){
 		EventBus.getInstance().removeSubscriber(this);
 		
 		for(SoundData data : this.sounds.values()){
@@ -69,7 +92,9 @@ public class SoundPlayer implements IEventBusSubscriber{
 		
 		if(typeID>=0){
 			if(!this.sounds.containsKey(typeID)){
-				this.sounds.put(typeID, new SoundData(typeID));
+				SoundData data = new SoundData(typeID);
+				data.setVolume(this.soundVolume);
+				this.sounds.put(typeID, data);
 			}
 			
 			IWrapper actor = (event.getActor() instanceof IWrapper?(IWrapper)event.getActor():null);

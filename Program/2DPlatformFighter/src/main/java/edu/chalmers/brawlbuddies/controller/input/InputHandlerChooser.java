@@ -18,6 +18,7 @@ import edu.chalmers.brawlbuddies.controller.input.xbox.XboxFinder;
 public class InputHandlerChooser {
 	
 	private static InputHandlerChooser instance;
+	private static String[] controlTypes = {"Keyboard with mouse", "Keyboard only", "XboxControl", "MidiDevice"};
 	
 	private XboxFinder xboxFinder;
 	private MidiDeviceFinder midiFinder;
@@ -51,10 +52,10 @@ public class InputHandlerChooser {
 		midiFinder = new MidiDeviceFinder();
 		
 		this.controllers.clear();
-		this.controllers.put("KeyboardWithMouse", 1);
-		this.controllers.put("KeyboardOnly", 2);
-		this.controllers.put("XboxControl", xboxFinder.getCount());
-		this.controllers.put("MidiDevice", midiFinder.getCount());
+		this.controllers.put(controlTypes[0], 1);
+		this.controllers.put(controlTypes[1], 2);
+		this.controllers.put(controlTypes[2], xboxFinder.getCount());
+		this.controllers.put(controlTypes[3], midiFinder.getCount());
 	}
 	
 	/**
@@ -72,6 +73,25 @@ public class InputHandlerChooser {
 	public Map<String, Integer> getCountByType(){
 		return this.controllers;
 	}
+	
+	/**
+	 * Returns the names of all controllers (indexes are used).
+	 * E.g. a controller may be named XboxControl 1
+	 * @return The names of all the controllers
+	 */
+	public String[] getControllerNames(){
+		String[] names = new String[this.countExternalControllers()+3];
+		int count = 0, controlCount = 0;
+		for(String key : this.controllers.keySet()){
+			controlCount = this.controllers.get(key);
+			for(int i = 0; i<controlCount; i++){
+				names[count] = key + (controlCount>1?" "+(i+1):"");
+				count++;
+			}
+		}
+		
+		return names;
+	}
 
 	/**
 	 * Retrieves an input handler from given parameters
@@ -84,17 +104,17 @@ public class InputHandlerChooser {
 		for(String name : this.controllers.keySet()){
 			for(int i = 0; i<this.controllers.get(name); i++){
 				if(num == index){
-					if(name.equals("KeyboardWithMouse")){
+					if(name.equals(controlTypes[0])){
 						return new KeyInputHandler();
-					}else if(name.equals("KeyboardOnly")){
+					}else if(name.equals(controlTypes[1])){
 						KeyInputHandler handler = new KeyInputHandler(false);
 						if(useAsSecondPlayer){
 							setAsPlayer2(handler);
 						}
 						return handler;
-					}else if(name.equals("XboxControl")){
+					}else if(name.equals(controlTypes[2])){
 						return new XboxInputHandler(num-start);
-					}else if(name.equals("MidiDevice")){
+					}else if(name.equals(controlTypes[3])){
 						return new SynthInputHandler(num-start);
 					}else{
 						System.out.println("Input type not recognized");

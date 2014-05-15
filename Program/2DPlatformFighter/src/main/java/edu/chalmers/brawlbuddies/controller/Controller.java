@@ -2,13 +2,13 @@ package edu.chalmers.brawlbuddies.controller;
 
 import java.util.List;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
-import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceFinder;
+import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 /**
  * Basic controller used for handling the general aspects of the
@@ -19,6 +19,8 @@ import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceFinder;
  */
 
 public class Controller extends StateBasedGame {
+	
+	private AppGameContainer gameContainer;
 
 	/**
 	 * Creates a new Controller and a new Slick window
@@ -33,25 +35,44 @@ public class Controller extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
+		gameContainer = (AppGameContainer)container;
+		
 		//Inits all the states
 		List<BasicGameState> states = StateFactory.getAllStates();
 		for(BasicGameState state : states){
 			this.addState(state);
 		}
-		
-		//Sets up and starts a new game. NOTE: This is only temporarily.
-		//TODO remove this when the menu is in place.
-		Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(1, false)),
-							 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(2, true))};
-		String[] characterNames = {"bob", "bob"};
-		this.startGame(players, characterNames);
+	}
+	
+	/**
+	 * Sets the volume of the music in the game
+	 * @param volume The volume to use
+	 */
+	public void setMusicVolume(float volume){
+		SoundPlayer.getInstance().setMusicVolume(volume);
+	}
+	
+	/**
+	 * Sets the volume of the sounds in the game
+	 * @param volume The volume to use
+	 */
+	public void setSoundVolume(float volume){
+		SoundPlayer.getInstance().setSoundVolume(volume);
+	}
+	
+	public void setResolution(int x, int y, boolean fullscreen){
+		try {
+			gameContainer.setDisplayMode(x, y, fullscreen);
+		} catch (SlickException e) {
+			System.out.println("Could not change resolution");
+		}
 	}
 	
 	/**
 	 * Redirects the game to the main menu
 	 */
-	public void gotoMenu(){
-		this.enterState(Constants.GAMESTATE_MENU);
+	public void gotoMainMenu(){
+		this.enterState(Constants.GAMESTATE_MAIN_MENU);
 	}
 	
 	/**

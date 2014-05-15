@@ -11,7 +11,7 @@ import edu.chalmers.brawlbuddies.controller.input.InputHandler;
 import edu.chalmers.brawlbuddies.controller.input.KeyInputHandler;
 
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
-import edu.chalmers.brawlbuddies.services.factories.GameFactory;
+import edu.chalmers.brawlbuddies.model.GameFactory;
 import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.IView;
 import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
@@ -59,6 +59,10 @@ public class PlayState extends BasicGameState{
 		}
 	}
 	
+	public boolean gameStarted(){
+		return this.players != null && this.players.length>0;
+	}
+	
 	/**
 	 * Handles all control signals and updates all the data
 	 * @param gc The slick game container
@@ -67,8 +71,8 @@ public class PlayState extends BasicGameState{
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		//Check if any players set
-		if(this.players != null){
+		//Check if game started
+		if(this.gameStarted()){
 			//Send all control signals to model
 			for(int i = 0; i<this.players.length; i++){
 				InputHandler handler = players[i].getInputHandler();
@@ -113,7 +117,9 @@ public class PlayState extends BasicGameState{
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		view.render(gc, g);
+		if(this.gameStarted()){
+			view.render(gc, g);
+		}
 	}
 	
 	/**
@@ -125,7 +131,7 @@ public class PlayState extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Entering Play state");
-		SoundPlayer.getInstance().start();
+		SoundPlayer.getInstance().startSounds();
 	}
 
 	/**
@@ -137,7 +143,7 @@ public class PlayState extends BasicGameState{
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Leaving Play state");
-		SoundPlayer.getInstance().stop();
+		SoundPlayer.getInstance().stopSounds();
 	}
 	
 	/**

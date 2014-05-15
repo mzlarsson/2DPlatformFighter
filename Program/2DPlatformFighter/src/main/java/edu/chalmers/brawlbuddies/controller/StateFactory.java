@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.newdawn.slick.state.BasicGameState;
 
+import edu.chalmers.brawlbuddies.controller.menu.MainMenuState;
+import edu.chalmers.brawlbuddies.controller.menu.OptionMenuState;
+import edu.chalmers.brawlbuddies.controller.menu.CreditsMenuState;
+
 /**
  * Factory for creating the states of the game Brawl Buddies
  * @author Matz Larsson
@@ -20,8 +24,10 @@ public class StateFactory {
 	 */
 	public static List<BasicGameState> getAllStates(){
 		List<BasicGameState> states = new ArrayList<BasicGameState>();
-		states.add(new MenuState());
+		states.add(new MainMenuState());
 		states.add(new PlayState());
+		states.add(new OptionMenuState());
+		states.add(new CreditsMenuState());
 		return states;
 	}
 }

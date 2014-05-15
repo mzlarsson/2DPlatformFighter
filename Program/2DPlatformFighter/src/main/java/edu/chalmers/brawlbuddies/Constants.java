@@ -24,5 +24,6 @@ public class Constants {
 	public static final String SKILLS = "res/data/skills/";
 	public static final String MELEES_DATA = "res/data/melees/";
 	public static final String SOUND = "res/sound/";
+	public static final String SETTINGS = "res/settings/settings.bbml";
 	
 }
