@@ -6,7 +6,7 @@
 	<lifetime>250</lifetime>
 	<effects>
 		<damage>100</damage>
-		<push aim="0,1">1000</push>
+		<push aim="0,-1">1000</push>
 	</effects>
 	
 </projectile>

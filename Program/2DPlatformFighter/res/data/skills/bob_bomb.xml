@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<skill name="Bobs Big Ball" cooldown="15000" id="23">
+<skill name="Bobs Big Ball" cooldown="15000" id="23" animation="bomb">
 
 	<skillparts>
+		<wait>600</wait>
 		<projectile name="bob_bomb"></projectile>
 	</skillparts>
 
