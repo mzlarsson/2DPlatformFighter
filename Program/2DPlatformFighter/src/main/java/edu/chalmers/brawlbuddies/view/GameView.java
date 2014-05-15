@@ -20,18 +20,32 @@ public class GameView implements IEventBusSubscriber, IView {
 	private Map<Integer, Animation> objectAnims;
 	private Map<Integer, IDrawable> objects;
 	private Map<Integer, HudImage> huds = new HashMap<Integer, HudImage>();
+	
+	private SideScroller scroller;
+	private boolean resolutionSet = false;
 
 	public GameView() {
 		objectAnims = new TreeMap<Integer, Animation>();
 		objects = new TreeMap<Integer, IDrawable>();
+		scroller = new SideScroller(null, null, 200, 200, 1.5d);
 		EventBus.getInstance().addSubscriber(this);
 	}
 
 	public void render(GameContainer gc, Graphics g) {
+		if(!resolutionSet){
+			this.scroller.setResolution(gc.getWidth(), gc.getHeight());
+			this.resolutionSet = true;
+		}
+		
+		g.scale(scroller.getScale(), scroller.getScale());
+		g.translate(scroller.getX(), scroller.getY());
 		map.render(0, 0);
 		for (Map.Entry<Integer, IDrawable> entry : objects.entrySet()) {
 			entry.getValue().render(gc, g);
 		}
+		
+		g.translate(-scroller.getX(), -scroller.getY());
+		g.scale(1.0f/scroller.getScale(), 1.0f/scroller.getScale());
 		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
 			entry.getValue().render(gc, g);
 		}
@@ -50,6 +64,7 @@ public class GameView implements IEventBusSubscriber, IView {
 					.useSkill((IWrapper) event.getActor());
 		} else if (event.getName().equals("createMap")) {
 			this.map = (TiledMap) event.getRecipient();
+			this.scroller.setMapSize(map.getWidth()*map.getTileWidth(), map.getHeight()*map.getTileHeight());
 		} else if (event.getName().equals("createAnimation")) {
 			this.objectAnims.put(
 					((IWrapper) event.getRecipient()).getTypeID(),
@@ -139,6 +154,10 @@ public class GameView implements IEventBusSubscriber, IView {
 		}
 		HealthImage image = new HealthImage(healthW);
 		huds.get(healthW.getID()).addHealthBar(image);
+	}
+	
+	public void resolutionUpdated(){
+		this.resolutionSet = false;
 	}
 
 }

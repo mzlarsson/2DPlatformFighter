@@ -42,7 +42,6 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	 * @param game The parent controller
 	 */
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		System.out.println("Hello");
 		((OptionMenuState)(game.getState(Constants.GAMESTATE_MENU_OPTIONS))).loadSettings((Controller)game);
 	}
 
