@@ -23,15 +23,15 @@ public class CharacterImage implements IDrawable {
 	private boolean inAir;
 	private String movementName = "idleLeft";
 	private boolean isAttacking = false;
-
+	private int id;
 	/**
 	 * Constructor for the Character image. Copies neccesary information from character through character wrapper. 
 	 * @param character a character wrapper from which information is accessed.
 	 */
 	public CharacterImage(CharacterWrapper character) {
-		int tmpID = character.getTypeID();
+		id = character.getUniqeID();
 		position = character.getPosition();
-		mapAnimation = AnimationMapFactory.create(tmpID);
+		mapAnimation = AnimationMapFactory.create(character.getTypeID());
 		animation = mapAnimation.get(movementName);
 		animation.start();
 		aimDirection = character.getAim().getDirection();
@@ -173,5 +173,9 @@ public class CharacterImage implements IDrawable {
 			animation.restart();
 			animation.start();
 		}
+	}
+
+	public Integer getUniqeID() {
+		return id;
 	}
 }

@@ -1,5 +1,7 @@
 package edu.chalmers.brawlbuddies.view;
 
+import edu.chalmers.brawlbuddies.eventbus.EventBus;
+import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.IHealth;
 
@@ -9,6 +11,7 @@ public class HealthWrapper implements IWrapper, IHealth {
 
 	public HealthWrapper(Health health){
 		this.health=health;
+		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
 	}
 	
 	public HealthWrapper(float max, float curr, int id){
@@ -22,26 +25,29 @@ public class HealthWrapper implements IWrapper, IHealth {
 
 	public void heal(float healAmount) {
 		health.heal(healAmount);
-
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 	}
 
 	public void takeDamage(float damage) {
 		health.takeDamage(damage);
-
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 	}
 
 	public void restoreHealth() {
 		health.restoreHealth();
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 
 	}
 
 	public void setHealth(float health) {
 		this.health.setHealth(health);
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 
 	}
 
 	public void setMaxHealth(float health) {
 		this.health.setMaxHealth(health);
+		EventBus.getInstance().fireEvent(new EventBusEvent("updateObject", this, null));
 
 	}
 

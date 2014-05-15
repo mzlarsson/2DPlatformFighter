@@ -10,10 +10,12 @@ public class ProjectileImage implements IDrawable {
 	private Animation animation;
 	private Position centerPos;
 	private double angle;
-
-	public ProjectileImage(Animation anim) {
+	private int id;
+	
+	public ProjectileImage(Animation anim, int id) {
 		animation = anim.copy();
 		animation.start();
+		this.id=id;
 	}
 
 	public void render(GameContainer gc, Graphics g) {
@@ -27,6 +29,10 @@ public class ProjectileImage implements IDrawable {
 		centerPos = projectile.getCenterPosition();
 		angle = projectile.getTheta()+90;
 
+	}
+
+	public Integer getUniqeID() {
+		return id;
 	}
 
 }

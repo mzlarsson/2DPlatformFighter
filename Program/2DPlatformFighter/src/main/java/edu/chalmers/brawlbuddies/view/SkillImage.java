@@ -14,10 +14,12 @@ public class SkillImage implements IDrawable {
 	private Position position= new Position(0,0);
 	private Map<String, Animation> mapAnimation;
 	private Animation animation;
-	private int ID = 90;
+	private int ownerId;
+	private int id;
 	
 	public SkillImage(SkillWrapper skill){
-		ID=skill.getOwnerID();
+		ownerId=skill.getOwnerID();
+		id = skill.getID();
 		mapAnimation = AnimationMapFactory.create(skill.getTypeID());
 		animation = mapAnimation.get("idle");
 		animation.start();
@@ -32,12 +34,16 @@ public class SkillImage implements IDrawable {
 	}
 
 	public void update(IWrapper obj1, IWrapper obj2) {
-		// TODO Auto-generated method stu
 		SkillWrapper skill = (SkillWrapper) obj1;
+		//set skillinmage cooldown
 	
 	}
 	public int getID(){
-		return ID;
+		return ownerId;
+	}
+
+	public Integer getUniqeID() {
+		return id;
 	}
 
 }

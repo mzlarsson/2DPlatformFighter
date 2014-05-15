@@ -20,5 +20,7 @@ public interface IDrawable {
 	 */
 	public void update(IWrapper obj1, IWrapper obj2);
 
+	public Integer getUniqeID();
+
 
 }

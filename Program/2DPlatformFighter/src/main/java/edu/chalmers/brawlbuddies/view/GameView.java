@@ -39,7 +39,7 @@ public class GameView implements IEventBusSubscriber, IView {
 
 	public void eventPerformed(EventBusEvent event) {
 		if (event.getName().equals("createObject")) {
-			addObjectImage((IWrapper) event.getRecipient());
+			createObjectImage((IWrapper) event.getRecipient());
 		} else if (event.getName().equals("removeObject")) {
 			removeObjectImage((IWrapper) event.getRecipient());
 		} else if (event.getName().equals("updateObject")) {
@@ -56,18 +56,28 @@ public class GameView implements IEventBusSubscriber, IView {
 					AnimationMapFactory.create(
 							((IWrapper) event.getRecipient()).getTypeID()).get(
 							"idle"));
-		} 
+		}
 	}
+
 	public HudImage createHud(IWrapper obj) {
 		return new HudImage(obj);
 	}
 
 	public void addHud(IWrapper obj) {
-		SkillWrapper skill = (SkillWrapper) obj;
-		if (!huds.containsKey(skill.getOwnerID())) {
-			HudImage hud = createHud(obj);
-			huds.put(skill.getOwnerID(), hud);
+		if (obj.getClass() == SkillWrapper.class) {
+			SkillWrapper skill = (SkillWrapper) obj;
+			if (!huds.containsKey(skill.getOwnerID())) {
+				HudImage hud = createHud(obj);
+				huds.put(skill.getOwnerID(), hud);
+			}
+		} else if (obj.getClass() == HealthWrapper.class) {
+			HealthWrapper health = (HealthWrapper) obj;
+			if (!huds.containsKey(health.getID())) {
+				HudImage hud = createHud(obj);
+				huds.put(health.getID(), hud);
+			}
 		}
+
 	}
 
 	public void removeObjectImage(IWrapper obj) {
@@ -78,30 +88,57 @@ public class GameView implements IEventBusSubscriber, IView {
 	public void updateObject(IWrapper obj1, IWrapper obj2) {
 		if (obj1.getClass() == SkillWrapper.class) {
 			huds.get(obj1.getUniqeID()).update(obj1, obj2);
+		} else if (obj1.getClass() == HealthWrapper.class) {
+			huds.get(obj1.getUniqeID()).update(obj1, obj2);
 		} else {
 			objects.get(obj1.getUniqeID()).update(obj1, obj2);
 		}
 	}
 
-	private void addObjectImage(IWrapper obj) {
-		objects.put(obj.getUniqeID(), createObjectImage(obj));
+	private void addObjectImage(IDrawable drawable) {
+		if (drawable != null) {
+			objects.put(drawable.getUniqeID(), drawable);
+		}
 	}
 
 	private IDrawable createObjectImage(IWrapper obj) {
-		if (obj.getClass() == CharacterWrapper.class) {
-			return new CharacterImage((CharacterWrapper) obj);
+		if (obj.getClass() == SkillWrapper.class) {
+			createSkillImage(obj);
+			return null;
+		} else if (obj.getClass() == HealthWrapper.class) {
+			createHealthImage(obj);
+			return null;
+		} else if (obj.getClass() == CharacterWrapper.class) {
+			CharacterImage image = new CharacterImage((CharacterWrapper) obj);
+			addObjectImage(image);
+			return image;
 		} else if (obj.getClass() == ProjectileWrapper.class) {
-			return new ProjectileImage(objectAnims.get(obj.getTypeID()));
-		} else if (obj.getClass() == SkillWrapper.class) {
-			SkillWrapper skillW= (SkillWrapper)obj;
-			if (!huds.containsKey(skillW.getOwnerID())){
-				addHud(obj);
-			}
-			SkillImage skill = new SkillImage(skillW);
-			huds.get(skill.getID()).addSkill(skill);
-			return skill;
+			ProjectileImage image = new ProjectileImage(objectAnims.get(obj
+					.getTypeID()), obj.getUniqeID());
+			addObjectImage(image);
+			return image;
+		} else {
+			return null;
 		}
-		return null;
+	}
+
+	private void createSkillImage(IWrapper obj) {
+		SkillWrapper skillW = (SkillWrapper) obj;
+		if (!huds.containsKey(skillW.getOwnerID())) {
+			addHud(obj);
+		}
+		SkillImage skill = new SkillImage(skillW);
+		huds.get(skill.getID()).addSkill(skill);
+	}
+
+	private void createHealthImage(IWrapper obj) {
+		HealthWrapper healthW = (HealthWrapper) obj;
+		System.out.println();
+		if (!huds.containsKey(healthW.getID())) {
+			addHud(obj);
+		}
+		HealthImage image = new HealthImage(healthW);
+		huds.get(healthW.getID()).addHealthBar(image);
 	}
 
 }
