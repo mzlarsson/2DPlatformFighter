@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model.world;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,9 +9,9 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.ISkill;
-import edu.chalmers.brawlbuddies.model.world.Character;
-import edu.chalmers.brawlbuddies.model.world.ICharacter;
-import edu.chalmers.brawlbuddies.model.world.JumpMovement;
+import edu.chalmers.brawlbuddies.model.skills.SkillFactory;
+import edu.chalmers.brawlbuddies.util.ShapeFactory;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 import edu.chalmers.brawlbuddies.view.CharacterWrapper;
 
 /**

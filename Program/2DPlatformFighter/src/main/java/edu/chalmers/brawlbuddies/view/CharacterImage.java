@@ -5,9 +5,9 @@ import java.util.Map;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class CharacterImage implements IDrawable {
 	private Position position;

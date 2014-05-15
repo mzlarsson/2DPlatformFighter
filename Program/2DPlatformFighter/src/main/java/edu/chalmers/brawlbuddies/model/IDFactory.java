@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model;
 
 /**
  * A Class for creating a new unique ID.

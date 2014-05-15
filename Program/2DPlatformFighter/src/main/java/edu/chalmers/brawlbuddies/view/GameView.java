@@ -11,7 +11,6 @@ import org.newdawn.slick.tiled.TiledMap;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.eventbus.IEventBusSubscriber;
-import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class GameView implements IEventBusSubscriber, IView {
 	private TiledMap map;

@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model.skills;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +11,12 @@ import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
-import edu.chalmers.brawlbuddies.model.skills.IEffect;
-import edu.chalmers.brawlbuddies.model.skills.ISkill;
-import edu.chalmers.brawlbuddies.model.skills.MeleePart;
-import edu.chalmers.brawlbuddies.model.skills.ProjectilePart;
-import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
-import edu.chalmers.brawlbuddies.model.skills.Skill;
-import edu.chalmers.brawlbuddies.model.skills.WaitPart;
+import edu.chalmers.brawlbuddies.model.IDFactory;
 import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
 import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
+import edu.chalmers.brawlbuddies.model.world.MeleeFactory;
+import edu.chalmers.brawlbuddies.model.world.ProjectileFactory;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 import edu.chalmers.brawlbuddies.view.SkillWrapper;
 
 /**

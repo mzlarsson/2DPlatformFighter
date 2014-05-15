@@ -9,7 +9,6 @@ import org.newdawn.slick.Graphics;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.services.factories.AnimationMapFactory;
 
 public class SkillImage implements IDrawable {
 	private Position position;

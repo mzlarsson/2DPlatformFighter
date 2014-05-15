@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.services.factories;
+package edu.chalmers.brawlbuddies.model.world;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.world.GameMap;
+import edu.chalmers.brawlbuddies.util.XMLReader;
 
 /**
  * A factory for creating GameMaps.

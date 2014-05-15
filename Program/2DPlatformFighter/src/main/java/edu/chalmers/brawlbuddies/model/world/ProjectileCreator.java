@@ -43,7 +43,7 @@ public class ProjectileCreator implements IProjectileCreator {
 		this.speed = speed;
 		this.lifetime = lifetime;
 		this.typeID = typeID;
-		this.gravity = gravity==null?Constants.DEFAULT_GRAVITY.copy():gravity;
+		this.gravity = gravity==null?Movement.DEFAULT_GRAVITY.copy():gravity;
 		this.effects = effects;
 	}
 
