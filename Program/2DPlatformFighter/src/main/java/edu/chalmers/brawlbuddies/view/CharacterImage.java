@@ -8,14 +8,17 @@ import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
+
 /**
- * Creates an object of the character that can be drawn on the screen. 
- * Contains animation and logic for the correct animation.
+ * Creates an object of the character that can be drawn on the screen. Contains
+ * animation and logic for the correct animation.
+ * 
  * @author Lisa
- *
+ * 
  */
 public class CharacterImage implements IDrawable {
-	private Position position;
+	private Position drawPos;
+	private Position drawOffset;
 	private Animation animation;
 	private Map<String, Animation> mapAnimation;
 	private Direction aimDirection;
@@ -24,15 +27,22 @@ public class CharacterImage implements IDrawable {
 	private String movementName = "idleLeft";
 	private boolean isAttacking = false;
 	private int id;
+
 	/**
-	 * Constructor for the Character image. Copies neccesary information from character through character wrapper. 
-	 * @param character a character wrapper from which information is accessed.
+	 * Constructor for the Character image. Copies neccesary information from
+	 * character through character wrapper.
+	 * 
+	 * @param character
+	 *            a character wrapper from which information is accessed.
 	 */
 	public CharacterImage(CharacterWrapper character) {
 		id = character.getUniqeID();
-		position = character.getPosition();
 		mapAnimation = AnimationMapFactory.create(character.getTypeID());
 		animation = mapAnimation.get(movementName);
+		drawOffset = new Position(
+				(character.getShape().getWidth() - animation.getWidth()) / 2,
+				character.getShape().getHeight() - animation.getHeight());
+		drawPos = getDrawPos(character.getPosition());
 		animation.start();
 		aimDirection = character.getAim().getDirection();
 		moveDirection = character.getDirection();
@@ -42,23 +52,42 @@ public class CharacterImage implements IDrawable {
 	 * {@inheritDoc}
 	 */
 	public void render(GameContainer gc, Graphics g) {
-		animation.draw(position.getX(), position.getY());
+		animation.draw(drawPos.getX(), drawPos.getY());
 	}
+
 	/**
 	 * a method to give the correct format of a string for the use in the class
-	 * @param str the string that is to be corrected
+	 * 
+	 * @param str
+	 *            the string that is to be corrected
 	 * @return str with capital first letter and the rest lowercase
 	 */
 	private String correctStringFormat(String str) {
 		return java.lang.Character.toUpperCase(str.charAt(0))
 				+ str.substring(1).toLowerCase();
 	}
-	
+
 	/**
-	 * method to handle a skill used event. Bulky. Would benefit from better idea. 
-	 * @param wrapper a skillwrapper sent by the event.
+	 * Calculates the animations drawposition by adding the drawOffset to the
+	 * given position.
+	 * 
+	 * @param pos
+	 *            The upper left corner of the characters shape.
+	 * @return The upper left corner of where the animation should be drawn.
 	 */
-	public void useSkill(IWrapper wrapper) { //TODO Temporary until better implemented Event handling
+	private Position getDrawPos(Position pos) {
+		return new Position(pos.add(drawOffset));
+	}
+
+	/**
+	 * method to handle a skill used event. Bulky. Would benefit from better
+	 * idea.
+	 * 
+	 * @param wrapper
+	 *            a skillwrapper sent by the event.
+	 */
+	public void useSkill(IWrapper wrapper) { // TODO Temporary until better
+												// implemented Event handling
 		SkillWrapper skill = (SkillWrapper) wrapper;
 		isAttacking = true;
 		String tmpMovementName = skill.getAnimationName()
@@ -66,7 +95,7 @@ public class CharacterImage implements IDrawable {
 		// Set correct animation if neccesary
 		setAnimation(tmpMovementName);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -107,14 +136,15 @@ public class CharacterImage implements IDrawable {
 								+ "Air"
 								+ correctStringFormat(tmpMoveDirection
 										.toString())
-								+ correctStringFormat(aimDirection.getXDirection().toString());
+								+ correctStringFormat(aimDirection
+										.getXDirection().toString());
 					} else {
 						tmpMovementName = "move"
 								+ "Air"
 								+ correctStringFormat(tmpMoveDirection
 										.toString())
-								+ correctStringFormat(tmpAimDirection.getXDirection()
-										.toString());
+								+ correctStringFormat(tmpAimDirection
+										.getXDirection().toString());
 					}
 				} else {
 					if (tmpAimDirection == Direction.NONE) {
@@ -122,29 +152,30 @@ public class CharacterImage implements IDrawable {
 								+ "Ground"
 								+ correctStringFormat(tmpMoveDirection
 										.toString())
-								+ correctStringFormat(aimDirection.getXDirection().toString());
+								+ correctStringFormat(aimDirection
+										.getXDirection().toString());
 					} else {
 						tmpMovementName = "move"
 								+ "Ground"
 								+ correctStringFormat(tmpMoveDirection
 										.toString())
-								+ correctStringFormat(tmpAimDirection.getXDirection()
-										.toString());
+								+ correctStringFormat(tmpAimDirection
+										.getXDirection().toString());
 					}
 				}
-			}else{
-				if(tmpAimDirection == Direction.NONE){
+			} else {
+				if (tmpAimDirection == Direction.NONE) {
 					tmpMovementName = "idleLeft";
 				} else {
 					tmpMovementName = "idle"
-						+ correctStringFormat(aimDirection.getXDirection().toString());
+							+ correctStringFormat(aimDirection.getXDirection()
+									.toString());
 				}
 			}
 			// Set correct animation if neccesary
 			setAnimation(tmpMovementName);
-			
+
 		}
-		
 
 		// Set instance variables to current values
 		if (tmpMoveDirection != Direction.NONE) {
@@ -154,17 +185,21 @@ public class CharacterImage implements IDrawable {
 			aimDirection = tmpAimDirection;
 		}
 		inAir = character.isInAir();
-		position = character.getPosition();
+		drawPos = getDrawPos(character.getPosition());
 	}
+
 	/**
 	 * sets the correct animation sorted on the appropriate movement name
-	 * @param tmpMovementName the temporary movement name calculated in update and useSkill
+	 * 
+	 * @param tmpMovementName
+	 *            the temporary movement name calculated in update and useSkill
 	 */
 	private void setAnimation(String tmpMovementName) {
-		if(!mapAnimation.containsKey(tmpMovementName)){
-			tmpMovementName="idle" + (aimDirection.getXDirection()!=Direction.NONE
-					? correctStringFormat(aimDirection.getXDirection().toString())
-					: correctStringFormat(Direction.LEFT.toString()));
+		if (!mapAnimation.containsKey(tmpMovementName)) {
+			tmpMovementName = "idle"
+					+ (aimDirection.getXDirection() != Direction.NONE ? correctStringFormat(aimDirection
+							.getXDirection().toString())
+							: correctStringFormat(Direction.LEFT.toString()));
 		}
 		if (!(tmpMovementName.equals(movementName))) {
 			animation.stop();

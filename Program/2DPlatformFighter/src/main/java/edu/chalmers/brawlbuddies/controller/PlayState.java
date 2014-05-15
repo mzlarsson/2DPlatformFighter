@@ -4,12 +4,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.controller.input.GameKey;
 import edu.chalmers.brawlbuddies.controller.input.InputHandler;
 import edu.chalmers.brawlbuddies.controller.input.KeyInputHandler;
+import edu.chalmers.brawlbuddies.controller.menu.EndScreenState;
 import edu.chalmers.brawlbuddies.model.GameFactory;
+import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.IView;
@@ -22,11 +25,12 @@ import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
  *
  */
 
-public class PlayState extends BasicGameState{
+public class PlayState extends BasicGameState implements GameListener{
 	
 	private IView view;
 	private IBrawlBuddies game;
 	private Player[] players;
+	private StateBasedGame state;
 
 	/**
 	 * Creates a new PlayState
@@ -56,6 +60,11 @@ public class PlayState extends BasicGameState{
 		for(int i = 0; i<players.length; i++){
 			players[i].setCharacterID(id[i]);
 		}
+		game.addGameListener(this);
+	}
+	
+	public boolean gameStarted(){
+		return this.players != null && this.players.length>0;
 	}
 	
 	/**
@@ -66,8 +75,8 @@ public class PlayState extends BasicGameState{
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		//Check if any players set
-		if(this.players != null){
+		//Check if game started
+		if(this.gameStarted()){
 			//Send all control signals to model
 			for(int i = 0; i<this.players.length; i++){
 				InputHandler handler = players[i].getInputHandler();
@@ -112,7 +121,9 @@ public class PlayState extends BasicGameState{
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		view.render(gc, g);
+		if(this.gameStarted()){
+			view.render(gc, g);
+		}
 	}
 	
 	/**
@@ -124,7 +135,8 @@ public class PlayState extends BasicGameState{
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Entering Play state");
-		SoundPlayer.getInstance().start();
+		state = game;
+		SoundPlayer.getInstance().startSounds();
 	}
 
 	/**
@@ -136,7 +148,7 @@ public class PlayState extends BasicGameState{
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Leaving Play state");
-		SoundPlayer.getInstance().stop();
+		SoundPlayer.getInstance().stopSounds();
 	}
 	
 	/**
@@ -147,6 +159,21 @@ public class PlayState extends BasicGameState{
 	@Override
 	public int getID(){
 		return Constants.GAMESTATE_PLAY;
+	}
+
+	public void playerKilled(int playerID) {
+		// Do nothing
+	}
+
+	public void gameOver(int winnerID) {
+		String winner = "DRAW! Or bugged.";
+		for (Player p : players) {
+			if (p.getCharacterID()==winnerID) {
+				winner = p.getName();
+			}
+		}
+		((EndScreenState)state.getState(Constants.END_SCREEN)).setWinner(winner);;
+		state.enterState(Constants.END_SCREEN);		
 	}
 
 }

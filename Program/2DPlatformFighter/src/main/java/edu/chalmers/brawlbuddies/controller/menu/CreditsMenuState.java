@@ -1,26 +1,26 @@
-package edu.chalmers.brawlbuddies.controller;
+package edu.chalmers.brawlbuddies.controller.menu;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-/**
- * State for displaying and handling the main menu system
- * @author Matz Larsson
- * @version 0.1
- *
- */
+import edu.chalmers.brawlbuddies.controller.Constants;
+import edu.chalmers.brawlbuddies.view.menu.MenuView;
+import edu.chalmers.brawlbuddies.view.menu.CreditsMenuView;
 
-public class MenuState extends BasicGameState {
+public class CreditsMenuState extends BasicGameState implements MenuListener{
 
-	/**
-	 * Creates a new Menu state
-	 */
-	public MenuState() {
-		// TODO Auto-generated constructor stub
+	private MenuView view;
+	private MenuHandler handler;
+	private StateBasedGame game;
+	
+	public CreditsMenuState() {
+		view = new CreditsMenuView();
+		handler = new MenuHandler(view);
+		handler.addMenuListener(this);
 	}
 
 	/**
@@ -29,8 +29,7 @@ public class MenuState extends BasicGameState {
 	 * @param game The parent controller
 	 */
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	/**
@@ -41,9 +40,7 @@ public class MenuState extends BasicGameState {
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		g.setColor(Color.yellow);
-		g.drawString("This is the menu", 100, 100);
+		view.render(container, g);
 	}
 
 	/**
@@ -54,8 +51,16 @@ public class MenuState extends BasicGameState {
 	 * @throws SlickException If the slick engine finds invalid data
 	 */
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		// TODO Auto-generated method stub
-
+		this.game = game;
+		handler.update(container, delta);
+		
+		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+			gotoMainMenu();
+		}
+	}
+	
+	public void gotoMainMenu(){
+		game.enterState(Constants.GAMESTATE_MAIN_MENU);
 	}
 
 	/**
@@ -65,7 +70,17 @@ public class MenuState extends BasicGameState {
 	 */
 	@Override
 	public int getID() {
-		return Constants.GAMESTATE_MENU;
+		return Constants.GAMESTATE_MENU_CREDITS;
 	}
 
+	public void menuActivated(MenuEvent event){
+		if(event.getValue()=="Back"){
+			gotoMainMenu();
+		}
+	}
+	
+	@Override
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
+		view.update();
+	}
 }

@@ -1,7 +1,5 @@
 package edu.chalmers.brawlbuddies;
 
-import edu.chalmers.brawlbuddies.model.Velocity;
-
 /**
  * Contains simple contants that are used in Brawl Buddies.
  * @author Matz Larsson
@@ -20,5 +18,6 @@ public class Constants {
 	public static final String SKILLS = "res/data/skills/";
 	public static final String MELEES_DATA = "res/data/melees/";
 	public static final String SOUND = "res/sound/";
+	public static final String SETTINGS = "res/settings/settings.bbml";
 	
 }

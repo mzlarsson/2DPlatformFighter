@@ -9,8 +9,9 @@ public interface GameListener {
 	
 	/**
 	 * This method will be called at a Game Over event.
+	 * @param winnerID The ID of the character who won.
 	 */
-	public void gameOver();
+	public void gameOver(int winnerID);
 	
 	/**
 	 * 
