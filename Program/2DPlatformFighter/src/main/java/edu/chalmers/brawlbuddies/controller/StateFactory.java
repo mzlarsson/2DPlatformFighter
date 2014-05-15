@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.state.BasicGameState;
 
+import edu.chalmers.brawlbuddies.controller.menu.EndScreenState;
 import edu.chalmers.brawlbuddies.controller.menu.MainMenuState;
 import edu.chalmers.brawlbuddies.controller.menu.OptionMenuState;
 import edu.chalmers.brawlbuddies.controller.menu.CreditsMenuState;
@@ -28,6 +29,7 @@ public class StateFactory {
 		states.add(new PlayState());
 		states.add(new OptionMenuState());
 		states.add(new CreditsMenuState());
+		states.add(new EndScreenState());
 		return states;
 	}
 }

@@ -17,5 +17,7 @@ public class Constants {
 	public static final int GAMESTATE_MENU_OPTIONS = 2;
 	/** ID of the credits menu state */
 	public static final int GAMESTATE_MENU_CREDITS = 3;
+	/** ID of the end screen state */
+	public static final int END_SCREEN = 4;
 	
 }

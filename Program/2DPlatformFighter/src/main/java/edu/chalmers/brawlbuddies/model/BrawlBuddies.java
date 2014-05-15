@@ -151,9 +151,9 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 	/**
 	 * Will call the gameOver() method on all the listening classes.
 	 */
-	public void gameOver() {
+	public void gameOver(int winnerID) {
 		for(GameListener gl : listeners) {
-			gl.gameOver();
+			gl.gameOver(winnerID);
 		}
 	}
 	
@@ -164,13 +164,15 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 		if (lifeLimit) {
 			lives.put(playerID, lives.get(playerID)-1);
 			int pplAlive = 0;
-			for(int i : lives.values()) {
-				if (i>=0) {
+			int potentialWinner = -1;
+			for(int i : lives.keySet()) {
+				if (lives.get(i)>=0) {
 					pplAlive += 1;
+					potentialWinner = i;
 				}
 			}
 			if (pplAlive < 2) {
-				gameOver();
+				gameOver(potentialWinner);
 			}
 		}
 	}
@@ -183,7 +185,15 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 		if (decreaseGameTime(delta)) {
 			world.update(delta);
 		} else {
-			gameOver();
+			int winnerID = -1;
+			int winnerLives = -9999999;
+			for(int i : lives.keySet()) {
+				if (lives.get(i)>winnerLives) {
+					winnerID = i;
+					winnerLives = lives.get(i);
+				}
+			}
+			gameOver(winnerID);
 		}
 	}
 
