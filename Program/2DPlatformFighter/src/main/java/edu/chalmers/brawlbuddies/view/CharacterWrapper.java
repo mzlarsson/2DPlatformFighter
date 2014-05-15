@@ -101,7 +101,6 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 	public boolean isDestroyed() {
 		return character.isDestroyed();
 	}
-
 	public void onCollision(IGameObject object, Alignment alignment) {
 		character.onCollision(object, alignment);
 
