@@ -222,10 +222,10 @@ public enum Direction {
 		if(angle>90 && angle<270){
 			dir = dir.add(Direction.LEFT);
 		}
-		if(angle<180 && angle>0){
+		if(angle>180 && angle<360){
 			dir = dir.add(Direction.UP);
 		}
-		if(angle>180 && angle < 360){
+		if(angle<180 && angle>0){
 			dir = dir.add(Direction.DOWN);
 		}
 		return dir;
