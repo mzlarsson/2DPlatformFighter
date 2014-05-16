@@ -88,8 +88,8 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 	public void loadSettings(Controller controller){
 		Settings settings = Settings.getInstance();
 		if(settings.getSetting("Music") != null){
-			controller.setMusicVolume(settings.getSetting("Music").equals("On")?1.0f:0.0f);
-			controller.setSoundVolume(settings.getSetting("Sound").equals("On")?1.0f:0.0f);
+			controller.useMusic(settings.getSetting("Music").equals("On"));
+			controller.useSounds(settings.getSetting("Sound").equals("On"));
 			String[] res = settings.getSetting("Resolution").split("x");
 			boolean fullscreen = settings.getSetting("Fullscreen").equals("On");
 			controller.setResolution(Integer.parseInt(res[0]), Integer.parseInt(res[1]), fullscreen);

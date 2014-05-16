@@ -16,7 +16,6 @@ import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.IView;
-import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 /**
  * State for handling the main gameplay of the game BrawlBuddies
@@ -139,7 +138,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Entering Play state");
 		state = game;
-		SoundPlayer.getInstance().startSounds();
 	}
 
 	/**
@@ -151,7 +149,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Leaving Play state");
-		SoundPlayer.getInstance().stopSounds();
 	}
 	
 	/**
