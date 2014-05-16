@@ -24,6 +24,7 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 	
 	private boolean timeLimit;
 	private int time;
+	private IGoal goal;
 	
 	private boolean lifeLimit;
 	private Map<Integer,Integer> lives;

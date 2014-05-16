@@ -7,7 +7,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.model.Direction;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.skills.SkillWrapper;
+import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 
 /**
  * Creates an object of the character that can be drawn on the screen. Contains

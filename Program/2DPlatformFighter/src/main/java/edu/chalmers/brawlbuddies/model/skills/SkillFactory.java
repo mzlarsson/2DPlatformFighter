@@ -17,7 +17,6 @@ import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
 import edu.chalmers.brawlbuddies.model.world.MeleeFactory;
 import edu.chalmers.brawlbuddies.model.world.ProjectileFactory;
 import edu.chalmers.brawlbuddies.util.XMLReader;
-import edu.chalmers.brawlbuddies.view.SkillWrapper;
 
 /**
  * A factory for building a skill from an XML file.

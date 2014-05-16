@@ -8,7 +8,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 import edu.chalmers.brawlbuddies.model.world.IHealth;
 
 public class HealthImage implements IDrawable {

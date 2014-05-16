@@ -1,9 +1,8 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model.skills;
 
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
-import edu.chalmers.brawlbuddies.model.skills.ISkill;
-import edu.chalmers.brawlbuddies.model.skills.Skill;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
 

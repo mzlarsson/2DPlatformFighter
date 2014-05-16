@@ -4,7 +4,9 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
 
 public class ProjectileImage implements IDrawable {
 	private Animation animation;

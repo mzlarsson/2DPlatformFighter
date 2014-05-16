@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model;
 
 public interface IWrapper {
 	public int getTypeID();

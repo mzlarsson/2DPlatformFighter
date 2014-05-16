@@ -12,8 +12,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.model.skills.SkillWrapper;
+import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 import edu.chalmers.brawlbuddies.model.world.Health;
+import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 
 public class HudImage implements IDrawable {
 	private int hudID;
