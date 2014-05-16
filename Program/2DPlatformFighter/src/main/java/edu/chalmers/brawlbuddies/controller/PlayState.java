@@ -2,9 +2,9 @@ package edu.chalmers.brawlbuddies.controller;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.controller.input.GameKey;
@@ -18,7 +18,6 @@ import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.view.GameView;
 import edu.chalmers.brawlbuddies.view.HudImage;
 import edu.chalmers.brawlbuddies.view.IView;
-import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 /**
  * State for handling the main gameplay of the game BrawlBuddies
@@ -79,6 +78,9 @@ public class PlayState extends BasicGameState implements GameListener{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		//Check if game started
 		if(this.gameStarted()){
+			if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)){
+				sbg.enterState(Constants.GAMESTATE_MAIN_MENU);
+			}
 			//Send all control signals to model
 			for(int i = 0; i<this.players.length; i++){
 				InputHandler handler = players[i].getInputHandler();
@@ -138,7 +140,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Entering Play state");
 		state = game;
-		SoundPlayer.getInstance().startSounds();
 	}
 
 	/**
@@ -150,7 +151,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		System.out.println("Leaving Play state");
-		SoundPlayer.getInstance().stopSounds();
 	}
 	
 	/**
