@@ -11,10 +11,12 @@ import edu.chalmers.brawlbuddies.controller.input.GameKey;
 import edu.chalmers.brawlbuddies.controller.input.InputHandler;
 import edu.chalmers.brawlbuddies.controller.input.KeyInputHandler;
 import edu.chalmers.brawlbuddies.controller.menu.EndScreenState;
+import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.model.GameFactory;
 import edu.chalmers.brawlbuddies.model.GameListener;
 import edu.chalmers.brawlbuddies.model.IBrawlBuddies;
 import edu.chalmers.brawlbuddies.view.GameView;
+import edu.chalmers.brawlbuddies.view.HudImage;
 import edu.chalmers.brawlbuddies.view.IView;
 import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 

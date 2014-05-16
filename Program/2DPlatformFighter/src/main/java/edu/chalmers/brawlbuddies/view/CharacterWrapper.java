@@ -21,8 +21,9 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 
 	public CharacterWrapper(Character character) {
 		this.character = character;
+		System.out.println("chacterwrapper created");
+		EventBus.getInstance().fireEvent(new EventBusEvent("createHud", this, null));
 		EventBus.getInstance().fireEvent(new EventBusEvent("createObject", this, null));
-		System.out.println("character created");
 	}
 	public CharacterWrapper(Shape shape, int id, Position projOffset) {
 		this(new Character(shape, id, projOffset));

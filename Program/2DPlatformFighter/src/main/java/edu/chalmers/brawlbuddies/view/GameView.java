@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 
 import org.newdawn.slick.Animation;
@@ -20,6 +22,10 @@ public class GameView implements IEventBusSubscriber, IView {
 	private Map<Integer, Animation> objectAnims;
 	private Map<Integer, IDrawable> objects;
 	private Map<Integer, HudImage> huds = new HashMap<Integer, HudImage>();
+	
+	public static int time= 10000;
+	public static String matchState = "timeMatch";
+	
 
 	public GameView() {
 		objectAnims = new TreeMap<Integer, Animation>();
@@ -34,6 +40,12 @@ public class GameView implements IEventBusSubscriber, IView {
 		}
 		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
 			entry.getValue().render(gc, g);
+		}
+		if(matchState.equals("timeMatch")){
+			Timer timer = new Timer();
+			TimerTask task = new TimedTask(g);
+			timer.schedule(task, 1000, time);
+			
 		}
 	}
 
@@ -56,28 +68,26 @@ public class GameView implements IEventBusSubscriber, IView {
 					AnimationMapFactory.create(
 							((IWrapper) event.getRecipient()).getTypeID()).get(
 							"idle"));
+		} else if(event.getName().equals("createHud")){
+			System.out.println("create hud event activated. recipient:" + event.getRecipient());
+			addHud((CharacterWrapper)event.getRecipient());
+		} else if(event.getName().equals("characterDied")){
+			CharacterWrapper character = (CharacterWrapper)event.getRecipient();
+			huds.get(character.getID()).characterDied();
+		} else if(event.getName().equals("gameOver")){
+			gameOver();
 		}
 	}
+		
 
 	public HudImage createHud(IWrapper obj) {
 		return new HudImage(obj);
 	}
 
 	public void addHud(IWrapper obj) {
-		if (obj.getClass() == SkillWrapper.class) {
-			SkillWrapper skill = (SkillWrapper) obj;
-			if (!huds.containsKey(skill.getOwnerID())) {
-				HudImage hud = createHud(obj);
-				huds.put(skill.getOwnerID(), hud);
-			}
-		} else if (obj.getClass() == HealthWrapper.class) {
-			HealthWrapper health = (HealthWrapper) obj;
-			if (!huds.containsKey(health.getID())) {
-				HudImage hud = createHud(obj);
-				huds.put(health.getID(), hud);
-			}
-		}
-
+		CharacterWrapper character= (CharacterWrapper)obj;
+		System.out.println("hud added to huds id:" + character.getUniqeID());
+		huds.put(character.getUniqeID(), createHud(obj));
 	}
 
 	public void removeObjectImage(IWrapper obj) {
@@ -124,21 +134,26 @@ public class GameView implements IEventBusSubscriber, IView {
 
 	private void createSkillImage(IWrapper obj) {
 		SkillWrapper skillW = (SkillWrapper) obj;
-		if (!huds.containsKey(skillW.getOwnerID())) {
-			addHud(obj);
-		}
 		SkillImage skill = new SkillImage(skillW);
 		huds.get(skill.getID()).addSkill(skill);
 	}
 
 	private void createHealthImage(IWrapper obj) {
 		HealthWrapper healthW = (HealthWrapper) obj;
-		System.out.println();
-		if (!huds.containsKey(healthW.getID())) {
-			addHud(obj);
-		}
 		HealthImage image = new HealthImage(healthW);
-		huds.get(healthW.getID()).addHealthBar(image);
+		System.out.println(healthW.getID());
+		System.out.println(huds.get(healthW.getID()));
+		HudImage hud = huds.get(healthW.getID());
+		hud.addHealthBar(image);
+	}
+	private void gameOver(){
+		System.out.println("gameOver");
+		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
+			entry.getValue().gameOver();
+		}
+		huds.clear();
+		EventBus.getInstance().removeSubscriber(this);
+		
 	}
 
 }

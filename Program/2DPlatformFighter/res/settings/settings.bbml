@@ -9,11 +9,11 @@
 		<value>Off</value>
 	</setting>
 	<setting>
-		<name>Sound</name>
+		<name>Music</name>
 		<value>Off</value>
 	</setting>
 	<setting>
-		<name>Music</name>
+		<name>Sound</name>
 		<value>Off</value>
 	</setting>
 </settings>
