@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.chalmers.brawlbuddies.controller.menu.OptionMenuState;
 import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 /**
@@ -27,6 +28,8 @@ public class Controller extends StateBasedGame {
 	 */
 	public Controller() {
 		super("BrawlBuddies v1.0");
+		SoundPlayer player = SoundPlayer.getInstance();
+		player.setMusic("res/sound/music/menu.ogg");
 	}
 
 	/**
@@ -42,6 +45,20 @@ public class Controller extends StateBasedGame {
 		for(BasicGameState state : states){
 			this.addState(state);
 		}
+		
+		((OptionMenuState)(this.getState(Constants.GAMESTATE_MENU_OPTIONS))).loadSettings(this);
+	}
+	
+	/**
+	 * Set up if music should be on or off
+	 * @param useMusic If the music should be on
+	 */
+	public void useMusic(boolean useMusic){
+		if(useMusic){
+			SoundPlayer.getInstance().startMusic();
+		}else{
+			SoundPlayer.getInstance().stopMusic();
+		}
 	}
 	
 	/**
@@ -53,6 +70,18 @@ public class Controller extends StateBasedGame {
 	}
 	
 	/**
+	 * Set up if sound should be on or off
+	 * @param useSound If the sound should be on
+	 */
+	public void useSounds(boolean useSound){
+		if(useSound){
+			SoundPlayer.getInstance().startSounds();
+		}else{
+			SoundPlayer.getInstance().stopSounds();
+		}
+	}
+	
+	/**
 	 * Sets the volume of the sounds in the game
 	 * @param volume The volume to use
 	 */
@@ -60,6 +89,12 @@ public class Controller extends StateBasedGame {
 		SoundPlayer.getInstance().setSoundVolume(volume);
 	}
 	
+	/**
+	 * Sets the resolution of the screen
+	 * @param x The x-value
+	 * @param y The y-value
+	 * @param fullscreen If fullscreen should be used
+	 */
 	public void setResolution(int x, int y, boolean fullscreen){
 		try {
 			gameContainer.setDisplayMode(x, y, fullscreen);

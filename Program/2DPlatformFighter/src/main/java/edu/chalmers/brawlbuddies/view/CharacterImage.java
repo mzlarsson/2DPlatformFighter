@@ -101,8 +101,9 @@ public class CharacterImage implements IDrawable {
 	 */
 	public void update(IWrapper obj1, IWrapper obj2) {
 		CharacterWrapper character = (CharacterWrapper) obj1;
-		Direction tmpAimDirection = character.getAim().getDirection();
-		Direction tmpMoveDirection = character.getDirection();
+		Direction tmpAimDirection = character.getAim().getDirection().getXDirection();
+		Direction tmpMoveDirection = character.getDirection().getXDirection();
+		inAir = character.isInAir();
 		String tmpMovementName = "";
 
 		if (isAttacking && animation.isStopped()) {
@@ -129,46 +130,42 @@ public class CharacterImage implements IDrawable {
 		}
 
 		if (!isAttacking) {
-			if (tmpMoveDirection != Direction.NONE) {
-				if (inAir) {
-					if (tmpAimDirection == Direction.NONE) {
-						tmpMovementName = "move"
-								+ "Air"
-								+ correctStringFormat(tmpMoveDirection
-										.toString())
-								+ correctStringFormat(aimDirection
-										.getXDirection().toString());
-					} else {
-						tmpMovementName = "move"
-								+ "Air"
-								+ correctStringFormat(tmpMoveDirection
-										.toString())
-								+ correctStringFormat(tmpAimDirection
-										.getXDirection().toString());
-					}
+			if (inAir) {
+				if (tmpAimDirection == Direction.NONE) {
+					tmpMovementName = "move"
+							+ "Air"
+							+ correctStringFormat(aimDirection
+									.getXDirection().toString());
 				} else {
-					if (tmpAimDirection == Direction.NONE) {
-						tmpMovementName = "move"
-								+ "Ground"
-								+ correctStringFormat(tmpMoveDirection
-										.toString())
-								+ correctStringFormat(aimDirection
-										.getXDirection().toString());
-					} else {
-						tmpMovementName = "move"
-								+ "Ground"
-								+ correctStringFormat(tmpMoveDirection
-										.toString())
-								+ correctStringFormat(tmpAimDirection
-										.getXDirection().toString());
-					}
+					tmpMovementName = "move"
+							+ "Air"
+							+ correctStringFormat(tmpAimDirection
+									.getXDirection().toString());
+				}
+			} else if (tmpMoveDirection != Direction.NONE) {
+				if (tmpAimDirection == Direction.NONE) {
+					tmpMovementName = "move"
+							+ "Ground"
+							+ correctStringFormat(tmpMoveDirection
+									.toString())
+							+ correctStringFormat(aimDirection
+									.getXDirection().toString());
+				} else {
+					tmpMovementName = "move"
+							+ "Ground"
+							+ correctStringFormat(tmpMoveDirection
+									.toString())
+							+ correctStringFormat(tmpAimDirection
+									.getXDirection().toString());
 				}
 			} else {
 				if (tmpAimDirection == Direction.NONE) {
-					tmpMovementName = "idleLeft";
+					tmpMovementName = "idle"
+							+ correctStringFormat(aimDirection
+									.getXDirection().toString());
 				} else {
 					tmpMovementName = "idle"
-							+ correctStringFormat(aimDirection.getXDirection()
+							+ correctStringFormat(tmpAimDirection.getXDirection()
 									.toString());
 				}
 			}
@@ -184,7 +181,6 @@ public class CharacterImage implements IDrawable {
 		if (tmpAimDirection != Direction.NONE) {
 			aimDirection = tmpAimDirection;
 		}
-		inAir = character.isInAir();
 		drawPos = getDrawPos(character.getPosition());
 	}
 
@@ -199,9 +195,10 @@ public class CharacterImage implements IDrawable {
 			tmpMovementName = "idle"
 					+ (aimDirection.getXDirection() != Direction.NONE ? correctStringFormat(aimDirection
 							.getXDirection().toString())
-							: correctStringFormat(Direction.LEFT.toString()));
+							: correctStringFormat(moveDirection.getXDirection().toString()));
 		}
 		if (!(tmpMovementName.equals(movementName))) {
+			System.out.println(movementName);
 			animation.stop();
 			movementName = tmpMovementName;
 			animation = mapAnimation.get(movementName);

@@ -303,8 +303,12 @@ public class Movement {
 	 */
 	public Direction getDirection(){
 		Velocity total = this.getTotalVelocity();
-		double angle = total.getTheta();
-		return Direction.getDirection(angle);
+		if (total.equals(new Velocity(0,0))){
+			return Direction.NONE;
+		} else {
+			double angle = total.getTheta();
+			return Direction.getDirection(angle);
+		}
 	}
 	
 	/**
