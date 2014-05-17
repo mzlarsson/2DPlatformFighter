@@ -3,6 +3,7 @@ package edu.chalmers.brawlbuddies.view.sound;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.lwjgl.openal.AL;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
@@ -201,4 +202,11 @@ public class SoundPlayer implements IEventBusSubscriber{
 		return null;
 	}
 
+	/**
+	 * Stops all sounds definitely.
+	 * Should be called on when closing application
+	 */
+	public void stop(){
+		AL.destroy();
+	}
 }

@@ -85,7 +85,11 @@ public class InputHandlerChooser {
 		for(String key : this.controllers.keySet()){
 			controlCount = this.controllers.get(key);
 			for(int i = 0; i<controlCount; i++){
-				names.put(count+"", key + (controlCount>1?" "+(i+1):""));
+				if(key.toLowerCase().contains("midi")){
+					names.put(count+"", this.midiFinder.getDevice(i).getDeviceInfo().getName());
+				}else{
+					names.put(count+"", key + (controlCount>1?" "+(i+1):""));
+				}
 				count++;
 			}
 		}

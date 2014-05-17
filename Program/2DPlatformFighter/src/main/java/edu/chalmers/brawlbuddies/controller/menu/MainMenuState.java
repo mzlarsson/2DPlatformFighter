@@ -89,7 +89,7 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	}
 	
 	public void shutdown(){
-		System.exit(0);
+		game.closeRequested();
 	}
 
 	public void menuActivated(MenuEvent event) {

@@ -26,8 +26,9 @@ public class GameSetupView extends SimpleMenuView{
 	}
 	
 	public void load(GameContainer gc){
-		this.topOffset = (gc.getHeight()-700)/2;
+		this.topOffset = (gc.getHeight()-780)/2;
 		List<MultiChoiceOption> characters = MultiChoiceOption.stringToMultiChoice(CharacterFactory.getAvailableCharacters());
+		InputHandlerChooser.getInstance().updateHandlers();
 		List<MultiChoiceOption> controllers = MultiChoiceOption.stringToMultiChoice(InputHandlerChooser.getInstance().getControllerNames());
 		List<MultiChoiceOption> maps = MultiChoiceOption.stringToMultiChoice(GameMapFactory.getAvailableMaps());
 		

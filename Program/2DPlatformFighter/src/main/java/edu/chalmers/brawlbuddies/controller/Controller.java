@@ -119,5 +119,16 @@ public class Controller extends StateBasedGame {
 		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players, characterNames, mapName, lives, time);
 		this.enterState(Constants.GAMESTATE_PLAY);
 	}
+	
+	/**
+	 * Called when the program wishes to shutdown
+	 * @return <code>true</code> if shutting down, <code>false</code> otherwise
+	 */
+	@Override
+	public boolean closeRequested(){
+		SoundPlayer.getInstance().stop();
+		System.exit(0);
+		return true;
+	}
 
 }
