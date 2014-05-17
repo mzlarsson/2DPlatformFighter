@@ -30,10 +30,7 @@ public class GameSetupView extends SimpleMenuView{
 		List<MultiChoiceOption> characters = MultiChoiceOption.stringToMultiChoice(CharacterFactory.getAvailableCharacters());
 		List<MultiChoiceOption> controllers = MultiChoiceOption.stringToMultiChoice(InputHandlerChooser.getInstance().getControllerNames());
 		List<MultiChoiceOption> maps = MultiChoiceOption.stringToMultiChoice(GameMapFactory.getAvailableMaps());
-		List<MultiChoiceOption> modes = new ArrayList<MultiChoiceOption>();
-		modes.add(new MultiChoiceOption("lives", "Lives"));
-		modes.add(new MultiChoiceOption("time", "Time"));
-		modes.add(new MultiChoiceOption("timelives", "Time & Lives"));
+		
 		//Player1
 		int x = (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth());
 		this.add(new MultiChoiceMenuItem("p1_character", "Character", characters, new Position(x, 150+topOffset), standardSize, false));
@@ -48,13 +45,40 @@ public class GameSetupView extends SimpleMenuView{
 		//Map choice
 		this.add(new MultiChoiceMenuItem("map", "Map", maps, 400+topOffset, standardSize));
 		//Type choice
-		this.add(new MultiChoiceMenuItem("mode", "Mode", modes, 480+topOffset, standardSize));
+		this.add(getChoiceLiveMode());
+		this.add(getChoiceTimeMode());
 		//Submit
 		x = (int)(gc.getWidth()/2-centerOffset-500);
-		this.add(new SimpleMenuItem("gotoMain", "Back", new Position(x, 590+topOffset)));
+		this.add(new SimpleMenuItem("gotoMain", "Back", new Position(x, 670+topOffset)));
 		x = (int)(gc.getWidth()/2+centerOffset);
-		this.add(new SimpleMenuItem("startGame", "Start game", new Position(x, 590+topOffset)));
+		this.add(new SimpleMenuItem("startGame", "Start game", new Position(x, 670+topOffset)));
 		this.setSelectedItem(this.getMenuItems().get(0));
+	}
+	
+	private MultiChoiceMenuItem getChoiceLiveMode(){
+		List<MultiChoiceOption> options = new ArrayList<MultiChoiceOption>();
+		options.add(new MultiChoiceOption("-1", "No lives"));
+		for(int i = 1; i<=10; i++){
+			options.add(new MultiChoiceOption(""+i, ""+i));
+		}
+		
+		MultiChoiceMenuItem mcmItem = new MultiChoiceMenuItem("mode_lives", "Lives", options, 480+topOffset, standardSize);
+		mcmItem.setItem("3");
+		return mcmItem;
+	}
+	
+	private MultiChoiceMenuItem getChoiceTimeMode(){
+		List<MultiChoiceOption> options = new ArrayList<MultiChoiceOption>();
+		int[] times = {30, 60, 120, 180, 300, 450, 600, 900, 1200, 1800};
+		options.add(new MultiChoiceOption("-1", "No time"));
+		for(int i = 0; i<times.length; i++){
+			int min = times[i]/60;
+			int sec = times[i]%60;
+			options.add(new MultiChoiceOption(times[i]+"", (min>0?(min+":"+(sec<10?"0"+sec:""+sec)+" minuter"):sec+" sekunder")));
+		}
+		
+		MultiChoiceMenuItem mcmItem = new MultiChoiceMenuItem("mode_time", "Time", options, 560+topOffset, standardSize);
+		return mcmItem;
 	}
 
 	@Override

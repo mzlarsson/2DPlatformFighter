@@ -78,12 +78,13 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 			String p2_character = view.get("p2_character").getValue();
 			int p2_control = Integer.parseInt(view.get("p2_control").getValue());
 			String map = view.get("map").getValue();
-			String mode = view.get("mode").getValue();
+			int lives = Integer.parseInt(view.get("mode_lives").getValue());
+			int time = Integer.parseInt(view.get("mode_time").getValue());
 			
 			Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(p1_control, false)),
 								 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(p2_control, isSecondControl(p1_control, p2_control)))};
 			String[] charNames = {p1_character, p2_character};
-			((Controller)game).startGame(players, charNames, map, mode);
+			((Controller)game).startGame(players, charNames, map, lives, time);
 		}
 	}
 	
@@ -93,7 +94,15 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	}
 	
 	private boolean canStart(){
+		return controlsAreValid() && goalIsValid();
+	}
+	
+	private boolean controlsAreValid(){
 		return view.get("p2_control").getValue() != null;
+	}
+	
+	private boolean goalIsValid(){
+		return !(Integer.parseInt(view.get("mode_lives").getValue())<0 && Integer.parseInt(view.get("mode_time").getValue())<0);
 	}
 	
 	public void gotoMainMenu(){
@@ -113,6 +122,8 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 			for(MultiChoiceOption option : p2_control.getOptions()){
 				p2_control.enable(option.getCodeValue(), !option.getCodeValue().equals(event.getValue()));
 			}
+		}else if(event.getName().equals("mode_lives") || event.getName().equals("mode_time")){
+			view.get("mode_time").setError(!goalIsValid());
 		}
 
 		view.get("startGame").setError(!canStart());
