@@ -1,7 +1,6 @@
 package edu.chalmers.brawlbuddies.view;
 
 import java.awt.Dimension;
-import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -52,28 +51,24 @@ public class SideScroller implements IEventBusSubscriber{
 		return -this.viewportY;
 	}
 	
-	public int getWidth(){
-		return (int)this.viewportSize.getWidth();
-	}
-	
-	public int getHeight(){
-		return (int)this.viewportSize.getHeight();
-	}
-
-	public int getScreenWidth(){
-		return (int)this.resolution.getWidth();
-	}
-	
-	public int getScreenHeight(){
-		return (int)this.resolution.getHeight();
-	}
-	
 	public float getScale(){
 		return this.scale;
 	}
 	
-	public Collection<Position> getPos(){
-		return this.positions.values();
+	public int getTopX(){
+		if(this.mapSize.getWidth() == this.viewportSize.getWidth()){
+			return this.viewportX;
+		}else{
+			return 0;
+		}
+	}
+	
+	public int getTopY(){
+		if(this.mapSize.getHeight() == this.viewportSize.getHeight()){
+			return this.viewportY;
+		}else{
+			return 0;
+		}
 	}
 	
 	public void setMapSize(int x, int y){
@@ -121,39 +116,72 @@ public class SideScroller implements IEventBusSubscriber{
 				}
 			}
 			
+			//Fix offsets
+			minX -= offsetX;
+			minY -= offsetY;
+			maxX += offsetX;
+			maxY += offsetY;
+			
 			//Calculate size of viewport
 			setupViewportSize(minX, minY, maxX, maxY);
 			
 			//Set up scale
-			float mapScale = (float)(mapSize.getWidth()/viewportSize.getWidth());
-			this.scale = (float)(resolution.getWidth()/viewportSize.getWidth());// * mapScale;
+			this.scale = Math.min((float)(resolution.getWidth()/viewportSize.getWidth()), (float)(resolution.getHeight()/viewportSize.getHeight()));
 	
-			//Set up position
-			this.viewportX = (int)((minX+maxX)/2 - (resolution.getWidth()/2 + this.offsetX)/viewportSize.getWidth());
-			this.viewportX = (int)Math.min(Math.max(0, this.viewportX), mapSize.getWidth()-viewportSize.getWidth());
-			this.viewportY = (int)((minY+maxY)/2 - (resolution.getHeight()/2 + this.offsetY)/viewportSize.getHeight());
-			this.viewportY = (int)Math.min(Math.max(0, this.viewportY), mapSize.getHeight()-viewportSize.getHeight());
+			//Set up x position
+			if(minX<=0){
+				this.viewportX = 0;
+			}else{
+				if(this.viewportSize.getWidth() == this.mapSize.getWidth()){
+					this.viewportX = -(int)(resolution.getWidth()-viewportSize.getWidth()*scale)/2+5;
+					System.out.println("vpX: "+viewportX);
+				}else{
+					this.viewportX = minX;
+					this.viewportX = (int)Math.min(Math.max(0, this.viewportX), mapSize.getWidth()-viewportSize.getWidth());
+				}
+			}
+			//Set up y position
+			if(minY<=0){
+				this.viewportY = 0;
+			}else{
+				if(this.viewportSize.getHeight() == this.mapSize.getHeight()){
+					this.viewportY = -(int)(resolution.getHeight()-viewportSize.getHeight()*scale)/2+5;
+					System.out.println("vpY: "+viewportY);
+				}else{
+					this.viewportY = minY;
+					this.viewportY = (int)Math.min(Math.max(0, this.viewportY), mapSize.getHeight()-viewportSize.getHeight());
+				}
+			}
 		}
 	}
 	
 	private void setupViewportSize(int minX, int minY, int maxX, int maxY){
-		double tmpSizeX = maxX-minX+2*this.offsetX;
-		double tmpSizeY = maxY-minY+2*this.offsetY;
-		if(tmpSizeX/this.mapSize.getWidth()>tmpSizeY/this.mapSize.getHeight()){
-			tmpSizeY = tmpSizeX/this.mapSize.getWidth()*this.mapSize.getHeight();
+		//Calculate center point between characters
+		double tmpSizeX = maxX-minX;
+		double tmpSizeY = maxY-minY;
+		
+		//Make sure the scale is the same against resolution.
+		if(tmpSizeX/this.resolution.getWidth()>tmpSizeY/this.resolution.getHeight()){
+			tmpSizeY = tmpSizeX/this.resolution.getWidth()*this.resolution.getHeight();
 		}else{
-			tmpSizeX = tmpSizeY/this.mapSize.getHeight()*this.mapSize.getWidth();
+			tmpSizeX = tmpSizeY/this.resolution.getHeight()*this.resolution.getWidth();
 		}
 		
+		//Make sure the window does not zoom to much.
 		if(tmpSizeX<this.minimumSize.getWidth() || tmpSizeY<this.minimumSize.getHeight()){
 			tmpSizeX = this.minimumSize.getWidth();
 			tmpSizeY = this.minimumSize.getHeight();
 		}
-		if(tmpSizeX>this.mapSize.getWidth() || tmpSizeY>this.mapSize.getHeight()){
+		
+		//Make sure the viewport does not try to extend more than the map size.
+		if(tmpSizeX>this.mapSize.getWidth()){
 			tmpSizeX = this.mapSize.getWidth();
+		}
+		if(tmpSizeY>this.mapSize.getHeight()){
 			tmpSizeY = this.mapSize.getHeight();
 		}
 		
+		//Set the viewport size variable.
 		this.viewportSize.setSize(tmpSizeX, tmpSizeY);
 	}
 
