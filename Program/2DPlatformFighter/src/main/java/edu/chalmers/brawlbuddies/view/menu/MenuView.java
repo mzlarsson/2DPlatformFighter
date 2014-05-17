@@ -8,6 +8,7 @@ public interface MenuView extends IView{
 
 	public List<MenuItem> getMenuItems();
 	public MenuItem getSelectedItem();
+	public MenuItem get(String itemName);
 	public void setSelectedItem(MenuItem item);
 	
 	public void nextItem();

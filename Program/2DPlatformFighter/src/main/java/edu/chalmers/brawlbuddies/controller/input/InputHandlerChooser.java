@@ -79,13 +79,13 @@ public class InputHandlerChooser {
 	 * E.g. a controller may be named XboxControl 1
 	 * @return The names of all the controllers
 	 */
-	public String[] getControllerNames(){
-		String[] names = new String[this.countExternalControllers()+3];
+	public Map<String, String> getControllerNames(){
+		Map<String, String> names = new LinkedHashMap<String, String>();
 		int count = 0, controlCount = 0;
 		for(String key : this.controllers.keySet()){
 			controlCount = this.controllers.get(key);
 			for(int i = 0; i<controlCount; i++){
-				names[count] = key + (controlCount>1?" "+(i+1):"");
+				names.put(count+"", key + (controlCount>1?" "+(i+1):""));
 				count++;
 			}
 		}
@@ -127,6 +127,15 @@ public class InputHandlerChooser {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Determines whether this input control uses the PC keyboard (keyboard with/without mouse)
+	 * @param index The index to check
+	 * @return <code>true</code> if the control uses the keyboard, <code>false</code> otherwise
+	 */
+	public boolean usesKeyboard(int index){
+		return index>=0 && index<controllers.get(controlTypes[0])+controllers.get(controlTypes[1]);
 	}
 	
 	/**

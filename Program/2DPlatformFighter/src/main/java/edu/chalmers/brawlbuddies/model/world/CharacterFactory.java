@@ -1,5 +1,10 @@
 package edu.chalmers.brawlbuddies.model.world;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -16,7 +21,8 @@ import edu.chalmers.brawlbuddies.util.XMLReader;
 /**
  * A factory for creating characters.
  * @author Patrik Haar
- * @version 0.1
+ * @author Matz Larsson
+ * @version 1.0
  */
 public class CharacterFactory {
 	
@@ -90,5 +96,26 @@ public class CharacterFactory {
 		character.setSkills(skills);
 		
 		return wrapper;
+	}
+	
+	public static Map<String, String> getAvailableCharacters(){
+		File folder = new File(Constants.CHARACTER_DATA);
+		File[] files = folder.listFiles(new FileFilter(){
+			public boolean accept(File file) {
+				return file.isFile();
+			}
+		});
+		Map<String, String> charNames = new LinkedHashMap<String, String>();
+		for(int i = 0; i<files.length; i++){
+			Document xmlDoc = XMLReader.getDocument(files[i].getAbsolutePath());
+			Element rootNode = xmlDoc.getDocumentElement();
+			String charName = rootNode.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
+
+			String path = files[i].getAbsolutePath();
+			int startIndex = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"))+1;
+			String filename = path.substring(startIndex).substring(0, path.lastIndexOf(".")-startIndex);
+			charNames.put(filename, charName);
+		}
+		return charNames;
 	}
 }

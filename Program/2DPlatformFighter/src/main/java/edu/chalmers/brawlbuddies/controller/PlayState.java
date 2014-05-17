@@ -53,10 +53,10 @@ public class PlayState extends BasicGameState implements GameListener{
 	 * @param players The players to take part in the game
 	 * @param names The names of the characters to used, synched with players array
 	 */
-	public void startGame(Player[] players, String[] names){
+	public void startGame(Player[] players, String[] names, String mapName, String gameType){
 		view = new GameView();
 		this.players = players;
-		game = GameFactory.create("basic16Map", names, 0, 3);
+		game = GameFactory.create(mapName, names, 0, 3);
 		int[] id = game.getCharacterIDs();
 		for(int i = 0; i<players.length; i++){
 			players[i].setCharacterID(id[i]);
@@ -174,8 +174,8 @@ public class PlayState extends BasicGameState implements GameListener{
 				winner = p.getName();
 			}
 		}
-		((EndScreenState)state.getState(Constants.END_SCREEN)).setWinner(winner);;
-		state.enterState(Constants.END_SCREEN);		
+		((EndScreenState)state.getState(Constants.GAMESTATE_END_SCREEN)).setWinner(winner);;
+		state.enterState(Constants.GAMESTATE_END_SCREEN);		
 	}
 
 }

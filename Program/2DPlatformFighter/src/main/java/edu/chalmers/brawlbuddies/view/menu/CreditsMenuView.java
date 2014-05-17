@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 public class CreditsMenuView extends SimpleMenuView{
 
 	public CreditsMenuView() {
-		this.add(new SimpleMenuItem("Back", 640));
+		this.add(new SimpleMenuItem("gotoMain", "Back", 640));
 	}
 	
 	@Override

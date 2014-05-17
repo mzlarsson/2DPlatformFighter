@@ -6,22 +6,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Constants;
-import edu.chalmers.brawlbuddies.controller.PlayState;
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
-import edu.chalmers.brawlbuddies.view.menu.MainMenuView;
+import edu.chalmers.brawlbuddies.view.menu.GameSetupView;
 import edu.chalmers.brawlbuddies.view.menu.MenuView;
+import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
+import edu.chalmers.brawlbuddies.view.menu.MultiChoiceOption;
 
-/**
- * State for displaying and handling the main menu system
- * @author Matz Larsson
- * @version 0.1
- *
- */
+public class GameSetupState extends BasicGameState implements MenuListener{
 
-public class MainMenuState extends BasicGameState implements MenuListener{
-	
 	private MenuView view;
 	private MenuHandler handler;
 	private StateBasedGame game;
@@ -29,8 +24,8 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	/**
 	 * Creates a new Menu state
 	 */
-	public MainMenuState() {
-		view = new MainMenuView();
+	public GameSetupState() {
+		view = new GameSetupView();
 		handler = new MenuHandler(view);
 		handler.addMenuListener(this);
 	}
@@ -73,40 +68,59 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	 */
 	@Override
 	public int getID() {
-		return Constants.GAMESTATE_MAIN_MENU;
+		return Constants.GAMESTATE_GAME_SETUP;
 	}
 	
 	public void startGame(){
-		game.enterState(Constants.GAMESTATE_GAME_SETUP);
+		if(canStart()){
+			String p1_character = view.get("p1_character").getValue();
+			int p1_control = Integer.parseInt(view.get("p1_control").getValue());
+			String p2_character = view.get("p2_character").getValue();
+			int p2_control = Integer.parseInt(view.get("p2_control").getValue());
+			String map = view.get("map").getValue();
+			String mode = view.get("mode").getValue();
+			
+			Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(p1_control, false)),
+								 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(p2_control, isSecondControl(p1_control, p2_control)))};
+			String[] charNames = {p1_character, p2_character};
+			((Controller)game).startGame(players, charNames, map, mode);
+		}
 	}
 	
-	public void gotoOptions(){
-		game.enterState(Constants.GAMESTATE_MENU_OPTIONS);
+	private boolean isSecondControl(int p1, int p2){
+		InputHandlerChooser handler = InputHandlerChooser.getInstance();
+		return handler.usesKeyboard(p1) && handler.usesKeyboard(p2);
 	}
 	
-	public void gotoCredits(){
-		game.enterState(Constants.GAMESTATE_MENU_CREDITS);
+	private boolean canStart(){
+		return view.get("p2_control").getValue() != null;
 	}
 	
-	public void shutdown(){
-		System.exit(0);
+	public void gotoMainMenu(){
+		game.enterState(Constants.GAMESTATE_MAIN_MENU);
 	}
 
-	public void menuActivated(MenuEvent event) {
+	public void menuActivated(MenuEvent event){
 		if(event.getName().equals("startGame")){
-			startGame();
-		}else if(event.getName().equals("options")){
-			gotoOptions();
-		}else if(event.getName().equals("credits")){
-			gotoCredits();
-		}else if(event.getName().equals("exit")){
-			shutdown();
+			if(canStart()){
+				startGame();
+			}
+		}else if(event.getName().equals("gotoMain")){
+			gotoMainMenu();
+		}else if(event.getName().equals("p1_control")){
+			MultiChoiceMenuItem p2_control = (MultiChoiceMenuItem)(view.getMenuItems().get(3));
+
+			for(MultiChoiceOption option : p2_control.getOptions()){
+				p2_control.enable(option.getCodeValue(), !option.getCodeValue().equals(event.getValue()));
+			}
 		}
+
+		view.get("startGame").setError(!canStart());
 	}
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		view.update();
 	}
-
+	
 }

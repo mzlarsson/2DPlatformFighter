@@ -10,7 +10,7 @@ public class EndScreenView extends SimpleMenuView {
 	
 	public EndScreenView() {
 		this.winnerName = "Not yet defined";
-		this.add(new SimpleMenuItem("Ok", 640));
+		this.add(new SimpleMenuItem("gotoMain", "Ok", 640));
 	}
 	
 	public void setWinner(String winnerName) {
