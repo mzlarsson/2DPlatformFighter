@@ -17,20 +17,13 @@ import edu.chalmers.brawlbuddies.model.world.World;
  * @version 0.4
  * @revised Matz Larsson
  */
-public class BrawlBuddies implements IBrawlBuddies, GameListener{
+public class BrawlBuddies implements IBrawlBuddies{
 
 	private World world;
-	private List<GameListener> listeners;
-	
-	private boolean timeLimit;
-	private int time;
-	private IGoal goal;
-	
-	private boolean lifeLimit;
-	private Map<Integer,Integer> lives;
+	private List<IGoal> goals;
 	
 	public BrawlBuddies(){
-		this(new World(new GameMap()), 0, 0);
+		this(new World(new GameMap()));
 	}
 
 	/**
@@ -41,37 +34,19 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 	 * @param lifeLimit Life limit of the game, if lower than 1 it will not be used.
 	 * 
 	 */
-	public BrawlBuddies(World world, int timeLimit, int lifeLimit) {
+	public BrawlBuddies(World world) {
 		this.world = world;
-		this.listeners = new ArrayList<GameListener>();
+		this.goals = new ArrayList<IGoal>();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addGoal(IGoal goal) {
+		goals.add(goal);
 		for (IGameObject ch : this.world.getObjectsByType(ICharacter.class)) {
-			((ICharacter)ch).addGameListener(this);
+			((ICharacter)ch).addGameListener(goal);
 		}
-		if (timeLimit>0) {
-			this.timeLimit = true;
-			this.time = timeLimit;
-		}
-		if (lifeLimit>0) {
-			this.lifeLimit = true;
-			this.lives = new HashMap<Integer,Integer>();
-			for(int playerID : getCharacterIDs()) {
-				this.lives.put(playerID, lifeLimit);
-			}
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addGameListener(GameListener gl) {
-		listeners.add(gl);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void removeGameListener(GameListener gl) {
-		listeners.remove(gl);
 	}
 	
 	/**
@@ -135,67 +110,16 @@ public class BrawlBuddies implements IBrawlBuddies, GameListener{
 			((ICharacter)object).setAim(aimPosition, isRelative);
 		}
 	}
-
-	/**
-	 * If the game is on a timer it is reduced.
-	 * @param delta The time to be subtracted in milliseconds.
-	 * @return <code>true</code> if there is time left on the clock. <code>false</code> if not.
-	 */
-	private boolean decreaseGameTime(int delta) {
-		if (timeLimit) {
-			this.time -= delta;
-			return this.time>0;
-		}
-		return true;
-	}
-
-	/**
-	 * Will call the gameOver() method on all the listening classes.
-	 */
-	public void gameOver(int winnerID) {
-		for(GameListener gl : listeners) {
-			gl.gameOver(winnerID);
-		}
-	}
-	
-	/**
-	 *  {@inheritDoc}
-	 */
-	public void playerKilled(int playerID) {
-		if (lifeLimit) {
-			lives.put(playerID, lives.get(playerID)-1);
-			int pplAlive = 0;
-			int potentialWinner = -1;
-			for(int i : lives.keySet()) {
-				if (lives.get(i)>=0) {
-					pplAlive += 1;
-					potentialWinner = i;
-				}
-			}
-			if (pplAlive < 2) {
-				gameOver(potentialWinner);
-			}
-		}
-	}
 	
 	/**
 	 * Updates all the objects of the world
 	 * @param delta Time since last update in milliseconds.
 	 */
 	public void update(int delta) {
-		if (decreaseGameTime(delta)) {
-			world.update(delta);
-		} else {
-			int winnerID = -1;
-			int winnerLives = -9999999;
-			for(int i : lives.keySet()) {
-				if (lives.get(i)>winnerLives) {
-					winnerID = i;
-					winnerLives = lives.get(i);
-				}
-			}
-			gameOver(winnerID);
+		for (IGoal goal : goals) {
+			goal.update(delta);
 		}
+		world.update(delta);
 	}
 
 

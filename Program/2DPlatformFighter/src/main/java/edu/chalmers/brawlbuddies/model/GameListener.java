@@ -8,14 +8,9 @@ package edu.chalmers.brawlbuddies.model;
 public interface GameListener {
 	
 	/**
-	 * This method will be called at a Game Over event.
-	 * @param winnerID The ID of the character who won.
+	 * Triggered on a game change.
+	 * @param evtName The name of the event.
+	 * @param value The value of the event.
 	 */
-	public void gameOver(int winnerID);
-	
-	/**
-	 * 
-	 * @param playerID
-	 */
-	public void playerKilled(int playerID);
+	public void gameEventPerformed(String evtName, Object value);
 }
