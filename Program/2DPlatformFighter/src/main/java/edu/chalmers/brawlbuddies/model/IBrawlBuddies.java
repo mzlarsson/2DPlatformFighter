@@ -43,14 +43,8 @@ public interface IBrawlBuddies {
 	public int[] getCharacterIDs();
 	
 	/**
-	 * Adds the given GameListener as a listener to catch game events.
-	 * @param gl The GameListener to handle the events this class throws.
+	 * Adds a goal to the game and makes it listen to all characters.
+	 * @param goal The goal to add.
 	 */
-	public void addGameListener(GameListener gl);
-	
-	/**
-	 * Removes the given GameListener as a listener to this class.
-	 * @param gl The GameListener to be removed.
-	 */
-	public void removeGameListener(GameListener gl);
+	public void addGoal(IGoal goal);
 }

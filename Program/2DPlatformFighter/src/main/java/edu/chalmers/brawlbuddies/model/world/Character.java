@@ -302,7 +302,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	private void characterKilled() {
 		for (GameListener gl : listeners) {
-			gl.playerKilled(getID());
+			gl.gameEventPerformed("characterKilled", this);
 		}
 	}
 
@@ -311,6 +311,7 @@ public class Character extends GameObject implements ICharacter {
 	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
+		gl.gameEventPerformed("characterAdded", this);
 	}
 
 	/**

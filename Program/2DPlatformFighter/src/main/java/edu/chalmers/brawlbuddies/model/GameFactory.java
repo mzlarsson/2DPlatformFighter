@@ -7,7 +7,7 @@ import edu.chalmers.brawlbuddies.model.world.World;
 
 public class GameFactory {
 
-	public static IBrawlBuddies create(String mapName, String[] characterNames, int timeLimit, int LifeLimit){
+	public static IBrawlBuddies create(String mapName, String[] characterNames, GameListener gl, int timeLimit, int lifeLimit){
 		GameMap map = GameMapFactory.create(mapName);
 		World world = new World(map);
 		
@@ -21,8 +21,18 @@ public class GameFactory {
 			
 			world.add(CharacterFactory.create(characterNames[i], tmpPos));
 		}
-		
-		return new BrawlBuddies(world, timeLimit, LifeLimit);
+		BrawlBuddies bb = new BrawlBuddies(world);
+		if (timeLimit>0) {
+			TimeLimitGoalWrapper time = new TimeLimitGoalWrapper(timeLimit);
+			time.addGameListener(gl);
+			bb.addGoal(time);
+		}
+		if (lifeLimit>0) {
+			LifeLimitGoalWrapper life = new LifeLimitGoalWrapper(lifeLimit);
+			life.addGameListener(gl);
+			bb.addGoal(life);
+		}
+		return bb;
 	}
 
 }
