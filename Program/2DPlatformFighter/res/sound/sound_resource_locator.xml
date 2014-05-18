@@ -6,11 +6,29 @@
 	
 	
 	<!-- Skills	2### -->
-	<resource id="ID_22">
+	<resource id="ID_21">
 	    <name>bob_lick</name>
 	    <sound>
 	        <trigger>skillUsed</trigger>
-	        <source>lick.ogg</source>
+	        <source>bob_lick.wav</source>
+	    </sound>
+	</resource>
+	<resource id="ID_22">
+	    <name>bob_lightning</name>
+	    <sound>
+	        <trigger>skillUsed</trigger>
+	        <source>bob_lightning.ogg</source>
+	    </sound>
+	    <sound>
+	        <trigger>skillStoppedUsed</trigger>
+	        <source>bob_lightning_stop.ogg</source>
+	    </sound>
+	</resource>
+	<resource id="ID_23">
+	    <name>big_bob_bomb</name>
+	    <sound>
+	        <trigger>skillUsed</trigger>
+	        <source>big_bob_bomb.ogg</source>
 	    </sound>
 	</resource>
 	
@@ -18,14 +36,21 @@
 	
 	<!-- Projectile	3### -->
 	<resource id="ID_30">
-	    <name>small_poison_projectile</name>
+	    <name>bob_ball</name>
 	    <sound>
 	        <trigger>createObject</trigger>
-	        <source>shoot.wav</source>
+	        <source>bob_ball_shoot.wav</source>
 	    </sound>
 	    <sound>
-	        <trigger>removeeObject</trigger>
-	        <source>bigshot.ogg</source>
+	        <trigger>removeObject</trigger>
+	        <source>bob_ball_hit.ogg</source>
+	    </sound>
+	</resource>
+	<resource id="ID_31">
+	    <name>big_bob_bomb</name>
+	    <sound>
+	        <trigger>removeObject</trigger>
+	        <source>big_bob_bomb_hit.wav</source>
 	    </sound>
 	</resource>
 

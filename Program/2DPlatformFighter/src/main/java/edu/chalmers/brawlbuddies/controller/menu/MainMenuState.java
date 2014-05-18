@@ -77,12 +77,7 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	}
 	
 	public void startGame(){
-		Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(1, false)),
-	 			new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(2, true))};
-		String[] characterNames = {"bob", "bob"};
-		((PlayState)game.getState(Constants.GAMESTATE_PLAY)).startGame(players, characterNames);
-
-		game.enterState(Constants.GAMESTATE_PLAY);
+		game.enterState(Constants.GAMESTATE_GAME_SETUP);
 	}
 	
 	public void gotoOptions(){
@@ -94,17 +89,17 @@ public class MainMenuState extends BasicGameState implements MenuListener{
 	}
 	
 	public void shutdown(){
-		System.exit(0);
+		game.closeRequested();
 	}
 
 	public void menuActivated(MenuEvent event) {
-		if(event.getValue().equals("Start game")){
+		if(event.getName().equals("startGame")){
 			startGame();
-		}else if(event.getValue().equals("Options")){
+		}else if(event.getName().equals("options")){
 			gotoOptions();
-		}else if(event.getValue().equals("Credits")){
+		}else if(event.getName().equals("credits")){
 			gotoCredits();
-		}else if(event.getValue().equals("Exit")){
+		}else if(event.getName().equals("exit")){
 			shutdown();
 		}
 	}

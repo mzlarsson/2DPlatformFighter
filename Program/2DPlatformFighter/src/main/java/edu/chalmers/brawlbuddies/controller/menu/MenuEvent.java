@@ -1,25 +1,25 @@
 package edu.chalmers.brawlbuddies.controller.menu;
 
+import edu.chalmers.brawlbuddies.view.menu.MenuItem;
+
 public class MenuEvent {
 	
-	private String name;
-	private String value;
-
-	public MenuEvent(String value) {
-		this(null, value);
+	private MenuItem item;
+	
+	public MenuEvent(MenuItem item){
+		this.item = item;
 	}
 	
-	public MenuEvent(String name, String value){
-		this.name = name;
-		this.value = value;
+	public MenuItem getMenuItem(){
+		return this.item;
 	}
 	
 	public String getName(){
-		return this.name;
+		return this.item.getItemName();
 	}
 	
 	public String getValue(){
-		return this.value;
+		return this.item.getValue();
 	}
 
 }

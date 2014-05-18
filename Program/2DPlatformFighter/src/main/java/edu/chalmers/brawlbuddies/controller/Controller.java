@@ -115,9 +115,20 @@ public class Controller extends StateBasedGame {
 	 * @param players The players to take part of this game
 	 * @param characterNames The names of the characters used, synched with the player array
 	 */
-	public void startGame(Player[] players, String[] characterNames){
+	public void startGame(Player[] players, String[] characterNames, String mapName, int lives, int time){
+		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players, characterNames, mapName, lives, time);
 		this.enterState(Constants.GAMESTATE_PLAY);
-		((PlayState)(this.getState(Constants.GAMESTATE_PLAY))).startGame(players, characterNames);
+	}
+	
+	/**
+	 * Called when the program wishes to shutdown
+	 * @return <code>true</code> if shutting down, <code>false</code> otherwise
+	 */
+	@Override
+	public boolean closeRequested(){
+		SoundPlayer.getInstance().stop();
+		System.exit(0);
+		return true;
 	}
 
 }

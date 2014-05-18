@@ -33,17 +33,8 @@ public class MenuHandler {
 	}
 	
 	public void notifyAll(MenuItem item){
-		if(item instanceof MultiChoiceMenuItem){
-			MultiChoiceMenuItem mcmItem = ((MultiChoiceMenuItem)item);
-			this.notifyAll(mcmItem.getName(), mcmItem.getValue());
-		}else{
-			this.notifyAll(null, item.getValue());
-		}
-	}
-	
-	public void notifyAll(String name, String value){
 		for(MenuListener listener : this.listeners){
-			listener.menuActivated(new MenuEvent(name, value));
+			listener.menuActivated(new MenuEvent(item));
 		}
 	}
 	

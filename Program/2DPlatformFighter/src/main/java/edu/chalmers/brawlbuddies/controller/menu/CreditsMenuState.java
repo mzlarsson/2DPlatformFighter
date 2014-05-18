@@ -74,7 +74,7 @@ public class CreditsMenuState extends BasicGameState implements MenuListener{
 	}
 
 	public void menuActivated(MenuEvent event){
-		if(event.getValue()=="Back"){
+		if(event.getName()=="gotoMain"){
 			gotoMainMenu();
 		}
 	}

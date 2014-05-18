@@ -7,9 +7,11 @@ public interface MenuItem {
 
 	public void render(GameContainer gc, Graphics g);
 	
+	public String getItemName();
 	public String getValue();
 	public void setActive(boolean active);
 	public boolean isActive();
+	public void setError(boolean hasError);
 	public boolean isWithin(float x, float y);
 	
 	public void recalculate();

@@ -134,7 +134,6 @@ public class SideScroller implements IEventBusSubscriber{
 			}else{
 				if(this.viewportSize.getWidth() == this.mapSize.getWidth()){
 					this.viewportX = -(int)(resolution.getWidth()-viewportSize.getWidth()*scale)/2+5;
-					System.out.println("vpX: "+viewportX);
 				}else{
 					this.viewportX = minX;
 					this.viewportX = (int)Math.min(Math.max(0, this.viewportX), mapSize.getWidth()-viewportSize.getWidth());
@@ -146,7 +145,6 @@ public class SideScroller implements IEventBusSubscriber{
 			}else{
 				if(this.viewportSize.getHeight() == this.mapSize.getHeight()){
 					this.viewportY = -(int)(resolution.getHeight()-viewportSize.getHeight()*scale)/2+5;
-					System.out.println("vpY: "+viewportY);
 				}else{
 					this.viewportY = minY;
 					this.viewportY = (int)Math.min(Math.max(0, this.viewportY), mapSize.getHeight()-viewportSize.getHeight());

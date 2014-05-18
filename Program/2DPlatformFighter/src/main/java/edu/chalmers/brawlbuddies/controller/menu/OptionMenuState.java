@@ -80,18 +80,18 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 		for(MenuItem item : view.getMenuItems()){
 			if(item instanceof MultiChoiceMenuItem){
 				MultiChoiceMenuItem mcmItem = ((MultiChoiceMenuItem)item);
-				settings.setSetting(mcmItem.getName(), mcmItem.getValue());
+				settings.setSetting(mcmItem.getItemName(), mcmItem.getValue());
 			}
 		}
 	}
 	
 	public void loadSettings(Controller controller){
 		Settings settings = Settings.getInstance();
-		if(settings.getSetting("Music") != null){
-			controller.useMusic(settings.getSetting("Music").equals("On"));
-			controller.useSounds(settings.getSetting("Sound").equals("On"));
-			String[] res = settings.getSetting("Resolution").split("x");
-			boolean fullscreen = settings.getSetting("Fullscreen").equals("On");
+		if(settings.getSetting("music") != null){
+			controller.useMusic(Boolean.parseBoolean(settings.getSetting("music")));
+			controller.useSounds(Boolean.parseBoolean(settings.getSetting("sound")));
+			String[] res = settings.getSetting("resolution").split("x");
+			boolean fullscreen = Boolean.parseBoolean(settings.getSetting("fullscreen"));
 			controller.setResolution(Integer.parseInt(res[0]), Integer.parseInt(res[1]), fullscreen);
 		}
 	}
@@ -107,7 +107,7 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 	}
 
 	public void menuActivated(MenuEvent event){
-		if(event.getValue()=="Back"){
+		if(event.getName()=="gotoMain"){
 			gotoMainMenu();
 		}
 	}

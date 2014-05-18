@@ -53,15 +53,14 @@ public class PlayState extends BasicGameState implements GameListener{
 	 * @param players The players to take part in the game
 	 * @param names The names of the characters to used, synched with players array
 	 */
-	public void startGame(Player[] players, String[] names){
+	public void startGame(Player[] players, String[] names, String mapName, int lives, int time){
 		view = new GameView();
 		this.players = players;
-		game = GameFactory.create("basic16Map", names, 0, 3);
+		game = GameFactory.create(mapName, names, this, time, lives);
 		int[] id = game.getCharacterIDs();
 		for(int i = 0; i<players.length; i++){
 			players[i].setCharacterID(id[i]);
 		}
-		game.addGameListener(this);
 	}
 	
 	public boolean gameStarted(){
@@ -163,19 +162,17 @@ public class PlayState extends BasicGameState implements GameListener{
 		return Constants.GAMESTATE_PLAY;
 	}
 
-	public void playerKilled(int playerID) {
-		// Do nothing
-	}
-
-	public void gameOver(int winnerID) {
-		String winner = "DRAW! Or bugged.";
-		for (Player p : players) {
-			if (p.getCharacterID()==winnerID) {
-				winner = p.getName();
+	public void gameEventPerformed(String evtName, Object value) {
+		if (evtName.equals("gameOver")) {
+			String winner = "DRAW! Or bugged.";
+			for (Player p : players) {
+				if (p.getCharacterID()==(Integer)value) {
+					winner = p.getName();
+				}
 			}
+			((EndScreenState)state.getState(Constants.GAMESTATE_END_SCREEN)).setWinner(winner);;
+			state.enterState(Constants.GAMESTATE_END_SCREEN);
 		}
-		((EndScreenState)state.getState(Constants.END_SCREEN)).setWinner(winner);;
-		state.enterState(Constants.END_SCREEN);		
 	}
 
 }

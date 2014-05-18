@@ -59,7 +59,7 @@ public class EndScreenState extends BasicGameState implements MenuListener{
 	}
 
 	public void menuActivated(MenuEvent event) {
-		if(event.getValue()=="Ok"){
+		if(event.getName()=="gotoMain"){
 			gotoMainMenu();
 		}
 	}
@@ -74,7 +74,7 @@ public class EndScreenState extends BasicGameState implements MenuListener{
 	
 	@Override
 	public int getID() {
-		return Constants.END_SCREEN;
+		return Constants.GAMESTATE_END_SCREEN;
 	}
 
 }

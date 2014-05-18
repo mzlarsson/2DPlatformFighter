@@ -27,8 +27,24 @@ public class SimpleMenuView implements MenuView{
 		}
 	}
 	
+	public void clearItems(){
+		if(items != null){
+			this.items.clear();
+		}
+	}
+	
 	public List<MenuItem> getMenuItems(){
 		return this.items;
+	}
+	
+	public MenuItem get(String itemName){
+		for(MenuItem item : this.items){
+			if(item.getItemName().equals(itemName)){
+				return item;
+			}
+		}
+		
+		return null;
 	}
 
 	public MenuItem getSelectedItem(){
@@ -59,8 +75,10 @@ public class SimpleMenuView implements MenuView{
 	}
 	
 	private void setSelection(int selectedIndex){
-		this.items.get(this.selectedIndex).setActive(false);
-		this.selectedIndex = selectedIndex;
-		this.items.get(this.selectedIndex).setActive(true);
+		if(selectedIndex>=0 && selectedIndex<this.items.size()){
+			this.items.get(this.selectedIndex).setActive(false);
+			this.selectedIndex = selectedIndex;
+			this.items.get(this.selectedIndex).setActive(true);
+		}
 	}
 }

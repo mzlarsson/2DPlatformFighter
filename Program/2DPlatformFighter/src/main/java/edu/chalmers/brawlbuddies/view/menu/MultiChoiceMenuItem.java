@@ -1,19 +1,19 @@
 package edu.chalmers.brawlbuddies.view.menu;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 
-import edu.chalmers.brawlbuddies.model.Position;
-
 public class MultiChoiceMenuItem extends SimpleMenuItem {
 	
 	private String name;
+	private boolean showName;
 	
-	private String[] values;
+	private List<MultiChoiceOption> values;
 	private boolean[] enabled;
 	private int valueIndex = 0;
 	
@@ -21,16 +21,29 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	private Polygon arrowRight;
 	private float arrowLength = 0;
 	
-	public MultiChoiceMenuItem(String name, String[] values, int vertPos){
-		this(name, values, vertPos, new Dimension(500, 75));
+	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, int vertPos){
+		this(itemName, name, values, vertPos, new Dimension(500, 75));
+	}
+	
+	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos){
+		this(itemName, name, values, pos, new Dimension(500, 75));
+	}
+	
+	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, int vertPos, Dimension size){
+		this(itemName, name, values, new Position(-1, vertPos), size);
 	}
 
-	public MultiChoiceMenuItem(String name, String[] values, int vertPos, Dimension size) {
-		super((values.length>0?values[0]:""), vertPos, size);
+	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos, Dimension size) {
+		this(itemName, name, values, pos, size, true);
+	}
+	
+	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos, Dimension size, boolean showName) {
+		super(itemName, (values.size()>0?values.get(0).getValue():""), pos, size);
 		
 		this.name = name;
 		this.values = values;
-		this.enabled = new boolean[this.values.length];
+		this.showName = showName;
+		this.enabled = new boolean[this.values.size()];
 		for(int i = 0; i<this.enabled.length; i++){
 			this.enabled[i] = true;
 		}
@@ -54,16 +67,18 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	}
 	
 	public void enable(String name, boolean enable){
-		for(int i = 0; i<values.length; i++){
-			if(name.equals(values[i])){
+		for(int i = 0; i<values.size(); i++){
+			if(name.equals(values.get(i).getCodeValue())){
 				enabled[i] = enable;
 			}
 		}
+		
+		this.setError(!isEnabled(valueIndex));
 	}
 	
 	public boolean isEnabled(String name){
-		for(int i = 0; i<values.length; i++){
-			if(name.equals(values[i])){
+		for(int i = 0; i<values.size(); i++){
+			if(name.equals(values.get(i).getCodeValue())){
 				return isEnabled(i);
 			}
 		}
@@ -85,8 +100,8 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	
 	public void setItem(String value){
 		if(value != null){
-			for(int i = 0; i<values.length; i++){
-				if(value.equals(values[i])){
+			for(int i = 0; i<values.size(); i++){
+				if(value.equals(values.get(i).getCodeValue())){
 					setItem(i);
 				}
 			}
@@ -94,14 +109,19 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	}
 	
 	private void setItem(int index){
-		if(index>=0 && index<values.length){
+		if(index>=0 && index<values.size()){
 			this.valueIndex = index;
-			this.setValue(values[valueIndex]);
+			this.setValue(values.get(valueIndex).getValue());
+			this.setError(!isEnabled(valueIndex));
 		}
 	}
 	
-	private String getValueContent(){
+	private String getTextValue(){
 		return super.getValue();
+	}
+	
+	public List<MultiChoiceOption> getOptions(){
+		return this.values;
 	}
 	
 	@Override
@@ -109,7 +129,7 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		if(!isEnabled(this.valueIndex)){
 			return null;
 		}else{
-			return super.getValue();
+			return values.get(valueIndex).getCodeValue();
 		}
 	}
 	
@@ -126,25 +146,28 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		//Draw square around
 		super.renderSelection(gc, g);
 		
-		//Draw value content
-		String val = (this.isEnabled(this.valueIndex)?"":"[Disabled] ")+(this.getValueContent()==null?"":this.getValueContent());
-		int stringWidth = g.getFont().getWidth(val);
-		int stringHeight = g.getFont().getHeight(val);
-		g.setColor(this.isEnabled(this.valueIndex)?Color.white:Color.gray);
-		g.drawString(val, (gc.getWidth()-stringWidth)/2, (int)(this.getPosition(gc).getY()+(getSize().getHeight()-stringHeight)/2));
-		
 		//Update arrow positions
 		Position pos = this.getPosition(gc);
 		arrowLeft.setLocation(pos.getX(), pos.getY());
 		arrowRight.setLocation((float)(pos.getX()+this.getSize().getWidth()-this.arrowLength-34), pos.getY());
 		
+		//Draw value content
+		String val = (this.isEnabled(this.valueIndex)?"":"[Disabled] ")+(this.getTextValue()==null?"":this.getTextValue());
+		int stringWidth = g.getFont().getWidth(val);
+		int stringHeight = g.getFont().getHeight(val);
+		g.setColor(this.isEnabled(this.valueIndex)?Color.white:Color.gray);
+		g.drawString(val, (int)(pos.getX()+(getSize().getWidth()-stringWidth)/2), (int)(this.getPosition(gc).getY()+(getSize().getHeight()-stringHeight)/2));
+		
+		
 		//Draw name and arrows
-		g.setColor(this.isActive()?Color.white:Color.gray);
-		g.drawString(name, pos.getX()-g.getFont().getWidth(name)-50, (float)(pos.getY()+(getSize().getHeight()-g.getFont().getHeight(name))/2));
+		if(showName){
+			g.setColor(this.isActive()?Color.white:Color.gray);
+			g.drawString(name, pos.getX()-g.getFont().getWidth(name)-50, (float)(pos.getY()+(getSize().getHeight()-g.getFont().getHeight(name))/2));
+		}
 		if(this.valueIndex>0){
 			g.draw(arrowLeft);
 		}
-		if(this.valueIndex<this.values.length-1){
+		if(this.valueIndex<this.values.size()-1){
 			g.draw(arrowRight);
 		}
 	}
