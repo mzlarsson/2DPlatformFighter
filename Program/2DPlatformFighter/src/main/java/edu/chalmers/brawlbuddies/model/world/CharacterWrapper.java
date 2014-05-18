@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model.world;
 
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
@@ -8,13 +8,11 @@ import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.GameListener;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
-import edu.chalmers.brawlbuddies.model.world.ICharacter;
-import edu.chalmers.brawlbuddies.model.world.IGameObject;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
-import edu.chalmers.brawlbuddies.model.world.Character;
 
 public class CharacterWrapper implements IWrapper, ICharacter {
 	private Character character;

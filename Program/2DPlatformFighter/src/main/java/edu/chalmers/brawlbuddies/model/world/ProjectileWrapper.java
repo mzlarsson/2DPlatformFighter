@@ -1,4 +1,4 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.List;
 
@@ -7,14 +7,11 @@ import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.IEffect;
-import edu.chalmers.brawlbuddies.model.world.IGameObject;
-import edu.chalmers.brawlbuddies.model.world.IProjectile;
-import edu.chalmers.brawlbuddies.model.world.Movement;
 import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
-import edu.chalmers.brawlbuddies.model.world.Projectile;
 
 public class ProjectileWrapper implements IWrapper, IProjectile {
 	private Projectile projectile;

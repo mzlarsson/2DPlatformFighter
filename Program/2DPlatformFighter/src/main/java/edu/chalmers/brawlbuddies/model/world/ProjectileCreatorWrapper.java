@@ -1,12 +1,10 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model.world;
 
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Aim;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.world.IProjectile;
-import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
-import edu.chalmers.brawlbuddies.model.world.ProjectileCreator;
 
 public class ProjectileCreatorWrapper implements IWrapper, IProjectileCreator {
 

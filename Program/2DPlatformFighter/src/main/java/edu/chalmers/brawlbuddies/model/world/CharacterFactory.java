@@ -12,8 +12,6 @@ import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.skills.SkillFactory;
 import edu.chalmers.brawlbuddies.util.ShapeFactory;
 import edu.chalmers.brawlbuddies.util.XMLReader;
-import edu.chalmers.brawlbuddies.view.CharacterWrapper;
-import edu.chalmers.brawlbuddies.view.HealthWrapper;
 
 /**
  * A factory for creating characters.

@@ -16,7 +16,6 @@ import edu.chalmers.brawlbuddies.model.skills.EffectFactory;
 import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.ShapeFactory;
 import edu.chalmers.brawlbuddies.util.XMLReader;
-import edu.chalmers.brawlbuddies.view.ProjectileCreatorWrapper;
 
 /**
  * A factory for creating ProjectileCreators

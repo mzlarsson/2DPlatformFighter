@@ -1,9 +1,8 @@
-package edu.chalmers.brawlbuddies.view;
+package edu.chalmers.brawlbuddies.model.world;
 
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
-import edu.chalmers.brawlbuddies.model.world.Health;
-import edu.chalmers.brawlbuddies.model.world.IHealth;
+import edu.chalmers.brawlbuddies.model.IWrapper;
 
 public class HealthWrapper implements IWrapper, IHealth {
 
