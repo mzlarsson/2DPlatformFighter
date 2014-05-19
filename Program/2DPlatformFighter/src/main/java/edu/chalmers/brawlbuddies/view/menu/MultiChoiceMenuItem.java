@@ -3,7 +3,6 @@ package edu.chalmers.brawlbuddies.view.menu;
 import java.awt.Dimension;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
@@ -148,21 +147,22 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		
 		//Update arrow positions
 		Position pos = this.getPosition(gc);
+		Dimension size = this.getSize();
 		arrowLeft.setLocation(pos.getX(), pos.getY());
-		arrowRight.setLocation((float)(pos.getX()+this.getSize().getWidth()-this.arrowLength-34), pos.getY());
+		arrowRight.setLocation((float)(pos.getX()+size.getWidth()-this.arrowLength-34), pos.getY());
 		
 		//Draw value content
 		String val = (this.isEnabled(this.valueIndex)?"":"[Disabled] ")+(this.getTextValue()==null?"":this.getTextValue());
 		int stringWidth = g.getFont().getWidth(val);
 		int stringHeight = g.getFont().getHeight(val);
-		g.setColor(this.isEnabled(this.valueIndex)?Color.white:Color.gray);
-		g.drawString(val, (int)(pos.getX()+(getSize().getWidth()-stringWidth)/2), (int)(this.getPosition(gc).getY()+(getSize().getHeight()-stringHeight)/2));
+		g.setColor(this.isEnabled(this.valueIndex)&&this.isActive()?getActiveColor():getInactiveColor());
+		g.drawString(val, (int)(pos.getX()+(size.getWidth()-stringWidth)/2), (int)(pos.getY()+(size.getHeight()-stringHeight)/2));
 		
 		
 		//Draw name and arrows
 		if(showName){
-			g.setColor(this.isActive()?Color.white:Color.gray);
-			g.drawString(name, pos.getX()-g.getFont().getWidth(name)-50, (float)(pos.getY()+(getSize().getHeight()-g.getFont().getHeight(name))/2));
+			g.setColor(this.isActive()?getActiveColor():getInactiveColor());
+			g.drawString(name, pos.getX()-g.getFont().getWidth(name)-50, (float)(pos.getY()+(size.getHeight()-g.getFont().getHeight(name))/2));
 		}
 		if(this.valueIndex>0){
 			g.draw(arrowLeft);

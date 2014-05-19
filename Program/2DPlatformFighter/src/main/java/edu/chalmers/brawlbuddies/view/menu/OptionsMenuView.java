@@ -4,11 +4,11 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
+import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.controller.menu.Settings;
 
 public class OptionsMenuView extends SimpleMenuView {
@@ -35,12 +35,14 @@ public class OptionsMenuView extends SimpleMenuView {
 		this.add(fullscreen);
 		
 		this.add(new SimpleMenuItem("gotoMain", "Back", 640));
+
+		this.setBackground(Constants.IMAGES + "menus/menu_options.png");
 	}
 	
 	@Override
 	public void render(GameContainer gc, Graphics g){
 		super.render(gc, g);
-		g.setColor(Color.white);
+		g.setColor(SimpleMenuItem.getActiveColor());
 		String typeName = "Options";
 		g.setFont(font);
 		g.drawString(typeName, (gc.getWidth()-g.getFont().getWidth(typeName))/2, 100);

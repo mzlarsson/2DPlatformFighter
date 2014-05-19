@@ -5,11 +5,11 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
+import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
 import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
@@ -54,6 +54,8 @@ public class GameSetupView extends SimpleMenuView{
 		x = (int)(gc.getWidth()/2+centerOffset);
 		this.add(new SimpleMenuItem("startGame", "Start game", new Position(x, 670+topOffset)));
 		this.setSelectedItem(this.getMenuItems().get(0));
+
+		this.setBackground(Constants.IMAGES + "menus/menu_gamesetup.png");
 	}
 	
 	private MultiChoiceMenuItem getChoiceLiveMode(){
@@ -92,7 +94,7 @@ public class GameSetupView extends SimpleMenuView{
 		}
 		
 		super.render(gc, g);
-		g.setColor(Color.white);
+		g.setColor(SimpleMenuItem.getActiveColor());
 		g.setFont(font);
 		String output = "Player1";
 		g.drawString(output, (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);

@@ -11,11 +11,16 @@ public class SimpleMenuItem implements MenuItem{
 	private boolean recalculate = true;
 	private boolean active = false;
 	private boolean error = false;
+	
 	private int vertPos = 0;
 	private int horizPos = 0;
 	private String value = "";
 	private String name = "";
+	
 	private Color opaqueColor = new Color(255, 255, 255, 60);
+	private static Color errorColor = Color.red;
+	private static Color activeColor = Color.black;
+	private static Color inactiveColor = Color.gray;
 	
 	private Dimension size;
 	private Position pos;
@@ -46,7 +51,7 @@ public class SimpleMenuItem implements MenuItem{
 		
 		int stringWidth = g.getFont().getWidth(val);
 		int stringHeight = g.getFont().getHeight(val);
-		g.setColor(this.isActive()?Color.white:Color.gray);
+		g.setColor(this.isActive()?activeColor:inactiveColor);
 		g.drawString(val, (int)(pos.getX()+(getSize().getWidth()-stringWidth)/2), (int)(vertPos+(size.getHeight()-stringHeight)/2));
 	}
 	
@@ -56,7 +61,7 @@ public class SimpleMenuItem implements MenuItem{
 			g.setColor(this.opaqueColor);
 			g.fillRect(pos.getX(), pos.getY(), (float)size.getWidth(), (float)size.getHeight());
 		}
-		g.setColor((this.error?Color.red:(this.isActive()?Color.white:Color.gray)));
+		g.setColor((this.error?errorColor:(this.isActive()?activeColor:inactiveColor)));
 		g.drawRect(pos.getX(), pos.getY(), (float)size.getWidth(), (float)size.getHeight());
 	}
 	
@@ -122,5 +127,14 @@ public class SimpleMenuItem implements MenuItem{
 	public boolean isActive() {
 		return this.active;
 	}
-
+	
+	public static Color getErrorColor(){
+		return errorColor;
+	}
+	public static Color getActiveColor(){
+		return activeColor;
+	}
+	public static Color getInactiveColor(){
+		return inactiveColor;
+	}
 }
