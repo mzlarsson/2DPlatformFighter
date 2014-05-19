@@ -6,6 +6,9 @@ package edu.chalmers.brawlbuddies.model;
  * @version 0.3
  */
 public class Position extends Vector{
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Creates a new position with a x and y value
 	 * @param x the x-value of the position

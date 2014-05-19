@@ -20,7 +20,6 @@ public class GameMap {
 		try {
 			this.map = new TiledMap(Constants.TILEMAPS + "basic16Map.tmx");
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.spawn = new Position[2];

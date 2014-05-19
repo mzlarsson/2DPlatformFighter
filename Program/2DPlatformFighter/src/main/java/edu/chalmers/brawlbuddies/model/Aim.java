@@ -7,6 +7,9 @@ package edu.chalmers.brawlbuddies.model;
  *
  */
 public class Aim extends Vector {
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Creates a new aim
 	 * @param x - The x component to assign

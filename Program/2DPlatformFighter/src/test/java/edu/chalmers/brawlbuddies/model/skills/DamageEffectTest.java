@@ -4,12 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.Health;
-import edu.chalmers.brawlbuddies.model.world.ICharacter;
 import edu.chalmers.brawlbuddies.model.world.Character;
 /**
  * A test class for DamageEffect

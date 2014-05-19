@@ -14,7 +14,6 @@ public class MeleeCreator {
 	private List<IEffect> effects;
 	private int typeID;
 	private Shape shape;
-	private int creatorID = 0;
 	
 	public MeleeCreator(List<IEffect> effects, Shape shape , int id) {
 		this.effects = effects;
@@ -23,7 +22,6 @@ public class MeleeCreator {
 	}
 	
 	public void setCreatorID(int a) {
-		this.creatorID = a;
 		if (effects != null) {
 			for (int i = 0; i < effects.size(); i++) {
 				effects.get(i).setCreatorID(a);

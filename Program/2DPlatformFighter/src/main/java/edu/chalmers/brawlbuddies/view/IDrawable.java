@@ -4,7 +4,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.model.IWrapper;
-import edu.chalmers.brawlbuddies.model.Position;
 
 public interface IDrawable {
 	/**

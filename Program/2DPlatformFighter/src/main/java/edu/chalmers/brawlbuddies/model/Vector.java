@@ -10,6 +10,8 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class Vector extends Vector2f {
 	
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Initiates a vector with coordinates
 	 * @param x The x-coordinate

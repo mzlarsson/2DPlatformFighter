@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Shape;
 
-import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.model.Aim;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
@@ -24,7 +23,6 @@ public class ProjectileCreator implements IProjectileCreator {
 	private float lifetime;
 	private Velocity gravity;
 	private int typeID;
-	private int creatorId;
 
 	/**
 	 * Creates a new projectileCreator with a Shape, projectile speed and
@@ -48,7 +46,6 @@ public class ProjectileCreator implements IProjectileCreator {
 	}
 
 	public void setCreatorID(int a) {
-		this.creatorId = a;
 		if (effects != null) {
 			for (int i = 0; i < effects.size(); i++) {
 				effects.get(i).setCreatorID(a);

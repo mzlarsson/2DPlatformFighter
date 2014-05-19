@@ -2,19 +2,12 @@ package edu.chalmers.brawlbuddies.model.statuseffects;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
-import org.newdawn.slick.font.effects.Effect;
 import org.newdawn.slick.geom.Rectangle;
 
-import edu.chalmers.brawlbuddies.model.skills.DamageEffect;
-import edu.chalmers.brawlbuddies.model.skills.SelfCastPart;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
-import edu.chalmers.brawlbuddies.model.world.Melee;
 import edu.chalmers.brawlbuddies.model.Position;
 /**
  * A test class for DamageStatusEffect

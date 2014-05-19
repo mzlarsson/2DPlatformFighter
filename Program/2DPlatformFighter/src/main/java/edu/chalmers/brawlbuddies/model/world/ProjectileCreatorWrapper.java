@@ -20,7 +20,6 @@ public class ProjectileCreatorWrapper implements IWrapper, IProjectileCreator {
 	}
 
 	public int getUniqeID() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

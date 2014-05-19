@@ -1,7 +1,6 @@
 package edu.chalmers.brawlbuddies.model.world;
 
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;

@@ -2,15 +2,11 @@ package edu.chalmers.brawlbuddies.model.skills;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.statuseffects.DamageStatusEffect;
-import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
 /**

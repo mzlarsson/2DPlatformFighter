@@ -3,7 +3,6 @@ package edu.chalmers.brawlbuddies.model;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.newdawn.slick.geom.Vector2f;
 
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Vector;

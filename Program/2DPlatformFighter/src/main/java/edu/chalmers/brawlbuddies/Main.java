@@ -1,11 +1,7 @@
 package edu.chalmers.brawlbuddies;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import junit.framework.Test;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
@@ -44,7 +40,6 @@ public class Main {
 		try {
 			setLibraryPath("target/natives");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(System.getProperty("java.library.path"));

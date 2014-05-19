@@ -1,7 +1,6 @@
 package edu.chalmers.brawlbuddies.model.world;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.newdawn.slick.geom.Polygon;

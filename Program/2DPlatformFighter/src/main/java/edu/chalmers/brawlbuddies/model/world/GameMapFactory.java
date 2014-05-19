@@ -34,7 +34,6 @@ public class GameMapFactory {
 		try {
 			map = new TiledMap(Constants.TILEMAPS + mapName.toLowerCase() + ".tmx");
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

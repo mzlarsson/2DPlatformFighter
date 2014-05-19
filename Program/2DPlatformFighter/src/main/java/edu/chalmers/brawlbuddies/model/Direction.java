@@ -1,7 +1,5 @@
 package edu.chalmers.brawlbuddies.model;
 
-import org.lwjgl.Sys;
-
 /**
  * Enum for holding and calculating simple movement directions.
  * 
