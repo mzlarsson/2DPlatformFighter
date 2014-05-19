@@ -19,44 +19,55 @@ import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 
+/**
+ * a class to represent and draw the heads up display of a character in game.
+ * 
+ * @author Lisa
+ * 
+ */
 public class HudImage implements IDrawable {
-	public static boolean lifeLimit=false;
-	public int lives=0;
-
+	// goal oriented variables
+	public static boolean lifeLimit = false;
+	public int lives = 0;
+	// id oriented variables
 	private int hudID;
 	private static int hudIndex = 0;
 	private int hudNr = 0;
+	// objects that the hud contains
+	private Map<String, Animation> mapAnimation;
+	private Map<Integer, SkillImage> skills;
+	private Animation animation;
+	private HealthImage healthBar;
+	private Animation icon;
+	// positions for the hud and all its objects
+	private Position upperLeftCornerPosition;
+	private ArrayList<Position> skillPosition;
+	private Position characterImagePosition;
+	private Position healthBarPosition;
+	// size of the hud
 	private int hudLength = 274;
 	private int hudHeight = 99;
 
-	private Animation animation;
-	private Map<String, Animation> mapAnimation;
-
-	
-	
-	private HealthImage healthBar;
-	private Animation icon;
-	private Map<Integer, SkillImage> skills = new HashMap<Integer, SkillImage>();
-
-	private Position upperLeftCornerPosition;
-	private Position characterImagePosition;
-	private ArrayList<Position> skillPosition = new ArrayList<Position>();
-	private Position healthBarPosition;
-
+	/**
+	 * constructor for the hud. gives values to instance variables.
+	 * 
+	 * @param wrapper
+	 *            a character wrapper containing the neccecary id
+	 */
 	public HudImage(IWrapper wrapper) {
 		CharacterWrapper charac = (CharacterWrapper) wrapper;
-		
-		hudID = charac.getUniqeID();
-		
+
+		// set correct animations to objects
 		mapAnimation = AnimationMapFactory.create(40);
+		skills = new HashMap<Integer, SkillImage>();
 		animation = mapAnimation.get("idle");
 		animation.start();
-		
-		//set character image depending on character
-		Map<String, Animation> characterIcon = AnimationMapFactory.create(charac.getTypeID());
+		Map<String, Animation> characterIcon = AnimationMapFactory
+				.create(charac.getTypeID());
 		icon = characterIcon.get("icon");
-		
-		
+
+		// set positions
+		skillPosition = new ArrayList<Position>();
 		upperLeftCornerPosition = new Position(0, 0);
 		upperLeftCornerPosition = new Position(hudIndex, 0);
 		healthBarPosition = new Position(upperLeftCornerPosition.getX() + 99,
@@ -69,7 +80,9 @@ public class HudImage implements IDrawable {
 				upperLeftCornerPosition.getY() + 60));
 		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 220,
 				upperLeftCornerPosition.getY() + 60));
-		
+
+		// handle identification
+		hudID = charac.getUniqeID();
 		hudNr = hudIndex;
 		hudIndex = hudIndex + 300;
 	}
@@ -85,6 +98,71 @@ public class HudImage implements IDrawable {
 
 	private Position getHealthBarPosition() {
 		return healthBarPosition;
+	}
+
+	public Integer getUniqeID() {
+		return hudID;
+	}
+
+	/**
+	 * sets the starting amount of lives for the hud
+	 * 
+	 * @param l
+	 *            the amount of lives to start the game with
+	 */
+	public void setLives(int l) {
+		if (lifeLimit) {
+			lives = l;
+		}
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void render(GameContainer gc, Graphics g) {
+		animation.draw(upperLeftCornerPosition.getX(),
+				upperLeftCornerPosition.getY());
+		icon.draw(upperLeftCornerPosition.getX() + 10,
+				upperLeftCornerPosition.getY() + 10);
+
+		for (Map.Entry<Integer, SkillImage> entry : skills.entrySet()) {
+			entry.getValue().render(gc, g);
+		}
+		healthBar.render(gc, g);
+		renderLives(g);
+	}
+
+	/**
+	 * renhers the life information
+	 * 
+	 * @param g
+	 *            the slick graphics object
+	 */
+	private void renderLives(Graphics g) {
+		if (lifeLimit) {
+			g.setColor(Color.green);
+		} else {
+			g.setColor(Color.red);
+		}
+		g.drawString(Integer.toString(lives), 20 + hudNr, 100);
+		g.setColor(Color.black);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void update(IWrapper obj1, IWrapper obj2) {
+		if (obj1.getClass() == HealthWrapper.class) {
+			healthBar.update(obj1, obj2);
+		}
+		if (obj1.getClass() == SkillWrapper.class) {
+			skills.get(obj1.getUniqeID()).update(obj1, obj2);
+		}
+		if (obj1.getClass() == CharacterWrapper.class) {
+			// TODO fix life
+		}
+
 	}
 
 	public void addHealthBar(HealthImage health) {
@@ -104,71 +182,25 @@ public class HudImage implements IDrawable {
 
 	}
 
-	public void render(GameContainer gc, Graphics g) {
-		animation.draw(upperLeftCornerPosition.getX(),
-				upperLeftCornerPosition.getY());
-		icon.draw(upperLeftCornerPosition.getX() + 10,
-		upperLeftCornerPosition.getY() + 10);
-
-		for (Map.Entry<Integer, SkillImage> entry : skills.entrySet()) {
-			entry.getValue().render(gc, g);
-		}
-		healthBar.render(gc, g);
-		
-		
-		
-		renderLives(g);
-	}
-
-	private void renderLives(Graphics g) {
-		if(lifeLimit){
-			g.setColor(Color.green);
-		}else{
-			g.setColor(Color.red);
-		}
-
-		g.drawString(Integer.toString(lives), 20+ hudNr, 100);
-		
-		g.setColor(Color.black);
-	}
-
-	public void update(IWrapper obj1, IWrapper obj2) {
-		if (obj1.getClass() == HealthWrapper.class) {
-			healthBar.update(obj1, obj2);
-		}
-		if (obj1.getClass() == SkillWrapper.class) {
-			skills.get(obj1.getUniqeID()).update(obj1, obj2);
-		}
-		if (obj1.getClass() == CharacterWrapper.class) {
-			// TODO fix life
-		}
-
-	}
-
-	public Integer getUniqeID() {
-		return hudID;
-	}
-
+	/**
+	 * handles the lifes on the event of a character's death
+	 */
 	public void characterDied() {
-		if(lifeLimit){
+		if (lifeLimit) {
 			lives = lives - 1;
-		}else{
+		} else {
 			lives++;
 		}
 
 	}
 
+	/**
+	 * handles the hud on game over
+	 */
 	public void gameOver() {
 		hudIndex = 0;
-		lifeLimit= false;
+		lifeLimit = false;
 		skillPosition.clear();
-	}
-	
-	public void setLives(int l){
-		if(lifeLimit){
-			lives = l;
-		}
-		
 	}
 
 }
