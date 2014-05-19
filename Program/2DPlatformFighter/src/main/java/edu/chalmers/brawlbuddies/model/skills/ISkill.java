@@ -45,4 +45,9 @@ public interface ISkill {
 	 * @return The ID of the character that owns the skill
 	 */
 	public int getOwnerID();
+	/**
+	 * Returns the cooldown of the skill
+	 * @return the cooldown of the skill in milliseconds
+	 */
+	public int getCooldown();
 }

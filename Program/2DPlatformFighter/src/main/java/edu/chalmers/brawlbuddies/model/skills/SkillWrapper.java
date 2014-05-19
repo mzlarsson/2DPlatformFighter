@@ -48,4 +48,8 @@ public class SkillWrapper implements IWrapper, ISkill {
 	public int getOwnerID(){
 		return skill.getOwnerID();
 	}
+
+	public int getCooldown() {
+		return skill.getCooldown();
+	}
 }
