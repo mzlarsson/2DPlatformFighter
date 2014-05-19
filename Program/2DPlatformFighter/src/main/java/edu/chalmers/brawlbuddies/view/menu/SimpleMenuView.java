@@ -12,6 +12,9 @@ import org.newdawn.slick.SlickException;
 import edu.chalmers.brawlbuddies.view.SideScroller;
 
 public class SimpleMenuView implements MenuView{
+
+	public static final float REFERENCE_SIZE_X = 1920.0f;
+	public static final float REFERENCE_SIZE_Y = 1080.0f;
 	
 	private List<MenuItem> items;
 	private int selectedIndex = 0;
@@ -32,8 +35,9 @@ public class SimpleMenuView implements MenuView{
 	}
 
 	public void render(GameContainer gc, Graphics g){
+		g.scale(gc.getWidth()/1920.0f, gc.getHeight()/1080.0f);
 		if(background != null){
-			g.drawImage(background, 0, 0, gc.getWidth(), gc.getHeight(), 0, 0, background.getWidth(), background.getHeight());
+			g.drawImage(background, 0, 0);
 		}
 
 		for(MenuItem item : this.items){
@@ -110,6 +114,5 @@ public class SimpleMenuView implements MenuView{
 	}
 
 	public void update(int delta) {
-		//Do nothing. But laugh.
 	}
 }

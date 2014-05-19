@@ -139,7 +139,7 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	}
 	
 	public boolean isWithinRight(float x, float y){
-		return this.isWithin(x, y) && x>this.getPosition(null).getX()+this.getSize().getWidth()/2;
+		return this.isWithin(x, y) && x>this.getRealPosition(null).getX()+this.getRealSize().getWidth()/2;
 	}
 	
 	@Override

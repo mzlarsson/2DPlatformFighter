@@ -22,7 +22,7 @@ public class CreditsMenuView extends SimpleMenuView{
 		g.setFont(FontCreator.getFont(FontCreator.LARGE));
 		String[] lines = {"Brawl Buddies", "Made by Small Electric Boar Riot", "Nano   Volt   Boarman   Nika"};
 		for(int i = 0; i<lines.length; i++){
-			g.drawString(lines[i], (gc.getWidth()-g.getFont().getWidth(lines[i]))/2, 360+40*i);
+			g.drawString(lines[i], (SimpleMenuView.REFERENCE_SIZE_X-g.getFont().getWidth(lines[i]))/2, 360+40*i);
 		}
 	}
 

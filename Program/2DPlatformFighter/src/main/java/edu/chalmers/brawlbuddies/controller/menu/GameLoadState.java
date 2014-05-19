@@ -57,7 +57,7 @@ public class GameLoadState extends BasicGameState{
 		if(!painted){
 			g.fillRect(0, 0, gc.getWidth(), gc.getHeight());
 			if(loadingScreen != null){
-				g.drawImage(loadingScreen, 0, 0, loadingScreen.getWidth(), loadingScreen.getHeight(), 0, 0, gc.getWidth(), gc.getHeight());
+				g.drawImage(loadingScreen, 0, 0, gc.getWidth(), gc.getHeight(), 0, 0, loadingScreen.getWidth(), loadingScreen.getHeight());
 			}
 			painted = true;
 		}else{

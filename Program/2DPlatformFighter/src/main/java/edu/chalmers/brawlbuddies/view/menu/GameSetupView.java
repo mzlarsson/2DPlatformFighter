@@ -32,14 +32,14 @@ public class GameSetupView extends SimpleMenuView{
 	}
 	
 	public void load(GameContainer gc){
-		this.topOffset = (gc.getHeight()-780)/2;
+		this.topOffset = (int)((SimpleMenuView.REFERENCE_SIZE_Y-780)/2);
 		
 		//Player1
-		int x = (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth());
+		int x = (int)(SimpleMenuView.REFERENCE_SIZE_X/2-centerOffset-standardSize.getWidth());
 		this.add(new MultiChoiceMenuItem("p1_character", "Character", characters, new Position(x, 150+topOffset), standardSize, false));
 		this.add(new MultiChoiceMenuItem("p1_control", "Control", controllers, new Position(x, 265+topOffset), standardSize, false));
 		//Player2
-		x = (int)(gc.getWidth()/2+centerOffset);
+		x = (int)(SimpleMenuView.REFERENCE_SIZE_X/2+centerOffset);
 		this.add(new MultiChoiceMenuItem("p2_character", "Character", characters, new Position(x, 150+topOffset), standardSize, false));
 		MultiChoiceMenuItem p2_control = new MultiChoiceMenuItem("p2_control", "Control", controllers, new Position(x, 265+topOffset), standardSize, false);
 		p2_control.setItem(controllers.get(1).getCodeValue());
@@ -51,9 +51,9 @@ public class GameSetupView extends SimpleMenuView{
 		this.add(getChoiceLiveMode());
 		this.add(getChoiceTimeMode());
 		//Submit
-		x = (int)(gc.getWidth()/2-centerOffset-500);
+		x = (int)(SimpleMenuView.REFERENCE_SIZE_X/2-centerOffset-500);
 		this.add(new SimpleMenuItem("gotoMain", "Back", new Position(x, 670+topOffset)));
-		x = (int)(gc.getWidth()/2+centerOffset);
+		x = (int)(SimpleMenuView.REFERENCE_SIZE_X/2+centerOffset);
 		this.add(new SimpleMenuItem("startGame", "Start game", new Position(x, 670+topOffset)));
 		this.setSelectedItem(this.getMenuItems().get(0));
 
@@ -99,9 +99,9 @@ public class GameSetupView extends SimpleMenuView{
 		g.setColor(SimpleMenuItem.getActiveColor());
 		g.setFont(FontCreator.getFont(FontCreator.BIG));
 		String output = "Player1";
-		g.drawString(output, (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);
+		g.drawString(output, (int)(SimpleMenuView.REFERENCE_SIZE_X/2-centerOffset-standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);
 		output = "Player2";
-		g.drawString(output, (int)(gc.getWidth()/2+centerOffset+standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);
+		g.drawString(output, (int)(SimpleMenuView.REFERENCE_SIZE_X/2+centerOffset+standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);
 	}
 	
 	@Override

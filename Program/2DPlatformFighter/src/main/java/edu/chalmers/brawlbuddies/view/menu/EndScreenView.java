@@ -30,7 +30,7 @@ public class EndScreenView extends SimpleMenuView {
 		String[] lines = {"The Winner Is:", winnerName};
 		g.setFont(FontCreator.getFont(FontCreator.BIG));
 		for(int i = 0; i<lines.length; i++){
-			g.drawString(lines[i], (gc.getWidth()-g.getFont().getWidth(lines[i]))/2, 300+40*i);
+			g.drawString(lines[i], (SimpleMenuView.REFERENCE_SIZE_X-g.getFont().getWidth(lines[i]))/2, 300+40*i);
 		}
 	}
 }

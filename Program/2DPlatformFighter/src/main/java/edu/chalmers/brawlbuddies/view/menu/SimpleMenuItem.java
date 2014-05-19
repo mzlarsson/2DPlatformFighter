@@ -23,7 +23,9 @@ public class SimpleMenuItem implements MenuItem{
 	private static Color errorColor = Color.red;
 	private static Color activeColor = Color.black;
 	private static Color inactiveColor = Color.gray;
-	
+
+	private float scaleX = 1.0f;
+	private float scaleY = 1.0f;
 	private Dimension size;
 	private Position pos;
 	
@@ -81,12 +83,17 @@ public class SimpleMenuItem implements MenuItem{
 	}
 	
 	protected Position getPosition(GameContainer gc){
+		if(gc != null){
+			this.scaleX = gc.getWidth()/SimpleMenuView.REFERENCE_SIZE_X;
+			this.scaleY = gc.getHeight()/SimpleMenuView.REFERENCE_SIZE_Y;
+		}
+		
 		if(pos == null || this.recalculate){
 			if(this.horizPos>=0){
 				this.pos = new Position(horizPos, vertPos);
 				this.recalculate = false;
 			}else if(gc != null){
-				int x = (int)((gc.getWidth()-size.getWidth())/2);
+				int x = (int)((1920.0f-size.getWidth())/2);
 				int y = vertPos;
 				this.pos = new Position(x, y);
 				this.recalculate = false;
@@ -98,15 +105,25 @@ public class SimpleMenuItem implements MenuItem{
 		return this.pos;
 	}
 	
+	protected Position getRealPosition(GameContainer gc){
+		Position pos = this.getPosition(gc);
+		return new Position((int)(pos.getX()*scaleX), (int)(pos.getY()*scaleY));
+	}
+	
 	protected Dimension getSize(){
 		return this.size;
 	}
 	
+	protected Dimension getRealSize(){
+		return new Dimension((int)(size.getWidth()*scaleX), (int)(size.getHeight()*scaleY));
+	}
+	
 	public boolean isWithin(float x, float y){
-		Position pos = this.getPosition(null);
+		Position pos = this.getRealPosition(null);
+		Dimension size = this.getRealSize();
 		if(pos != null){
-			if(x>pos.getX() && x<pos.getX()+this.size.getWidth()){
-				if(y>pos.getY() && y<pos.getY()+this.size.getHeight()){
+			if(x>pos.getX() && x<pos.getX()+size.getWidth()){
+				if(y>pos.getY() && y<pos.getY()+size.getHeight()){
 					return true;
 				}
 			}
