@@ -15,9 +15,6 @@ public class TimeLimitGoalWrapper implements IGoal {
 
 	private TimeLimitGoal tlg;
 	
-	private int timeLeft;
-	private int secondsLeft;
-	
 	private List<GameListener> listeners;
 	
 	/**
@@ -28,14 +25,11 @@ public class TimeLimitGoalWrapper implements IGoal {
 		this.tlg = new TimeLimitGoal(timeLimit);
 		tlg.addGameListener(this);
 		this.listeners = new ArrayList<GameListener>();
-		this.timeLeft = timeLimit*1000;
-		this.secondsLeft = timeLimit;
 		EventBus.getInstance().fireEvent(new EventBusEvent("timeLimitAdded", timeLimit, null));
 	}
 	
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("gameOver")) {
-			EventBus.getInstance().fireEvent(new EventBusEvent("gameOver", null, null));
 			for (GameListener gl : listeners) {
 				gl.gameEventPerformed(evtName, value);
 			}
@@ -45,16 +39,7 @@ public class TimeLimitGoalWrapper implements IGoal {
 	}
 
 	public void update(int delta) {
-		decreaseTime(delta);
 		tlg.update(delta);
-	}
-
-	private void decreaseTime(int delta) {
-		timeLeft -= delta;
-		if (timeLeft/1000!=secondsLeft) {
-			EventBus.getInstance().fireEvent(new EventBusEvent("updateTime", secondsLeft, null));
-			secondsLeft = timeLeft/1000;
-		}
 	}
 	
 	public void addGameListener(GameListener gl) {

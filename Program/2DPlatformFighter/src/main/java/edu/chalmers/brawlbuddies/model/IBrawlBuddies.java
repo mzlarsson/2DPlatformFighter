@@ -43,6 +43,12 @@ public interface IBrawlBuddies {
 	public int[] getCharacterIDs();
 	
 	/**
+	 * Sets the GoalHandler this game will use.
+	 * @param gh The GoalHandler to use.
+	 */
+	public void setGoalHandler(IGoalHandler gh);
+	
+	/**
 	 * Adds a goal to the game and makes it listen to all characters.
 	 * @param goal The goal to add.
 	 */
