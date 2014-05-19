@@ -10,6 +10,7 @@ package edu.chalmers.brawlbuddies;
 public class Constants {
 
 	public static final String IMAGES = "res/imgs/";
+	public static final String DATA = "res/data/";
 	public static final String CHARACTER_DATA = "res/data/characters/";
 	public static final String CHARACTER_IMAGES = "res/imgs/characters/";
 	public static final String PROJECTILES_DATA = "res/data/projectiles/";

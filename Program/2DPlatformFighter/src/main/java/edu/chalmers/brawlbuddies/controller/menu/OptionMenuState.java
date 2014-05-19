@@ -62,6 +62,7 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		this.game = game;
 		handler.update(container, delta);
+		view.update(delta);
 		
 		if(container.getInput().isKeyPressed(Input.KEY_ESCAPE)){
 			gotoMainMenu();
@@ -114,6 +115,6 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
-		view.update();
+		view.updateContents();
 	}
 }

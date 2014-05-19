@@ -9,6 +9,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
+import edu.chalmers.brawlbuddies.controller.menu.Settings;
+
 public class OptionsMenuView extends SimpleMenuView {
 	
 	private TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.BOLD, 24), false, null);
@@ -18,10 +20,20 @@ public class OptionsMenuView extends SimpleMenuView {
 		onOff.add(new MultiChoiceOption("false", "Off"));
 		onOff.add(new MultiChoiceOption("true", "On"));
 		
-		this.add(new MultiChoiceMenuItem("music", "Music", onOff, 170));
-		this.add(new MultiChoiceMenuItem("sound", "Sound", onOff, 285));
-		this.add(new MultiChoiceMenuItem("resolution", "Resolution", MultiChoiceOption.stringToMultiChoice(new String[]{"800x600", "1280x720", "1366x768", "1600x900", "1680x1050", "1920x1080"}), 400));
-		this.add(new MultiChoiceMenuItem("fullscreen", "Fullscreen", onOff, 515));
+		Settings settings = Settings.getInstance();
+		MultiChoiceMenuItem music = new MultiChoiceMenuItem("music", "Music", onOff, 170);
+		music.setItem(settings.getSetting("music"));
+		this.add(music);
+		MultiChoiceMenuItem sound = new MultiChoiceMenuItem("sound", "Sound", onOff, 285);
+		sound.setItem(settings.getSetting("sound"));
+		this.add(sound);
+		MultiChoiceMenuItem resolution = new MultiChoiceMenuItem("resolution", "Resolution", MultiChoiceOption.stringToMultiChoice(new String[]{"800x600", "1280x720", "1366x768", "1600x900", "1680x1050", "1920x1080"}), 400);
+		resolution.setItem(settings.getSetting("resolution"));
+		this.add(resolution);
+		MultiChoiceMenuItem fullscreen = new MultiChoiceMenuItem("fullscreen", "Fullscreen", onOff, 515);
+		fullscreen.setItem(settings.getSetting("fullscreen"));
+		this.add(fullscreen);
+		
 		this.add(new SimpleMenuItem("gotoMain", "Back", 640));
 	}
 	

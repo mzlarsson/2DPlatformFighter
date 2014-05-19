@@ -14,6 +14,7 @@ public interface MenuView extends IView{
 	public void nextItem();
 	public void prevItem();
 	
-	public void update();
+	public void updateContents();
+	public void update(int delta);
 	
 }
