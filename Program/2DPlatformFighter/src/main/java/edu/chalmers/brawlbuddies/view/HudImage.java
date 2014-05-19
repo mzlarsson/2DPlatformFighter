@@ -157,10 +157,6 @@ public class HudImage implements IDrawable {
 		if (obj1.getClass() == SkillWrapper.class) {
 			skills.get(obj1.getUniqeID()).update(obj1, obj2);
 		}
-		if (obj1.getClass() == CharacterWrapper.class) {
-			// TODO fix life
-		}
-
 	}
 
 	public void addHealthBar(HealthImage health) {

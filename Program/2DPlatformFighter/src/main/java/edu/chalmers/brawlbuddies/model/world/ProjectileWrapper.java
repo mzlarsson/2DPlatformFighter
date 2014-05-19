@@ -71,11 +71,6 @@ public class ProjectileWrapper implements IWrapper, IProjectile {
 
 	}
 
-	public void transform(Transform transform) {
-		projectile.transform(transform);
-
-	}
-
 	public Position update(int delta) {
 		return projectile.update(delta);
 	}

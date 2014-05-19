@@ -131,7 +131,8 @@ public class Character extends GameObject implements ICharacter {
 		if (isRelative) {
 			this.aim.set(aimPosition);
 		} else {
-			this.aim.set(aimPosition.subtract(this.getCenterPosition()));
+			Position tmpPos = (Position)aimPosition.subtract(this.getCenterPosition()).getNormalized().scale(100);
+			this.aim.set(tmpPos.getX(), tmpPos.getY());
 		}
 	}
 
@@ -326,7 +327,7 @@ public class Character extends GameObject implements ICharacter {
 
 	public void reset() {
 		this.restoreHealth();
-		this.getMovement().resetSpeed(Alignment.BOTH);
+		this.getMovement().reset();
 		this.restoreScale();
 		this.statusEffectList.reset();
 	}

@@ -1,7 +1,5 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-//TODO check if percentage heal and damage is needed.
-
 /**
  * A class describing health for a character
  * 

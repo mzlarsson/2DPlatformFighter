@@ -91,9 +91,9 @@ public class XboxInputHandler implements InputHandler, XboxListener {
 	public void initMouseTimer(){
 		mousePos = new Position(0, 0);
 		this.input.setDeadZone(XboxInput.AXIS_ROTATE_X, 0.0f);
-		this.input.setMinumumAxisValue(XboxInput.AXIS_ROTATE_X, 0.3f);
+		this.input.setMinumumAxisValue(XboxInput.AXIS_ROTATE_X, 0.15f);
 		this.input.setDeadZone(XboxInput.AXIS_ROTATE_Y, 0.0f);
-		this.input.setMinumumAxisValue(XboxInput.AXIS_ROTATE_Y, 0.3f);
+		this.input.setMinumumAxisValue(XboxInput.AXIS_ROTATE_Y, 0.15f);
 		mouseTimer = new Timer(10, new ActionListener(){
 			public void actionPerformed(ActionEvent ae){
 				float x = input.getAxisValue(XboxInput.AXIS_ROTATE_X);
@@ -238,8 +238,9 @@ public class XboxInputHandler implements InputHandler, XboxListener {
 	 * NOTE: Use XboxInput.axisEquals(int, int) to check real axis indexes against virtual ones
 	 */
 	public void axisRestored(int axisIndex) {
-		if((XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_X) && !input.axisIsActive(XboxInput.AXIS_ROTATE_Y)) ||
-		   (XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_Y) && !input.axisIsActive(XboxInput.AXIS_ROTATE_X))){
+		if((XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_X) && !input.axisIsMoving(XboxInput.AXIS_ROTATE_Y)) ||
+		   (XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_Y) && !input.axisIsMoving(XboxInput.AXIS_ROTATE_X))){
+			System.out.println(input.getAxisValue(XboxInput.AXIS_ROTATE_X)+", "+input.getAxisValue(XboxInput.AXIS_ROTATE_Y));
 			mouseTimer.stop();
 			if(isActive(GameKey.LEFT)){
 				this.mousePos.set(-100.0f, 0.0f);

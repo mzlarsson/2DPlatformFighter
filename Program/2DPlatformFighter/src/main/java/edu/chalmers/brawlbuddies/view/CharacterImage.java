@@ -3,8 +3,10 @@ package edu.chalmers.brawlbuddies.view;
 import java.util.Map;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
 
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.IWrapper;
@@ -30,6 +32,7 @@ public class CharacterImage implements IDrawable {
 	private String movementName = "idleLeft";
 	private boolean isAttacking = false;
 	private int id;
+	private Circle crosshair;
 
 	/**
 	 * Constructor for the Character image. Copies neccesary information from
@@ -49,6 +52,7 @@ public class CharacterImage implements IDrawable {
 		animation.start();
 		aimDirection = character.getAim().getDirection();
 		moveDirection = character.getDirection();
+		crosshair = new Circle(0,0,10);
 	}
 
 	/**
@@ -56,8 +60,11 @@ public class CharacterImage implements IDrawable {
 	 */
 	public void render(GameContainer gc, Graphics g) {
 		animation.draw(drawPos.getX(), drawPos.getY());
+		g.setColor(Color.red);
+		g.setLineWidth(3);
+		g.draw(crosshair);
 	}
-
+	
 	/**
 	 * a method to give the correct format of a string for the use in the class
 	 * 
@@ -89,8 +96,7 @@ public class CharacterImage implements IDrawable {
 	 * @param wrapper
 	 *            a skillwrapper sent by the event.
 	 */
-	public void useSkill(IWrapper wrapper) { // TODO Temporary until better
-												// implemented Event handling
+	public void useSkill(IWrapper wrapper) {
 		SkillWrapper skill = (SkillWrapper) wrapper;
 		isAttacking = true;
 		String tmpMovementName = skill.getAnimationName()
@@ -111,25 +117,6 @@ public class CharacterImage implements IDrawable {
 
 		if (isAttacking && animation.isStopped()) {
 			isAttacking = false;
-		}
-
-		// TODO fix direction and set animation
-		if (obj2 != null) {
-			if (obj2.getClass() == SkillWrapper.class) {
-				SkillWrapper skill = (SkillWrapper) obj2;
-				isAttacking = true;
-				if (tmpAimDirection != Direction.NONE) {
-					tmpMovementName = skill.getAnimationName()
-							+ correctStringFormat(tmpAimDirection.toString());
-
-				} else {
-					tmpMovementName = skill.getAnimationName()
-							+ correctStringFormat(aimDirection.toString());
-
-				}
-				// Set correct animation if neccesary
-				setAnimation(tmpMovementName);
-			}
 		}
 
 		if (!isAttacking) {
@@ -185,6 +172,8 @@ public class CharacterImage implements IDrawable {
 			aimDirection = tmpAimDirection;
 		}
 		drawPos = getDrawPos(character.getPosition());
+		crosshair.setCenterX(character.getProjFirePos().getX()+character.getAim().getX());
+		crosshair.setCenterY(character.getProjFirePos().getY()+character.getAim().getY());
 	}
 
 	/**

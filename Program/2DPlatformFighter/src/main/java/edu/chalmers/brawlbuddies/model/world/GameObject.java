@@ -166,15 +166,6 @@ public abstract class GameObject implements IGameObject{
 	}
 	
 	/**
-	 * Transforms the GameObject's shape using the given Transform object.
-	 * @param trans The Transform object to transform the shape of the GameObject with.
-	 */
-	//TODO check if this fix works
-	public void transform(Transform trans) {
-		this.shape = shape.transform(trans);
-	}
-	
-	/**
 	 * Sets the x-position of the top left corner of the shape.
 	 * @param x Sets the x-position of the top left corner of the shape.
 	 */

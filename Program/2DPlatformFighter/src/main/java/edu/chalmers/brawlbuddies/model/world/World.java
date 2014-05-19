@@ -603,7 +603,6 @@ public class World implements CreatorListener{
 			}
 
 			if(character.isDestroyed()){
-				//TODO fix this.
 				ICharacter ch = (ICharacter)character;
 				ch.reset();
 				ch.setCenterPosition(this.data.getGameMap().getRandomSpawn());

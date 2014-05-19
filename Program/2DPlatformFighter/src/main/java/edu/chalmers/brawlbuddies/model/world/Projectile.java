@@ -32,7 +32,6 @@ public class Projectile extends GameObject implements IProjectile{
 		super(mov, shape);
 		this.lifetime = lifetime;
 		this.typeID = id;
-		//TODO is this good?
 		this.effects = ListCopy.simpleCopy(effects);
 	}
 	

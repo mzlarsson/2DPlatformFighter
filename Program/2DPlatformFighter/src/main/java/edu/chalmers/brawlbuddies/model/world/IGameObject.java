@@ -15,7 +15,6 @@ public interface IGameObject{
 	public void setCenterPosition(Position pos);
 	public Shape getShape();
 	public void setShape(Shape shape);
-	public void transform(Transform transform);
 
 	public Position update(int delta);
 	public boolean isDestroyed();

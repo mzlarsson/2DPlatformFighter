@@ -172,7 +172,6 @@ public class GameView implements IEventBusSubscriber, IView {
 		timeLimit = timeLimit - time;
 		int minutes = timeLimit / 60000;
 		int seconds = (timeLimit % 60000)/1000;
-		System.out.println(timeLimit);
 		g.setColor(Color.red);
 		g.drawString(
 				Integer.toString(minutes) + ":" + Integer.toString(seconds),

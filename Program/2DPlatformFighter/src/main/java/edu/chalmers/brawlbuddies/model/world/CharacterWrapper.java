@@ -89,11 +89,6 @@ public class CharacterWrapper implements IWrapper, ICharacter {
 
 	}
 
-	public void transform(Transform transform) {
-		character.transform(transform);
-
-	}
-
 	public Position update(int delta) {
 		return character.update(delta);
 	}

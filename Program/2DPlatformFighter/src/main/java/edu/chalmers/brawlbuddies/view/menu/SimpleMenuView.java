@@ -107,7 +107,9 @@ public class SimpleMenuView implements MenuView{
 	}
 
 	public void close() {
-		// TODO Auto-generated method stub
-		
+	}
+
+	public void update(int delta) {
+		//Do nothing. But laugh.
 	}
 }

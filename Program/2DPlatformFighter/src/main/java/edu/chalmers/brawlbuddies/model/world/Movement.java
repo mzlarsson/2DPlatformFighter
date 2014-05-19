@@ -1,7 +1,5 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-import edu.chalmers.brawlbuddies.Constants;
-
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
@@ -100,6 +98,13 @@ public class Movement {
 	 */
 	public boolean isEnabled(){
 		return this.enabled;
+	}
+	
+	public void reset() {
+		resetSpeed(Alignment.BOTH);
+		extraSpeed.set(0, 0);
+		outerSpeed.set(0, 0);
+		scale = 1;
 	}
 	
 	/**
