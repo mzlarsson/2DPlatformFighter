@@ -6,6 +6,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import edu.chalmers.brawlbuddies.util.FontCreator;
+
 public class SimpleMenuItem implements MenuItem{
 	
 	private boolean recalculate = true;
@@ -46,6 +48,7 @@ public class SimpleMenuItem implements MenuItem{
 	}
 
 	public void render(GameContainer gc, Graphics g) {
+		g.setFont(FontCreator.getFont(FontCreator.MEDIUM));
 		renderSelection(gc, g);
 		String val = (this.value==null?"":this.value);
 		

@@ -71,13 +71,21 @@ public class MenuHandler {
 		if(input.isKeyDown(Input.KEY_RIGHT) && !hasCooldown(Input.KEY_RIGHT)){
 			if(menuView.getSelectedItem() instanceof MultiChoiceMenuItem){
 				((MultiChoiceMenuItem)menuView.getSelectedItem()).nextItem();
+				this.notifyAll(menuView.getSelectedItem());
 				setCooldown(Input.KEY_RIGHT, 300);
 			}
 		}
 		if(input.isKeyDown(Input.KEY_LEFT) && !hasCooldown(Input.KEY_LEFT)){
 			if(menuView.getSelectedItem() instanceof MultiChoiceMenuItem){
 				((MultiChoiceMenuItem)menuView.getSelectedItem()).prevItem();
+				this.notifyAll(menuView.getSelectedItem());
 				setCooldown(Input.KEY_LEFT, 300);
+			}
+		}
+		
+		if(input.isKeyPressed(Input.KEY_ESCAPE)){
+			if(menuView.get("gotoMain") != null){
+				this.notifyAll(menuView.get("gotoMain"));
 			}
 		}
 		

@@ -15,26 +15,10 @@ public class SimpleMenuView implements MenuView{
 	
 	private List<MenuItem> items;
 	private int selectedIndex = 0;
-//	private ParticleHandler particles;
 	private Image background;
 
 	public SimpleMenuView() {
 		items = new ArrayList<MenuItem>();
-	}
-	
-//	private void initParticles(int x, int y){
-//		try {
-//			particles = new ParticleHandler(Constants.IMAGES + "menus/particle.png");
-//			particles.addEmitter(Constants.DATA + "menus/background.xml", x, y);
-//		} catch (SlickException e) {
-//			System.out.println("Failed while reading particles");
-//		}
-//	}
-	
-	public void update(int delta){
-//		if(particles != null){
-//			particles.update(delta);
-//		}
 	}
 	
 	public void setBackground(String path){
@@ -47,15 +31,11 @@ public class SimpleMenuView implements MenuView{
 		}
 	}
 
-	public void render(GameContainer gc, Graphics g){		
+	public void render(GameContainer gc, Graphics g){
 		if(background != null){
 			g.drawImage(background, 0, 0, gc.getWidth(), gc.getHeight(), 0, 0, background.getWidth(), background.getHeight());
 		}
-		
-//		if(particles == null){
-//			initParticles(gc.getWidth()/2, gc.getHeight()/2);
-//		}
-//		particles.render();
+
 		for(MenuItem item : this.items){
 			item.render(gc, g);
 		}

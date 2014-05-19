@@ -9,8 +9,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.controller.Constants;
-import edu.chalmers.brawlbuddies.controller.Controller;
-import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
 import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
 import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
@@ -71,7 +69,6 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		this.game = game;
 		handler.update(container, delta);
-		view.update(delta);
 	}
 
 	/**

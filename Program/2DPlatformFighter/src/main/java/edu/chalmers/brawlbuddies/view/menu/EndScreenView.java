@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.util.FontCreator;
 
 public class EndScreenView extends SimpleMenuView {
 
@@ -25,7 +26,9 @@ public class EndScreenView extends SimpleMenuView {
 		super.render(gc, g);
 		
 		g.setColor(SimpleMenuItem.getActiveColor());
+		g.setFont(FontCreator.getFont(FontCreator.MEDIUM));
 		String[] lines = {"The Winner Is:", winnerName};
+		g.setFont(FontCreator.getFont(FontCreator.BIG));
 		for(int i = 0; i<lines.length; i++){
 			g.drawString(lines[i], (gc.getWidth()-g.getFont().getWidth(lines[i]))/2, 300+40*i);
 		}

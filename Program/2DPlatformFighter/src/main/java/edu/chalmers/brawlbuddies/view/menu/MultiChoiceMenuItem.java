@@ -7,6 +7,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 
+import edu.chalmers.brawlbuddies.util.FontCreator;
+
 public class MultiChoiceMenuItem extends SimpleMenuItem {
 	
 	private String name;
@@ -144,6 +146,7 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	public void render(GameContainer gc, Graphics g){
 		//Draw square around
 		super.renderSelection(gc, g);
+		g.setFont(FontCreator.getFont(FontCreator.MEDIUM));
 		
 		//Update arrow positions
 		Position pos = this.getPosition(gc);

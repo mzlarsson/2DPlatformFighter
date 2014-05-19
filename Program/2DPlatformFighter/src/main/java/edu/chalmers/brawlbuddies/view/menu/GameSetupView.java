@@ -1,24 +1,19 @@
 package edu.chalmers.brawlbuddies.view.menu;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.TrueTypeFont;
 
 import edu.chalmers.brawlbuddies.Constants;
-import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
-import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
-import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
+import edu.chalmers.brawlbuddies.util.FontCreator;
 
 public class GameSetupView extends SimpleMenuView{
 	
 	private boolean loaded = false;
-	private TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.BOLD, 24), false, null);
 	private static Dimension standardSize = new Dimension(400, 60);
 	private int centerOffset = 50;
 	private int topOffset = 0;
@@ -102,7 +97,7 @@ public class GameSetupView extends SimpleMenuView{
 		
 		super.render(gc, g);
 		g.setColor(SimpleMenuItem.getActiveColor());
-		g.setFont(font);
+		g.setFont(FontCreator.getFont(FontCreator.BIG));
 		String output = "Player1";
 		g.drawString(output, (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth()/2-g.getFont().getWidth(output)/2), 90+topOffset);
 		output = "Player2";

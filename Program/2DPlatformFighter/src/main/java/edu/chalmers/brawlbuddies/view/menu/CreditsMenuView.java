@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.util.FontCreator;
 
 public class CreditsMenuView extends SimpleMenuView{
 
@@ -18,9 +19,10 @@ public class CreditsMenuView extends SimpleMenuView{
 		super.render(gc, g);
 		
 		g.setColor(SimpleMenuItem.getActiveColor());
+		g.setFont(FontCreator.getFont(FontCreator.LARGE));
 		String[] lines = {"Brawl Buddies", "Made by Small Electric Boar Riot", "Nano   Volt   Boarman   Nika"};
 		for(int i = 0; i<lines.length; i++){
-			g.drawString(lines[i], (gc.getWidth()-g.getFont().getWidth(lines[i]))/2, 300+40*i);
+			g.drawString(lines[i], (gc.getWidth()-g.getFont().getWidth(lines[i]))/2, 360+40*i);
 		}
 	}
 
