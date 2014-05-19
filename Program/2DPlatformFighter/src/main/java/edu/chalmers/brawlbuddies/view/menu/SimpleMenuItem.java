@@ -15,6 +15,7 @@ public class SimpleMenuItem implements MenuItem{
 	private int horizPos = 0;
 	private String value = "";
 	private String name = "";
+	private Color opaqueColor = new Color(255, 255, 255, 60);
 	
 	private Dimension size;
 	private Position pos;
@@ -51,6 +52,10 @@ public class SimpleMenuItem implements MenuItem{
 	
 	protected void renderSelection(GameContainer gc, Graphics g){
 		Position pos = this.getPosition(gc);
+		if(isActive()){
+			g.setColor(this.opaqueColor);
+			g.fillRect(pos.getX(), pos.getY(), (float)size.getWidth(), (float)size.getHeight());
+		}
 		g.setColor((this.error?Color.red:(this.isActive()?Color.white:Color.gray)));
 		g.drawRect(pos.getX(), pos.getY(), (float)size.getWidth(), (float)size.getHeight());
 	}

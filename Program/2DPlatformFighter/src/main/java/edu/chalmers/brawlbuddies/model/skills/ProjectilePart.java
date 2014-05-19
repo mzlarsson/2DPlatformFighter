@@ -66,4 +66,10 @@ public class ProjectilePart implements SkillPart {
 	public void setCreatorID(int a){
 		shooter.setCreatorID(a);
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "ProjectilePart:" +  " shooter= " + shooter + " aim= " + aim + " aimOffset= " + aimOffset;
+	}
 }

@@ -37,8 +37,12 @@ public class Controller extends StateBasedGame {
 	 * @see StateFactory
 	 */
 	@Override
-	public void initStatesList(GameContainer container) throws SlickException {
+	public void initStatesList(GameContainer container) throws SlickException {		
 		gameContainer = (AppGameContainer)container;
+		
+		//Show splash screen (game intro)
+		this.addState(new Intro());
+		//this.enterState(Constants.GAMESTATE_INTRO);
 		
 		//Inits all the states
 		List<BasicGameState> states = StateFactory.getAllStates();
@@ -46,7 +50,10 @@ public class Controller extends StateBasedGame {
 			this.addState(state);
 		}
 		
+		//Load settings
 		((OptionMenuState)(this.getState(Constants.GAMESTATE_MENU_OPTIONS))).loadSettings(this);
+		//FIXME remove when having intro
+		this.enterState(Constants.GAMESTATE_MAIN_MENU);
 	}
 	
 	/**

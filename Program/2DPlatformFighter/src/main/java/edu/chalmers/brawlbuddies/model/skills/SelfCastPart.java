@@ -48,5 +48,9 @@ public class SelfCastPart implements SkillPart {
 	public void setCreatorID(int id) {
 	
 	}
+	
+	public String toString(){
+		return "Selfcast"; 
+	}
 
 }

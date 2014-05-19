@@ -25,4 +25,5 @@
   <object x="29" y="638" width="962" height="132"/>
   <object x="165" y="390" width="167" height="30"/>
  </objectgroup>
+ <spawns>100,100,900,100</spawns>
 </map>

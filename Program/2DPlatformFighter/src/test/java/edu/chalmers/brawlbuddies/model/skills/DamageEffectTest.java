@@ -3,11 +3,16 @@ package edu.chalmers.brawlbuddies.model.skills;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
+import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
+import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
+import edu.chalmers.brawlbuddies.model.world.Character;
 /**
- * A class to test DamageEffect
+ * A test class for DamageEffect
  * @author David Gustafsson
  *
  */
@@ -18,18 +23,18 @@ public class DamageEffectTest {
 	DamageEffect damage = new DamageEffect(500f);
 	// Test if the effect will damage a object when creatorID is different from
 	// target ID
-	Dummy bob = new Dummy(1000);
-	damage.setCreatorID(1);
-	bob.setID(5);
+	Character bob = new Character(new Rectangle(10, 10, 10, 10), 1, new Position(10 , 10) );
+	bob.setHealth(new Health(1000, 1000 , 2));
+	damage.setCreatorID(2);
 	damage.effect(null, bob);
-	assertTrue(bob.getMissingHealth() == 500);
+	assertTrue(bob.getHealth() == 500);
 	
 	// Test if the effect will damage a object when creatorID is the same as
 	// the target ID
-	damage.setCreatorID(5);
+	damage.setCreatorID(1);
 	bob.restoreHealth();
 	damage.effect(null, bob);
-	assertTrue(bob.getMissingHealth() == 0);
+	assertTrue(bob.getHealth() == 1000);
 	}
 
 }

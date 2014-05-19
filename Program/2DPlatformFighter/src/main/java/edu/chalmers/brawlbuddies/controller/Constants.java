@@ -21,5 +21,7 @@ public class Constants {
 	public static final int GAMESTATE_END_SCREEN = 4;
 	/** ID of the state for setting up game  */
 	public static final int GAMESTATE_GAME_SETUP = 5;
+	/** ID of the state of the intro  */
+	public static final int GAMESTATE_INTRO = 6;
 	
 }

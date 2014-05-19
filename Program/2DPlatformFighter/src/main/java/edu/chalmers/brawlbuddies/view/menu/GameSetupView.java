@@ -87,7 +87,7 @@ public class GameSetupView extends SimpleMenuView{
 		if(!loaded){
 			this.clearItems();
 			load(gc);
-			super.update();
+			super.updateContents();
 			loaded = true;
 		}
 		
@@ -101,7 +101,7 @@ public class GameSetupView extends SimpleMenuView{
 	}
 	
 	@Override
-	public void update(){
+	public void updateContents(){
 		this.loaded = false;
 	}
 }

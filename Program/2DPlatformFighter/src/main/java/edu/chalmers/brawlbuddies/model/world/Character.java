@@ -202,6 +202,7 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	public void takeDamage(float a) {
+		a = statusEffectList.calculateDamage(a);
 		health.takeDamage(a);
 		if (isDead()) {
 			characterKilled();

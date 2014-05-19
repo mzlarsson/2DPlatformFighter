@@ -22,15 +22,14 @@ public class GameFactory {
 			world.add(CharacterFactory.create(characterNames[i], tmpPos));
 		}
 		BrawlBuddies bb = new BrawlBuddies(world);
+		GoalHandlerWrapper gh = new GoalHandlerWrapper();
+		gh.addGameListener(gl);
+		bb.setGoalHandler(gh);
 		if (timeLimit>0) {
-			TimeLimitGoalWrapper time = new TimeLimitGoalWrapper(timeLimit);
-			time.addGameListener(gl);
-			bb.addGoal(time);
+			bb.addGoal(new TimeLimitGoalWrapper(timeLimit));
 		}
 		if (lifeLimit>0) {
-			LifeLimitGoalWrapper life = new LifeLimitGoalWrapper(lifeLimit);
-			life.addGameListener(gl);
-			bb.addGoal(life);
+			bb.addGoal(new LifeLimitGoalWrapper(lifeLimit));
 		}
 		return bb;
 	}

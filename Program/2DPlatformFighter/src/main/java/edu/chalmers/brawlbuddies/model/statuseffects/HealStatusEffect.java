@@ -10,7 +10,7 @@ public class HealStatusEffect implements IStatusEffect {
 	private int duration;
 	private int intervall;
 	private float healAmount;
-	private int prevIndex;
+	private int prevTick;
 	/**
 	 * Creates a new heal status effect with a duration, intervall and heal.
 	 * The duration is the time the effect will be active
@@ -28,7 +28,7 @@ public class HealStatusEffect implements IStatusEffect {
 		this.duration = duration;
 		this.intervall = intervall;
 		this.healAmount = heal;
-		this.prevIndex = duration / intervall;
+		this.prevTick = duration;
 		
 	}
 	
@@ -44,10 +44,9 @@ public class HealStatusEffect implements IStatusEffect {
 	 */
 	public void update(ICharacter c, float delta) {
 		duration -= delta;
-		while(prevIndex != duration/intervall && prevIndex != 0){
+		while(prevTick - duration>= intervall && prevTick > 0){
 		c.heal(healAmount);
-		System.out.println("character takes damage");
-		prevIndex -= 1;
+		prevTick -= intervall;
 		}
 	}
 

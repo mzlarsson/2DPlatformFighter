@@ -52,5 +52,11 @@ public class WaitPart implements SkillPart {
 	 */
 	public void setCreatorID(int id) {
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "WaitPart:" + " delayTotal = " + delayTotal + " delayLeft = " + delayLeft; 
+	}
 }

@@ -5,17 +5,40 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+
+import edu.chalmers.brawlbuddies.Constants;
 
 public class SimpleMenuView implements MenuView{
 	
 	private List<MenuItem> items;
 	private int selectedIndex = 0;
+	private ParticleHandler particles;
 
 	public SimpleMenuView() {
 		items = new ArrayList<MenuItem>();
 	}
+	
+	private void initParticles(int x, int y){
+		try {
+			particles = new ParticleHandler(Constants.IMAGES + "menus/particle.png");
+			particles.addEmitter(Constants.DATA + "menus/background.xml", x, y);
+		} catch (SlickException e) {
+			System.out.println("Failed while reading particles");
+		}
+	}
+	
+	public void update(int delta){
+		if(particles != null){
+			particles.update(delta);
+		}
+	}
 
-	public void render(GameContainer gc, Graphics g) {
+	public void render(GameContainer gc, Graphics g){
+		if(particles == null){
+			initParticles(gc.getWidth()/2, gc.getHeight()/2);
+		}
+		particles.render();
 		for(MenuItem item : this.items){
 			item.render(gc, g);
 		}
@@ -59,7 +82,8 @@ public class SimpleMenuView implements MenuView{
 		}
 	}
 	
-	public void update(){
+	public void updateContents(){
+		this.particles = null;
 		setSelection(0);
 		for(MenuItem item : this.items){
 			item.recalculate();
