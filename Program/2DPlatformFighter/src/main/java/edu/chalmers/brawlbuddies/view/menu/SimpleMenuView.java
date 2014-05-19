@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.view.SideScroller;
 
 public class SimpleMenuView implements MenuView{
 	
@@ -104,5 +105,9 @@ public class SimpleMenuView implements MenuView{
 			this.selectedIndex = selectedIndex;
 			this.items.get(this.selectedIndex).setActive(true);
 		}
+	}
+
+	public SideScroller getScroller() {
+		return null;
 	}
 }

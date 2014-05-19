@@ -36,6 +36,10 @@ public class GameView implements IEventBusSubscriber, IView {
 		scroller = new SideScroller(null, null, 200, 200, 1.5d);
 		EventBus.getInstance().addSubscriber(this);
 	}
+	
+	public SideScroller getScroller(){
+		return this.scroller;
+	}
 
 	public void render(GameContainer gc, Graphics g) {
 		if(!resolutionSet){
