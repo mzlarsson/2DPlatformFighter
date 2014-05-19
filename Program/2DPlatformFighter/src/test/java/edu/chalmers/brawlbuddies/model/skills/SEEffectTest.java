@@ -13,9 +13,12 @@ import edu.chalmers.brawlbuddies.model.statuseffects.DamageStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
-
+/**
+ * A test class for SEEffectTest
+ * @author David Gustafsson
+ *
+ */
 public class SEEffectTest {
-	private SEEffect testEffect = new SEEffect( new DamageStatusEffect(100 , 10 , 10));
 	
 	@Test
 	public void test() {

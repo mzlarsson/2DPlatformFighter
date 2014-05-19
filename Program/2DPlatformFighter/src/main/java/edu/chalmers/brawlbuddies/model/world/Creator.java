@@ -15,7 +15,10 @@ public class Creator {
 	
 	private List<CreatorListener> listeners;
 	private static Creator instance = null;
-
+	
+	/**
+	 * Creates a new Creator
+	 */
 	private Creator() {
 		listeners = new ArrayList<CreatorListener>();
 	}

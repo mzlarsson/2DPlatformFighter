@@ -70,11 +70,6 @@ public class CharacterFactory {
 				, shapeParams.getNamedItem("parameters").getNodeValue(), x, y),
 				Integer.parseInt(rootNode.getAttribute("id")), projOffset);
 		CharacterWrapper wrapper = new CharacterWrapper(character);
-		// Setting the name
-		character.setName(rootNode.getElementsByTagName("name").item(0)
-				.getFirstChild().getNodeValue());
-		// Setting the biography
-		character.setBio(xmlDoc.getElementsByTagName("bio").item(0).getFirstChild().getNodeValue());
 		// Setting the health
 		HealthWrapper health= new HealthWrapper(Float.parseFloat(xmlDoc.getElementsByTagName("health").item(0).getFirstChild().getNodeValue()), character.getID());
 		character.setHealth(health);
@@ -97,7 +92,10 @@ public class CharacterFactory {
 		
 		return wrapper;
 	}
-	
+	/**
+	 * Get a map of the available characters with their name and document file path.
+	 * @return Map<String, String> - a map of available characters
+	 */
 	public static Map<String, String> getAvailableCharacters(){
 		File folder = new File(Constants.CHARACTER_DATA);
 		File[] files = folder.listFiles(new FileFilter(){

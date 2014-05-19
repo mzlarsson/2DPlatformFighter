@@ -31,8 +31,6 @@ public class Character extends GameObject implements ICharacter {
 	private int typeID;
 	private StatusEffectList statusEffectList = new StatusEffectList();
 
-	private String name;
-	private String bio;
 	private IHealth health;
 
 	private ISkill[] skills;
@@ -43,12 +41,13 @@ public class Character extends GameObject implements ICharacter {
 	private List<GameListener> listeners;
 
 	/**
-	 * Creates a Character.
-	 * 
-	 * @param cd
-	 *            The data from which the character gets its attributes from.
-	 * @param player
-	 *            The Player controlling the character.
+	 * Creates a Character with a shape, ID and projectile offset.
+	 * The shape will decide the hitbox of the character.
+	 * The ID will decide which ID the character will have.
+	 * The Projectile offset adds a offset to all projectile a character fires.
+	 * @param shape- the shape of the characters hitbox
+	 * @param id - the ID of the Character
+	 * @param projOffset - the offset of the character that will be added to a character projectiles
 	 */
 	public Character(Shape shape, int id, Position projOffset) {
 		super(new JumpMovement(), shape);
@@ -56,29 +55,138 @@ public class Character extends GameObject implements ICharacter {
 		this.projOffset = projOffset;
 		this.listeners = new ArrayList<GameListener>();
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-
+	
 	/**
 	 * Set the skills for the character
-	 * 
-	 * @param skills
+	 * @param skills - the skill to set for the character
 	 */
 	public void setSkills(ISkill[] skills) {
 		this.skills = skills;
 	}
 
 	/**
-	 * Activate a Skill in the skills array with the given positionNbr in the
-	 * array if it exists
+	 * Set the new Maximal amount of health a character have.
+	 * @param maxHealth - the new amount of max health for the character.
+	 */
+	public void setMaxHealth(float maxHealth) {
+		health.setMaxHealth(maxHealth);
+	}
+
+	/**
+	 * Set a new Health object to a character
+	 * @param health- the new health object of the character
+	 */
+	public void setHealth(IHealth health) {
+		this.health = health;
+	}
+
+	/**
+	 * Set health of a Character
+	 * @param newHealth - the new health of a character
+	 */
+	public void setHealth(float newHealth) {
+		this.health.setHealth(newHealth);
+	}
+
+	@Override
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setMovement(Movement movement) {
+		if (!(movement instanceof JumpMovement)) {
+			throw new IllegalArgumentException("Only JumpMovements accepted");
+		} else {
+			super.setMovement(movement);
+		}
+	}
+
+	/**
+	 * Set the base speed of the character
+	 * @param baseSpeed - the new BaseSpeed of the character
+	 */
+	public void setBaseSpeed(Velocity baseSpeed) {
+		this.getMovement().setBaseSpeed(baseSpeed);
+	}
+	
+	/**
+	 * Set the base jump speed of the character
+	 * @param baseJump - the new base jump speed of the character
+	 */
+	public void setBaseJumpSpeed(float baseJump) {
+		this.getMovement().setBaseJumpSpeed(baseJump);
+	}
+	
+	/**
+	 * Set the maximum amount of jumps a character can do in succession
+	 * @param maxJumps - the maximum amount of jumps  
+	 */
+	public void setMaxJumps(int maxJumps) {
+		this.getMovement().setMaxJumps(maxJumps);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setAim(Position aimPosition, boolean isRelative) {
+		if (isRelative) {
+			this.aim.set(aimPosition);
+		} else {
+			this.aim.set(aimPosition.subtract(this.getCenterPosition()));
+		}
+	}
+
+	@Override
+	/**
+	 * {@inheritDoc}
+	 */
+	public JumpMovement getMovement() {
+		return (JumpMovement) super.getMovement();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Position getProjFirePos() {
+		return new Position(this.getCenterPosition().add(
+				this.aim.getX() < 0 ? -projOffset.getX() : projOffset.getX(),
+				projOffset.getY()));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Aim getAim() {
+		return this.aim;
+	}
+	
+	/**
+	 * Get the health of the character
+	 * @return float - the health of the character
+	 */
+	public float getHealth() {
+		return health.getHealth();
+	}
+	
+	/**
+	 * Get the max health of the character
+	 * @return float - the max health of the Character
+	 */
+	public float getMaxHealth() {
+		return health.getMaxHealth();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getTypeID() {
+		return typeID;
+	}
+
+	/**
+	 * Activate a Skill in the skills on a given position in the
+	 * if there exist is a skill on the given position. 
 	 * 
-	 * @param positionNbr
+	 * @param positionNbr- a number signifying a position in skills.
 	 */
 	public void activateSkill(int positionNbr) {
 		if (skills != null && (positionNbr > -1)
@@ -88,39 +196,8 @@ public class Character extends GameObject implements ICharacter {
 		}
 	}
 
-	@Override
-	public void setMovement(Movement movement) {
-		if (!(movement instanceof JumpMovement)) {
-			throw new IllegalArgumentException("Only JumpMovements accepted");
-		} else {
-			super.setMovement(movement);
-		}
-	}
-
-	@Override
-	public JumpMovement getMovement() {
-		return (JumpMovement) super.getMovement();
-	}
-
-	public void setBaseSpeed(Velocity baseSpeed) {
-		this.getMovement().setBaseSpeed(baseSpeed);
-	}
-
-	public void setBaseJumpSpeed(float baseJump) {
-		this.getMovement().setBaseJumpSpeed(baseJump);
-	}
-
-	public void setMaxJumps(int maxJumps) {
-		this.getMovement().setMaxJumps(maxJumps);
-	}
-
 	/**
-	 * Updates the velocity and position of the Character and returns the new
-	 * position.
-	 * 
-	 * @param delta
-	 *            The time passed since last update in milliseconds.
-	 * @return The position after the movement.
+	 * {@inheritDoc}
 	 */
 	public Position update(int delta) {
 		statusEffectList.update(delta, (ICharacter) this);
@@ -129,8 +206,7 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	/**
-	 * Makes the character move to the left/right/up/down depending on the
-	 * Direction.
+	 * {@inheritDoc}
 	 */
 	public void move(Direction dir) {
 		if (statusEffectList.canMove()) {
@@ -143,9 +219,7 @@ public class Character extends GameObject implements ICharacter {
 
 	/**
 	 * Updates the cooldown of the skills with the time passed.
-	 * 
-	 * @param delta
-	 *            Time past in milliseconds.
+	 * @param delta - The time past in milliseconds.
 	 */
 	private void updateCooldowns(int delta) {
 		for (ISkill s : skills) {
@@ -154,7 +228,7 @@ public class Character extends GameObject implements ICharacter {
 	}
 
 	/**
-	 * Makes the character jump if able.
+	 * {@inheritDoc}
 	 */
 	public void makeJump() {
 		if (statusEffectList.canJump()) {
@@ -170,37 +244,10 @@ public class Character extends GameObject implements ICharacter {
 	public void cancelJump() {
 		this.getMovement().cancelJump();
 	}
-
-	public Position getProjFirePos() {
-		return new Position(this.getCenterPosition().add(
-				this.aim.getX() < 0 ? -projOffset.getX() : projOffset.getX(),
-				projOffset.getY()));
-	}
-
-	public Aim getAim() {
-		return this.aim;
-	}
-
-	public void setAim(Position aimPosition, boolean isRelative) {
-		if (isRelative) {
-			this.aim.set(aimPosition);
-		} else {
-			this.aim.set(aimPosition.subtract(this.getCenterPosition()));
-		}
-	}
-
-	public void setMaxHealth(float a) {
-		health.setMaxHealth(a);
-	}
-
-	public void setHealth(IHealth hlth) {
-		this.health = hlth;
-	}
-
-	public void setHealth(float a) {
-		this.health.setHealth(a);
-	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void takeDamage(float a) {
 		a = statusEffectList.calculateDamage(a);
 		health.takeDamage(a);
@@ -211,14 +258,6 @@ public class Character extends GameObject implements ICharacter {
 
 	public void heal(float a) {
 		health.heal(a);
-	}
-
-	public float getHealth() {
-		return health.getHealth();
-	}
-
-	public float getMaxHealth() {
-		return health.getMaxHealth();
 	}
 
 	public void restoreHealth() {
@@ -233,11 +272,6 @@ public class Character extends GameObject implements ICharacter {
 		Movement mov = getMovement();
 		mov.setOuterSpeed(mov.getOuterSpeed().getX() + v.getX(), mov
 				.getOuterSpeed().getY() + v.getY());
-	}
-
-	@Override
-	public int getTypeID() {
-		return typeID;
 	}
 
 	public void onCollision(IGameObject object, Alignment alignment) {

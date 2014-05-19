@@ -12,7 +12,11 @@ import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.JumpMovement;
-
+/**
+ * A test class for ImmobilizeStatusEffect
+ * @author David Gustafsson
+ *
+ */
 public class ImmobilizeStatusEffectTest {
 
 	@Test
