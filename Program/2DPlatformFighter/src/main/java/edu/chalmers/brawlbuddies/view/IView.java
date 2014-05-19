@@ -16,5 +16,15 @@ public interface IView {
 	 * @return The scroller used for this view
 	 */
 	public SideScroller getScroller();
+	
+	/**
+	 * Updates timers in the view.
+	 * @param delta Time since last update in milliseconds.
+	 */
+	public void update(int delta);
 
+	/**
+	 * Removes everything connected to the view.
+	 */
+	public void close();
 }

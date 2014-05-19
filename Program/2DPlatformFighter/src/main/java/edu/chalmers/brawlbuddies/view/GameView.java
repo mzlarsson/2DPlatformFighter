@@ -1,11 +1,7 @@
 package edu.chalmers.brawlbuddies.view;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.TreeMap;
 
 import org.newdawn.slick.Animation;
@@ -34,7 +30,6 @@ public class GameView implements IEventBusSubscriber, IView {
 	private boolean timeGoal;
 	private int timeLimit;
 	private int delta;
-	private long lastFrame;
 	// tiled map and map lists of all objects in view
 	private TiledMap map;
 	private Map<Integer, Animation> objectAnims;
@@ -123,6 +118,11 @@ public class GameView implements IEventBusSubscriber, IView {
 			timeLimit = (Integer) event.getRecipient();
 		}
 	}
+	
+	public void update(int delta) {
+		this.delta = delta;
+	}
+	
 //render methods
 	/**
 	 * A method to render the game on screen using Slick2D
@@ -133,11 +133,6 @@ public class GameView implements IEventBusSubscriber, IView {
 	 *            the current slick graphic object
 	 */
 	public void render(GameContainer gc, Graphics g) {
-		// handle time
-		if (lastFrame > 0) {
-			delta = (int) (gc.getTime() - lastFrame);
-		}
-		lastFrame = gc.getTime();
 		// set resulution
 		if (!resolutionSet) {
 			this.scroller.setResolution(gc.getWidth(), gc.getHeight());
@@ -156,6 +151,7 @@ public class GameView implements IEventBusSubscriber, IView {
 		g.scale(1.0f / scroller.getScale(), 1.0f / scroller.getScale());
 		// render hud
 		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
+			entry.getValue().update(delta);
 			entry.getValue().render(gc, g);
 		}
 		// render time
@@ -175,7 +171,8 @@ public class GameView implements IEventBusSubscriber, IView {
 	private void renderTime(int time, Graphics g) {
 		timeLimit = timeLimit - time;
 		int minutes = timeLimit / 60000;
-		int seconds = (timeLimit % 60000) / 600;
+		int seconds = (timeLimit % 60000)/1000;
+		System.out.println(timeLimit);
 		g.setColor(Color.red);
 		g.drawString(
 				Integer.toString(minutes) + ":" + Integer.toString(seconds),

@@ -8,8 +8,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
-import edu.chalmers.brawlbuddies.eventbus.EventBus;
-import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.skills.SkillWrapper;
@@ -22,12 +20,11 @@ public class SkillImage implements IDrawable {
 	private int id;
 
 	private int delta;
-	private long lastFrame;
 
 	private int cooldown = 5000;
 	private int cooldownScale = 0;
 	private float skillHeight = 30;
-	private Color color = new Color(128, 128, 128, 150);
+	private Color color = new Color(80, 80, 80, 150);
 	private Rectangle cooldownRect = new Rectangle(0, 0, 30, 0);
 
 	public SkillImage(SkillWrapper skill) {
@@ -39,12 +36,11 @@ public class SkillImage implements IDrawable {
 		cooldown=skill.getCooldown();
 	}
 
+	public void update(int delta) {
+		this.delta = delta;
+	}
+	
 	public void render(GameContainer gc, Graphics g) {
-		if (lastFrame > 0) {
-			delta = (int) (gc.getTime() - lastFrame);
-		}
-		lastFrame = gc.getTime();
-
 		animation.draw(position.getX(), position.getY());
 		setCooldownScale(cooldownScale - delta);
 		setCooldownRectangle();
@@ -52,10 +48,12 @@ public class SkillImage implements IDrawable {
 	}
 
 	private void renderCooldown(Graphics g) {
-		g.setColor(color);
-		g.fill(cooldownRect);
-		g.setColor(Color.black);
-
+		if (cooldownScale>0) {
+			g.setColor(color);
+			g.fill(cooldownRect);
+			g.setColor(Color.black);
+			g.drawString(cooldownScale/1000 + "." + (cooldownScale%1000)/100, position.getX(), position.getY()+5);
+		}
 	}
 
 	public void place(Position p) {
@@ -64,7 +62,6 @@ public class SkillImage implements IDrawable {
 	}
 
 	public void update(IWrapper obj1, IWrapper obj2) {
-		SkillWrapper skill = (SkillWrapper) obj1;
 		setCooldownScale(cooldown);
 	}
 
@@ -73,10 +70,7 @@ public class SkillImage implements IDrawable {
 	}
 
 	private void setCooldownScale(int i) {
-		if (i <= cooldown && i >= 0) {
-			cooldownScale = i;
-		}
-
+		cooldownScale = i;
 	}
 
 	public int getID() {

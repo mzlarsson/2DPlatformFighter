@@ -3,6 +3,8 @@ package edu.chalmers.brawlbuddies.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.chalmers.brawlbuddies.model.world.ICharacter;
+
 /**
  * A class for handling goals for the game
  * @author Patrik Haar
@@ -12,10 +14,12 @@ public class GoalHandler implements IGoalHandler {
 
 	private List<IGoal> goals;
 	private List<GameListener> listeners;
+	private List<ICharacter> characters;
 	
 	public GoalHandler() {
 		goals = new ArrayList<IGoal>();
 		listeners = new ArrayList<GameListener>();
+		characters = new ArrayList<ICharacter>();
 	}
 	
 	/**
@@ -26,9 +30,15 @@ public class GoalHandler implements IGoalHandler {
 		for (GameListener gl : listeners) {
 			goal.addGameListener(gl);
 		}
+		for (ICharacter character : characters) {
+			goal.gameEventPerformed("characterAdded", character);
+		}
 	}
 
 	public void gameEventPerformed(String evtName, Object value) {
+		if (evtName.equals("characterAdded")) {
+			characters.add((ICharacter)value);
+		}
 		for(IGoal goal : goals) {
 			goal.gameEventPerformed(evtName, value);
 		}

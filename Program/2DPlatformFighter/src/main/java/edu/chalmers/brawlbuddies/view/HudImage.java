@@ -8,15 +8,11 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.skills.SkillWrapper;
 import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
-import edu.chalmers.brawlbuddies.model.world.Health;
 import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 
 /**
@@ -42,11 +38,7 @@ public class HudImage implements IDrawable {
 	// positions for the hud and all its objects
 	private Position upperLeftCornerPosition;
 	private ArrayList<Position> skillPosition;
-	private Position characterImagePosition;
 	private Position healthBarPosition;
-	// size of the hud
-	private int hudLength = 274;
-	private int hudHeight = 99;
 
 	/**
 	 * constructor for the hud. gives values to instance variables.
@@ -72,13 +64,13 @@ public class HudImage implements IDrawable {
 		upperLeftCornerPosition = new Position(hudIndex, 0);
 		healthBarPosition = new Position(upperLeftCornerPosition.getX() + 99,
 				16);
-		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 100,
+		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 110,
 				upperLeftCornerPosition.getY() + 60));
-		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 140,
+		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 150,
 				upperLeftCornerPosition.getY() + 60));
-		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 180,
+		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 190,
 				upperLeftCornerPosition.getY() + 60));
-		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 220,
+		skillPosition.add(new Position(upperLeftCornerPosition.getX() + 230,
 				upperLeftCornerPosition.getY() + 60));
 
 		// handle identification
@@ -117,6 +109,12 @@ public class HudImage implements IDrawable {
 
 	}
 
+	public void update(int delta) {
+		for (Map.Entry<Integer, SkillImage> entry : skills.entrySet()) {
+			entry.getValue().update(delta);
+		}
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -35,6 +35,7 @@ public class GoalHandlerWrapper implements IGoalHandler {
 
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
+		gh.addGameListener(gl);
 	}
 
 	public void removeGameListener(GameListener gl) {
