@@ -22,7 +22,8 @@
 		lightningLeft="0,6,7,6,31,false,false"
 		lightningRight="8,6,15,6,31,false,false"
 		bombLeft="0,7,7,7,100,false,false"
-		bombRight="8,7,15,7,100,false,false">
+		bombRight="8,7,15,7,100,false,false"
+		icon="8,3,8,3,100,false,false">
 	</resource>
 	
 	
@@ -39,5 +40,5 @@
 	<resource id="33" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
 
 	<!-- Hud	4### -->
-	<resource id="40" name="hud" size="274,99" idle="0,0,9,0,100,true,true"></resource> 
+	<resource id="40" name="hud" size="274,99" idle="0,0,9,0,100,false,false"></resource> 
 </resources>

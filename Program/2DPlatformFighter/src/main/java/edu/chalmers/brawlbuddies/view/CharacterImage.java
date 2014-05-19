@@ -201,7 +201,6 @@ public class CharacterImage implements IDrawable {
 							: correctStringFormat(moveDirection.getXDirection().toString()));
 		}
 		if (!(tmpMovementName.equals(movementName))) {
-			System.out.println(movementName);
 			animation.stop();
 			movementName = tmpMovementName;
 			animation = mapAnimation.get(movementName);

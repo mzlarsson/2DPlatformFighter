@@ -150,4 +150,8 @@ public class Skill implements ISkill{
 	public String toString(){
 		return "Skill:" + " typID = " + typeID + " ownerID = " + ownerID + " cooldown = " + cooldown + " skillActive= " + skillActive + " currentSkillPart = " + currentSkillpart + " animName = " + animName;
 	}
+
+	public int getCooldown() {
+		return cooldown;
+	}
 }

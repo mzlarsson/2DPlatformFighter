@@ -105,4 +105,9 @@ public class SimpleMenuView implements MenuView{
 	public SideScroller getScroller() {
 		return null;
 	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,7 +2,7 @@
 <skill name="Bobs Lightning Dash" cooldown="10000" id="22" animation="lightning">
 
 	<skillparts>
-		<projectile name="bob_lightning"></projectile>
+		<projectile name="bob_lightning" aim="0,-1" aim_offset="-90"></projectile>
 		<selfcast>
 			<push_over_time duration="250" power="2200" aim="0,-1" aimOffset="-90"></push_over_time>
 			<immobilize duration="250"></immobilize>
