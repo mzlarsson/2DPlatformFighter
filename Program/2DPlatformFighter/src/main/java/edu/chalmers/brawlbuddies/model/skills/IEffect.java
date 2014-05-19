@@ -16,9 +16,11 @@ public interface IEffect {
 	 * @return <code>true</code> if reciever successfully effected, <code>false</code> otherwise.
 	 */
 	public boolean effect(IGameObject sender, IGameObject reciever);
+	
 	/**
 	 * Sets the creator ID.
 	 * @param id The ID of the creator.
 	 */
 	public void setCreatorID(int id);
+	
 }

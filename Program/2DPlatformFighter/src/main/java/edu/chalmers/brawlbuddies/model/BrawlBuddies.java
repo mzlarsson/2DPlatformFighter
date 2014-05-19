@@ -1,9 +1,6 @@
 package edu.chalmers.brawlbuddies.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.chalmers.brawlbuddies.model.world.GameMap;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
@@ -20,7 +17,7 @@ import edu.chalmers.brawlbuddies.model.world.World;
 public class BrawlBuddies implements IBrawlBuddies{
 
 	private World world;
-	private List<IGoal> goals;
+	private IGoalHandler goals;
 	
 	public BrawlBuddies(){
 		this(new World(new GameMap()));
@@ -36,17 +33,17 @@ public class BrawlBuddies implements IBrawlBuddies{
 	 */
 	public BrawlBuddies(World world) {
 		this.world = world;
-		this.goals = new ArrayList<IGoal>();
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addGoal(IGoal goal) {
-		goals.add(goal);
-		for (IGameObject ch : this.world.getObjectsByType(ICharacter.class)) {
-			((ICharacter)ch).addGameListener(goal);
+	public void setGoalHandler(IGoalHandler gh) {
+		goals = gh;
+		for (IGameObject character : world.getObjectsByType(ICharacter.class)) {
+			((ICharacter)character).addGameListener(gh);
 		}
+	}
+	
+	public void addGoal(IGoal goal) {
+		goals.addGoal(goal);
 	}
 	
 	/**
@@ -116,9 +113,7 @@ public class BrawlBuddies implements IBrawlBuddies{
 	 * @param delta Time since last update in milliseconds.
 	 */
 	public void update(int delta) {
-		for (IGoal goal : goals) {
-			goal.update(delta);
-		}
+		goals.update(delta);
 		world.update(delta);
 	}
 

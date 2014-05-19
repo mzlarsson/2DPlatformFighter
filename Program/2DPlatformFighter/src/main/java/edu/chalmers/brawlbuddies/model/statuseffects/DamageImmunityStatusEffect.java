@@ -67,8 +67,8 @@ public class DamageImmunityStatusEffect implements IPreDamageStatusEffect {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int compareTo(IPreDamageStatusEffect o) {
-		return o.getPriority() - priority;
+	public int compareTo(IPreDamageStatusEffect effect) {
+		return priority - effect.getPriority();
 	}
 	
 

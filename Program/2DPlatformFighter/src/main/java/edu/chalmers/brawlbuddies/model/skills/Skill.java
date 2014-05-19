@@ -144,4 +144,10 @@ public class Skill implements ISkill{
 	public int getOwnerID() {
 		return ownerID;
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "Skill:" + " typID = " + typeID + " ownerID = " + ownerID + " cooldown = " + cooldown + " skillActive= " + skillActive + " currentSkillPart = " + currentSkillpart + " animName = " + animName;
+	}
 }

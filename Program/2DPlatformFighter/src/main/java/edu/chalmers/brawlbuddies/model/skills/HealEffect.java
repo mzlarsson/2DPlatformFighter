@@ -29,18 +29,32 @@ public class HealEffect implements IEffect {
 	 * {@inheritDoc}
 	 */
 	public boolean effect(IGameObject sender, IGameObject reciever) {
-		if(reciever instanceof HealAble){
-			((HealAble) reciever).heal(healAmount);
-			return true;
-		} else {
+		if(sender == null){
+			if(reciever instanceof HealAble){
+				((HealAble) reciever).heal(healAmount);
+				return true;
+				} else {
+					return false;
+			}
+		}
+		else{
+			if( reciever instanceof HealAble){
+				if(((HealAble) reciever).getID() != creatorID){
+				((HealAble) reciever).heal(healAmount);
+				}
+			}
 			return false;
 		}
+		
 	}
 	/**
 	 * {@inheritDoc}
 	 */
 	public void setCreatorID(int id) {
 		this.creatorID = id;
+	}
+	public String toString(){
+		return "HealEffect" + " heal = " + healAmount;
 	}
 
 }
