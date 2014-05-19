@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,15 +23,21 @@ public class GameSetupView extends SimpleMenuView{
 	private int centerOffset = 50;
 	private int topOffset = 0;
 
-	public GameSetupView() {
+	private List<MultiChoiceOption> characters;
+	private List<MultiChoiceOption> controllers;
+	private List<MultiChoiceOption> maps;
+
+	public GameSetupView(){
+	}
+	
+	public void setData(Map<String, String> characters, Map<String, String> controllers, Map<String, String> maps){
+		this.characters = MultiChoiceOption.stringToMultiChoice(characters);
+		this.controllers = MultiChoiceOption.stringToMultiChoice(controllers);
+		this.maps = MultiChoiceOption.stringToMultiChoice(maps);
 	}
 	
 	public void load(GameContainer gc){
 		this.topOffset = (gc.getHeight()-780)/2;
-		List<MultiChoiceOption> characters = MultiChoiceOption.stringToMultiChoice(CharacterFactory.getAvailableCharacters());
-		InputHandlerChooser.getInstance().updateHandlers();
-		List<MultiChoiceOption> controllers = MultiChoiceOption.stringToMultiChoice(InputHandlerChooser.getInstance().getControllerNames());
-		List<MultiChoiceOption> maps = MultiChoiceOption.stringToMultiChoice(GameMapFactory.getAvailableMaps());
 		
 		//Player1
 		int x = (int)(gc.getWidth()/2-centerOffset-standardSize.getWidth());

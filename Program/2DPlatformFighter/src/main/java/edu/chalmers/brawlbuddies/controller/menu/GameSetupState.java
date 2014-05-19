@@ -1,15 +1,19 @@
 package edu.chalmers.brawlbuddies.controller.menu;
 
+import java.util.Map;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Constants;
+import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
+import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
 import edu.chalmers.brawlbuddies.view.menu.GameSetupView;
 import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
@@ -24,10 +28,18 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	/**
 	 * Creates a new Menu state
 	 */
-	public GameSetupState() {
+	public GameSetupState() {		
 		view = new GameSetupView();
 		handler = new MenuHandler(view);
 		handler.addMenuListener(this);
+	}
+	
+	public void setupData(){
+		Map<String, String> characters = CharacterFactory.getAvailableCharacters();
+		InputHandlerChooser.getInstance().updateHandlers();
+		Map<String, String> controllers = InputHandlerChooser.getInstance().getControllerNames();
+		Map<String, String> maps = GameMapFactory.getAvailableMaps();
+		((GameSetupView)view).setData(characters, controllers, maps);
 	}
 
 	/**
@@ -132,6 +144,7 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
+		setupData();
 		view.updateContents();
 	}
 	

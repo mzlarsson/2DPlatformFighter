@@ -37,6 +37,10 @@ public class Settings {
 		}
 	}
 	
+	public Map<String, String> getSettings(){
+		return this.values;
+	}
+	
 	public String getSetting(String setting){
 		return this.values.get(setting);
 	}
