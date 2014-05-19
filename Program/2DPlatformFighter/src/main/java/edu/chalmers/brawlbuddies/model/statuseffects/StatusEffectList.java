@@ -78,13 +78,19 @@ public class StatusEffectList {
 		for (IPreDamageStatusEffect effect : preDamage) {
 			damage = effect.calculateDamage(damage);
 		}
+		for (int i = 0; !preDamage.isEmpty() && i < preDamage.size(); i++){
+			if( !preDamage.get(i).isActive()){
+				preDamage.remove(i);
+				i--;
+			}
+		}
 		return damage;
 	}
 	
 	/**
 	 * Sort the preDamage list 
 	 */
-	public void sortPreDamage() {
+	private void sortPreDamage() {
 		Collections.sort(preDamage);
 	}
 	

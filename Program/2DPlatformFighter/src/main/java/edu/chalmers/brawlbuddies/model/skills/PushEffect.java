@@ -14,7 +14,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
 
 public class PushEffect implements IEffect {
 	private Velocity velocity = null;
-	private int creatorId;
+	private int creatorID;
 	private float aimOffset;
 	private float power;
 	
@@ -43,7 +43,7 @@ public class PushEffect implements IEffect {
 	 * {@inheritDoc}
 	 */
 	public void setCreatorID(int creatorID) {
-		this.creatorId = creatorID;
+		this.creatorID = creatorID;
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class PushEffect implements IEffect {
 					}
 				}
 			} else {
-				if(!(reciever instanceof ICharacter && ((ICharacter)reciever).getID() == creatorId)){
+				if(!(reciever instanceof ICharacter && ((ICharacter)reciever).getID() == creatorID)){
 					if (velocity == null) {
 						Velocity v = sender.getTotalVelocity().getNormalized();
 						v = v.scale(power);
@@ -80,5 +80,12 @@ public class PushEffect implements IEffect {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "PushEffect: " + "velocity = " + velocity + " power = " + power + " aimOffset = " + aimOffset + " creatorID = " + creatorID;
 	}
 }

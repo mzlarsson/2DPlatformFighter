@@ -62,5 +62,12 @@ public class MeleePart implements SkillPart {
 	public void setCreatorID(int id) {
 		hitter.setCreatorID(id);
 	}
+	
+	/**
+	 *  {@inheritDoc}
+	 */
+	public String toString(){
+		return "MeleePart: " +" hitter:" + hitter.toString() + " aim = " + aim + " aimOffset= " + aimOffset  ;
+	}
 
 }

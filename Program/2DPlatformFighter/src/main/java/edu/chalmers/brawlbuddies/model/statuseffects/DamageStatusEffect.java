@@ -10,7 +10,7 @@ public class DamageStatusEffect implements IStatusEffect {
 	private int duration;
 	private int intervall;
 	private float damage;
-	private int prevIndex;
+	private int prevTick;
 	/**
 	 * Creates a new DamageStatusEffect with duration , intervall and damage.
 	 * The duration decides how long the status effect is active. 
@@ -28,7 +28,7 @@ public class DamageStatusEffect implements IStatusEffect {
 		this.duration = duration;
 		this.intervall = intervall;
 		this.damage = damage;
-		this.prevIndex = duration / intervall;
+		this.prevTick = duration;
 		
 	}
 	/**
@@ -43,9 +43,9 @@ public class DamageStatusEffect implements IStatusEffect {
 	 */
 	public void update(ICharacter c, float delta) {
 		duration -= delta;
-		while(prevIndex != duration/intervall && prevIndex != 0){
+		while(prevTick - duration >= intervall && prevTick > 0){
 		c.takeDamage(damage);
-		prevIndex -= 1;
+		prevTick -= intervall;
 		}
 	}
 	

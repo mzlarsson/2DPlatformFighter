@@ -39,7 +39,7 @@ public class ShieldStatusEffect implements IPreDamageStatusEffect {
 	 * {@inheritDoc}
 	 */
 	public boolean isActive() {
-		return shieldAmount > 0 || duration > 0;
+		return shieldAmount > 0 && duration > 0;
 	}
 	
 
@@ -63,9 +63,9 @@ public class ShieldStatusEffect implements IPreDamageStatusEffect {
 	 * {@inheritDoc}
 	 */
 	public float calculateDamage(float damage) {
-		float returnDamage = damage - shieldAmount < 0? 0 : damage - shieldAmount; 
-		shieldAmount -= damage;
-		return returnDamage;
+		float returningDamage = shieldAmount - damage >= 0? 0 : damage - shieldAmount; 
+		shieldAmount = shieldAmount - damage <= 0? 0 : shieldAmount - damage;
+		return returningDamage;
 	}
 	
 
@@ -73,7 +73,7 @@ public class ShieldStatusEffect implements IPreDamageStatusEffect {
 	 * {@inheritDoc}
 	 */
 	public int compareTo(IPreDamageStatusEffect effect) {
-		return priority - effect.getPriority() ;
+		return priority - effect.getPriority();
 	}
 	
 

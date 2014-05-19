@@ -44,4 +44,7 @@ public class DamageEffect implements IEffect {
 		}
 		return false;
 	}
+	public String toString(){
+		return "DamageEffect:" + " damage = " + damage + " creatorID = " + creatorID;  
+	}
 }

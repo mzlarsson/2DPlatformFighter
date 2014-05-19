@@ -42,5 +42,11 @@ public class SEEffect implements IEffect{
 	public void setCreatorID(int iD) {
 		creatorID = iD;		
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString(){
+		return "SEEffect" + " statuseffect = " + statusEffect + " creatorID = " + creatorID;
+	}
 }
