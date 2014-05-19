@@ -13,7 +13,7 @@ public class EndScreenView extends SimpleMenuView {
 		this.winnerName = "Not yet defined";
 		this.add(new SimpleMenuItem("gotoMain", "Ok", 640));
 		
-		this.setBackground(Constants.IMAGES + "menus/menu_endscreen.png");
+		this.setBackground(Constants.MENU_IMAGES + "menu_endscreen.png");
 	}
 	
 	public void setWinner(String winnerName) {

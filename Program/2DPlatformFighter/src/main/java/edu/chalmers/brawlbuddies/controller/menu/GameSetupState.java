@@ -93,17 +93,10 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 			String map = view.get("map").getValue();
 			int lives = Integer.parseInt(view.get("mode_lives").getValue());
 			int time = Integer.parseInt(view.get("mode_time").getValue());
-			
-			Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(p1_control, false)),
-								 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(p2_control, isSecondControl(p1_control, p2_control)))};
-			String[] charNames = {p1_character, p2_character};
-			((Controller)game).startGame(players, charNames, map, lives, time);
+		
+			((GameLoadState)game.getState(Constants.GAMESTATE_LOADING_GAME)).setup(p1_character, p1_control, p2_character, p2_control, map, lives, time);	
+			game.enterState(Constants.GAMESTATE_LOADING_GAME);
 		}
-	}
-	
-	private boolean isSecondControl(int p1, int p2){
-		InputHandlerChooser handler = InputHandlerChooser.getInstance();
-		return handler.usesKeyboard(p1) && handler.usesKeyboard(p2);
 	}
 	
 	private boolean canStart(){

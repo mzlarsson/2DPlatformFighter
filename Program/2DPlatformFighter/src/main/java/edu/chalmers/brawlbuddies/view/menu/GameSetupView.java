@@ -62,7 +62,7 @@ public class GameSetupView extends SimpleMenuView{
 		this.add(new SimpleMenuItem("startGame", "Start game", new Position(x, 670+topOffset)));
 		this.setSelectedItem(this.getMenuItems().get(0));
 
-		this.setBackground(Constants.IMAGES + "menus/menu_gamesetup.png");
+		this.setBackground(Constants.MENU_IMAGES + "menu_gamesetup.png");
 	}
 	
 	private MultiChoiceMenuItem getChoiceLiveMode(){

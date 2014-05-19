@@ -36,7 +36,7 @@ public class OptionsMenuView extends SimpleMenuView {
 		
 		this.add(new SimpleMenuItem("gotoMain", "Back", 640));
 
-		this.setBackground(Constants.IMAGES + "menus/menu_options.png");
+		this.setBackground(Constants.MENU_IMAGES + "menu_options.png");
 	}
 	
 	@Override

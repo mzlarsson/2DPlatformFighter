@@ -11,6 +11,6 @@ public class MainMenuView extends SimpleMenuView{
 			this.add(new SimpleMenuItem(itemNames[i], names[i], 250+115*i));
 		}
 		
-		this.setBackground(Constants.IMAGES + "menus/menu_main.png");
+		this.setBackground(Constants.MENU_IMAGES + "menu_main.png");
 	}
 }
