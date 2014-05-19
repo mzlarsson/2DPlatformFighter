@@ -21,7 +21,7 @@ public class OptionMenuState extends BasicGameState implements MenuListener{
 	private StateBasedGame game;
 	
 	public OptionMenuState() {
-		view = new OptionsMenuView();
+		view = new OptionsMenuView(Settings.getInstance().getSettings());
 		handler = new MenuHandler(view);
 		handler.addMenuListener(this);
 	}

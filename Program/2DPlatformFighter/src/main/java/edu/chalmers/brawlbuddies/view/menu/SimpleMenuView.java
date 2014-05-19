@@ -5,40 +5,57 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import edu.chalmers.brawlbuddies.Constants;
+//import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.view.SideScroller;
 
 public class SimpleMenuView implements MenuView{
 	
 	private List<MenuItem> items;
 	private int selectedIndex = 0;
-	private ParticleHandler particles;
+//	private ParticleHandler particles;
+	private Image background;
 
 	public SimpleMenuView() {
 		items = new ArrayList<MenuItem>();
 	}
 	
-	private void initParticles(int x, int y){
-		try {
-			particles = new ParticleHandler(Constants.IMAGES + "menus/particle.png");
-			particles.addEmitter(Constants.DATA + "menus/background.xml", x, y);
-		} catch (SlickException e) {
-			System.out.println("Failed while reading particles");
-		}
-	}
+//	private void initParticles(int x, int y){
+//		try {
+//			particles = new ParticleHandler(Constants.IMAGES + "menus/particle.png");
+//			particles.addEmitter(Constants.DATA + "menus/background.xml", x, y);
+//		} catch (SlickException e) {
+//			System.out.println("Failed while reading particles");
+//		}
+//	}
 	
 	public void update(int delta){
-		if(particles != null){
-			particles.update(delta);
+//		if(particles != null){
+//			particles.update(delta);
+//		}
+	}
+	
+	public void setBackground(String path){
+		try {
+			this.background = new Image(path);
+		} catch (SlickException e) {
+			System.out.println("Could not load background image: "+path);
+		} catch(RuntimeException exc){
+			System.out.println("Could really not load background image: "+path);
 		}
 	}
 
-	public void render(GameContainer gc, Graphics g){
-		if(particles == null){
-			initParticles(gc.getWidth()/2, gc.getHeight()/2);
+	public void render(GameContainer gc, Graphics g){		
+		if(background != null){
+			g.drawImage(background, 0, 0, gc.getWidth(), gc.getHeight(), 0, 0, background.getWidth(), background.getHeight());
 		}
-		particles.render();
+		
+//		if(particles == null){
+//			initParticles(gc.getWidth()/2, gc.getHeight()/2);
+//		}
+//		particles.render();
 		for(MenuItem item : this.items){
 			item.render(gc, g);
 		}
@@ -83,7 +100,6 @@ public class SimpleMenuView implements MenuView{
 	}
 	
 	public void updateContents(){
-		this.particles = null;
 		setSelection(0);
 		for(MenuItem item : this.items){
 			item.recalculate();
@@ -104,5 +120,9 @@ public class SimpleMenuView implements MenuView{
 			this.selectedIndex = selectedIndex;
 			this.items.get(this.selectedIndex).setActive(true);
 		}
+	}
+
+	public SideScroller getScroller() {
+		return null;
 	}
 }

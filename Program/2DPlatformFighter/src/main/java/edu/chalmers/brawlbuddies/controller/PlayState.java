@@ -87,6 +87,7 @@ public class PlayState extends BasicGameState implements GameListener{
 				//FIXME do other implementation.
 				if(handler instanceof KeyInputHandler && ((KeyInputHandler)handler).getInput() == null){
 					((KeyInputHandler)handler).setInput(gc.getInput());
+					((KeyInputHandler)handler).setScroller(view.getScroller());
 				}
 				
 				game.move(characterID, handler.getDirection());

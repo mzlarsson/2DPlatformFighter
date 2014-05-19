@@ -7,9 +7,10 @@ import org.newdawn.slick.state.BasicGameState;
 
 import edu.chalmers.brawlbuddies.controller.menu.CreditsMenuState;
 import edu.chalmers.brawlbuddies.controller.menu.EndScreenState;
+import edu.chalmers.brawlbuddies.controller.menu.GameSetupState;
 import edu.chalmers.brawlbuddies.controller.menu.MainMenuState;
 import edu.chalmers.brawlbuddies.controller.menu.OptionMenuState;
-import edu.chalmers.brawlbuddies.controller.menu.GameSetupState;
+import edu.chalmers.brawlbuddies.controller.menu.GameLoadState;
 
 /**
  * Factory for creating the states of the game Brawl Buddies
@@ -32,6 +33,7 @@ public class StateFactory {
 		states.add(new CreditsMenuState());
 		states.add(new EndScreenState());
 		states.add(new GameSetupState());
+		states.add(new GameLoadState());
 		return states;
 	}
 }

@@ -1,15 +1,19 @@
 package edu.chalmers.brawlbuddies.controller.menu;
 
+import java.util.Map;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Constants;
+import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
+import edu.chalmers.brawlbuddies.model.world.CharacterFactory;
+import edu.chalmers.brawlbuddies.model.world.GameMapFactory;
 import edu.chalmers.brawlbuddies.view.menu.GameSetupView;
 import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
@@ -24,10 +28,18 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	/**
 	 * Creates a new Menu state
 	 */
-	public GameSetupState() {
+	public GameSetupState() {		
 		view = new GameSetupView();
 		handler = new MenuHandler(view);
 		handler.addMenuListener(this);
+	}
+	
+	public void setupData(){
+		Map<String, String> characters = CharacterFactory.getAvailableCharacters();
+		InputHandlerChooser.getInstance().updateHandlers();
+		Map<String, String> controllers = InputHandlerChooser.getInstance().getControllerNames();
+		Map<String, String> maps = GameMapFactory.getAvailableMaps();
+		((GameSetupView)view).setData(characters, controllers, maps);
 	}
 
 	/**
@@ -81,17 +93,10 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 			String map = view.get("map").getValue();
 			int lives = Integer.parseInt(view.get("mode_lives").getValue());
 			int time = Integer.parseInt(view.get("mode_time").getValue());
-			
-			Player[] players = { new Player("Player1", InputHandlerChooser.getInstance().getInputHandler(p1_control, false)),
-								 new Player("Player2", InputHandlerChooser.getInstance().getInputHandler(p2_control, isSecondControl(p1_control, p2_control)))};
-			String[] charNames = {p1_character, p2_character};
-			((Controller)game).startGame(players, charNames, map, lives, time);
+		
+			((GameLoadState)game.getState(Constants.GAMESTATE_LOADING_GAME)).setup(p1_character, p1_control, p2_character, p2_control, map, lives, time);	
+			game.enterState(Constants.GAMESTATE_LOADING_GAME);
 		}
-	}
-	
-	private boolean isSecondControl(int p1, int p2){
-		InputHandlerChooser handler = InputHandlerChooser.getInstance();
-		return handler.usesKeyboard(p1) && handler.usesKeyboard(p2);
 	}
 	
 	private boolean canStart(){
@@ -132,6 +137,7 @@ public class GameSetupState extends BasicGameState implements MenuListener{
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
+		setupData();
 		view.updateContents();
 	}
 	

@@ -23,5 +23,7 @@ public class Constants {
 	public static final int GAMESTATE_GAME_SETUP = 5;
 	/** ID of the state of the intro  */
 	public static final int GAMESTATE_INTRO = 6;
+	/** ID of the state of the loading screen  */
+	public static final int GAMESTATE_LOADING_GAME = 7;
 	
 }

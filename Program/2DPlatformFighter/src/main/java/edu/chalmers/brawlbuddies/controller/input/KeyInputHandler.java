@@ -9,6 +9,7 @@ import org.newdawn.slick.KeyListener;
 
 import edu.chalmers.brawlbuddies.model.Direction;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.view.SideScroller;
 
 /**
  * Class for handling input control settings from keyboard and mouse.
@@ -31,6 +32,8 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	private Position mousePos = new Position(0, 0);
 	private float mouseAngle = 0.0f;
 	private boolean useMouse = true;
+	
+	private SideScroller scroller;
 	
 	/**
 	 * Creates a new KeyInputHandler which uses the mouse to aim
@@ -137,6 +140,14 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	}
 	
 	/**
+	 * Sets the scroller used on the screen
+	 * @param scroller The scroller used
+	 */
+	public void setScroller(SideScroller scroller){
+		this.scroller = scroller;
+	}
+	
+	/**
 	 * Set if this handler should consider the mouse as aiming device
 	 * @param useMouse <code>true</code> if the mouse should be used for aiming, <code>false</code> otherwise
 	 */
@@ -234,7 +245,13 @@ public class KeyInputHandler implements InputHandler, KeyListener{
 	 */
 	public Position getMousePosition() {
 		if(!this.isMousePositionRelative()){
-			return new Position(this.input.getMouseX(), this.input.getMouseY());
+			if(scroller == null){
+				return new Position(this.input.getMouseX(), this.input.getMouseY());
+			}else{
+				int x = (int)(-scroller.getX()+this.input.getMouseX()/scroller.getScale());
+				int y = (int)(-scroller.getY()+this.input.getMouseY()/scroller.getScale());
+				return new Position(x, y);
+			}
 		}else{
 			return this.mousePos;
 		}

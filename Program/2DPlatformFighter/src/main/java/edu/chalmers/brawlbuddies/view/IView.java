@@ -10,5 +10,11 @@ public interface IView {
 	 * @param g the associated slick Graphics object
 	 */
 	public void render(GameContainer gc, Graphics g);
+	
+	/**
+	 * Returns the scroller used for this view
+	 * @return The scroller used for this view
+	 */
+	public SideScroller getScroller();
 
 }
