@@ -32,8 +32,7 @@ public class ProjectileFactory {
 	 */
 	public static IProjectileCreator create(String projName) {
 		
-		Document xmlDoc = XMLReader.getDocument(Constants.PROJECTILES_DATA + projName.toLowerCase() + ".xml");
-
+		Document xmlDoc = XMLReader.getDocument(Constants.PROJECTILES_DATA + projName + ".xml");
 		Element rootNode = xmlDoc.getDocumentElement();
 		
 		// Getting the type ID

@@ -33,9 +33,9 @@ public class SkillFactory {
 	 */
 	public static ISkill create(String skillName, int ownerID) {
 		
-		Document xmlDoc = XMLReader.getDocument(Constants.SKILLS + skillName.toLowerCase() + ".xml");
-
+		Document xmlDoc = XMLReader.getDocument(Constants.SKILLS + skillName + ".xml");
 		Element rootNode = xmlDoc.getDocumentElement();
+		
 		// Creating the Skill with it's cooldown
 		Skill skill = new Skill(Integer.parseInt(rootNode.getAttribute("cooldown")),
 				IDFactory.getInstance().getID(), Integer.parseInt(rootNode.getAttribute("id")),

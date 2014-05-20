@@ -1,11 +1,12 @@
 package edu.chalmers.brawlbuddies.util;
 
 import java.awt.FontFormatException;
-import java.io.File;
 import java.io.IOException;
 
 import org.newdawn.slick.Font;
 import org.newdawn.slick.TrueTypeFont;
+
+import edu.chalmers.brawlbuddies.Constants;
 
 public class FontCreator {
 
@@ -26,7 +27,7 @@ public class FontCreator {
 	public static Font getFont(int sizeIndex){
 		if(bigFont == null){
 			try {
-				java.awt.Font f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File("res/fonts/SF Slapstick Comic.ttf"));
+				java.awt.Font f = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, ClassLoader.getSystemResourceAsStream(Constants.FONTS + "SF Slapstick Comic.ttf"));
 				smallFont = new TrueTypeFont(f.deriveFont(14.0f).deriveFont(java.awt.Font.PLAIN), true);
 				mediumFont = new TrueTypeFont(f.deriveFont(18.0f).deriveFont(java.awt.Font.PLAIN), true);
 				bigFont = new TrueTypeFont(f.deriveFont(24.0f).deriveFont(java.awt.Font.PLAIN), true);
@@ -36,7 +37,7 @@ public class FontCreator {
 			} catch (FontFormatException e) {
 				System.out.println("Invalid font given");
 			} catch (IOException e) {
-				System.out.println("Could not read font");
+				System.out.println("Could not read font: "+(Constants.FONTS + "SF Slapstick Comic.ttf"));
 			}
 		}
 		

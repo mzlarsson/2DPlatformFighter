@@ -1,8 +1,7 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.SlickException;
@@ -14,6 +13,7 @@ import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
 import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.model.Position;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.XMLReader;
 
 /**
@@ -32,13 +32,12 @@ public class GameMapFactory {
 		
 		TiledMap map = null;
 		try {
-			map = new TiledMap(Constants.TILEMAPS + mapName.toLowerCase() + ".tmx");
+			map = new TiledMap(Constants.TILEMAPS + mapName + ".tmx");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 		
-		Document xmlDoc = XMLReader.getDocument(Constants.TILEMAPS + mapName.toLowerCase() + ".tmx");
-
+		Document xmlDoc = XMLReader.getDocument(Constants.TILEMAPS + mapName + ".tmx");
 		Element rootNode = xmlDoc.getDocumentElement();
 		
 		String[] spawnString = rootNode.getElementsByTagName("spawns").item(0).getFirstChild().getNodeValue().split(",");
@@ -52,15 +51,10 @@ public class GameMapFactory {
 	}
 	
 	public static Map<String, String> getAvailableMaps(){
-		File folder = new File(Constants.TILEMAPS);
-		File[] files = folder.listFiles(new FileFilter(){
-			public boolean accept(File file) {
-				return file.isFile();
-			}
-		});
+		List<String> fileNames = ResourceLoader.listFileNames(Constants.TILEMAPS);
 		Map<String, String> mapNames = new LinkedHashMap<String, String>();
-		for(int i = 0; i<files.length; i++){
-			String path = files[i].getAbsolutePath();
+		for(int i = 0; i<fileNames.size(); i++){
+			String path = fileNames.get(i);
 			int startIndex = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"))+1;
 			String name = path.substring(startIndex).substring(0, path.lastIndexOf(".")-startIndex);
 			mapNames.put(name, name);

@@ -29,7 +29,7 @@ public class Controller extends StateBasedGame {
 	public Controller() {
 		super("BrawlBuddies v1.0");
 		SoundPlayer player = SoundPlayer.getInstance();
-		player.setMusic("res/sound/music/menu.ogg");
+		player.setMusic(edu.chalmers.brawlbuddies.Constants.MUSIC + "menu.ogg");
 	}
 
 	/**

@@ -12,7 +12,7 @@ public class XMLWriter {
 			bw.write(xml);
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error while printing the file: "+path);
+			System.out.println("Error while printing the file: "+path+"\n"+e.getMessage());
 		}
 	}
 }

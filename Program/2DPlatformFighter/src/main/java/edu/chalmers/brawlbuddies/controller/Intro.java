@@ -7,6 +7,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
+
 public class Intro extends BasicGameState {
 	
 	private Image bg;
@@ -19,18 +21,14 @@ public class Intro extends BasicGameState {
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		//Load images
-		String path = "res/imgs/intro/";
-		try {
-			bg = new Image(path+"background.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-			members = new Image[4];
-			members[0] = new Image(path+"nano.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-			members[1] = new Image(path+"volt.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-			members[2] = new Image(path+"boarman.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-			members[3] = new Image(path+"nika.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-			logo = new Image(path+"logo.png").getScaledCopy(gc.getWidth(), gc.getHeight());
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+		String path = edu.chalmers.brawlbuddies.Constants.IMAGES + "intro/";
+		bg = ResourceLoader.getImage(path+"background.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		members = new Image[4];
+		members[0] = ResourceLoader.getImage(path+"nano.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		members[1] = ResourceLoader.getImage(path+"volt.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		members[2] = ResourceLoader.getImage(path+"boarman.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		members[3] = ResourceLoader.getImage(path+"nika.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		logo = ResourceLoader.getImage(path+"logo.png").getScaledCopy(gc.getWidth(), gc.getHeight());
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {

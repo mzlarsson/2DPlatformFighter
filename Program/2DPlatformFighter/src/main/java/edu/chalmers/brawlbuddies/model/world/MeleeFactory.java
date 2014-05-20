@@ -19,8 +19,7 @@ import edu.chalmers.brawlbuddies.util.XMLReader;
 public class MeleeFactory {
 	public static MeleeCreator create(String projName){
 		
-		Document xmlDoc = XMLReader.getDocument(Constants.MELEES_DATA + projName.toLowerCase() + ".xml");
-	
+		Document xmlDoc = XMLReader.getDocument(Constants.MELEES_DATA + projName + ".xml");
 		Element rootNode = xmlDoc.getDocumentElement();
 		
 		// Getting the type ID

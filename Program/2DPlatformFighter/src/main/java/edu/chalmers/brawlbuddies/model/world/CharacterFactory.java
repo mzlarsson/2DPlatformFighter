@@ -1,8 +1,7 @@
 package edu.chalmers.brawlbuddies.model.world;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -15,6 +14,7 @@ import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.ISkill;
 import edu.chalmers.brawlbuddies.model.skills.SkillFactory;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.ShapeFactory;
 import edu.chalmers.brawlbuddies.util.XMLReader;
 
@@ -57,9 +57,9 @@ public class CharacterFactory {
 	 */
 	public static ICharacter create(String charName, float x, float y) {
 		
-		Document xmlDoc = XMLReader.getDocument(Constants.CHARACTER_DATA + charName.toLowerCase() + ".xml");
-
+		Document xmlDoc = XMLReader.getDocument(Constants.CHARACTER_DATA + charName + ".xml");
 		Element rootNode = xmlDoc.getDocumentElement();
+		
 		// Setting the projectile fire offset
 		String[] projParams = rootNode.getElementsByTagName("projOffset").item(0).getFirstChild().getNodeValue().split(",");
 		Position projOffset = new Position(Float.parseFloat(projParams[0]),Float.parseFloat(projParams[1]));
@@ -97,22 +97,17 @@ public class CharacterFactory {
 	 * @return Map<String, String> - a map of available characters
 	 */
 	public static Map<String, String> getAvailableCharacters(){
-		File folder = new File(Constants.CHARACTER_DATA);
-		File[] files = folder.listFiles(new FileFilter(){
-			public boolean accept(File file) {
-				return file.isFile();
-			}
-		});
+		List<String> fileNames = ResourceLoader.listFileNames(Constants.CHARACTER_DATA);
 		Map<String, String> charNames = new LinkedHashMap<String, String>();
-		for(int i = 0; i<files.length; i++){
-			Document xmlDoc = XMLReader.getDocument(files[i].getAbsolutePath());
+		for(int i = 0; i<fileNames.size(); i++){
+			Document xmlDoc = XMLReader.getDocument(fileNames.get(i));
 			Element rootNode = xmlDoc.getDocumentElement();
-			String charName = rootNode.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
+			String characterName = rootNode.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
 
-			String path = files[i].getAbsolutePath();
+			String path = fileNames.get(i);
 			int startIndex = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"))+1;
 			String filename = path.substring(startIndex).substring(0, path.lastIndexOf(".")-startIndex);
-			charNames.put(filename, charName);
+			charNames.put(filename, characterName);
 		}
 		return charNames;
 	}

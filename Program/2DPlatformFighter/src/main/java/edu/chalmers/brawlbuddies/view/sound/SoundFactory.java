@@ -3,13 +3,12 @@ package edu.chalmers.brawlbuddies.view.sound;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.XMLReader;
 
 public class SoundFactory {
@@ -80,11 +79,9 @@ public class SoundFactory {
 				//Looping or not
 				looping = Boolean.parseBoolean(soundNode.getAttribute("looping"));
 				
-				try {
-					sound = new SoundKeeper(new Sound(filePath), stoppers, looping);
+				sound = new SoundKeeper(ResourceLoader.getSound(filePath), stoppers, looping);
+				if(sound != null && sound.isPlayable()){
 					sounds.put(key, sound);
-				} catch (SlickException e) {
-					System.out.println("Did not find sound file: "+filePath);
 				}
 			}
 		}
