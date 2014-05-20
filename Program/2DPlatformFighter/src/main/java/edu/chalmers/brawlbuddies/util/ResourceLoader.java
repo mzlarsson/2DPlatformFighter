@@ -14,6 +14,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+import edu.chalmers.brawlbuddies.Constants;
+
 public class ResourceLoader {
 
 	public static Image getImage(String path){
@@ -30,13 +32,13 @@ public class ResourceLoader {
 		try{
 			return new Sound(path);
 		}catch(SlickException ioe){
-			System.out.println("Could not read image: "+path);
+			System.out.println("Could not read sound: "+path);
 			return null;
 		}
 	}
 	
 	public static List<String> listFileNames(String dirPath){
-		if(ResourceLoader.class.getResource("ResourceLoader.class").toString().startsWith("jar:")){
+		if(insideJar()){
 			CodeSource src = ResourceLoader.class.getProtectionDomain().getCodeSource();
 			if (src != null) {
 				List<String> fileNames = new ArrayList<String>();
@@ -73,17 +75,20 @@ public class ResourceLoader {
 				return null;
 			}
 		}else{
-			String prefix = "res/";
-			File mainPath = new File(prefix+dirPath);
+			File mainPath = new File(Constants.ECLIPSE_RESOURCE_PREFIX+dirPath);
 			File[] files = mainPath.listFiles();
 			List<String> fileNames = new ArrayList<String>();
 			for(int i = 0; i<files.length; i++){
 				if(files[i].isFile()){
-					fileNames.add(files[i].getPath().substring(prefix.length()));
+					fileNames.add(files[i].getPath().substring(Constants.ECLIPSE_RESOURCE_PREFIX.length()));
 				}
 			}
 			return fileNames;
 		}
+	}
+	
+	public static boolean insideJar(){
+		return ResourceLoader.class.getResource("ResourceLoader.class").toString().startsWith("jar:");
 	}
 
 }

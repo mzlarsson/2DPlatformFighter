@@ -1,6 +1,5 @@
 package edu.chalmers.brawlbuddies.util;
 
-import java.io.File;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -33,6 +32,27 @@ public class XMLReader {
 	 * @return A Document made from the xml file.
 	 */
 	public static Document getDocument(String docString, String schemaPath) {
+		return getDocument(docString, schemaPath, true);
+	}
+	
+	/**
+	 * Finds and returns the xml file on the path provided.
+	 * @param docString The path to the file.
+	 * @param insideProject If the file exists within the classpath
+	 * @return A Document made from the xml file.
+	 */
+	public static Document getDocument(String docString, boolean insideProject) {
+		return getDocument(docString, null, insideProject);
+	}
+
+	/**
+	 * Finds and returns the xml file on the path provided.
+	 * @param docString The path to the file.
+	 * @param schemaPath Path to the schema to use. Null to use default set up.
+	 * @param insideProject If the file exists within the classpath
+	 * @return A Document made from the xml file.
+	 */
+	public static Document getDocument(String docString, String schemaPath, boolean insideProject){
 		try {
 			// API used to convert XML into a DOM object tree
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -48,14 +68,24 @@ public class XMLReader {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			
 			// Takes the document
-			InputStream fileStream = ClassLoader.getSystemResourceAsStream(docString);
-			return builder.parse(new InputSource(fileStream));
+			if(insideProject){
+				InputStream fileStream = ClassLoader.getSystemResourceAsStream(docString);
+				return builder.parse(new InputSource(fileStream));
+			}else{
+				return builder.parse(new InputSource(docString));
+			}
 		} catch (Exception ex) {
 			System.out.println("Could not read XML: "+ex.getMessage());
 		}
 		return null;
 	}
 	
+	/**
+	 * Sets the schema of the given factory
+	 * @param factory The factory to affect
+	 * @param schemaPath The path to the schema file
+	 * @throws SAXException If anything goes wrong
+	 */
 	private static void setSchema(DocumentBuilderFactory factory, String schemaPath) throws SAXException{
 		factory.setNamespaceAware(true);
 		factory.setValidating(true);

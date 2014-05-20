@@ -9,6 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.XMLReader;
 import edu.chalmers.brawlbuddies.util.XMLWriter;
 
@@ -57,13 +58,13 @@ public class Settings {
 		}
 		builder.append("</settings>");
 		
-		XMLWriter.write(Constants.SETTINGS, builder.toString());
+		XMLWriter.write(getFilePath(), builder.toString());
 	}
 	
 	public void load(){
 		this.values.clear();
-		if(new File(Constants.SETTINGS).exists()){
-			Document doc = XMLReader.getDocument(Constants.SETTINGS);
+		if(new File(getFilePath()).exists()){
+			Document doc = XMLReader.getDocument(getFilePath(), false);
 			NodeList list = doc.getElementsByTagName("setting");
 			for(int i = 0; i<list.getLength(); i++){
 				Element el = (Element)list.item(i);
@@ -72,6 +73,10 @@ public class Settings {
 				this.setSetting(name, value);
 			}
 		}
+	}
+	
+	private String getFilePath(){
+		return (ResourceLoader.insideJar()?"":Constants.ECLIPSE_RESOURCE_PREFIX) + Constants.SETTINGS;
 	}
 
 }

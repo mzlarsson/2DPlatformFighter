@@ -1,7 +1,6 @@
 package edu.chalmers.brawlbuddies.util;
 
 import java.awt.FontFormatException;
-import java.io.File;
 import java.io.IOException;
 
 import org.newdawn.slick.Font;
