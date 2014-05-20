@@ -96,5 +96,13 @@ public class SoundKeeper {
 	public void setVolume(float volume){
 		this.volume = volume;
 	}
+	
+	/**
+	 * Checks whether this sound is playable
+	 * @return <code>true</code> if the sound is playable, <code>false</code> otherwise
+	 */
+	public boolean isPlayable(){
+		return this.sound != null;
+	}
 
 }

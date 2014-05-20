@@ -11,6 +11,7 @@ import edu.chalmers.brawlbuddies.controller.Constants;
 import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 
 public class GameLoadState extends BasicGameState{
 	
@@ -21,11 +22,7 @@ public class GameLoadState extends BasicGameState{
 	private Image loadingScreen;
 	
 	public GameLoadState() {
-		try {
-			this.loadingScreen = new Image(edu.chalmers.brawlbuddies.Constants.MENU_IMAGES + "loading_screen.png");
-		} catch (SlickException e) {
-			System.out.println("Could not load loading screen");
-		}
+		this.loadingScreen = ResourceLoader.getImage(edu.chalmers.brawlbuddies.Constants.MENU_IMAGES + "loading_screen.png");
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {

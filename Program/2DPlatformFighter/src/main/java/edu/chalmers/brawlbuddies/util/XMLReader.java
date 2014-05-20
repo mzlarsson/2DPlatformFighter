@@ -1,6 +1,7 @@
 package edu.chalmers.brawlbuddies.util;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,10 +46,12 @@ public class XMLReader {
 			}
 			// Provides access to the documents data
 			DocumentBuilder builder = factory.newDocumentBuilder();
+			
 			// Takes the document
-			return builder.parse(new InputSource(docString));
+			InputStream fileStream = ClassLoader.getSystemResourceAsStream(docString);
+			return builder.parse(new InputSource(fileStream));
 		} catch (Exception ex) {
-			//System.out.println(ex.getMessage());
+			System.out.println("Could not read XML: "+ex.getMessage());
 		}
 		return null;
 	}
@@ -56,6 +59,6 @@ public class XMLReader {
 	private static void setSchema(DocumentBuilderFactory factory, String schemaPath) throws SAXException{
 		factory.setNamespaceAware(true);
 		factory.setValidating(true);
-	    factory.setSchema(SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema").newSchema(new File(schemaPath)));
+	    factory.setSchema(SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema").newSchema(ClassLoader.getSystemResource(schemaPath)));
 	}
 }

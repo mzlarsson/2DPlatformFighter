@@ -37,12 +37,12 @@ public class Main {
 	 * 				NOTE: This variable is not used.
 	 */
 	public static void main(String[] args){
-		try {
-			setLibraryPath("target/natives");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(System.getProperty("java.library.path"));
+//		try {
+//			setLibraryPath("target/natives");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println(System.getProperty("java.library.path"));
 		Controller controller = new Controller();
 		try {
 			AppGameContainer appgc;

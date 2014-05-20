@@ -6,8 +6,9 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
+
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 //import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.view.SideScroller;
 
@@ -26,11 +27,9 @@ public class SimpleMenuView implements MenuView{
 	
 	public void setBackground(String path){
 		try {
-			this.background = new Image(path);
-		} catch (SlickException e) {
-			System.out.println("Could not load background image: "+path);
+			this.background = ResourceLoader.getImage(path);
 		} catch(RuntimeException exc){
-			System.out.println("Could really not load background image: "+path);
+			System.out.println("Could not load background image: "+path);
 		}
 	}
 
