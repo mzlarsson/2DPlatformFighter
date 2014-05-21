@@ -25,7 +25,63 @@
 		bombRight="8,7,15,7,100,false,false"
 		icon="8,3,8,3,100,false,false">
 	</resource>
-	
+	<resource id="12" name="bob_red" size="140,100"
+		idleLeft="0,0,7,0,100,true,true"
+		idleRight="8,0,15,0,100,true,true"
+		moveGroundLeftLeft="0,1,7,1,100,true,false"
+		moveGroundRightRight="8,1,15,1,100,true,false"
+		moveGroundRightLeft="0,2,7,2,100,true,false"
+		moveGroundLeftRight="8,2,15,2,100,true,false"
+		moveAirLeft="0,3,7,3,100,true,false"
+		moveAirRight="8,3,15,3,100,true,false"
+		poisonLeft="0,4,7,4,50,false,false"
+		poisonRight="8,4,15,4,50,false,false"
+		lickLeft="0,5,7,5,50,false,false"
+		lickRight="8,5,15,5,50,false,false"
+		lightningLeft="0,6,7,6,31,false,false"
+		lightningRight="8,6,15,6,31,false,false"
+		bombLeft="0,7,7,7,100,false,false"
+		bombRight="8,7,15,7,100,false,false"
+		icon="8,3,8,3,100,false,false">
+	</resource>
+	<resource id="13" name="bob_poison" size="140,100"
+		idleLeft="0,0,7,0,100,true,true"
+		idleRight="8,0,15,0,100,true,true"
+		moveGroundLeftLeft="0,1,7,1,100,true,false"
+		moveGroundRightRight="8,1,15,1,100,true,false"
+		moveGroundRightLeft="0,2,7,2,100,true,false"
+		moveGroundLeftRight="8,2,15,2,100,true,false"
+		moveAirLeft="0,3,7,3,100,true,false"
+		moveAirRight="8,3,15,3,100,true,false"
+		poisonLeft="0,4,7,4,50,false,false"
+		poisonRight="8,4,15,4,50,false,false"
+		lickLeft="0,5,7,5,50,false,false"
+		lickRight="8,5,15,5,50,false,false"
+		lightningLeft="0,6,7,6,31,false,false"
+		lightningRight="8,6,15,6,31,false,false"
+		bombLeft="0,7,7,7,100,false,false"
+		bombRight="8,7,15,7,100,false,false"
+		icon="8,3,8,3,100,false,false">
+	</resource>
+	<resource id="10" name="bob_blue" size="140,100"
+		idleLeft="0,0,7,0,100,true,true"
+		idleRight="8,0,15,0,100,true,true"
+		moveGroundLeftLeft="0,1,7,1,100,true,false"
+		moveGroundRightRight="8,1,15,1,100,true,false"
+		moveGroundRightLeft="0,2,7,2,100,true,false"
+		moveGroundLeftRight="8,2,15,2,100,true,false"
+		moveAirLeft="0,3,7,3,100,true,false"
+		moveAirRight="8,3,15,3,100,true,false"
+		poisonLeft="0,4,7,4,50,false,false"
+		poisonRight="8,4,15,4,50,false,false"
+		lickLeft="0,5,7,5,50,false,false"
+		lickRight="8,5,15,5,50,false,false"
+		lightningLeft="0,6,7,6,31,false,false"
+		lightningRight="8,6,15,6,31,false,false"
+		bombLeft="0,7,7,7,100,false,false"
+		bombRight="8,7,15,7,100,false,false"
+		icon="8,3,8,3,100,false,false">
+	</resource>
 	
 	<!-- Skills	2### -->
 	<resource id="20" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<character id="14">
+
+	<name>Bob the Blue Blob</name>
+	<bio>Bob was bouncing down the road one day and was suddenly cast into another dimension filled with like-minded buddies who liked to fight. Bob was happy.</bio>
+	<hitbox shape="rectangle" parameters="50,50"></hitbox>
+	<projOffset>0,0</projOffset>
+	<health>500</health>
+	<movespeed>500</movespeed>
+	<jumpingpower>750</jumpingpower>
+	<maxjumps>2</maxjumps>
+	<skills>
+		<skill>bob_basic_ball</skill>
+		<skill>bob_lick</skill>
+		<skill>bob_dash</skill>
+		<skill>bob_bomb</skill>
+	</skills>
+
+</character>
