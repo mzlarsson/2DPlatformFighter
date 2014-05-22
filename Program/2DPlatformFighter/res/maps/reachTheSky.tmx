@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="200" height="150" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="name" value="Reach The Sky"/>
+  <property name="spawns" value="160,1600,3040,1440,2160,880,640,600"/>
+ </properties>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16">
   <image source="textures/tileset.png" width="320" height="320"/>
  </tileset>
@@ -23,5 +27,4 @@
    H4sIAAAAAAAAC+3dTW/TMAAG4BYObOPMOLCNMyDBNs6AxOedC19n4P//A1yhSFFnt0nqJo7zPNJ7iZgIKG/tLK6zWgEAAAAAAAAAAAAAwLKdhJwOzNkE5wtjug65GZjbCc6X+Xi5Xq1ehVyH3ITchrxe9z8ONXofru0PIR9DPoV8Dvmy7n8cAAAAAAAAABiu79rCMdYTlnhOLFPftYVjrCcs8ZwAAAAAAAAAyLfHSI7j9i+hNLn2GMlx3P4lAADlOmTf3NJijTu5XYRcVpKrzP83cMi+0qXFd0AAAAAAWLIH69XqJOQ05Czk4br7MahR7Fq/DLkKeRryJORixzFdoWax67+9Zjq2jrp9LPbzMHexz/3m+m+vmY6to24fa7piHKEmsc/95vr/EfIz5FfIt5DvO441XTGOUINd40Zz/ffRdKU95zKWMFe7xo1DtOdczd+hJ8xF7nFjW3vO1Ywl5lzMxbHGjZhmLLGHAHMRu1ZzjBsxzVhiDwHmYoprNfa7LyhRrdfq5p9xr5X7054OFOVRyHkrj6c9HSiKfkCafkCafrBk2/ff2zmPZNefd/9OTZ6FPM+YF+OePiNo9oC0fyLc1exxZ384AAAAACCnfc83Pbtkyfo83/TsEgAAAACAKfgeBqT5HgYAAMfWZ/2ddXgszZD9RazDAwAAAAAAAOZiyJqBHEmtO2jOB0rQvLMq53tJDll30JwPlGBzPZb0Hjf9oCSl9sP6T0pQaj+8o5QS6Aekbdb0l7RGf7sf2+/wNd9iyWL9MJ7Af/ox3NBnWcbk+djXD/OttCHff/Ud2N2m/MyJ/d37umE8YUxDn5/n+MyJfd7pByUp/fe7XWK+xbHU0A/jCceiH5BWWz/Mt8ipxn4YT8hFPyCt9n6Yb3GIJfTDeMJQ+gFpS+uH+RZ9LLEfxhO60g9IW3o/zLfYRT+MJ6Tph36Qph/mW6Tph/GENP3QD9L0w3yLtO39bsd4h0GX8yk1JX2WcHyb63HsdxjsO5+pO6AflKpLP96EvE3kXYefN99irrr043fIn5C/e44ZT6hN6fMr/WBKc+uH+RZj6nr/EbvPSB03nlCLrvcfX1d37803x8a+/9APxtR1ftXcj7czdTfMtzi2Od5/GE8Yi35AWm392MR8i1xq7IfxhFz0A9Jq78cmx1grLcvI1NeuiIiIiIgsL/8A2Z88fcDUAQA=
   </data>
  </layer>
- <spawns>160,1600,3040,1440,2160,880,640,600</spawns>
 </map>

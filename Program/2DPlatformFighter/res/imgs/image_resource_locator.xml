@@ -23,7 +23,7 @@
 		lightningRight="8,6,15,6,31,false,false"
 		bombLeft="0,7,7,7,100,false,false"
 		bombRight="8,7,15,7,100,false,false"
-		icon="8,3,8,3,100,false,false">
+		icon="0,8,0,8,100,false,false">
 	</resource>
 	<resource id="12" name="bob_red" size="140,100"
 		idleLeft="0,0,7,0,100,true,true"
@@ -42,7 +42,7 @@
 		lightningRight="8,6,15,6,31,false,false"
 		bombLeft="0,7,7,7,100,false,false"
 		bombRight="8,7,15,7,100,false,false"
-		icon="8,3,8,3,100,false,false">
+		icon="0,8,0,8,100,false,false">
 	</resource>
 	<resource id="13" name="bob_poison" size="140,100"
 		idleLeft="0,0,7,0,100,true,true"
@@ -61,9 +61,9 @@
 		lightningRight="8,6,15,6,31,false,false"
 		bombLeft="0,7,7,7,100,false,false"
 		bombRight="8,7,15,7,100,false,false"
-		icon="8,3,8,3,100,false,false">
+		icon="0,8,0,8,100,false,false">
 	</resource>
-	<resource id="10" name="bob_blue" size="140,100"
+	<resource id="14" name="bob_blue" size="140,100"
 		idleLeft="0,0,7,0,100,true,true"
 		idleRight="8,0,15,0,100,true,true"
 		moveGroundLeftLeft="0,1,7,1,100,true,false"
@@ -80,14 +80,14 @@
 		lightningRight="8,6,15,6,31,false,false"
 		bombLeft="0,7,7,7,100,false,false"
 		bombRight="8,7,15,7,100,false,false"
-		icon="8,3,8,3,100,false,false">
+		icon="0,8,0,8,100,false,false">
 	</resource>
 	
 	<!-- Skills	2### -->
-	<resource id="20" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
-	<resource id="21" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
-	<resource id="22" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
-	<resource id="23" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
+	<resource id="20" name="bob_poison" size="40,40" idle="0,0,0,0,100,false,false"></resource>
+	<resource id="21" name="bob_lick" size="40,40" idle="0,0,0,0,100,false,false"></resource>
+	<resource id="22" name="bob_lightning" size="40,40" idle="0,0,0,0,100,false,false"></resource>
+	<resource id="23" name="bob_bomb" size="40,40" idle="0,0,0,0,100,false,false"></resource>
 	
 	
 	<!-- Projectile	3### -->

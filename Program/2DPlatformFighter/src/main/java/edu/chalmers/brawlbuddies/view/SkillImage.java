@@ -41,7 +41,7 @@ public class SkillImage implements IDrawable {
 	}
 	
 	public void render(GameContainer gc, Graphics g) {
-		animation.draw(position.getX(), position.getY());
+		animation.draw(position.getX(), position.getY(), 30, 30);
 		setCooldownScale(cooldownScale - delta);
 		setCooldownRectangle();
 		renderCooldown(g);
@@ -51,8 +51,9 @@ public class SkillImage implements IDrawable {
 		if (cooldownScale>0) {
 			g.setColor(color);
 			g.fill(cooldownRect);
-			g.setColor(Color.black);
+			g.setColor(Color.yellow);
 			g.drawString(cooldownScale/1000 + "." + (cooldownScale%1000)/100, position.getX(), position.getY()+5);
+			g.setColor(Color.black);
 		}
 	}
 

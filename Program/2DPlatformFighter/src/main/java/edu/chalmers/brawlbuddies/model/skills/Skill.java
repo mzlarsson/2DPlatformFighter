@@ -61,9 +61,9 @@ public class Skill implements ISkill{
 	 */
 	private void activate(ICharacter ch, int delta) {
 		if (!skillActive) {
+			resetCooldown();
 			skillActive = true;
 			currentCaster = ch;
-			resetCooldown();
 		}
 		boolean aborted = false;
 		for (int i=currentSkillpart; i<skillParts.size(); i++) {
@@ -116,8 +116,8 @@ public class Skill implements ISkill{
 	 * {@inheritDoc}
 	 */
 	public boolean update(int delta) {
+		cooldownLeft -= delta;
 		if (!skillActive) {
-			cooldownLeft -= delta;
 			if (isReady()){
 				cooldownLeft = 0;
 				return true;

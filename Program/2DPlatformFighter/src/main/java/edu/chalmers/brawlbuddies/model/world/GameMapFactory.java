@@ -8,6 +8,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.eventbus.EventBus;
@@ -36,11 +38,8 @@ public class GameMapFactory {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
-		Document xmlDoc = XMLReader.getDocument(Constants.TILEMAPS + mapName + ".tmx");
-		Element rootNode = xmlDoc.getDocumentElement();
-		
-		String[] spawnString = rootNode.getElementsByTagName("spawns").item(0).getFirstChild().getNodeValue().split(",");
+
+		String[] spawnString = map.getMapProperty("spawns", "100,50").split(",");
 		Position[] spawns = new Position[spawnString.length/2];
 		for (int i=0; i<spawns.length; i++) {
 			spawns[i] = new Position(Float.parseFloat(spawnString[i*2]),Float.parseFloat(spawnString[i*2+1]));
@@ -54,10 +53,21 @@ public class GameMapFactory {
 		List<String> fileNames = ResourceLoader.listFileNames(Constants.TILEMAPS);
 		Map<String, String> mapNames = new LinkedHashMap<String, String>();
 		for(int i = 0; i<fileNames.size(); i++){
+			Document xmlDoc = XMLReader.getDocument(fileNames.get(i));
+			Element rootNode = xmlDoc.getDocumentElement();
+			String mapName = "Name not found";
+			NodeList list = rootNode.getElementsByTagName("property");
+			for (int j=0; j<list.getLength(); j++) {
+				NamedNodeMap att = list.item(j).getAttributes();
+				if (att.getNamedItem("name")!=null && att.getNamedItem("name").getNodeValue().equals("name")) {
+					mapName = att.getNamedItem("value").getNodeValue();
+				}
+			}
+
 			String path = fileNames.get(i);
 			int startIndex = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"))+1;
 			String name = path.substring(startIndex).substring(0, path.lastIndexOf(".")-startIndex);
-			mapNames.put(name, name);
+			mapNames.put(name, mapName);
 		}
 		return mapNames;
 	}

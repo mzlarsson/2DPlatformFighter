@@ -122,7 +122,7 @@ public class HudImage implements IDrawable {
 		animation.draw(upperLeftCornerPosition.getX(),
 				upperLeftCornerPosition.getY());
 		icon.draw(upperLeftCornerPosition.getX() + 10,
-				upperLeftCornerPosition.getY() + 10);
+				upperLeftCornerPosition.getY() + 10, 90, 80);
 
 		for (Map.Entry<Integer, SkillImage> entry : skills.entrySet()) {
 			entry.getValue().render(gc, g);
@@ -180,6 +180,8 @@ public class HudImage implements IDrawable {
 	 * handles the lifes on the event of a character's death
 	 */
 	public void characterDied() {
+		animation.restart();
+		animation.start();
 		if (lifeLimit) {
 			lives = lives - 1;
 		} else {

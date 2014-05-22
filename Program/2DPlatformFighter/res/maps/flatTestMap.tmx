@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="24" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="name" value="Simple Map"/>
+  <property name="spawns" value="100,100,900,100"/>
+ </properties>
  <tileset firstgid="1" name="testMapSet" tilewidth="32" tileheight="32">
   <image source="textures/testMapSet.png" width="64" height="32"/>
   <tile id="1">
@@ -25,5 +29,4 @@
   <object x="29" y="638" width="962" height="132"/>
   <object x="165" y="390" width="167" height="30"/>
  </objectgroup>
- <spawns>100,100,900,100</spawns>
 </map>
