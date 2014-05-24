@@ -1,0 +1,64 @@
+﻿Meeting Agenda 2014-05-16
+Meeting begins at: 15:30
+Participants: 
+
+1. Reports from previous meeting:
+        
+2. Objectives
+        2.1 Workout what needs to be done until the project lockdown day 
+
+3. Discussion items:
+        3.1 How do we do:
+
+        3.2 What to do:
+        	Work to the lockdown day.
+        3.3 Why is:
+
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+5.2 Next meeting
+
+Meeting ends at:
+
+
+
+
+________________
+
+
+Meeting Agenda 2014-05-14
+Meeting begins at:15:
+Participants: Matz Larsson, Patrik Haar, Lisa Lipkin, David Gustafsson
+
+1. Reports from previous meeting:
+        RAD .2 .3 .4 and Appendix
+        
+2. Objectives:
+        2.1 Workout what needs to be done until the project lockdown day 
+see Discussion
+
+3. Discussion items:
+        3.1 How do we do:
+
+        3.2 What to do:
+        	Work to be done until lockdown day- see outcomes and assignments        
+        3.3 Why is:
+
+
+4. Outcomes and assignments:
+	Nano - Scrolling.
+	Nika - Improving HUD and improve structure by moving wrappers
+	Boarman - Continue work from previous meeting
+	Volt - game goals
+
+        RAD and Appendix is pushed further on the next week.
+ 
+5. Wrap up:
+        5.1 Unsolved issues: 
+                RAD .2 .3 .4 and Appendix
+        5.2 Next meeting:
+                2014-05-19
+Meeting ends at: 16:02
