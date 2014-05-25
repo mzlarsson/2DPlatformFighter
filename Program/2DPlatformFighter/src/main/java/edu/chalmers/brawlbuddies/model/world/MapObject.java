@@ -19,21 +19,32 @@ public class MapObject extends GameObject implements Impassible{
 	public MapObject(Shape shape) {
 		super(shape);
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Position update(int delta) {
 		return this.getCenterPosition();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getTypeID() {
 		return 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isDestroyed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void onCollision(IGameObject object, Alignment alignment) {
 		//Do nothing.
 	}

@@ -20,16 +20,15 @@ import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
 
 /**
- * The main game view that handels the view in game.
+ * The main game view that handles the view in game.
  * 
- * @author Lisa
- * 
+ * @author Lisa Lipkin
+ * @revised Patrik Haar
  */
 public class GameView implements IEventBusSubscriber, IView {
 	// goal and time realated variables
 	private boolean timeGoal;
 	private int timeLimit;
-	private int delta;
 	// tiled map and map lists of all objects in view
 	private TiledMap map;
 	private Map<Integer, Animation> objectAnims;
@@ -117,7 +116,6 @@ public class GameView implements IEventBusSubscriber, IView {
 	}
 	
 	public void update(int delta) {
-		this.delta = delta;
 		if(timeGoal) {
 			timeLimit = timeLimit - delta;
 		}

@@ -17,28 +17,25 @@ import edu.chalmers.brawlbuddies.model.world.Health;
  *
  */
 public class HealStatusEffectTest {
-
+	private Character bob = new Character(new Rectangle(10, 10 ,10 ,10 ), 1 , new Position(0, 0));
+	
 	@Test
-	public void test() {
-		Character bob = new Character(new Rectangle(10, 10 ,10 ,10 ), 1 , new Position(0, 0));
+	public void testHealthStatusEffectAtDifferentUpdateIntervall() {
 		bob.setHealth(new Health(1000, 1));
 		Skill skill = new Skill(0, 0 , 0 , 0, null );
 		Skill[] skills = {skill};
 		bob.setSkills(skills);
-		DamageEffect testDamage = new DamageEffect(500);
-		testDamage.setCreatorID(5);
-		testDamage.effect(null, bob);
+		bob.takeDamage(500);
 		assertTrue(bob.getHealth()== 500);
-		HealStatusEffect testEffect1 = new HealStatusEffect(100, 1, 1);
+		HealStatusEffect testEffect1 = new HealStatusEffect(100, 10, 10);
 		bob.applyStatusEffect(testEffect1);
-		bob.update(50);
+		bob.update(49);
+		assertTrue(bob.getHealth() == 540);
+		bob.update(1);
 		assertTrue(bob.getHealth() == 550);
-		HealStatusEffect testEffect2 = new HealStatusEffect(100, 1 , 10);
-		bob.applyStatusEffect(testEffect2);
-		bob.update(10);
-		assertTrue(bob.getHealth() == 660);
-		bob.update(90);
-		assertTrue(bob.getHealth() == 1000);
+		bob.update(100);
+		assertTrue(bob.getHealth() == 600);
+		
 	}
 
 }

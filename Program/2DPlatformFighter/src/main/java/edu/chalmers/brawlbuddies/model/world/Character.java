@@ -252,79 +252,121 @@ public class Character extends GameObject implements ICharacter {
 	public void takeDamage(float a) {
 		a = statusEffectList.calculateDamage(a);
 		health.takeDamage(a);
-		if (isDead()) {
+		if (isDestroyed()) {
 			characterKilled();
 		}
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void heal(float a) {
 		health.heal(a);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void restoreHealth() {
 		health.restoreHealth();
 	}
+	
+	
 
-	public boolean isDead() {
-		return health.isDead();
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void push(Velocity v) {
 		Movement mov = getMovement();
 		mov.setOuterSpeed(mov.getOuterSpeed().getX() + v.getX(), mov
 				.getOuterSpeed().getY() + v.getY());
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void onCollision(IGameObject object, Alignment alignment) {
 		if (object == null || object instanceof Impassible) {
 			this.getMovement().resetSpeed(alignment);
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isDestroyed() {
-		return this.isDead();
+		return health.isDead();
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void applyStatusEffect(IStatusEffect effect) {
 		statusEffectList.add(effect);
 
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addScale(float scale) {
 		super.getMovement().addScale(scale);
 
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeScale(float scale) {
 		super.getMovement().removeScale(scale);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void restoreScale() {
 		super.getMovement().restoreScale();
 
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void resetGravity() {
 		super.getMovement().resetGravity(Movement.Alignment.BOTH);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addSpeed(Velocity velocity) {
 		super.getMovement().addSpeed(velocity);
 
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeSpeed(Velocity velocity) {
 		super.getMovement().removeSpeed(velocity);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Direction getDirection() {
 		return this.getMovement().getDirection();
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isInAir() {
 		return this.getMovement().isInAir();
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void reset() {
 		this.restoreHealth();
 		this.getMovement().reset();

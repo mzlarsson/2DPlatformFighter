@@ -34,26 +34,30 @@ public class Projectile extends GameObject implements IProjectile{
 		this.typeID = id;
 		this.effects = ListCopy.simpleCopy(effects);
 	}
-	
 	/**
-	 * Returns the angle of this projectile
-	 * @return The angle of this projectile
+	 * {@inheritDoc}
 	 */
 	public double getTheta(){
 		return this.getTotalVelocity().getTheta();
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getTypeID() {
 		return typeID;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Position update(int delta) {
 		lifetime -= delta;
 		return this.getMovement().nextPosition(this.getCenterPosition(), delta);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void onCollision(IGameObject obj, Movement.Alignment alignment) {
 		if(obj == null || obj instanceof Impassible){
 			this.destroyed = true;
@@ -67,7 +71,9 @@ public class Projectile extends GameObject implements IProjectile{
 			}
 		}
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isDestroyed() {
 		return this.effects.isEmpty() || this.destroyed || this.lifetime<0;
 	}

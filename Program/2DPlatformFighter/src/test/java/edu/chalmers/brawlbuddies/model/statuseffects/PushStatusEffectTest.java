@@ -17,9 +17,8 @@ import edu.chalmers.brawlbuddies.model.world.Health;
  *
  */
 public class PushStatusEffectTest {
-
 	@Test
-	public void test() {
+	public void testWhenAimIsNull(){
 		Character bob = new Character(new Rectangle(10, 10 ,10 ,10 ), 1 , new Position(0, 0));
 		bob.setHealth(new Health(1000, 1));
 		Skill skill = new Skill(0, 0 , 0 , 0, null );
@@ -32,8 +31,16 @@ public class PushStatusEffectTest {
 		assertTrue(bob.getTotalVelocity().getX() == bob.getAim().getNormalized().scale(1).getX());
 		bob.update(90);
 		assertTrue(bob.getTotalVelocity().getX() == 0);
-		
-		
+	}
+	@Test
+	public void testWhenAimIsntNull(){
+		Character bob = new Character(new Rectangle(10, 10 ,10 ,10 ), 1 , new Position(0, 0));
+		bob.setHealth(new Health(1000, 1));
+		Skill skill = new Skill(0, 0 , 0 , 0, null );
+		Skill[] skills = {skill};
+		bob.setSkills(skills);
+		bob.setAim(new Position(10, 10), false);
+
 		PushStatusEffect test2 = new PushStatusEffect(100, 1, new Aim(30,30),  0);
 		bob.applyStatusEffect(test2);
 		bob.update(10);

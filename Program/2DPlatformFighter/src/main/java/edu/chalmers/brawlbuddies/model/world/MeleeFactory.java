@@ -15,8 +15,18 @@ import edu.chalmers.brawlbuddies.model.skills.EffectFactory;
 import edu.chalmers.brawlbuddies.model.skills.IEffect;
 import edu.chalmers.brawlbuddies.util.ShapeFactory;
 import edu.chalmers.brawlbuddies.util.XMLReader;
-
+/**
+ * A class for creating new Meleecreator from a xml document
+ * @author David Gustafsson
+ * @revised Patrik Haar
+ *
+ */
 public class MeleeFactory {
+	/**
+	 * Creates a new MeleeCreator by using a xml document with a particular name
+	 * @param projName - the name of the xml document to read in from
+	 * @return MeleeCreator - the new Meleecreator
+	 */
 	public static MeleeCreator create(String projName){
 		
 		Document xmlDoc = XMLReader.getDocument(Constants.MELEES_DATA + projName + ".xml");

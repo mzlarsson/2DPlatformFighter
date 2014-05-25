@@ -56,25 +56,48 @@ public class World implements CreatorListener{
 		this.add(character);
 		return character.getID();
 	}
-	
+	/**
+	 * Adds a gameobject to the World
+	 */
 	public void add(IGameObject obj){
 		this.data.add(obj);
 	}
 	
+	/**
+	 * Remove a Gameobject from the world
+	 * @param obj - the gameobject to be removed
+	 */
 	public void remove(IGameObject obj){
 		this.data.remove(obj);
 	}
-
+	
+	/**
+	 * Get a gameobject by its ID from World
+	 * @param objectID - the ID of the object
+	 * @return IGameObject - the gameobject with the ID
+	 */
 	public IGameObject getObjectById(int objectID){
 		return this.data.getObjectById(objectID);
 	}
 	
 	@SuppressWarnings("rawtypes")
+	/**
+	 * Get a list of object from world that only includes a class
+	 * @param type - the class of the objects
+	 * @return List<IGameObject> - a list of game objects
+	 */
 	public List<IGameObject> getObjectsByType(Class type){
 		return this.data.getObjectsByType(type);
 	}
 	
 	@SuppressWarnings("rawtypes")
+	/**
+	 * Get a list of object from world that only includes or excludes a particular class 
+	 * depending on match
+	 * @param type - the class that shall be included or excluded
+	 * @param match - true if the list shall only include a particular class
+	 * @return List<IGameObject> - a list of game objects
+	 */
 	public List<IGameObject> getObjectsByType(Class type, boolean match){
 		return this.data.getObjectsByType(type, match);
 	}
@@ -206,27 +229,6 @@ public class World implements CreatorListener{
 		return newGoodPos;
 	}
 
-	/**
-	 * Checks if the Shape is occupying valid tiles.
-	 * 
-	 * @param shape
-	 *            The Shape to test.
-	 * @return true if position is valid.
-	 */
-	private boolean isTileValid(Shape shape) {
-		int minX = getTilePositionX(shape.getMinX());
-		int maxX = getTilePositionX(shape.getMaxX());
-		int minY = getTilePositionY(shape.getMinY());
-		int maxY = getTilePositionY(shape.getMaxY());
-		for (int i = minX; i <= maxX; i++) {
-			for (int j = minY; j <= maxY; j++) {
-				if (!isTileValid(i, j)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 
 	/**
 	 * Checks if the tiles adjacent to the shape in the given direction is

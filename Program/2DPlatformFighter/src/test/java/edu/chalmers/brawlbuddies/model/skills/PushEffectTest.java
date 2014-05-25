@@ -21,29 +21,44 @@ import edu.chalmers.brawlbuddies.model.world.Projectile;
  *
  */
 public class PushEffectTest {
-	
+	private Character bob = new Character(new Rectangle(10, 10, 10, 10), 1, new Position(10 , 10) );
+
 	@Test
-	public void test() {
+	public void testPushWithSameID(){
 		PushEffect testEffect1 = new PushEffect(1, new Velocity(10, 10) , 1);
-		Velocity nor1 = new Velocity(10,10).getNormalized();
-		Character bob = new Character(new Rectangle(10, 10, 10, 10), 1, new Position(10 , 10) );
 		bob.setHealth(new Health(1000, 1000, 1));
 		assertTrue(bob.getTotalVelocity().x == 0 & bob.getTotalVelocity().y == 0);
-		testEffect1.setCreatorID(1);
+		testEffect1.setCreatorID(bob.getID());
 		testEffect1.effect(bob, bob);
 		assertTrue(bob.getTotalVelocity().x == 0 & bob.getTotalVelocity().y == 0);
-		testEffect1.setCreatorID(5);
+		bob.reset();
+	}
+	
+	@Test
+	public void testPushWithDiffrentID(){
+		PushEffect testEffect1 = new PushEffect(1, new Velocity(10, 10) , 1);
+		Velocity nor1 = new Velocity(10,10).getNormalized();
+		bob.setHealth(new Health(1000, 1000, 1));
+		testEffect1.setCreatorID(bob.getID() + 1);
 		testEffect1.effect(bob, bob);
 		assertTrue(bob.getTotalVelocity().x == nor1.x && bob.getTotalVelocity().y == nor1.y);		
 		bob.reset();
 		
-		
+	}
+	
+	@Test
+	public void testPushWithDifferentIDAndAScale(){
+		bob.setHealth(new Health(1000, 1000, 1));
 		PushEffect testEffect2 = new PushEffect(2, new Velocity(10, 10), 1);
 		Velocity nor2 = new Velocity(10,10).getNormalized().scale(2);
 		testEffect2.effect(bob, bob);
 		assertTrue(bob.getTotalVelocity().x == nor2.x && bob.getTotalVelocity().y == nor2.y);
-		
 		bob.reset();
+		
+	}
+	@Test
+	public void testSelfCast(){
+		bob.setHealth(new Health(1000, 1000, 1));
 		PushEffect testEffect3 = new PushEffect(3, null , 0);
 		bob.setAim(new Position(10, 10), false);
 		Aim a =  bob.getAim().copy();
@@ -51,6 +66,12 @@ public class PushEffectTest {
 		testEffect3.effect(null, bob);
 		assertTrue(bob.getTotalVelocity().x == nor3.x && bob.getTotalVelocity().y == nor3.y);
 		
+	}
+	
+	@Test
+	public void testWithProjectileAsSender() {
+		bob.setHealth(new Health(1000, 1000, 1));
+		PushEffect testEffect3 = new PushEffect(3, null , 0);
 		Projectile testProjectile = new Projectile(new Rectangle(10, 10, 10 , 10), new Movement() , 0, 0, new ArrayList<IEffect>());
 		bob.reset();
 		testProjectile.update(100);
