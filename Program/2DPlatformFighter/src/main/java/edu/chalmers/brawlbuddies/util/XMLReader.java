@@ -70,6 +70,7 @@ public class XMLReader {
 			}
 			// Provides access to the documents data
 			DocumentBuilder builder = factory.newDocumentBuilder();
+			builder.setErrorHandler(new DocumentErrorHandler(DocumentErrorHandler.LEVEL_FATAL_ERROR));
 			
 			// Takes the document
 			if(insideProject){
@@ -79,7 +80,7 @@ public class XMLReader {
 				return builder.parse(new InputSource(docString));
 			}
 		} catch (Exception ex) {
-			System.out.println("Could not read XML: "+ex.getMessage());
+			GameLogger.getLogger().severe("Could not read XML: "+ex.getMessage());
 		}
 		return null;
 	}

@@ -240,7 +240,6 @@ public class XboxInputHandler implements InputHandler, XboxListener {
 	public void axisRestored(int axisIndex) {
 		if((XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_X) && !input.axisIsMoving(XboxInput.AXIS_ROTATE_Y)) ||
 		   (XboxInput.axisEquals(axisIndex, XboxInput.AXIS_ROTATE_Y) && !input.axisIsMoving(XboxInput.AXIS_ROTATE_X))){
-			System.out.println(input.getAxisValue(XboxInput.AXIS_ROTATE_X)+", "+input.getAxisValue(XboxInput.AXIS_ROTATE_Y));
 			mouseTimer.stop();
 			if(isActive(GameKey.LEFT)){
 				this.mousePos.set(-100.0f, 0.0f);

@@ -46,9 +46,9 @@ public class FontCreator {
 				largeFont = new TrueTypeFont(f.deriveFont(30.0f).deriveFont(java.awt.Font.PLAIN), true);
 				largeBoldFont = new TrueTypeFont(f.deriveFont(30.0f).deriveFont(java.awt.Font.BOLD), true);
 			} catch (FontFormatException e) {
-				System.out.println("Invalid font given");
+				GameLogger.getLogger().severe("Invalid font given");
 			} catch (IOException e) {
-				System.out.println("Could not read font: "+(Constants.FONTS + "SF Slapstick Comic.ttf"));
+				GameLogger.getLogger().warning("Could not read font: "+(Constants.FONTS + "SF Slapstick Comic.ttf"));
 			}
 		}
 		

@@ -1,6 +1,6 @@
 package edu.chalmers.brawlbuddies.model.statuseffects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;

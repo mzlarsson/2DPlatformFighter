@@ -9,6 +9,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.controller.menu.OptionMenuState;
+import edu.chalmers.brawlbuddies.util.GameLogger;
 import edu.chalmers.brawlbuddies.view.sound.SoundPlayer;
 
 /**
@@ -28,6 +29,7 @@ public class Controller extends StateBasedGame {
 	 */
 	public Controller() {
 		super("BrawlBuddies v1.0");
+		GameLogger.getLogger().info("Starting BrawlBuddies...");
 		SoundPlayer player = SoundPlayer.getInstance();
 		player.setMusic(edu.chalmers.brawlbuddies.Constants.MUSIC + "menu.ogg");
 	}
@@ -106,7 +108,7 @@ public class Controller extends StateBasedGame {
 		try {
 			gameContainer.setDisplayMode(x, y, fullscreen);
 		} catch (SlickException e) {
-			System.out.println("Could not change resolution");
+			GameLogger.getLogger().warning("Could not change resolution");
 		}
 	}
 	
@@ -133,6 +135,7 @@ public class Controller extends StateBasedGame {
 	 */
 	@Override
 	public boolean closeRequested(){
+		GameLogger.getLogger().info("Closing...");
 		SoundPlayer.getInstance().stop();
 		System.exit(0);
 		return true;

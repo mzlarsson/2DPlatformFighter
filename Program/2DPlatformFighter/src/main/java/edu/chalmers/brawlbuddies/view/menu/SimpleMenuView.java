@@ -26,11 +26,7 @@ public class SimpleMenuView implements MenuView{
 	}
 	
 	public void setBackground(String path){
-		try {
-			this.background = ResourceLoader.getImage(path);
-		} catch(RuntimeException exc){
-			System.out.println("Could not load background image: "+path);
-		}
+		this.background = ResourceLoader.getImage(path);
 	}
 
 	public void render(GameContainer gc, Graphics g){

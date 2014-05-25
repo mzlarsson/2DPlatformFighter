@@ -1,8 +1,10 @@
 package edu.chalmers.brawlbuddies.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import edu.chalmers.brawlbuddies.util.GameLogger;
 /**
  * A test class for Direction
  * @author David Gustafsson
@@ -86,7 +88,7 @@ public class DirectionTest {
 		for(int i = 0; i < x.length; i++){
 			for( int j = y.length - 1 ; j >= 0; j--){
 			if(Direction.getDirection(x[i], y[j]) != result){
-				System.out.println(Direction.getDirection(x[i], y[j]) + " != " + result); 
+				GameLogger.getLogger().warning(Direction.getDirection(x[i], y[j]) + " != " + result); 
 			}
 			assertTrue(Direction.getDirection(x[i], y[j]) == result);
 			}
@@ -96,7 +98,7 @@ public class DirectionTest {
 		for(int i = 0; i + 1 < dir.length; i = i + 2){
 		assertTrue(dir[i].add(dir[i+ 1]) == dir[dir.length - 1] && dir[i + 1].add(dir[i]) == dir[dir.length - 1] );
 		if (!(dir[i].add(dir[i+ 1]) == dir[dir.length - 1] && dir[i + 1].add(dir[i]) == dir[dir.length - 1] )){
-			System.out.println(dir[i] + " " + dir[i + 1] + "!= "  + dir[dir.length - 1] );
+			GameLogger.getLogger().warning(dir[i] + " " + dir[i + 1] + "!= "  + dir[dir.length - 1] );
 		}
 		}
 	}
