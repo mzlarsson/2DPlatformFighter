@@ -3,7 +3,7 @@ package edu.chalmers.brawlbuddies;
 /**
  * Contains simple contants that are used in Brawl Buddies.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

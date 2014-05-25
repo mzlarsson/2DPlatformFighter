@@ -4,7 +4,11 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-
+/**
+ * A factory to create shapes 
+ * @author Patrick Haar
+ * @version 1.0
+ */
 public class ShapeFactory {
 	
 	/**

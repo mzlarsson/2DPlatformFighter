@@ -20,7 +20,9 @@ public class Position {
 	public Position copy(){
 		return new Position(this.x, this.y);
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public String toString(){
 		return "edu.chalmers.brawlbuddies.view.menu.Position ("+this.x+", "+this.y+")";
 	}

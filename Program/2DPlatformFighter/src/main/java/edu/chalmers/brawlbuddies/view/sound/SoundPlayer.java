@@ -13,7 +13,11 @@ import edu.chalmers.brawlbuddies.eventbus.IEventBusSubscriber;
 import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
-
+/**
+ * A class for playing sounds and music for the game 
+ * @author Matz Larsson
+ *
+ */
 public class SoundPlayer implements IEventBusSubscriber{
 	
 	private float musicVolume = 1.0f;
@@ -147,13 +151,11 @@ public class SoundPlayer implements IEventBusSubscriber{
 	 */
 	public void eventPerformed(EventBusEvent event) {
 		if(!this.stopped){
-			int typeID = -1, uniqueID = -1;
+			int typeID = -1;
 			if(event.getActor() != null && event.getActor() instanceof IWrapper){
 				typeID = ((IWrapper)event.getActor()).getTypeID();
-				uniqueID = ((IWrapper)event.getActor()).getUniqeID();
 			}else if(event.getRecipient() != null && event.getRecipient() instanceof IWrapper){
 				typeID = ((IWrapper)event.getRecipient()).getTypeID();
-				uniqueID = ((IWrapper)event.getRecipient()).getUniqeID();
 			}
 			
 			if(typeID>=0){
@@ -166,7 +168,7 @@ public class SoundPlayer implements IEventBusSubscriber{
 				IWrapper actor = (event.getActor() instanceof IWrapper?(IWrapper)event.getActor():null);
 				IWrapper recipient = (event.getRecipient() instanceof IWrapper?(IWrapper)event.getRecipient():null);
 				String soundName = getSoundName(actor, recipient, event.getName());
-				this.sounds.get(typeID).playSound(uniqueID, soundName!=null?soundName:event.getName());
+				this.sounds.get(typeID).playSound( soundName!=null?soundName:event.getName());
 			}
 		}
 	}

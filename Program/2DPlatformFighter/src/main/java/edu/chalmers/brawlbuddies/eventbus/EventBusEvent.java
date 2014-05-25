@@ -4,7 +4,7 @@ package edu.chalmers.brawlbuddies.eventbus;
  * A class that creates an Event that is used by the EventBus and it's
  * subscribers.
  * 
- * @author Lisa
+ * @author Lisa Lipkin
  * 
  */
 public class EventBusEvent {

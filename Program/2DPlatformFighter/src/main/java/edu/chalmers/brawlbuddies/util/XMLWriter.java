@@ -4,9 +4,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * A class that write a xml document
+ * @author Matz Larsson
+ *
+ */
 public class XMLWriter {
-
+	/**
+	 * Write to a xml document at a given path
+	 * @param path - the file path
+	 * @param xml - the xml document to be written
+	 */
 	public static void write(String path, String xml){
 		try {
 			createPath(path);
@@ -18,7 +26,10 @@ public class XMLWriter {
 			GameLogger.getLogger().warning("Error while printing the file: "+path+"\n"+e.getMessage());
 		}
 	}
-	
+	/**
+	 * Creates a file path by a given file path name
+	 * @param path - the file path
+	 */
 	private static void createPath(String path){
 		File folder = new File(path).getParentFile();
 		if(!folder.exists()){

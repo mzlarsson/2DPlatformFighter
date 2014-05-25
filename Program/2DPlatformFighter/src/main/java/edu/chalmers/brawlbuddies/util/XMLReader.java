@@ -9,7 +9,11 @@ import javax.xml.validation.SchemaFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
+/**
+ * A class to read xml documents
+ * @author Patrik Haar
+ *
+ */
 public class XMLReader {
 	
 	static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";

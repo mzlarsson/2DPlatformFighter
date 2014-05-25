@@ -8,7 +8,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 
 import edu.chalmers.brawlbuddies.util.FontCreator;
-
+/**
+ * A menu item that have multiple choice
+ * @author Matz Larsson
+ *
+ */
 public class MultiChoiceMenuItem extends SimpleMenuItem {
 	
 	private String name;
@@ -22,22 +26,59 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	private Polygon arrowRight;
 	private float arrowLength = 0;
 	
+	/**
+	 * Creates a new MultiChoiceMenuItem with a item name, name , values and vertical position
+	 * @param itemName - the item name
+	 * @param name - the name to be shown
+	 * @param values - the values
+	 * @param vertPos - the vertical position
+	 */
 	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, int vertPos){
 		this(itemName, name, values, vertPos, new Dimension(500, 75));
 	}
-	
+	/**
+	 * Creates a new MultiChoiceMenuItem with a item name, name, values and position
+	 * @param itemName - the item name
+	 * @param name - the name to be shown
+	 * @param values - the values
+	 * @param pos - the position
+	 */
 	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos){
 		this(itemName, name, values, pos, new Dimension(500, 75));
 	}
-	
+	/**
+	 * Creates a new MultiChoiceMenuItem with a item name, name, values, vertical position
+	 * size
+	 * @param itemName
+	 * @param name
+	 * @param values
+	 * @param vertPos
+	 * @param size
+	 */
 	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, int vertPos, Dimension size){
 		this(itemName, name, values, new Position(-1, vertPos), size);
 	}
-
+	/**
+	 * Creates a new MultiChoiceMenutItem with a item name, name, values, position and size
+	 * @param itemName
+	 * @param name
+	 * @param values
+	 * @param pos
+	 * @param size
+	 */
 	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos, Dimension size) {
 		this(itemName, name, values, pos, size, true);
 	}
-	
+	/**
+	 * Creates a new MultiChoiceMenuItem with a item name, name, values, position, 
+	 * size and boolean to decide if to show name.
+	 * @param itemName
+	 * @param name
+	 * @param values
+	 * @param pos
+	 * @param size
+	 * @param showName 
+	 */
 	public MultiChoiceMenuItem(String itemName, String name, List<MultiChoiceOption> values, Position pos, Dimension size, boolean showName) {
 		super(itemName, (values.size()>0?values.get(0).getValue():""), pos, size);
 		
@@ -51,7 +92,9 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		
 		initArrows();
 	}
-	
+	/**
+	 * 
+	 */
 	private void initArrows(){
 		Dimension size = this.getSize();
 		arrowLength = (float)size.getHeight()/4;
@@ -66,17 +109,14 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		arrowRight.addPoint(0, arrowLength/2*3);
 		arrowRight.addPoint(0, arrowLength/2*5);
 	}
-	
 	public void enable(String name, boolean enable){
 		for(int i = 0; i<values.size(); i++){
 			if(name.equals(values.get(i).getCodeValue())){
 				enabled[i] = enable;
 			}
 		}
-		
 		this.setError(!isEnabled(valueIndex));
 	}
-	
 	public boolean isEnabled(String name){
 		for(int i = 0; i<values.size(); i++){
 			if(name.equals(values.get(i).getCodeValue())){
@@ -86,19 +126,15 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 		
 		return false;
 	}
-	
 	private boolean isEnabled(int index){
 		return index>=0 && index<enabled.length && enabled[index];
 	}
-	
 	public void nextItem(){
 		setItem(valueIndex+1);
 	}
-	
 	public void prevItem(){
 		setItem(valueIndex-1);
 	}
-	
 	public void setItem(String value){
 		if(value != null){
 			for(int i = 0; i<values.size(); i++){
@@ -108,7 +144,6 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 			}
 		}
 	}
-	
 	private void setItem(int index){
 		if(index>=0 && index<values.size()){
 			this.valueIndex = index;
@@ -124,7 +159,9 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 	public List<MultiChoiceOption> getOptions(){
 		return this.values;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getValue(){
 		if(!isEnabled(this.valueIndex)){
@@ -133,15 +170,15 @@ public class MultiChoiceMenuItem extends SimpleMenuItem {
 			return values.get(valueIndex).getCodeValue();
 		}
 	}
-	
 	public String getName(){
 		return this.name;
 	}
-	
 	public boolean isWithinRight(float x, float y){
 		return this.isWithin(x, y) && x>this.getRealPosition(null).getX()+this.getRealSize().getWidth()/2;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer gc, Graphics g){
 		//Draw square around

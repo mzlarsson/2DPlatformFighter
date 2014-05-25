@@ -1,7 +1,11 @@
 package edu.chalmers.brawlbuddies.view.sound;
 
 import java.util.Map;
-
+/**
+ * A class that handles sound information of a particular game object
+ * @author Matz Larsson
+ *
+ */
 public class SoundData {
 	
 	private Map<String, SoundKeeper> sounds;
@@ -16,30 +20,28 @@ public class SoundData {
 	
 	/**
 	 * Plays the sound that corresponds to the given soundName
-	 * @param uniqueID The unique ID to the object who requested this
 	 * @param soundName The name of the sound as specified in the sound document
 	 */
-	public void playSound(int uniqueID, String soundName){
+	public void playSound( String soundName){
 		SoundKeeper sound = this.sounds.get(soundName);
 		
 		if(sound != null){
-			sound.playSound(uniqueID);
+			sound.playSound();
 			for(String stopper : sound.getStoppers()){
-				this.stopSound(uniqueID, stopper);
+				this.stopSound(stopper);
 			}
 		}
 	}
 	
 	/**
 	 * Stops the sounds that corresponds to the given soundName
-	 * @param uniqueID The unique ID to the object who requested this
 	 * @param soundName The name of the sound as specified in the sound document
 	 */
-	public void stopSound(int uniqueID, String soundName){
+	public void stopSound(String soundName){
 		SoundKeeper sound = this.sounds.get(soundName);
 		
 		if(sound != null){
-			sound.stopSound(uniqueID);
+			sound.stopSound();
 		}
 	}
 	
@@ -59,7 +61,7 @@ public class SoundData {
 	 */
 	public void stop(){
 		for(SoundKeeper sound : this.sounds.values()){
-			sound.stopAllSounds();
+			sound.stopSound();
 		}
 	}
 
