@@ -19,10 +19,6 @@
 	        <trigger>skillUsed</trigger>
 	        <source>bob_lightning.ogg</source>
 	    </sound>
-	    <sound>
-	        <trigger>skillStoppedUsed</trigger>
-	        <source>bob_lightning_stop.ogg</source>
-	    </sound>
 	</resource>
 	<resource id="ID_23">
 	    <name>big_bob_bomb</name>
@@ -40,10 +36,6 @@
 	    <sound>
 	        <trigger>createObject</trigger>
 	        <source>bob_ball_shoot.wav</source>
-	    </sound>
-	    <sound>
-	        <trigger>removeObject</trigger>
-	        <source>bob_ball_hit.ogg</source>
 	    </sound>
 	</resource>
 	<resource id="ID_31">
