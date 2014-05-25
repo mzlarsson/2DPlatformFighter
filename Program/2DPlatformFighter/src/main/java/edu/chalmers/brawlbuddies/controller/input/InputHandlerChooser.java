@@ -109,7 +109,11 @@ public class InputHandlerChooser {
 			for(int i = 0; i<this.controllers.get(name); i++){
 				if(num == index){
 					if(name.equals(controlTypes[0])){
-						return new KeyInputHandler();
+						KeyInputHandler handler = new KeyInputHandler(true);
+						if(useAsSecondPlayer){
+							setAsPlayer2(handler);
+						}
+						return handler;
 					}else if(name.equals(controlTypes[1])){
 						KeyInputHandler handler = new KeyInputHandler(false);
 						if(useAsSecondPlayer){
@@ -162,7 +166,7 @@ public class InputHandlerChooser {
 			handler.setValue(GameKey.UP, Input.KEY_NUMPAD8);
 			handler.setValue(GameKey.LEFT, Input.KEY_NUMPAD4);
 			handler.setValue(GameKey.RIGHT, Input.KEY_NUMPAD6);
-			handler.setValue(GameKey.JUMP, Input.KEY_NUMPADENTER);
+			handler.setValue(GameKey.JUMP, Input.KEY_ENTER);
 			handler.setValue(GameKey.SKILL1, KeyInputHandler.MOUSE_LEFT_BUTTON);
 			handler.setValue(GameKey.SKILL2, KeyInputHandler.MOUSE_RIGHT_BUTTON);
 			handler.setValue(GameKey.SKILL3, Input.KEY_NUMPAD7);
