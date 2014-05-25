@@ -93,7 +93,7 @@
 	<!-- Projectile	3### -->
 	<resource id="30" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
 	<resource id="31" name="bob_bomb" size="60,60" idle="0,0,7,0,100,true,false"></resource>
-	<resource id="33" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
+	<resource id="33" name="bob_lightning" size="20,20" idle="0,0,0,0,100,false,false"></resource>
 
 	<!-- Hud	4### -->
 	<resource id="40" name="hud" size="274,99" idle="0,0,9,0,100,false,false"></resource>
