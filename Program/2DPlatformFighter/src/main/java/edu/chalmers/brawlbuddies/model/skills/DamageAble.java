@@ -10,10 +10,5 @@ public interface DamageAble {
 	 * @param a - the amount of damage the object will take
 	 */
 	public void takeDamage(float a);
-	/**
-	 * Get the ID of the Object
-	 * @return the ID of the object
-	 */
-	public int getID();
 
 }

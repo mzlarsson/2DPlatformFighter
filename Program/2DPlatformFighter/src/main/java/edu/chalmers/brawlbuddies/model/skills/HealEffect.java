@@ -39,7 +39,7 @@ public class HealEffect implements IEffect {
 		}
 		else{
 			if( reciever instanceof HealAble){
-				if(((HealAble) reciever).getID() != creatorID){
+				if(reciever.getID() != creatorID){
 				((HealAble) reciever).heal(healAmount);
 				}
 			}

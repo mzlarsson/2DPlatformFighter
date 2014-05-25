@@ -12,9 +12,4 @@ public interface PushAble {
 	 * @param v - the velocity the object will be pushed with
 	 */
 	public void push(Velocity v);
-	/**
-	 * Get the ID of the object
-	 * @return the ID of the object 
-	 */
-	public int getID();
 }

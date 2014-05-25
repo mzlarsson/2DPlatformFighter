@@ -14,12 +14,5 @@ public interface HealAble {
 	 *  Restore the health of the object
 	 */
 	public void restoreHealth();
-
-	/**
-	 * Get the ID of the Object
-	 * @return the ID of the object
-	 */
-	public int getID();
-
 	
 }
