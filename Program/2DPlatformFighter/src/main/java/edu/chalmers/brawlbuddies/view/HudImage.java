@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -23,18 +25,20 @@ import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
  */
 public class HudImage implements IDrawable {
 	// goal oriented variables
-	public static boolean lifeLimit = false;
-	public int lives = 0;
+	private boolean lifeLimit = false;
+	private int lives = 0;
 	// id oriented variables
 	private int hudID;
 	private static int hudIndex = 0;
 	private int hudNr = 0;
 	// objects that the hud contains
 	private Map<String, Animation> mapAnimation;
+	private Map<String, Animation> hudIcons;
 	private Map<Integer, SkillImage> skills;
 	private Animation animation;
 	private HealthImage healthBar;
 	private Animation icon;
+	private Animation lifeIcon;
 	// positions for the hud and all its objects
 	private Position upperLeftCornerPosition;
 	private ArrayList<Position> skillPosition;
@@ -57,6 +61,8 @@ public class HudImage implements IDrawable {
 		Map<String, Animation> characterIcon = AnimationMapFactory
 				.create(charac.getTypeID());
 		icon = characterIcon.get("icon");
+		hudIcons = AnimationMapFactory.create(41);
+		lifeIcon = hudIcons.get("deaths");
 
 		// set positions
 		skillPosition = new ArrayList<Position>();
@@ -103,10 +109,9 @@ public class HudImage implements IDrawable {
 	 *            the amount of lives to start the game with
 	 */
 	public void setLives(int l) {
-		if (lifeLimit) {
-			lives = l;
-		}
-
+		lifeLimit = true;
+		lifeIcon = hudIcons.get("lives");
+		lives = l;
 	}
 
 	public void update(int delta) {
@@ -138,12 +143,13 @@ public class HudImage implements IDrawable {
 	 *            the slick graphics object
 	 */
 	private void renderLives(Graphics g) {
+		lifeIcon.draw(15 + hudNr, 100, 20, 20);
 		if (lifeLimit) {
 			g.setColor(Color.green);
 		} else {
 			g.setColor(Color.red);
 		}
-		g.drawString(Integer.toString(lives), 20 + hudNr, 100);
+		g.drawString(Integer.toString(lives), 35 + hudNr, 100);
 		g.setColor(Color.black);
 	}
 

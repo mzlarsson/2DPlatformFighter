@@ -19,8 +19,6 @@ public class SkillImage implements IDrawable {
 	private int ownerId;
 	private int id;
 
-	private int delta;
-
 	private int cooldown = 5000;
 	private int cooldownScale = 0;
 	private float skillHeight = 30;
@@ -37,13 +35,12 @@ public class SkillImage implements IDrawable {
 	}
 
 	public void update(int delta) {
-		this.delta = delta;
+		setCooldownScale(cooldownScale - delta);
+		setCooldownRectangle();
 	}
 	
 	public void render(GameContainer gc, Graphics g) {
 		animation.draw(position.getX(), position.getY(), 30, 30);
-		setCooldownScale(cooldownScale - delta);
-		setCooldownRectangle();
 		renderCooldown(g);
 	}
 

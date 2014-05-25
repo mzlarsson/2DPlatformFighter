@@ -96,5 +96,6 @@
 	<resource id="33" name="small_poison_projectile" size="40,40" idle="0,0,7,0,100,true,false"></resource>
 
 	<!-- Hud	4### -->
-	<resource id="40" name="hud" size="274,99" idle="0,0,9,0,100,false,false"></resource> 
+	<resource id="40" name="hud" size="274,99" idle="0,0,9,0,100,false,false"></resource>
+	<resource id="41" name="hud_icons" size="40,40" deaths="0,0,0,0,100,false,false" lives="1,0,1,0,100,false,false"></resource>
 </resources>

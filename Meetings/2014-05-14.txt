@@ -1,0 +1,69 @@
+﻿Meeting Agenda 2014-05-14
+Meeting begins at:
+Participants: 
+
+1. Reports from previous meeting:
+        
+2. Objectives:
+        2.1 Assign work to group members concerning the report
+        2.2 Go through the SDD document
+        2.3 Go through the RAD document
+        2.4 Update on the work progress
+ 
+3. Discussion items:
+        3.1 How do we do:
+
+        3.2 What to do:
+
+        3.3 Why is:
+
+
+4. Outcomes and assignments:
+        
+5. Wrap up:
+        5.1 Unsolved issues
+	5.2 Next meeting
+
+Meeting ends at:
+
+
+
+
+________________
+
+
+Meeting Agenda 2014-05-14
+Meeting begins at:10.28
+Participants: Matz Larsson, Patrik Haar, Lisa Lipkin, David Gustafsson
+
+1. Reports from previous meeting:
+	The reports have been spoken about
+        
+2. Objectives:
+         2.1 Assign work to group members concerning the report
+                These areas can be worked on before monday next week
+		Final model, Problem areas & Alternative design.
+	2.2 Go through the SDD document
+                The SDD exists on the drive and can be open to change from anyone
+	2.3 Go through the RAD document
+                The RAD document was read through and changed when needed
+	2.4 Update on the work progress
+
+3. Discussion items:
+        3.1 How do we do:
+
+        3.2 What to do:
+
+        3.3 Why is:
+
+
+4. Outcomes and assignments:
+	Boarman  - Final model and continue with SDD
+	Nano & Nika - Problem areas 
+	Volt & all  - Alternative design 
+        
+5. Wrap up:
+        5.1 Unsolved issues - RAD .2 .3 .4 and Appendix
+	5.2 Next meeting - 16/05 - 2014
+
+Meeting ends at: 11:52

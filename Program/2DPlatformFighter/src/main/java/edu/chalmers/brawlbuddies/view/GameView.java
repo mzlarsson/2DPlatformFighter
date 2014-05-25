@@ -108,19 +108,22 @@ public class GameView implements IEventBusSubscriber, IView {
 			int characterID = (Integer) event.getRecipient();
 			huds.get(characterID).characterDied();
 		} else if (event.getName().equals("lifeLimitAdded")) {
-			HudImage.lifeLimit = true;
 			setLives((Integer) event.getRecipient());
 
 		} else if (event.getName().equals("timeLimitAdded")) {
 			timeGoal = true;
 			timeLimit = (Integer) event.getRecipient() * 1000;
-		} else if (event.getName().equals("updateTime")) {
-			timeLimit = (Integer) event.getRecipient();
 		}
 	}
 	
 	public void update(int delta) {
 		this.delta = delta;
+		if(timeGoal) {
+			timeLimit = timeLimit - delta;
+		}
+		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
+			entry.getValue().update(delta);
+		}
 	}
 	
 //render methods
@@ -151,15 +154,14 @@ public class GameView implements IEventBusSubscriber, IView {
 		g.scale(1.0f / scroller.getScale(), 1.0f / scroller.getScale());
 		// render hud
 		for (Map.Entry<Integer, HudImage> entry : huds.entrySet()) {
-			entry.getValue().update(delta);
 			entry.getValue().render(gc, g);
 		}
 		// render time
 		if (timeGoal) {
-			renderTime(delta, g);
+			renderTime(g);
 		}
 	}
-
+	
 	/**
 	 * render the time with graphics object
 	 * 
@@ -168,8 +170,7 @@ public class GameView implements IEventBusSubscriber, IView {
 	 * @param g
 	 *            Slick graphics object
 	 */
-	private void renderTime(int time, Graphics g) {
-		timeLimit = timeLimit - time;
+	private void renderTime(Graphics g) {
 		int minutes = timeLimit / 60000;
 		int seconds = (timeLimit % 60000)/1000;
 		g.setColor(Color.red);
