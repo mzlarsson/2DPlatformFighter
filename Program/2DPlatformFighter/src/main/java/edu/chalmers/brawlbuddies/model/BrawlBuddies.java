@@ -11,8 +11,8 @@ import edu.chalmers.brawlbuddies.model.world.World;
  * Holds the logic for the game.
  * 
  * @author Patrik Haar
- * @version 0.4
  * @revised Matz Larsson
+ * @version 1.0
  */
 public class BrawlBuddies implements IBrawlBuddies{
 

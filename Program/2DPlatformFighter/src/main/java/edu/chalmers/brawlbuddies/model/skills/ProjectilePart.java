@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.IProjectileCreator;
  * Describes a projectile creating SkillPart.
  * @author David Gustafsson
  * @revised Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public class ProjectilePart implements SkillPart {
 	private IProjectileCreator shooter;

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for holding an option with a display value (for showing) and a code value (for logics).
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class MultiChoiceOption {
 
 	private String codeValue;

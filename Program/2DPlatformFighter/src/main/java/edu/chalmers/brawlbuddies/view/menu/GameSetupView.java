@@ -13,6 +13,7 @@ import edu.chalmers.brawlbuddies.util.FontCreator;
 /**
  * A class to describe the option when starting a game
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class GameSetupView extends SimpleMenuView{

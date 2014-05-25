@@ -1,5 +1,13 @@
 package edu.chalmers.brawlbuddies.model;
 
+/**
+ * Interface for handling the connection against the model
+ * @author Matz Larsson
+ * @author Patrik Haar
+ * @version 1.0
+ *
+ */
+
 public interface IBrawlBuddies {
 	
 	/**

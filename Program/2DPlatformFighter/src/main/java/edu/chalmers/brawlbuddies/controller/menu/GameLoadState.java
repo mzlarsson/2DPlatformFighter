@@ -13,6 +13,12 @@ import edu.chalmers.brawlbuddies.controller.Player;
 import edu.chalmers.brawlbuddies.controller.input.InputHandlerChooser;
 import edu.chalmers.brawlbuddies.util.ResourceLoader;
 
+/**
+ * Displays a loading screen while loading the new game.
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class GameLoadState extends BasicGameState{
 	
 	private String p1_character, p2_character, map;

@@ -1,7 +1,9 @@
 package edu.chalmers.brawlbuddies.model.world;
+
 /**
  * A interface to describe Health objects
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public interface IHealth {

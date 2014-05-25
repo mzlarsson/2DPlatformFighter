@@ -6,7 +6,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
 /**
  * Class that extends the Movement class by adding logics for jumps as well.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

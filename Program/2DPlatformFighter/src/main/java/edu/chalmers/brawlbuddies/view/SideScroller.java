@@ -12,6 +12,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A class that handles the scrolling and scaling of the game view
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class SideScroller implements IEventBusSubscriber{

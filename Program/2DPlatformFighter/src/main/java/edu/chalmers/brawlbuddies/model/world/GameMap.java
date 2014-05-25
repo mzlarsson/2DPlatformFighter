@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.model.Position;
 /**
  * A class for representing a TileMap with spawn positions.
  * @author Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public class GameMap {
 

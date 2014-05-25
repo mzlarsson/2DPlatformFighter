@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
 /**
  * A interface to describe a object that can be pushed
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public interface PushAble {

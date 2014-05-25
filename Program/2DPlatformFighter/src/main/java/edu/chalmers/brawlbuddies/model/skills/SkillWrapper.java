@@ -9,6 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
  * A wrapper class for skill
  * @author Lisa Lipkin
  * @revised Patrik Haar
+ * @version 1.0
  *
  */
 public class SkillWrapper implements IWrapper, ISkill {

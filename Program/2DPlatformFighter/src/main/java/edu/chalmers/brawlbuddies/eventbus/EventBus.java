@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A singelton EventBuss that forwards events between the view and model.
- * 
+ * A singleton that forwards events between the view and model.
  * @author Lisa Lipkin
+ * @version 1.0
  * 
  */
 public class EventBus {

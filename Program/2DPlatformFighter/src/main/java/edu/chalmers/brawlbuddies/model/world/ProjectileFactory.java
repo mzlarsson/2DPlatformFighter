@@ -20,7 +20,7 @@ import edu.chalmers.brawlbuddies.util.XMLReader;
 /**
  * A factory for creating ProjectileCreators
  * @author Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public class ProjectileFactory {
 	

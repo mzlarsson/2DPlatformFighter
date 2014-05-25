@@ -9,6 +9,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import edu.chalmers.brawlbuddies.controller.Constants;
 import edu.chalmers.brawlbuddies.view.menu.EndScreenView;
 
+/**
+ * Controls the end screen menu
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class EndScreenState extends BasicGameState implements MenuListener{
 
 	private EndScreenView view;

@@ -10,9 +10,8 @@ import edu.chalmers.brawlbuddies.util.ListCopy;
 
 /**
  * A class for representing a Projectile in-game.
- * 
  * @author Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public class Projectile extends GameObject implements IProjectile{
 

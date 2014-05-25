@@ -4,6 +4,13 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+/**
+ * Handles the errors generated in the game
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class DocumentErrorHandler implements ErrorHandler{
 
 	public static final int LEVEL_NONE = 0;

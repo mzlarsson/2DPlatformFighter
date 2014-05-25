@@ -10,6 +10,7 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 /**
  * A class to describe a Melee object
  * @author David Gustafsson
+ * @version 1.0
  * 
  */
 public class Melee extends GameObject {

@@ -4,8 +4,8 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * An adapter class to vector2f to change implementation of some methods.
  * @author David Gustafsson
- * @version 0.2
  * @revised Matz Larsson
+ * @version 1.0
  * 
  */
 public class Vector extends Vector2f {

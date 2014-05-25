@@ -12,9 +12,8 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
 
 /**
  * A class to hold and fire a specific Projectile-type.
- * 
  * @author Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public class ProjectileCreator implements IProjectileCreator {
 	private List<IEffect> effects;

@@ -19,6 +19,7 @@ import edu.chalmers.brawlbuddies.util.XMLReader;
  * A class for creating new Meleecreator from a xml document
  * @author David Gustafsson
  * @revised Patrik Haar
+ * @version 1.0
  *
  */
 public class MeleeFactory {

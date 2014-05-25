@@ -13,6 +13,12 @@ import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.XMLReader;
 import edu.chalmers.brawlbuddies.util.XMLWriter;
 
+/**
+ * Contains method for loading and saving settings in the game.
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class Settings {
 	
 	private static Settings instance;

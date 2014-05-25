@@ -6,7 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
  * A interface describing a part of a skill.
  * @author David Gustafsson
  * @revised Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public interface SkillPart {
 	/**

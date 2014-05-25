@@ -8,6 +8,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A class that describes a list that handles a characters status effects. 
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class StatusEffectList {

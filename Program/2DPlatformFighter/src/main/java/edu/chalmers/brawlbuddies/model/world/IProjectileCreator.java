@@ -5,6 +5,7 @@ import edu.chalmers.brawlbuddies.model.Position;
 /**
  * A interface to describe a IProjectileCreator
  * @author Patrik Haar
+ * @version 1.0
  *
  */
 public interface IProjectileCreator {

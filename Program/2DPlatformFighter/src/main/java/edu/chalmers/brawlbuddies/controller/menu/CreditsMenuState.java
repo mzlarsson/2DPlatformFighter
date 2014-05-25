@@ -10,6 +10,12 @@ import edu.chalmers.brawlbuddies.controller.Constants;
 import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.CreditsMenuView;
 
+/**
+ * Controls the credits menu
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class CreditsMenuState extends BasicGameState implements MenuListener{
 
 	private MenuView view;
@@ -73,7 +79,8 @@ public class CreditsMenuState extends BasicGameState implements MenuListener{
 			gotoMainMenu();
 		}
 	}
-	
+
+
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
 		view.updateContents();

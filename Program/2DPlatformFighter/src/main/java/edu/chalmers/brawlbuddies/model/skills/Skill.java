@@ -5,6 +5,13 @@ import java.util.List;
 
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
 
+/**
+ * Describes a skill that can be used by a character
+ * @author Patrik Haar
+ * @version 1.0
+ *
+ */
+
 public class Skill implements ISkill{
 	
 	private int id;

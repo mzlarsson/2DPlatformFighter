@@ -14,6 +14,7 @@ import edu.chalmers.brawlbuddies.util.XMLReader;
  * A class that read sound information from a xml document and stores it in a map with
  * soundkeeper object.
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class SoundFactory {

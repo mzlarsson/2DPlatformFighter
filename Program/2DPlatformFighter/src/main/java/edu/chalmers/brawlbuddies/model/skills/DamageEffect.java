@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.*;
  * A class describing a damage effect
  * @author David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  * 
  */
 public class DamageEffect implements IEffect {

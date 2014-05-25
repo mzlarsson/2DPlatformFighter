@@ -8,6 +8,13 @@ import java.util.logging.Logger;
 
 import org.newdawn.slick.util.Log;
 
+/**
+ * Class for setting up the format of all loggings
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class GameLogger {
 	
 	private static ConsoleHandler handler;

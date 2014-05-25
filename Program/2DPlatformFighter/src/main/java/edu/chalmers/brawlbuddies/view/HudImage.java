@@ -16,9 +16,9 @@ import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 
 /**
- * a class to represent and draw the heads up display of a character in game.
- * 
+ * A class to represent and draw the heads up display of a character in game.
  * @author Lisa Lipkin
+ * @version 1.0
  * 
  */
 public class HudImage implements IDrawable {

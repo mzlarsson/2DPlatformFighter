@@ -7,6 +7,7 @@ import edu.chalmers.brawlbuddies.model.world.World;
 /**
  * A factory to create a Game
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class GameFactory {

@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.Constants;
 /**
  * A class to describe the main menu in the menu system
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class MainMenuView extends SimpleMenuView{

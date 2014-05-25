@@ -4,6 +4,7 @@ import org.newdawn.slick.Sound;
 /**
  * A class to contain and manage a single sound object
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class SoundKeeper {

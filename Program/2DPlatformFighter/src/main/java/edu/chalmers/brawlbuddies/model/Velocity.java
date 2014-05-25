@@ -3,7 +3,7 @@ package edu.chalmers.brawlbuddies.model;
 /**
  * A class that describes velocity object to our game
  * @author David Gustafsson
- * @version 0.3
+ * @version 1.0
  */
 public class Velocity extends Vector {
 

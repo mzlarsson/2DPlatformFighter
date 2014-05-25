@@ -10,6 +10,7 @@ import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
 /**
  * A class to describe the graphical representation of a projectile
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public class ProjectileImage implements IDrawable {

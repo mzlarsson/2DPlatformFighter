@@ -6,6 +6,7 @@ package edu.chalmers.brawlbuddies.model.world;
  * @author David Gustafsson
  * @revised Patrik Haar
  * @revised Matz Larsson
+ * @version 1.0
  */
 
 public class Health implements IHealth{

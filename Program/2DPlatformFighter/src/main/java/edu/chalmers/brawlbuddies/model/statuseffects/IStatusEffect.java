@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A interface describing a status effect 
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public interface IStatusEffect {

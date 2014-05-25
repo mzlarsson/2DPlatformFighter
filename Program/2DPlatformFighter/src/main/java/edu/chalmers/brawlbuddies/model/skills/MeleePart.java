@@ -8,6 +8,7 @@ import edu.chalmers.brawlbuddies.model.world.MeleeCreator;
 /**
  * Describe a melee creating Skillpart.
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class MeleePart implements SkillPart {

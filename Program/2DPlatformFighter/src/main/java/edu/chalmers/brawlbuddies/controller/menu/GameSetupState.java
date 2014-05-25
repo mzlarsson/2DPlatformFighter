@@ -17,6 +17,12 @@ import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceOption;
 
+/**
+ * Controls the "start new game" menu
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class GameSetupState extends BasicGameState implements MenuListener{
 
 	private MenuView view;

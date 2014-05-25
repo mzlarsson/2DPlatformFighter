@@ -8,6 +8,13 @@ import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.util.FontCreator;
 
+/**
+ * The most basic menu item
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class SimpleMenuItem implements MenuItem{
 	
 	private boolean recalculate = true;

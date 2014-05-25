@@ -8,7 +8,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
  * This is a class for handling movement. It contains methods for handling both
  * controlled movement (moving), gravity and other outer forces/velocities.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

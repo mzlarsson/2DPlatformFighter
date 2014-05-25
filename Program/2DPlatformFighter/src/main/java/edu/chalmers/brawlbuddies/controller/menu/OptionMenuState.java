@@ -13,6 +13,12 @@ import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
 import edu.chalmers.brawlbuddies.view.menu.OptionsMenuView;
 
+/**
+ * Controls the options menu
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class OptionMenuState extends BasicGameState implements MenuListener{
 
 	private MenuView view;

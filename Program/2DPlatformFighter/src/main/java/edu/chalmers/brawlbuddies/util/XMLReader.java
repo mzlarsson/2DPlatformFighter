@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 /**
  * A class to read xml documents
  * @author Patrik Haar
+ * @version 1.0
  *
  */
 public class XMLReader {

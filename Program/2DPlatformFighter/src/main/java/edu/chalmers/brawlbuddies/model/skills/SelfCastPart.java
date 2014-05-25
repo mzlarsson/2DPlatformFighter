@@ -9,7 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
  * Describes a self casting SkillPart.
  * @author David Gustafsson
  * @revised Patrik Haar
- * @version 0.1
+ * @version 1.0
  *
  */
 public class SelfCastPart implements SkillPart {

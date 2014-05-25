@@ -9,6 +9,13 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import edu.chalmers.brawlbuddies.util.ResourceLoader;
 
+/**
+ * Sets up an intro scene made by Small Electric Boar Riot
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class Intro extends BasicGameState {
 	
 	private Image bg;

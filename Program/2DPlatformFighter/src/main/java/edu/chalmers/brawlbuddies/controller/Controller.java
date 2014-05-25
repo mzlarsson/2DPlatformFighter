@@ -44,7 +44,7 @@ public class Controller extends StateBasedGame {
 		
 		//Show splash screen (game intro)
 		this.addState(new Intro());
-		//this.enterState(Constants.GAMESTATE_INTRO);
+		this.enterState(Constants.GAMESTATE_INTRO);
 		
 		//Inits all the states
 		List<BasicGameState> states = StateFactory.getAllStates();
@@ -54,8 +54,6 @@ public class Controller extends StateBasedGame {
 		
 		//Load settings
 		((OptionMenuState)(this.getState(Constants.GAMESTATE_MENU_OPTIONS))).loadSettings(this);
-		//FIXME remove when having intro
-		this.enterState(Constants.GAMESTATE_MAIN_MENU);
 	}
 	
 	/**

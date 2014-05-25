@@ -7,7 +7,8 @@ import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 /**
  * A wrapper class for ProjectileCreator
- * @author david_000
+ * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public class ProjectileCreatorWrapper implements IWrapper, IProjectileCreator {

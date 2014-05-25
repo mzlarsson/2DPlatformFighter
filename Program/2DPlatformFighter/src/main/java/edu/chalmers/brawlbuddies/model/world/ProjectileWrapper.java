@@ -14,6 +14,7 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
 /**
  * A wrapper class for a Projectile
  * @author Patrik Haar
+ * @version 1.0
  *
  */
 public class ProjectileWrapper implements IWrapper, IProjectile {

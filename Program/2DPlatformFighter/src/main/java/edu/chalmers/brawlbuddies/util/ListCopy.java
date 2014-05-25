@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * A class to copy of a list
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class ListCopy {

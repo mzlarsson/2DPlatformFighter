@@ -5,6 +5,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  * A interface describing effects
  * @author David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  *
  */
 public interface IEffect {

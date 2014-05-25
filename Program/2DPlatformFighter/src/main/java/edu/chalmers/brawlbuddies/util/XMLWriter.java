@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 /**
- * A class that write a xml document
+ * A class that hold methods for writing XML documents.
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class XMLWriter {

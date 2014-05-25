@@ -1,5 +1,12 @@
 package edu.chalmers.brawlbuddies.view.menu;
 
+/**
+ * Basic setup to represent a Position
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class Position {
 	
 	private int x, y;

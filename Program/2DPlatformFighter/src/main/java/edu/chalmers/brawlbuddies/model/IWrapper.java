@@ -2,6 +2,7 @@ package edu.chalmers.brawlbuddies.model;
 /***
  * A interface to describe wrapper objects
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public interface IWrapper {

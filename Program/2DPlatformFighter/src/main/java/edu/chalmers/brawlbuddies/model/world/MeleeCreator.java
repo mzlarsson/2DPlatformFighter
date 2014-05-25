@@ -12,6 +12,7 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
 /**
  * A class to hold and fire a specific Melee object
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class MeleeCreator {

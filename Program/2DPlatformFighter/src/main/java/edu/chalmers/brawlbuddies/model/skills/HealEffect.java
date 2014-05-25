@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  * A class describing a healing effect 
  * @author David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  *
  */
 public class HealEffect implements IEffect {

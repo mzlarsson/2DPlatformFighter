@@ -12,6 +12,13 @@ import edu.chalmers.brawlbuddies.util.ResourceLoader;
 //import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.view.SideScroller;
 
+/**
+ * A general description of a graphical representation of a menu view
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class SimpleMenuView implements MenuView{
 
 	public static final float REFERENCE_SIZE_X = 1920.0f;

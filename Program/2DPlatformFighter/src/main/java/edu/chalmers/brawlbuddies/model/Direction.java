@@ -4,8 +4,8 @@ package edu.chalmers.brawlbuddies.model;
  * Enum for holding and calculating simple movement directions.
  * 
  * @author Matz Larsson
- * @version 0.2
  * @revised Patrik Haar
+ * @version 1.0
  */
 
 public enum Direction {

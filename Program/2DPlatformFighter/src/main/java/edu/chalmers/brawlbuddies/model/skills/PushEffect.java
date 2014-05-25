@@ -9,6 +9,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
  * A class describing a push effect 
  * @author David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  *
  */
 

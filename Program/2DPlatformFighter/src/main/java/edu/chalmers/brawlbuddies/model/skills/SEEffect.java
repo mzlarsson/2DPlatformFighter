@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.IGameObject;
 /**
  *  A class describing a StatusEffect applying Effect
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class SEEffect implements IEffect{

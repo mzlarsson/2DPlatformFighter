@@ -5,7 +5,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * An interface for describing a Character Skill.
  * @author Patrik Haar
- * @version 0.1
+ * @version 1.0
  */
 public interface ISkill {
 	/**

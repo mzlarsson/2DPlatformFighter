@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 /**
  * A interface to describe a graphical representation of a item in a menu 
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public interface MenuItem {

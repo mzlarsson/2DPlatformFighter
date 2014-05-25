@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.statuseffects.StatusEffectList.Action;
 /**
  * A interface describing a status effect that will effect the action a character can take
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public interface IPreActStatusEffect extends IStatusEffect {

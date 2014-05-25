@@ -16,6 +16,7 @@ import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
 /**
  * A class for playing sounds and music for the game 
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class SoundPlayer implements IEventBusSubscriber{

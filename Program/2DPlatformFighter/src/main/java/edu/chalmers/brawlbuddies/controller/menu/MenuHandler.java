@@ -12,6 +12,12 @@ import edu.chalmers.brawlbuddies.view.menu.MenuItem;
 import edu.chalmers.brawlbuddies.view.menu.MenuView;
 import edu.chalmers.brawlbuddies.view.menu.MultiChoiceMenuItem;
 
+/**
+ * Handles menu views and listens for actions on them.
+ * @author Matz Larsson
+ * @version 1.0
+ */
+
 public class MenuHandler {
 
 	private MenuView menuView;

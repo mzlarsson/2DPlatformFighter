@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A class that describe a status effect that shield the character against damage
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class ShieldStatusEffect implements IPreDamageStatusEffect {

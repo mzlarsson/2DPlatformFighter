@@ -5,6 +5,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A status effect that slow or speed up the target during a amount of time. 
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class SlowSpeedStatusEffect implements IStatusEffect {

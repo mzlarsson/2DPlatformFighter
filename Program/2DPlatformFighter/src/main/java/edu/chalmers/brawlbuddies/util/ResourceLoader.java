@@ -16,8 +16,9 @@ import org.newdawn.slick.Sound;
 
 import edu.chalmers.brawlbuddies.Constants;
 /**
- * A class to load a resource file for the game
+ * A class to load resources for the game
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class ResourceLoader {

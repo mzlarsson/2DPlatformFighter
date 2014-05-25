@@ -11,10 +11,12 @@ import org.newdawn.slick.geom.Rectangle;
 import edu.chalmers.brawlbuddies.model.IWrapper;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.skills.SkillWrapper;
+
 /**
  * A class to graphical visualsation of a skill in game 
  * @author Lisa Lipkin
  * @revised Patrik Haar
+ * @version 1.0
  *
  */
 public class SkillImage implements IDrawable {

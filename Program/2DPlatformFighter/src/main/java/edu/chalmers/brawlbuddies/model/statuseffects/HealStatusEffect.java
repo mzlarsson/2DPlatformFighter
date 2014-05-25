@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A status effect that heals the character over a amount of time.
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class HealStatusEffect implements IStatusEffect {

@@ -6,6 +6,13 @@ import java.util.Map;
 
 import edu.chalmers.brawlbuddies.Constants;
 
+/**
+ * Graphical representation of the options menu
+ * @author Matz Larsson
+ * @version 1.0
+ *
+ */
+
 public class OptionsMenuView extends SimpleMenuView {
 
 	public OptionsMenuView(Map<String, String> settings) {

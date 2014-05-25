@@ -10,6 +10,7 @@ import edu.chalmers.brawlbuddies.Constants;
 /**
  * A class tot create Fonts
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class FontCreator {

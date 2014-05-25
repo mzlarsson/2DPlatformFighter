@@ -21,9 +21,9 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
  * A class to represent a player-controlled character.
  * 
  * @author Patrik Haar
- * @version 0.4
  * @revised David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  */
 @XStreamAlias("character")
 public class Character extends GameObject implements ICharacter {

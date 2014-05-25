@@ -1,9 +1,9 @@
 package edu.chalmers.brawlbuddies.eventbus;
 
 /**
- * Interface for EventBusSubscribers.
- * 
+ * Interface for subscribers to the eventbus.
  * @author Lisa Lipkin
+ * @version 1.0
  * 
  */
 public interface IEventBusSubscriber {

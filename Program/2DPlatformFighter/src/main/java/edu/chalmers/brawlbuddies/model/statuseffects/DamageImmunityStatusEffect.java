@@ -1,12 +1,13 @@
 package edu.chalmers.brawlbuddies.model.statuseffects;
 
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
-	/**
-	 * A class that describes a  status effect 
-	 * that will make the player the immune against damage.
-	 * @author David Gustafsson
-	 *
-	 */
+
+/**
+ * A class that describes a  status effect 
+ * that will make the player the immune against damage.
+ * @author David Gustafsson
+ * @version 1.0
+ */
 
 public class DamageImmunityStatusEffect implements IPreDamageStatusEffect {
 	private int duration;

@@ -18,9 +18,9 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * responsible for the calculation of collisions between objects in this world.
  * 
  * @author Matz Larsson
- * @version 0.4
  * @revised Lisa Lipkin
  * @revised Patrik Haar
+ * @version 1.0
  */
 
 public class World implements CreatorListener{

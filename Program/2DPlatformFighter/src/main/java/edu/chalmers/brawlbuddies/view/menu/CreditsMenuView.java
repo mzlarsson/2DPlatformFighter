@@ -8,6 +8,7 @@ import edu.chalmers.brawlbuddies.util.FontCreator;
 /**
  * A class describe the credits in the menu system.
  * @author Matz Larssson
+ * @version 1.0
  *
  */
 public class CreditsMenuView extends SimpleMenuView{

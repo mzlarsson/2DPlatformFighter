@@ -2,9 +2,9 @@ package edu.chalmers.brawlbuddies.model.statuseffects;
 
 /**
  * A interface to describe a status effect that will effect the amount of damage 
- * a character can take
- * 
+ * a character can take.
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public interface IPreDamageStatusEffect extends IStatusEffect, Comparable<IPreDamageStatusEffect> {

@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 /**
  * A interface to describe the view
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public interface IView {

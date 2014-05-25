@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.view.IView;
 /**
  * A interface to describe a menu view 
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public interface MenuView extends IView{

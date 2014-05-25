@@ -12,8 +12,8 @@ import edu.chalmers.brawlbuddies.util.SlickUtil;
  * A class to describe an object with a position, velocity and shape in the game.
  * 
  * @author Patrik Haar
- * @version 1.0
  * @revised Matz Larsson
+ * @version 1.0
  * 
  */
 public abstract class GameObject implements IGameObject{

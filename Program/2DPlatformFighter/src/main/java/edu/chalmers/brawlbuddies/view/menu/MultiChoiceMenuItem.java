@@ -11,6 +11,7 @@ import edu.chalmers.brawlbuddies.util.FontCreator;
 /**
  * A menu item that have multiple choice
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class MultiChoiceMenuItem extends SimpleMenuItem {

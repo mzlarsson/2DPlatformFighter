@@ -17,6 +17,7 @@ import edu.chalmers.brawlbuddies.model.world.Movement.Alignment;
  * A wrapper class for character that send events to the view when relevant changes occurs.
  * @author Lisa Lipkin
  * @revised Patrik Haar
+ * @version 1.0
  *
  */
 public class CharacterWrapper implements IWrapper, ICharacter {

@@ -13,8 +13,7 @@ import edu.chalmers.brawlbuddies.view.menu.MenuView;
 /**
  * State for displaying and handling the main menu system
  * @author Matz Larsson
- * @version 0.1
- *
+ * @version 1.0
  */
 
 public class MainMenuState extends BasicGameState implements MenuListener{

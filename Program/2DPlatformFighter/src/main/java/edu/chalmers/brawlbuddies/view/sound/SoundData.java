@@ -4,6 +4,7 @@ import java.util.Map;
 /**
  * A class that handles sound information of a particular game object
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class SoundData {

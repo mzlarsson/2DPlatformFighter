@@ -21,9 +21,9 @@ import edu.chalmers.brawlbuddies.model.world.ProjectileWrapper;
 
 /**
  * The main game view that handles the view in game.
- * 
  * @author Lisa Lipkin
  * @revised Patrik Haar
+ * @version 1.0
  */
 public class GameView implements IEventBusSubscriber, IView {
 	// goal and time realated variables

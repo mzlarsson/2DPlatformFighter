@@ -17,8 +17,8 @@ import edu.chalmers.brawlbuddies.model.world.CharacterWrapper;
 /**
  * Creates an object of the character that can be drawn on the screen. Contains
  * animation and logic for the correct animation.
- * 
  * @author Lisa Lipkin
+ * @version 1.0
  * 
  */
 public class CharacterImage implements IDrawable {

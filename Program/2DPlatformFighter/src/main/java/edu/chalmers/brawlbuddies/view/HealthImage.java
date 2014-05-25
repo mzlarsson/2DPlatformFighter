@@ -12,8 +12,8 @@ import edu.chalmers.brawlbuddies.model.world.IHealth;
 
 /**
  * A class to represent the healthbar int the view
- * 
- * @author Lisa
+ * @author Lisa Lipkin
+ * @version 1.0
  * 
  */
 public class HealthImage implements IDrawable {

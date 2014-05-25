@@ -7,6 +7,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
 /**
  * A interface to describe game object 
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public interface IGameObject{

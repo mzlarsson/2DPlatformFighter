@@ -14,6 +14,7 @@ import edu.chalmers.brawlbuddies.model.statuseffects.IStatusEffect;
  * A interface to describe a Character
  * @author David Gustafsson
  * @revised Matz Larsson
+ * @version 1.0
  *
  */
 public interface ICharacter extends IGameObject, HealAble, DamageAble, PushAble{

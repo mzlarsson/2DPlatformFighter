@@ -8,6 +8,7 @@ import edu.chalmers.brawlbuddies.util.FontCreator;
 /**
  * A class to describe the end screen in the menu system
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class EndScreenView extends SimpleMenuView {

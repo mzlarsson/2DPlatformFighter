@@ -9,8 +9,9 @@ import java.util.TreeMap;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
 /**
- * A class to contain the data of the world
+ * A class to contain all the data of the world
  * @author Matz Larsson
+ * @version 1.0
  *
  */
 public class WorldData {

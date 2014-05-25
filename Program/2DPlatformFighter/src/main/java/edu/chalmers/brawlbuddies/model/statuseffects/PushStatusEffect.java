@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * Creates a status effect that will push the character during a amount of time without gravity
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class PushStatusEffect implements IStatusEffect {

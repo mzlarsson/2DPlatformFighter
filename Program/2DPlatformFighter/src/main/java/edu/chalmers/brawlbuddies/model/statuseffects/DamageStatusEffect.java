@@ -4,6 +4,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A class that describe a status effect that will damage a character over time.
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class DamageStatusEffect implements IStatusEffect {

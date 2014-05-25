@@ -7,6 +7,7 @@ import edu.chalmers.brawlbuddies.model.IWrapper;
  
  * A wrapper class for Health that send events to the view when relevant changes occurs.
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public class HealthWrapper implements IWrapper, IHealth {

@@ -7,6 +7,7 @@ import edu.chalmers.brawlbuddies.model.IWrapper;
 /**
  * A interface for objects that can be rendered by the view
  * @author Lisa Lipkin
+ * @version 1.0
  *
  */
 public interface IDrawable {

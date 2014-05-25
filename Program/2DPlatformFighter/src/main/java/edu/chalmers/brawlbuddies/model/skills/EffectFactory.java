@@ -14,8 +14,9 @@ import edu.chalmers.brawlbuddies.model.statuseffects.ShieldStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.SlowSpeedStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.StunStatusEffect;
 /**
- * A factory that creates Effect with nodes
+ * A factory that creates Effects
  * @author Patrik Haar
+ * @version 1.0
  *
  */
 public class EffectFactory {

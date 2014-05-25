@@ -6,6 +6,7 @@ import edu.chalmers.brawlbuddies.model.world.ICharacter;
 /**
  * A status effect that will make the character unable to move during a duration of time
  * @author David Gustafsson
+ * @version 1.0
  *
  */
 public class ImmobilizeStatusEffect implements IPreActStatusEffect {
