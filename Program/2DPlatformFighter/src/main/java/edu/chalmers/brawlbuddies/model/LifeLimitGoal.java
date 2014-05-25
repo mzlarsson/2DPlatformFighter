@@ -18,7 +18,10 @@ public class LifeLimitGoal implements IGoal {
 	private int maxLives;
 	
 	private List<GameListener> listeners;
-	
+	/**
+	 * Create a new LifeLimitGoal with a life limit
+	 * @param lifeLimit - the life limit
+	 */
 	public LifeLimitGoal(int lifeLimit) {
 		this.lives = new HashMap<Integer,Integer>();
 		this.listeners = new ArrayList<GameListener>();
@@ -51,19 +54,27 @@ public class LifeLimitGoal implements IGoal {
 			gl.gameEventPerformed("gameOver", id);
 		}
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void update(int delta) {
 		// Does nothing.
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeGameListener(GameListener gl) {
 		listeners.remove(gl);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("characterAdded")) {
 			lives.put(((ICharacter)value).getID(), maxLives);

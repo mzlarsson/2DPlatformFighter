@@ -16,14 +16,19 @@ public class LifeLimitGoalWrapper implements IGoal{
 	private LifeLimitGoal llg;
 
 	private List<GameListener> listeners;
-	
+	/**
+	 * Creates a LifeLimitGoalWrapper with a life limit
+	 * @param lifeLimit - the life limit
+	 */
 	public LifeLimitGoalWrapper(int lifeLimit) {
 		this.listeners = new ArrayList<GameListener>();
 		this.llg = new LifeLimitGoal(lifeLimit);
 		llg.addGameListener(this);
 		EventBus.getInstance().fireEvent(new EventBusEvent("lifeLimitAdded", lifeLimit, null));
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("gameOver")) {
 			for (GameListener gl : listeners) {
@@ -33,16 +38,25 @@ public class LifeLimitGoalWrapper implements IGoal{
 			llg.gameEventPerformed(evtName, value);
 		}
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void update(int delta) {
 		llg.update(delta);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
 		
 	}
+	
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeGameListener(GameListener gl) {
 		listeners.remove(gl);
 	}

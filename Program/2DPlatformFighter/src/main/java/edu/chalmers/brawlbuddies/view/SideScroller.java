@@ -9,7 +9,11 @@ import edu.chalmers.brawlbuddies.eventbus.EventBusEvent;
 import edu.chalmers.brawlbuddies.eventbus.IEventBusSubscriber;
 import edu.chalmers.brawlbuddies.model.Position;
 import edu.chalmers.brawlbuddies.model.world.ICharacter;
-
+/**
+ * A class that handles the scrolling and scaling of the game view
+ * @author Matz Larsson
+ *
+ */
 public class SideScroller implements IEventBusSubscriber{
 	
 	private int viewportX, viewportY;

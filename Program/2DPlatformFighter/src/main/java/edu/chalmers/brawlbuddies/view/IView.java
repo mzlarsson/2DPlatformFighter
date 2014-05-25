@@ -2,7 +2,11 @@ package edu.chalmers.brawlbuddies.view;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-
+/**
+ * A interface to describe the view
+ * @author Lisa Lipkin
+ *
+ */
 public interface IView {
 	/**
 	 * Slick render method that forwards the render call

@@ -16,12 +16,17 @@ public class GoalHandlerWrapper implements IGoalHandler {
 
 	private GoalHandler gh;
 	private List<GameListener> listeners;
-
+	/**
+	 * Creates a new GoalHandlerWrapper
+	 */
 	public GoalHandlerWrapper() {
 		this.gh = new GoalHandler();
 		this.listeners = new ArrayList<GameListener>();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("characterKilled")) {
 			EventBus.getInstance().fireEvent(new EventBusEvent("characterDied", ((ICharacter)value).getID(), null));
@@ -29,19 +34,31 @@ public class GoalHandlerWrapper implements IGoalHandler {
 		gh.gameEventPerformed(evtName, value);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void update(int delta) {
 		gh.update(delta);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
 		gh.addGameListener(gl);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeGameListener(GameListener gl) {
 		listeners.remove(gl);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGoal(IGoal goal) {
 		gh.addGoal(goal);
 	}

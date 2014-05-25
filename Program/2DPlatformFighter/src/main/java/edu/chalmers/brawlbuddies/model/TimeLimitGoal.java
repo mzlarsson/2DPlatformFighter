@@ -28,6 +28,9 @@ public class TimeLimitGoal implements IGoal{
 		this.timeLeft = timeLimit*1000;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void update(int delta) {
 		if (!decreaseGameTime(delta)) {
 			gameOver();
@@ -63,15 +66,27 @@ public class TimeLimitGoal implements IGoal{
 			gl.gameEventPerformed("gameOver", winnerID.size()==1?winnerID.get(0):-1);
 		}
 	}
+	
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
 	}
+	
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeGameListener(GameListener gl) {
 		listeners.remove(gl);
 	}
+	
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("characterAdded")) {
 			lives.put(((ICharacter)value).getID(), 0);

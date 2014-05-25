@@ -18,7 +18,7 @@ import edu.chalmers.brawlbuddies.model.world.HealthWrapper;
 /**
  * a class to represent and draw the heads up display of a character in game.
  * 
- * @author Lisa
+ * @author Lisa Lipkin
  * 
  */
 public class HudImage implements IDrawable {
@@ -95,7 +95,9 @@ public class HudImage implements IDrawable {
 	private Position getHealthBarPosition() {
 		return healthBarPosition;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public Integer getUniqeID() {
 		return hudID;
 	}
@@ -135,7 +137,7 @@ public class HudImage implements IDrawable {
 	}
 
 	/**
-	 * renhers the life information
+	 * renders the life information
 	 * 
 	 * @param g
 	 *            the slick graphics object
@@ -181,7 +183,7 @@ public class HudImage implements IDrawable {
 	}
 
 	/**
-	 * handles the lifes on the event of a character's death
+	 * handles the lives on the event of a character's death
 	 */
 	public void characterDied() {
 		animation.restart();

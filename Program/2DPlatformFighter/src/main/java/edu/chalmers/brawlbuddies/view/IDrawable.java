@@ -4,7 +4,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.model.IWrapper;
-
+/**
+ * A interface for objects that can be rendered by the view
+ * @author Lisa Lipkin
+ *
+ */
 public interface IDrawable {
 	/**
 	 * Slick render method that forwards the render call

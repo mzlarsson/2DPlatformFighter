@@ -13,7 +13,11 @@ import edu.chalmers.brawlbuddies.model.statuseffects.PushStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.ShieldStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.SlowSpeedStatusEffect;
 import edu.chalmers.brawlbuddies.model.statuseffects.StunStatusEffect;
-
+/**
+ * A factory that creates Effect with nodes
+ * @author Patrik Haar
+ *
+ */
 public class EffectFactory {
 	
 	/**

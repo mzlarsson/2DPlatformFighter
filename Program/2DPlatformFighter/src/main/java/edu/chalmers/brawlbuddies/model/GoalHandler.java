@@ -15,7 +15,9 @@ public class GoalHandler implements IGoalHandler {
 	private List<IGoal> goals;
 	private List<GameListener> listeners;
 	private List<ICharacter> characters;
-	
+	/**
+	 * Creates a new GoalHandler
+	 */
 	public GoalHandler() {
 		goals = new ArrayList<IGoal>();
 		listeners = new ArrayList<GameListener>();
@@ -34,7 +36,9 @@ public class GoalHandler implements IGoalHandler {
 			goal.gameEventPerformed("characterAdded", character);
 		}
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameEventPerformed(String evtName, Object value) {
 		if (evtName.equals("characterAdded")) {
 			characters.add((ICharacter)value);
@@ -44,16 +48,25 @@ public class GoalHandler implements IGoalHandler {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void update(int delta) {
 		for (IGoal goal : goals) {
 			goal.update(delta);
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void addGameListener(GameListener gl) {
 		listeners.add(gl);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void removeGameListener(GameListener gl) {
 		listeners.remove(gl);
 	}
