@@ -64,7 +64,7 @@ public class PushEffect implements IEffect {
 					}
 				}
 			} else {
-				if(!(reciever instanceof ICharacter && ((ICharacter)reciever).getID() == creatorID)){
+				if(reciever.getID() != creatorID){
 					if (velocity == null) {
 						Velocity v = sender.getTotalVelocity().getNormalized();
 						v = v.scale(power);

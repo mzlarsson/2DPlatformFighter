@@ -103,6 +103,9 @@ public abstract class GameObject implements IGameObject{
 		return this.movement;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Velocity getTotalVelocity(){
 		return this.getMovement().getTotalVelocity();
 	}
@@ -250,8 +253,13 @@ public abstract class GameObject implements IGameObject{
 	public int getID() {
 		return id;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	public abstract Position update(int delta);
+	/**
+	 * {@inheritDoc}
+	 */
 	public abstract int getTypeID();
 
 }

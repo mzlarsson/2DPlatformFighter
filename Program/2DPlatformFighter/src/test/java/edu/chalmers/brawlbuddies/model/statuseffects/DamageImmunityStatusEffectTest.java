@@ -18,7 +18,7 @@ import edu.chalmers.brawlbuddies.model.world.Health;
 public class DamageImmunityStatusEffectTest {
 
 	@Test
-	public void test() {
+	public void testDamageImmunityDuringAUpdateFrame() {
 		Character bob = new Character(new Rectangle(10, 10 ,10 ,10 ), 1 , new Position(0, 0));
 		bob.setHealth(new Health(1000, 1));
 		Skill skill = new Skill(0, 0 , 0 , 0, null );
@@ -27,8 +27,10 @@ public class DamageImmunityStatusEffectTest {
 		
 		DamageImmunityStatusEffect test = new DamageImmunityStatusEffect(10, 1);
 		bob.applyStatusEffect(test);
+		// Test if damage immunity prevents character from taking damage
 		bob.takeDamage(1000);
 		assertTrue(bob.getHealth() == 1000);
+		// Test if damage immunity continues over its duration
 		bob.update(10);
 		bob.takeDamage(10);
 		assertTrue(bob.getHealth() == 990);

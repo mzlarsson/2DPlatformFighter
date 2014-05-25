@@ -28,7 +28,10 @@ public class SEEffect implements IEffect{
 	 */
 	public boolean effect(IGameObject sender, IGameObject reciever) {
 		if (reciever instanceof ICharacter) {
-			if (reciever.getID() != creatorID) {
+			if( sender == null){
+				((ICharacter) reciever).applyStatusEffect(statusEffect.copy());
+			}
+			else if (reciever.getID() != creatorID) {
 				((ICharacter)reciever).applyStatusEffect(statusEffect.copy());
 				return true;
 			}

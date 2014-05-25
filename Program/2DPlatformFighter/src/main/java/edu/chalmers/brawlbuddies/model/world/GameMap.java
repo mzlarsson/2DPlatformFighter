@@ -16,6 +16,9 @@ public class GameMap {
 	private TiledMap map;
 	private Position[] spawn;
 	
+	/**
+	 * Create a new a GameMap
+	 */
 	public GameMap() {
 		try {
 			this.map = new TiledMap(Constants.TILEMAPS + "basic16Map.tmx");
@@ -27,6 +30,11 @@ public class GameMap {
 		this.spawn[1] = new Position(1400,200);
 	}
 	
+	/**
+	 * Creates a new GameMap with a map and spawn posititions to the characters
+	 * @param map - the map of the GameMap
+	 * @param spawns - the spawn positions
+	 */
 	public GameMap(TiledMap map, Position[] spawns) {
 		this.map = map;
 		this.spawn = spawns;

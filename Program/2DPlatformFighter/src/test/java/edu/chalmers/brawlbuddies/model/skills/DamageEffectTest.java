@@ -15,20 +15,23 @@ import edu.chalmers.brawlbuddies.model.world.Character;
  */
 public class DamageEffectTest {
 	
-	@Test
-	public void test() {
-	DamageEffect damage = new DamageEffect(500f);
-	// Test if the effect will damage a object when creatorID is different from
-	// target ID
-	Character bob = new Character(new Rectangle(10, 10, 10, 10), 1, new Position(10 , 10) );
-	bob.setHealth(new Health(1000, 1000 , 2));
-	damage.setCreatorID(2);
-	damage.effect(null, bob);
-	assertTrue(bob.getHealth() == 500);
+
+	private DamageEffect damage = new DamageEffect(500f);
+	private Character bob = new Character(new Rectangle(10, 10, 10, 10), 1, new Position(10 , 10) );
 	
-	// Test if the effect will damage a object when creatorID is the same as
-	// the target ID
-	damage.setCreatorID(1);
+	@Test
+	public void testDamageWhenDifferentID() {
+	bob.setHealth(new Health(1000, 1000 , 5));
+	damage.setCreatorID(bob.getID() + 1);
+	damage.effect(null, bob);
+	System.out.println(bob.getHealth());
+	assertTrue(bob.getHealth() == 500);
+	}
+	
+	@Test
+	public void testDamageWhenSameID(){
+	bob.setHealth(new Health(1000, 1000 , 2));
+	damage.setCreatorID(bob.getID());
 	bob.restoreHealth();
 	damage.effect(null, bob);
 	assertTrue(bob.getHealth() == 1000);

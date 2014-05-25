@@ -44,7 +44,9 @@ public class ProjectileCreator implements IProjectileCreator {
 		this.gravity = gravity==null?Movement.DEFAULT_GRAVITY.copy():gravity;
 		this.effects = effects;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setCreatorID(int a) {
 		if (effects != null) {
 			for (int i = 0; i < effects.size(); i++) {
@@ -52,7 +54,10 @@ public class ProjectileCreator implements IProjectileCreator {
 			}
 		}
 	}
-	
+	/**
+	 * Get the Type ID of the projectilecreator
+	 * @return int - the type ID of the projectilecreator
+	 */
 	public int getTypeID() {
 		return typeID;
 	}

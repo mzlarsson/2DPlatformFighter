@@ -16,8 +16,8 @@ public class Health implements IHealth{
 
 	/**
 	 * Creates a Health object with a max and current health value.
-	 * @param max The maximum health value.
-	 * @param curr The current health value.
+	 * @param max - The maximum health value.
+	 * @param curr - The current health value.
 	 */
 	public Health(float max, float curr, int id) {
 		this.maxHp = max;
@@ -26,32 +26,28 @@ public class Health implements IHealth{
 	}
 	
 	/**
-	 * Creates a Health object with a max value.
-	 * @param max The maximum health value.
+	 * Creates a Health object with a maximum health amount and a ID.
+	 * @param max -  The maximum health value.
+	 * @param id - the ID of the health object
 	 */
 	public Health(float max, int id) {
 		this(max, max, id);
 	}
 	
 	/**
-	 * Decrease currentHp with float a if sum is lesser than zero currentHp is
-	 * set to zero
-	 * 
-	 * @param damage
+	 * {@inheritDoc}
 	 */
 	public void takeDamage(float damage) {
 		this.setHealth(currentHp-damage);
 	};
 
 	/**
-	 * Decrease current health with a percentage based on current Health if the
-	 * result is lesser than minimum damage current health take minimum damage
-	 * if result is larger than maximum damage current health take maximum
-	 * damage
+	 * Damage health with a percentage based on current Health.
+	 * Damage cannot exceed maximumdamage or be lower than minimumdamage.
 	 * 
-	 * @param percentage
-	 * @param minimumdamage
-	 * @param maximumdamage
+	 * @param percentage - the percentage of current health that will be taken as damage
+	 * @param minimumdamage - the minimum amount of damage that can be taken
+	 * @param maximumdamage - the maximum amount of damage that can be taken
 	 */
 	public void takeDamageCurrentHealth(float percentage, float minimumdamage,
 			float maximumdamage) {
@@ -67,13 +63,12 @@ public class Health implements IHealth{
 	}
 
 	/**
-	 * Decrease currentHp with a percentage based on missing health if the
-	 * result is lesser than minimumdamage currentHp take minimumdamage if
-	 * result is larger than maximumdamage currentHp take maximumdamage
+	 * Damage health with a percentage based on missing health. The damage cannot 
+	 * exceed maximumdamage or be lower than minimumdamage.
 	 * 
-	 * @param percentage
-	 * @param minimumdamage
-	 * @param maximumdamage
+	 * @param percentage - the percentage of missing health that will be taken as damage
+	 * @param minimumdamage - the minimum amount of damage that can be taken
+	 * @param maximumdamage - the maximum amount of damage that can be taken
 	 */
 	public void takeDamageMissingHealth(float percentage, float minimumdamage,
 			float maximumdamage) {
@@ -89,21 +84,20 @@ public class Health implements IHealth{
 	}
 
 	/**
-	 * Increase currentHp with a float if currentHp + a is bigger than maxHp,
-	 * currentHp is set to maxHp
-	 * 
-	 * @param a
+	 * {@inheritDoc}
 	 */
-	public void heal(float a) {
-		this.setHealth(currentHp+a);
+	public void heal(float healAmount) {
+		this.setHealth(currentHp+healAmount);
 	}
 
 	/**
-	 * Heals a character a percentage based on missing health
+	 * Heal health with percentage based on missing health. 
+	 * Heal cannot exceed maxhealing or 
+	 * be lower than minimumhealing.
 	 * 
-	 * @param percentage
-	 * @param maxhealing
-	 * @param minimumhealing
+	 * @param percentage -  the percentage of missing health to be healed
+	 * @param maxhealing - the minimum healing amount
+	 * @param minimumhealing - the maximum healing amount
 	 */
 	public void healPercentageofMissing(float percentage, float maxhealing,
 			float minimumhealing) {
@@ -119,13 +113,13 @@ public class Health implements IHealth{
 	}
 
 	/**
-	 * Heals a character a percentage based on maximum health
+	 * Heal health a percentage based on maximum health
+	 * The heal cannot exceed maxhealing or be lower than minimum healing
 	 * 
-	 * @param percentage
-	 * @param maxhealing
-	 * @param minimumhealing
-	 */
-	public void healPercetageofMaximum(float percentage, float maxhealing,
+	 * @param percentage -  the percentage of maximum health to be healed
+	 * @param maxhealing - the minimum healing amount
+	 * @param minimumhealing - the maximum healing amount
+	 */public void healPercetageofMaximum(float percentage, float maxhealing,
 			float minimumhealing) {
 		if ((maxHp / 100) * percentage >= maxhealing && maxhealing > 0) {
 			heal(maxhealing);
@@ -138,52 +132,57 @@ public class Health implements IHealth{
 	}
 
 	/**
-	 * Get current health
-	 * 
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public float getHealth() {
 		return currentHp;
 	}
 
 	/**
-	 * Set current health to maximum health
+	 * {@inheritDoc}
 	 */
 	public void restoreHealth() {
 		this.setHealth(maxHp);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isDead(){
 		return getHealth() == 0;
 	}
 
 	/**
-	 * Set max health
-	 * @param a
+	 * {@inheritDoc}
 	 */
 	public void setMaxHealth(float a) {
 		maxHp = a;
 	}
 
 	/**
-	 * Set current health. If the given variable is invalid the closest value
-	 * is calculated.
-	 * @param a The new health. Should be in the interval 0<= a <= maxHp
-	 */
+ 	* {@inheritDoc}
+ 	*/
 	public void setHealth(float a) {
 		currentHp = Math.min(Math.max(0, a), maxHp);
 	}
 
 	/**
-	 * Get missing health
-	 * @return missing health
+	 * {@inheritDoc}
 	 */
 	public float getMissingHealth() {
 		return getMaxHealth()-getHealth();
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public float getMaxHealth() {
 		return maxHp;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public int getID(){
 		return ownerID;
 	}
