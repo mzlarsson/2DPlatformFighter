@@ -10,6 +10,8 @@ import javax.swing.Timer;
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 
+import edu.chalmers.brawlbuddies.util.GameLogger;
+
 /**
  * Class for handling the connection and data transfer with an XBOX 360 controller
  * @author Matz Larsson
@@ -206,7 +208,7 @@ public class XboxCommunicator {
 	 * Stops listening for any new data
 	 */
 	public void close() {
-		System.out.println("Closing XboxCommunicator");
+		GameLogger.getLogger().info("Closing XboxCommunicator...");
 		updateTimer.stop();
 	}
 	

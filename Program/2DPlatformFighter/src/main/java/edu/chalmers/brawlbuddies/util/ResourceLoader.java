@@ -23,7 +23,7 @@ public class ResourceLoader {
 			InputStream imageStream = ClassLoader.getSystemResourceAsStream(path);
 			return new Image(imageStream, path, false);
 		}catch(SlickException ioe){
-			System.out.println("Could not read image: "+path);
+			GameLogger.getLogger().warning("Could not read image: "+path);
 			return null;
 		}
 	}
@@ -32,7 +32,7 @@ public class ResourceLoader {
 		try{
 			return new Sound(path);
 		}catch(SlickException ioe){
-			System.out.println("Could not read sound: "+path);
+			GameLogger.getLogger().warning("Could not read sound: "+path);
 			return null;
 		}
 	}
@@ -65,13 +65,13 @@ public class ResourceLoader {
 						}
 					}
 				}catch(IOException ioe){
-					System.out.println("Could not list files");
+					GameLogger.getLogger().warning("Could not list files");
 				}
 				
 				return fileNames;
 			}
 			else {
-				System.out.println("Could not read path: "+dirPath);
+				GameLogger.getLogger().warning("Could not read path: "+dirPath);
 				return null;
 			}
 		}else{

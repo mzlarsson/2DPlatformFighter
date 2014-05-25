@@ -137,7 +137,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	 */
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException{
-		System.out.println("Entering Play state");
 		state = game;
 	}
 
@@ -150,7 +149,6 @@ public class PlayState extends BasicGameState implements GameListener{
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException{
 		view.close();
-		System.out.println("Leaving Play state");
 	}
 	
 	/**

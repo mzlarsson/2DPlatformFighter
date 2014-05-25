@@ -1,6 +1,6 @@
 package edu.chalmers.brawlbuddies.model.statuseffects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
@@ -11,6 +11,7 @@ import edu.chalmers.brawlbuddies.model.Velocity;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
+import edu.chalmers.brawlbuddies.util.GameLogger;
 /**
  * A test class for SlowSpeedStatusEffect
  * @author David Gustafsson
@@ -38,12 +39,12 @@ public class SlowSpeedStatusEffectTest {
 		assertTrue(bob.getTotalVelocity().getX() == 100);
 		
 		SlowSpeedStatusEffect test2 = new SlowSpeedStatusEffect(100, 0 , new Velocity(0 , -100));
-		System.out.println(bob.getTotalVelocity());
+		GameLogger.getLogger().info(bob.getTotalVelocity().toString());
 		bob.applyStatusEffect(test2);
 		assertTrue(bob.getTotalVelocity().getX() == 100);
 		bob.update(1);
 		bob.resetGravity();
-		System.out.println(bob.getTotalVelocity().y == -100);
+		GameLogger.getLogger().info(""+(bob.getTotalVelocity().y == -100));
 	}
 
 }

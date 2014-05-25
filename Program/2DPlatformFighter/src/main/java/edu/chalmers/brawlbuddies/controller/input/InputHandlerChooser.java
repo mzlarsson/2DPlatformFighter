@@ -7,6 +7,7 @@ import org.newdawn.slick.Input;
 
 import edu.chalmers.brawlbuddies.controller.input.midi.MidiDeviceFinder;
 import edu.chalmers.brawlbuddies.controller.input.xbox.XboxFinder;
+import edu.chalmers.brawlbuddies.util.GameLogger;
 
 /**
  * Class for handling the choice of control inputs.
@@ -125,7 +126,7 @@ public class InputHandlerChooser {
 					}else if(name.equals(controlTypes[3])){
 						return new SynthInputHandler(num-start);
 					}else{
-						System.out.println("Input type not recognized");
+						GameLogger.getLogger().severe("Input type not recognized");
 					}
 				}
 				num++;

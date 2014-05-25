@@ -10,6 +10,8 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.Transmitter;
 import javax.swing.Timer;
 
+import edu.chalmers.brawlbuddies.util.GameLogger;
+
 /**
  * Communicator between the computer and a MIDI device such as a synth.
  * This class requires a Transmitter retrieved from a MIDI device.
@@ -151,7 +153,7 @@ public class MidiDeviceCommunicator implements Receiver{
 	 * Stops listening for any new data
 	 */
 	public void close() {
-		System.out.println("Closing");
+		GameLogger.getLogger().info("Closing MidiDeviceCommunicator...");
 		on = false;
 	}
 	
