@@ -15,9 +15,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 import edu.chalmers.brawlbuddies.Constants;
-
+/**
+ * A class to load a resource file for the game
+ * @author Matz Larsson
+ *
+ */
 public class ResourceLoader {
-
+	/**
+	 * Get the image with a given file path
+	 * @param path - the file path to the image
+	 * @return Image- the image at the file path
+	 */
 	public static Image getImage(String path){
 		try{
 			InputStream imageStream = ClassLoader.getSystemResourceAsStream(path);
@@ -27,7 +35,11 @@ public class ResourceLoader {
 			return null;
 		}
 	}
-	
+	/**
+	 * Get the Sound with a given file path
+	 * @param path - the file path to the sound
+	 * @return Sound - the sound at the file path
+	 */
 	public static Sound getSound(String path){
 		try{
 			return new Sound(path);
@@ -36,7 +48,11 @@ public class ResourceLoader {
 			return null;
 		}
 	}
-	
+	/**
+	 * Get a list of file names at a directory path
+	 * @param dirPath - the directory path
+	 * @return list<String> - a list of file names
+	 */
 	public static List<String> listFileNames(String dirPath){
 		if(insideJar()){
 			CodeSource src = ResourceLoader.class.getProtectionDomain().getCodeSource();
@@ -86,7 +102,10 @@ public class ResourceLoader {
 			return fileNames;
 		}
 	}
-	
+	/**
+	 * Return if the resource loader is inside a jar
+	 * @return boolean - true if the resource loader is inside a jar
+ 	 */
 	public static boolean insideJar(){
 		return ResourceLoader.class.getResource("ResourceLoader.class").toString().startsWith("jar:");
 	}

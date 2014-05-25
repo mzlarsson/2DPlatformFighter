@@ -7,7 +7,11 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.TrueTypeFont;
 
 import edu.chalmers.brawlbuddies.Constants;
-
+/**
+ * A class tot create Fonts
+ * @author Matz Larsson
+ *
+ */
 public class FontCreator {
 
 	public static final int SMALL = 0;
@@ -23,7 +27,14 @@ public class FontCreator {
 	private static Font bigBoldFont;
 	private static Font largeFont;
 	private static Font largeBoldFont;
-	
+	/**
+	 * Get a font by a size index that goes from 0 - 5
+	 * The available fonts are in rising order
+	 * small, medium, big , big bold 
+	 * large and large bold.
+	 * @param sizeIndex - the sizeindex of the font
+	 * @return Font - a font with the given size index
+	 */
 	public static Font getFont(int sizeIndex){
 		if(bigFont == null){
 			try {

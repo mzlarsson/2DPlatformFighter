@@ -5,22 +5,33 @@ import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.util.FontCreator;
-
+/**
+ * A class to describe the end screen in the menu system
+ * @author Matz Larsson
+ *
+ */
 public class EndScreenView extends SimpleMenuView {
 
 	private String winnerName;
-	
+	/**
+	 * Creates a new EndScreenView
+	 */
 	public EndScreenView() {
 		this.winnerName = "Not yet defined";
 		this.add(new SimpleMenuItem("gotoMain", "Ok", 640));
 		
 		this.setBackground(Constants.MENU_IMAGES + "menu_endscreen.png");
 	}
-	
+	/**
+	 * Set the winner in the end screen
+	 * @param winnerName - the name of the winning player
+	 */
 	public void setWinner(String winnerName) {
 		this.winnerName = winnerName;
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer gc, Graphics g){
 		super.render(gc, g);

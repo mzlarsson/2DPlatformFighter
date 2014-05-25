@@ -3,7 +3,7 @@ package edu.chalmers.brawlbuddies.eventbus;
 /**
  * Interface for EventBusSubscribers.
  * 
- * @author Lisa
+ * @author Lisa Lipkin
  * 
  */
 public interface IEventBusSubscriber {

@@ -5,15 +5,23 @@ import org.newdawn.slick.Graphics;
 
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.util.FontCreator;
-
+/**
+ * A class describe the credits in the menu system.
+ * @author Matz Larssson
+ *
+ */
 public class CreditsMenuView extends SimpleMenuView{
-
+	/**
+	 * Creates a new CredisMenuView
+	 */
 	public CreditsMenuView() {
 		this.add(new SimpleMenuItem("gotoMain", "Back", 640));
 
 		this.setBackground(Constants.MENU_IMAGES + "menu_credits.png");
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(GameContainer gc, Graphics g){
 		super.render(gc, g);

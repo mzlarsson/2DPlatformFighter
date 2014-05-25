@@ -8,20 +8,32 @@ import java.util.TreeMap;
 
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
-
+/**
+ * A class to contain the data of the world
+ * @author Matz Larsson
+ *
+ */
 public class WorldData {
 	
 	private Map<Integer, IGameObject> objects;
 	private GameMap gameMap = null;
-
+	/**
+	 * Creates a new world data object
+	 */
 	public WorldData() {
 		objects = new TreeMap<Integer, IGameObject>();
 	}
-	
+	/**
+	 * Add a new game object to world
+	 * @param object - the game object to be added
+	 */
 	public void add(IGameObject object){
 		this.objects.put(object.getID(), object);
 	}
-	
+	/**
+	 * Set the map of the world
+	 * @param gameMap - the new map to be used
+	 */
 	public void setMap(GameMap gameMap){
 		//Reset old map
 		for(Integer i : this.objects.keySet()){
@@ -43,11 +55,9 @@ public class WorldData {
 			}
 		}
 	}
-	
 	public GameMap getGameMap(){
 		return this.gameMap;
 	}
-	
 	public void remove(IGameObject object){
 		this.remove(object.getID());
 	}
@@ -68,7 +78,6 @@ public class WorldData {
 	public List<IGameObject> getObjectsByType(Class c){
 		return this.getObjectsByType(c, true);
 	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<IGameObject> getObjectsByType(Class c, boolean match){
 		List<IGameObject> objects = new ArrayList<IGameObject>();

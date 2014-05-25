@@ -10,7 +10,12 @@ import org.w3c.dom.NodeList;
 import edu.chalmers.brawlbuddies.Constants;
 import edu.chalmers.brawlbuddies.util.ResourceLoader;
 import edu.chalmers.brawlbuddies.util.XMLReader;
-
+/**
+ * A class that read sound information from a xml document and stores it in a map with
+ * soundkeeper object.
+ * @author Matz Larsson
+ *
+ */
 public class SoundFactory {
 	
 	private static SoundFactory instance;

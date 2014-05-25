@@ -11,7 +11,7 @@ import edu.chalmers.brawlbuddies.controller.Controller;
 /**
  * This is the main class of the game Brawl Buddies, a 2D platform fighter game.
  * @author Matz Larsson
- * @version 0.1
+ * @version 1.0
  *
  */
 

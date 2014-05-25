@@ -1,10 +1,13 @@
 package edu.chalmers.brawlbuddies.view.sound;
 
 import org.newdawn.slick.Sound;
-
+/**
+ * A class to contain and manage a single sound object
+ * @author Matz Larsson
+ *
+ */
 public class SoundKeeper {
 	
-	//private Map<Integer, Sound> currentSounds;
 	private Sound sound;
 	private float volume = 1.0f;
 	private boolean loop = false;
@@ -26,7 +29,6 @@ public class SoundKeeper {
 	 * @param loop If the sound shop loop
 	 */
 	public SoundKeeper(Sound sound, String[] stoppers, boolean loop){
-		//this.currentSounds = new TreeMap<Integer, Sound>();
 		this.sound = sound;
 		this.stoppers = stoppers;
 		this.loop = loop;
@@ -42,21 +44,8 @@ public class SoundKeeper {
 	
 	/**
 	 * Plays the current sound
-	 * @param uniqueID The unique ID of the object who requested this action
 	 */
-	public void playSound(int uniqueID){
-		/*if(this.currentSounds.get(uniqueID) == null){
-			this.currentSounds.put(uniqueID, SlickUtil.copy(this.sound));
-		}else if(this.currentSounds.get(uniqueID).playing()){
-			this.currentSounds.get(uniqueID).stop();
-		}
-		
-		if(this.loop){
-			this.currentSounds.get(uniqueID).loop(1.0f, this.volume);
-		}else{
-			this.currentSounds.get(uniqueID).play(1.0f, this.volume);
-		}*/
-		
+	public void playSound(){
 		if(this.loop){
 			this.sound.loop(1.0f, this.volume);
 		}else{
@@ -66,26 +55,9 @@ public class SoundKeeper {
 	
 	/**
 	 * Stops the current sound
-	 * @param uniqueID The unique ID of the object who requested this action
 	 */
-	public void stopSound(int uniqueID){
-		/*if(this.currentSounds.get(uniqueID) != null){
-			this.currentSounds.get(uniqueID).stop();
-		}*/
-		
+	public void stopSound(){
 		this.sound.stop();
-	}
-	
-	/**
-	 * Stops all instances of this sound currently playing
-	 */
-	public void stopAllSounds(){
-		/*Set<Integer> keys = this.currentSounds.keySet();
-		for(Integer i : keys){
-			stopSound(i);
-		}*/
-		
-		this.stopSound(-1);
 	}
 	
 	/**
