@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
 
 import edu.chalmers.brawlbuddies.model.Position;
-import edu.chalmers.brawlbuddies.model.skills.DamageEffect;
 import edu.chalmers.brawlbuddies.model.skills.Skill;
 import edu.chalmers.brawlbuddies.model.world.Character;
 import edu.chalmers.brawlbuddies.model.world.Health;
