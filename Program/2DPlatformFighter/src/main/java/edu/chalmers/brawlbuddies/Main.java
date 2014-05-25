@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 
 import edu.chalmers.brawlbuddies.controller.Controller;
 import edu.chalmers.brawlbuddies.util.GameLogger;
+import edu.chalmers.brawlbuddies.util.ResourceLoader;
 
 /**
  * This is the main class of the game Brawl Buddies, a 2D platform fighter game.
@@ -29,6 +30,7 @@ public class Main {
 		try {
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(controller);
+			appgc.setIcon((ResourceLoader.insideJar()?"":Constants.ECLIPSE_RESOURCE_PREFIX)+Constants.MENU_IMAGES+"BrawlBuddies_icon.png");
 
 			appgc.setDisplayMode(1366, 768, false);
 			appgc.start();
