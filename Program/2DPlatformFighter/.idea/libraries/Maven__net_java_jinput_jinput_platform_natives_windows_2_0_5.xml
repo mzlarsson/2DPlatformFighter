@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Maven: net.java.jinput:jinput-platform:natives-windows:2.0.5">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-windows.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-javadoc.jar!/" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/lib/native/windows" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

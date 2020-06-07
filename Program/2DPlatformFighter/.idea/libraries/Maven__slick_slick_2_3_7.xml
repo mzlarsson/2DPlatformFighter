@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: slick:slick:2.3.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/slick/slick/2.3.7/slick-2.3.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/slick/slick/2.3.7/slick-2.3.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/slick/slick/2.3.7/slick-2.3.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
